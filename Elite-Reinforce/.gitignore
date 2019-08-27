@@ -1,0 +1,7 @@
+# Visual Studio stuff
+.vs
+
+# Build directories
+**/FinalBuild
+**/Debug
+**/Release
