@@ -1,0 +1,9 @@
+rulesets
+********
+
+cvar 'dfx_ruleset' controls in which physics you want to play
+
+RS_VANILLA		0   // classic vq3 physics
+RS_CPM			1   // classic defrag cpm physics
+RS_XVANILLA		2   // extended vq3 physics featuring walljumping and crouchsliding
+RS_XCPM			3   // extended defrag cpm physics featuring walljumping and crouchsliding

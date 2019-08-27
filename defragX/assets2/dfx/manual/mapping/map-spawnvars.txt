@@ -1,0 +1,16 @@
+information for mappers
+========================
+
+Theese Spawnvars can be used to decide in which gametypes/rulesets specific entities will spawn or not
+
+notvq3      [ if value is set to 1 this entity will not spawn in ruleset 0-vq3  ]
+notcpm      [ if value is set to 1 this entity will not spawn in ruleset 1-cpm  ]
+notxvq3     [ if value is set to 1 this entity will not spawn in ruleset 2-xvq3 ]
+notxcpm     [ if value is set to 1 this entity will not spawn in ruleset 3-xcpm ]
+
+
+you also can set multiple informations in which gametypes a specific entity will spawn
+
+gametype    [ fastcap, adventure, defrag, teamrun, freestyle ]
+
+

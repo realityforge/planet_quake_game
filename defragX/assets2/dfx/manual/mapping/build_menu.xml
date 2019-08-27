@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<project version="2.0">
+<var name="q3map2">&quot;[RadiantPath]q3map2.[ExecutableType]&quot; -v<cond value="[MonitorAddress]"> -connect [MonitorAddress]</cond> -game quake3 -fs_basepath &quot;[EnginePath]&quot;<cond value="[GameName]"> -fs_game [GameName]</cond></var>
+<build name="Single: bsp">
+<command>[q3map2] -meta -custinfoparms &quot;[MapFile]&quot;</command>
+</build>
+<build name="Single: bsp +noOb">
+<command>[q3map2] -meta -custinfoparms -noob &quot;[MapFile]&quot;</command>
+</build>
+<build name="Single: vis">
+<command>[q3map2] -vis -saveprt &quot;[MapFile]&quot;</command>
+</build>
+<build name="Single: light">
+<command>[q3map2] -light -fast &quot;[MapFile]&quot;</command>
+</build>
+<separator/>
+<build name="[test] quick and very crude">
+<command>[q3map2] -meta -custinfoparms -samplesize 64 &quot;[MapFile]&quot;</command>
+<command>[q3map2] -vis -fast -saveprt &quot;[MapFile]&quot;</command>
+<command>[q3map2] -light -fast -nogrid &quot;[MapFile]&quot;</command>
+</build>
+<build name="[test] quick and very crude +noOb">
+<command>[q3map2] -meta -custinfoparms -noob -samplesize 64 &quot;[MapFile]&quot;</command>
+<command>[q3map2] -vis -fast -saveprt &quot;[MapFile]&quot;</command>
+<command>[q3map2] -light -fast -nogrid &quot;[MapFile]&quot;</command>
+</build>
+<separator/>
+<build name="(Final)">
+<command>[q3map2] -meta -custinfoparms &quot;[MapFile]&quot;</command>
+<command>[q3map2] -vis &quot;[MapFile]&quot;</command>
+<command>[q3map2] -light -fast -patchshadows -samples 2 -filter -bounce 8 &quot;[MapFile]&quot;</command>
+</build>
+<build name="(Final) +noOb">
+<command>[q3map2] -meta -custinfoparms -noob &quot;[MapFile]&quot;</command>
+<command>[q3map2] -vis &quot;[MapFile]&quot;</command>
+<command>[q3map2] -light -fast -patchshadows -samples 2 -filter -bounce 8 &quot;[MapFile]&quot;</command>
+</build>
+<separator/>
+<build name="convert to .ASE">
+<command>[q3map2] -meta -patchmeta &quot;[MapFile]&quot;</command>
+<command>[q3map2] -convert -format ase -shadersasbitmap &quot;[BspFile]&quot;</command>
+</build>
+<build name="convert to .OBJ">
+<command>[q3map2] -meta -patchmeta &quot;[MapFile]&quot;</command>
+<command>[q3map2] -convert -format obj -shadersasbitmap &quot;[BspFile]&quot;</command>
+</build>
+<separator/>
+<build name="make .pk3">
+<command>[q3map2] -pk3 &quot;[BspFile]&quot;</command>
+</build>
+</project>

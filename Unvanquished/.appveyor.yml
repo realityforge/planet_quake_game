@@ -1,0 +1,46 @@
+branches:
+  except:
+    - debian
+
+image: Visual Studio 2017
+
+environment:
+  global:
+    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
+    # /E:ON and /V:ON options are not enabled in the batch script intepreter
+    # See: http://stackoverflow.com/a/13751649/163740
+    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
+    PYTHON: "C:\\Python27.10-x64"
+    PYTHON_VERSION: "2.7.10"
+    PYTHON_ARCH: "64"
+    
+  matrix:
+    - COMPILER: msvc
+      COMPILER_VERSION: "15.0" # Visual Studio 2017
+      TARGET: x86
+      GENERATOR: "NMake Makefiles"
+
+matrix:
+  fast_finish: false
+
+configuration: Debug
+
+install:
+  - "powershell appveyor\\install.ps1"
+
+build:
+  parallel: true
+
+before_build:
+  - git submodule update --init --recursive
+  - ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  - python --version
+  - pip install -r src/utils/cbse/requirements.txt --upgrade
+
+build_script:
+  - cmd: cmake --version
+  - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
+  - cmd: cmake -DUSE_PRECOMPILED_HEADER=0 -DUSE_WERROR=1 -DBE_VERBOSE=1 -G "NMake Makefiles"
+         -DBUILD_CLIENT=0 -DBUILD_TTY_CLIENT=0 -DBUILD_SERVER=0 -DBUILD_GAME_NACL=0 -DCMAKE_BUILD_TYPE=Debug -H. -Bbuild
+  - cmd: cmake --build build

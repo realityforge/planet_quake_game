@@ -1,0 +1,11 @@
+{
+}
+{
+sand 0x40000       // was surf_dust, make sand step sounds, do a dust puff
+wood 0x100000      // make wood step sounds, can only pull with hook here when in GT_ADVENTURE
+grass 0x200000     // make grass step sounds
+stone 0x400000     // make stone step sounds
+tallgrass 0x800000 // make tallgrass step sounds like walking through bushes
+hot 0x1000000      // make burnin step sounds, do a smoke puff
+ice 0x2000000      // make ice step sounds, also applied for slick surface, do a thin cold puff
+}

@@ -1,0 +1,7 @@
+Well, this is it. The CorkScrew Mod 2.16, the source. It's all there (I hope). Good luck trying to figure out what the hell I did, because even I am confused. Most of the stuff I changes is not marked, and comments are scarce. I do hope that y'all can figure out the things you would like to code for yourself, like the grapple.
+
+Good luck and have fun!
+
+greets,
+
+Arjen '[F]irestarter' van der Veen

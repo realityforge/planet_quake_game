@@ -1,0 +1,344 @@
+                           -------------------
+                           UI Enhanced history
+                           -------------------
+
+The changes, updates, and bug fixes made to UI Enhanced
+
+
+------------------------------
+24 November 2002 - Version 1.2
+------------------------------
+
+  * Merged 1.32 source code changes. Includes some support for pre-1.32
+    releases (notably 1.30, 1.31).
+
+  * Added punkbuster support (sv_punkbuster and sv_strictAuth). Also added
+    sv_lanForceRate server parameter. Only available when creating a 
+    multiplayer (rather than a skirmish) game.
+
+  * Added support for fractional bot skill in skirmish mode when a range
+    of skill is specified.
+
+  * Added fractional bot skill to in-game menus that add and remove bots.
+
+  * Added a new bot selection method: the number of bots matches the size
+    recommended by the map script, but bots are selected from a list 
+    provided by the user.
+
+  * Recognition of all demos compatible with the 1.32 release 
+    (protocols 66, 67 and 68).
+
+  * FIXED: initialization of the 1.27 or 1.17 mouse style in the control menu.
+
+  * FIXED: two small GUI glitches in the bot skirmish menu.
+
+
+
+------------------------------
+29 November 2001 - Version 1.1
+------------------------------
+
+  * Item page of skirmish menu now uses a multi-tabbed control page as
+    well. The old format (all items on a single page) is available through
+    setting the cvar uie_olditemmenu to 1. Mods that add lots of items can
+    now add to what was a crowded page.
+
+  * Server page of skirmish menu now uses a multi-tabbed control page.
+    Mods can now expand this page with their server options. 
+
+  * Re-wrote preferences page to the same style as the controls
+    multi-tabbed page. Added new weapon graphics options.
+
+  * True resolution independent dynamic menus - and a more polished style.
+    No more jaggedly aligned menu items at resolutions other than 640x480.
+
+  * Start submenu is now sensitive to the game type, and join
+    game/autojoin has become the first item on the menu.
+
+  * Menu for voting yes/no is now sensitive to a vote in progress.
+
+  * Callvote map selection now initializes to the current gametype.
+
+  * Added core/ring colour selection for new rail effect.
+
+  * Fixed a bug that prevented "team follow1" and "team follow2" from
+    working.
+
+  * Control setup now has a new tab for mouse/joystick input. Added a
+    toggle for 1.17/1.27h mouse input preference.
+
+  * New end credit sequence.
+
+  * Pro-maps are recognized as being Id maps.
+
+  * Removed code used to "fix" the fraglimit and timelimit bugs in single
+    player games. Script option to prevent config bug is now disabled on
+    fresh installation. These issues were fixed in the 1.30 release.
+
+  * Merged fixedlegs and fixedtorso animation flags from client code into
+    UI (problems with Magdalena model, among others).
+
+  * Updated source code to 1.29h/1.30 release.
+
+  * Moved skirmish cvars used by UIE into a separate data file
+    uieSkirmish.dat. Full import in first run, so no values are lost. These
+    values can then be manually removed from q3config.cfg (uie_ffa_*,
+    uie_tourney_*, uie_team_*, uie_ctf_*).
+
+  * Fixed a cvar that was incorrectly saved when a CTF script file was
+    created (ui_ctf_timelimit).
+
+
+
+--------------------------
+27 June 2001 - Version 1.0
+--------------------------
+
+  * Source code release for developers
+
+  * FIXED: Bot skill bias in skirmish menu caused a crash in the VM, but 
+    not the DLL code.
+
+  * FIXED: deleting a single map or bot cleared the entire list.
+    Caused by a difference in memcpy() between the VM and binary builds.
+
+  * FIXED: missing control on model animation page.
+
+
+-----------------------
+5 May 2001 - Beta 0.99a
+-----------------------
+
+  * Massive re-organisation of the skirmish code, separating the interface
+    from the data and script generation. No visual difference, but makes
+    porting to other Q3 games (TA, Voyager Elite Force) possible.
+
+  * Choosing maps and bots is now even easier! Multiple selection and 
+    text lists for big collections.
+
+  * Software fix for the single player bot duplication and fraglimit bugs.
+
+  * Skirmish bot selection has added the option to use bots
+    recommended for the map, or a random selection of the same number of bots. 
+
+  * Demo selection now finds demos by the appended protocol. Timedemo
+    option also available.
+
+  * Maps that don't have an arena script are now displayed when
+    "all maps" is selected.
+
+  * Model selection now includes rotation controls for better preview.
+
+  * In game menu now defaults to a dynamic menu, and adds callvote, vote,
+    setup commands etc. in a similar fashion to TA.
+
+  * Skirmish maps can now be given their arena script recommended fraglimit.
+
+  * Increased number of selected maps to 32 (from 24).
+
+  * More skirmish server setup options.
+
+  * More configuration parameters in Game Options.
+
+  * All gametypes can now use the warmup interval.
+
+  * Scripts are limited to 16K in size by an internal Q3 buffer. The problem 
+    this presents to random map selections of about 25 maps or greater 
+    have been eased.
+
+  * User added maps are now sorted by map name. Id maps are given priority, 
+    and will always appear first.
+
+  * The FIGHT button in the skirmish mode is now disabled if no maps
+    are selected.
+
+  * Added swim animation to model selection and intro attract mode. 
+    Unfortunately some models have "afflictions" (Doom, Klesk are particularly 
+    bad) that suggest bad model anim data.
+
+  * Included a fix for the Doom and Klesk swimming animation problems
+    (zzz_animation_fix.pk3).
+
+  * FIXED: single player maps that were unable to complete a single player tier
+    (error message like: "1 arenas ignored to make count divisible by 4"),
+    are no longer dropped from the map list. The map "halven" was one example 
+    that created this error.
+
+  * FIXED: bots changing every map when they should have been changing
+    less frequently.
+
+  * FIXED: Executing a UIE saved script with a data block caused unexpected 
+    command execution on the console.
+
+    The data format for saving map rotation setup data into script files has 
+    changed. Data from previous versions can be loaded, but saved scripts cannot
+    be loaded into previous versions of UIE.
+
+  * FIXED: gaps appearing in the list of load/exec or save config files.
+
+  * FIXED: Incorrect editing state when entering model selection with the
+    team model viewed.
+
+  * FIXED: item disable menu when called from the in-game menu now behaves 
+    properly when ESC is pressed.
+
+  * FIXED: Cursor tracking no longer gives torso movement during death animation.
+
+
+
+--------------------------
+1 January 2001 - Beta 0.99
+--------------------------
+
+  * Model chooser/animator now supports team models, as well as separate
+    heads on models.
+
+  * Support for item disabling, for both map rotation and in-game. The
+    in-game disabling prepares for the next map, or a map restart.
+
+  * Saved scripts for map rotations now include a parameter block for
+    reloading at a later time. This parameter block includes all the
+    variables used to set up the script, so you can start again or tweak
+    again.
+
+    Save several different starting positions for your own variation (a
+    railgun tourney script and a small map tourney script, for example).
+    Loaded from the server tab for Skirmish or Multi-player creation.
+
+  * Re-enabled load and save config menus.
+
+  * Small visual change to the in-game menu (press ESC) that clearly
+    groups related menu commands together.
+
+  * Added pmove_fixed and server smoothclient options to server tab.
+
+  * REPLACED: All the uie_icons graphics have now been replaced by a
+    single shader script file. Icon name usage is unchanged, but the
+    original high quality Id graphics are used.
+
+  * FIXED: Annoying torso move/snap when model changed in model picker, or
+    by command line.
+
+  * FIXED: Weapon change sound not playing during attract mode, or model
+    animation.
+
+  * FIXED: Team Arena menu in wrong position.
+
+
+----------------------------
+19 December 2000 - Beta 0.98
+----------------------------
+
+  * Ported to 1.27 source code
+
+
+-----------------------------
+19 December 2000 - Beta 0.97b
+-----------------------------
+
+  * Replacement icons for use with custom map identification, 
+    and support for use of Id originals where higher quality
+    versions are required.
+
+  * Reduced memory overhead taken by VM as a memory pool
+
+  * Map pics now loaded just before first use, not over all 
+    maps in collection.
+
+  * Commands issued on map start now use activeAction
+    instead, previous delays should now disappear.
+
+
+-----------------------------
+16 December 2000 - Beta 0.97a
+-----------------------------
+
+  * New map grouping [NoBots]: for maps that don't include the 
+    routing data used by bots.
+
+  * Generated automatically from your map collection, you don't 
+    need to add maps manually. 
+
+  * Randomly generated maps now always exclude maps on the [NoBots] 
+    list. You can still place these maps on your hand selected lists. 
+
+  * Increased support for map arena scripts, about 1000 scripts can 
+    now be loaded. 
+
+  * BUGFIX: [No text] entries appearing on bot command menu under 
+    certain circumstances. 
+
+
+----------------------------
+23 November 2000 - Beta 0.97
+----------------------------
+
+  * Model/skin selection page improved: models and skins are separated out.
+    Also added an animation previewer: see how the model moves and sounds.
+
+  * New bot command menu system, in the style of Unreal Tournament. Includes
+    key binding in the setup menu, as well as an autoclose on/off in game
+    options.
+
+  * New type of map generation: "random, not list". Allows you to prevent
+    certain maps from being used.
+
+  * New type of map generation: "type bias". Allows you to use only Id,
+    non-Id, or from both with bias. Custom maps types are also supported.
+
+  * Map pictures now show info with a small icon: dm, tourney, team dm, ctf.
+    The user can add new types to usermaps.txt, three additional types are
+    already provided: railarena maps, small maps, big maps.
+
+  * The map generation page allows you to create random lists of maps based
+    on these map types. Play a random selection of RailArena maps!
+
+    Statusbar text tells you how many maps are available for use.
+
+  * The map selection page allows you to filter maps based on these custom
+    user types, using the "type bias".
+
+  * The map selection page now shows, in red, maps that've already been
+    chosen.
+
+  * New type of bot generation: "random, not list". Allows you to keep
+    certain bots out of your generated bot rotations.
+
+  * Map and bot generation pages show an identifying picture when the cursor
+    hovers over an item on the list.
+
+  * In-game add and remove bots menus now show a picture of the bot, as well
+    as team and a skill icon, for easier identification.
+
+  * Add bot menu now skips 7 bots at a time when using the scroll buttons.
+
+  * In-game menu now shows a NEXT MAP option. Must be used in tourney
+    rotations to move to the next map, but can also be used in any other
+    gametype map rotation. Attempts to put player(s) directly back into the
+    game when playing tourney.
+
+  * Added model viewing to main entry page. Animated model follows
+    cursor.
+
+  * Animated model has an attract mode. Runs through movement, weapon
+    change and fire, and death animations. Includes sfx (can be disabled).
+
+  * BUGFIX: Some bots that used fun names weren't kicked when replaced with
+    a new set (The Tick, Akuma[HPB], were two examples I found). Fixed.
+
+  * BUGFIX: Escape key now behaves in the same way as the back button.
+
+  * BUGFIX: Fixed an interface glitch that failed to hide some controls
+    on the bot page.
+
+  * BUGFIX: Maps with incorrect <b>scripts/mapname.arena</b> are now completely
+    rejected. This includes .arena scripts that don't have an associated BSP
+    map file. Previously an unknown map icon was displayed, with no map name
+    or details.
+
+
+-----------------------
+1 July 2000 - Beta 0.90
+-----------------------
+
+  * First public release

@@ -1,0 +1,807 @@
+-------------------------------------------
+Developer documentation for UI Enhanced 1.2
+-------------------------------------------
+
+
+A brief overview of the changes made to the user interface code by UI
+Enhanced. Not everything will appear in this file, but you should get
+enough information to hit the ground running.
+
+****************
+About Punkbuster, and other Quake3 versions
+
+I've tried to maintain as much compatibility as possible with earlier
+releases of Q3 source code (i.e. release 1.29), so that mods
+that want to work with 1.29, 1.30 and 1.31 can incorporate UIE and
+have a chance at keeping the Punkbuster changes out.
+
+Read the section "UIE across different Quake3 versions, and Punkbuster"
+for more information.
+****************
+
+Some of the coding choices that I've made might not jump out at you
+straight away just by reading the source code. If you're planning on
+extending this code then reading though this document will explain what
+those choices were, and how you can work with them to make your changes
+as smooth as possible. You might also want to print out this file so you
+can read it at your leisure. There's a lot of information here that
+you'll want to refer to as you make code changes.
+
+It's never easy entering into someone elses coding effort. I've tried to
+keep things as clean as possible, but inevitably there will be some
+things that can be done in a "better" way. If you want to manage the
+file changes then I can recomment Araxis Merge (http://www.araxis.com),
+its a fully featured two and three way merge tool, with a free 30 day
+demo.
+
+This is an archive of touched files only. You'll still need the full Id 
+source code release to compile the user interface.
+
+Let me know when you release your mod with part or all of this source
+code in place. I'll put up a link on my page to your site, and hopefully
+you'll put up a reciprocal link back to mine :)
+
+Enjoy!
+
+HypoThermia (uie@planetquake.com)
+
+http://www.planetquake.com/uie
+http://www.planetquake.com/code3arena
+http://www.eudoxus.demon.co.uk
+
+
+
+--------
+Contents
+--------
+
+1. Files added and removed
+    1.1 New files
+    1.2 Files removed
+    1.3 Files changed
+
+2. Getting started
+
+3. Using only parts of the code
+
+4. Skirmish menu code overview
+     4.1 Stored data
+     4.2 Script creation
+     4.3 User interface
+     4.4 Updating data and the interface
+     4.5 User Interface common controls
+
+5. Model animator code overview
+     5.1 Adding a new animation
+     5.2 Using the new animation data structure
+
+6. Dynamic menu code overview
+
+7. Script loading and saving overview
+
+8. Adding a new game type
+
+9. UIE logo
+
+10. UIE across different Quake3 versions, and Punkbuster
+     10.1 Removing Punkbuster code
+     10.2 New trap_FS_Seek() VM call in 1.31
+
+11. The notice appearing in all modified files
+
+
+--------------------------
+1. Files added and removed
+--------------------------
+
+
+1.1 New files
+-------------
+
+  ui_dynamicmenu.c      - the dynamic menu system, from my tutorial at C3A
+  ui_dynamicmenu.h
+
+  ui_ingame_mapvote.c   - the menu for selecting a map when using callvote
+
+  ui_startserver.h      - the new skirmish menu
+  ui_startserver_bot.c
+  ui_startserver_botsel.c
+  ui_startserver_common.c
+  ui_startserver_custommaps.c
+  ui_startserver_data.c
+  ui_startserver_items.c
+  ui_startserver_map.c
+  ui_startserver_mapsel.c
+  ui_startserver_q3.h
+  ui_startserver_script.c
+  ui_startserver_server.c  
+
+  uie_media1.pk3        - new images used for buttons, shaders, etc.
+                          you can incorporate these files/images into
+                          your own mod pk3 distribution
+
+
+1.2 Files removed
+-----------------
+
+  ui_startserver.c    - replaced by the new skirmish menu code
+
+  ui_login.c          - not included in the ui build process anyway
+  ui_rankings.c
+  ui_rankstatus.c
+  ui_signup.c
+  ui_specifyleague.c
+
+
+1.3 Files changed
+-----------------
+
+  ui_addbots.c         - improved addbot menu
+  ui_removebots.c      - improved removebot menu
+
+  ui_players.c         - implementation of animated model, includes
+                         tweaks to the animation code
+  ui_controls2.c       - one new control key, and display of new model anim
+  ui_menu.c            - display of new model anim
+  ui_playermodel.c     - new model picker and animator controls
+  ui_playersettings.c  - adds award icons and new model anim
+  ui_sound.c           - new model animation sfx option
+
+  ui_demo2.c           - reads correct dm_<protocol> demos, and timedemo option
+  ui_gameinfo.c        - better handling of .arena scripts and map loading
+  ui_ingame.c          - dynamic ingame menu as well as legacy menu
+  ui_loadconfig.c      - config loader, ignores Id .cfg in pak?.pk3 files
+  ui_main.c            - new cvars, including setup of disable_*
+  ui_preferences.c     - more game preferences options
+
+  ui_servers2.c        - favourite servers tutorial at C3A
+  ui_setup.c           - controls added to setup menu 
+  ui_sparena.c         - bug fixes for broken single player game
+  ui_splevel.c         - new award icon display system
+  ui_sppostgame.c      - single player bug fixes
+
+  ui_local.h           - many changes, including some new extern funcs
+  ui_atoms.c           - small changes
+  ui_qmenu.c           - listbox double click, and some static funcs 
+                         changed to extern
+
+
+
+
+------------------
+2. Getting started
+------------------
+
+The best thing you can do is to get the code compiling "out of the box":
+
+a) Take a fresh source code install, drop the source files into the Q3_UI
+   directory. 
+
+b) Add the new source files to your project, remove the files that are 
+   no longer used.
+
+c) Build the DLL.
+
+d) Update the q3_ui.q3asm and q3_ui.bat files to include the new source 
+   code files.
+
+e) Compile the VM.
+
+f) Test both the DLL and VM builds using the media pak from the latest 
+   release.
+
+
+
+-------------------------------
+3. Using only parts of the code
+-------------------------------
+
+The code is as independent and self contained as possible, but there are
+still some outside changes that need to be made. The most obvious way to
+find out what these external code changes are is to install the new
+source file(s) that you want, and see what breaks when you compile it.
+Then go back and look for those changes in the UIE source code. Most of
+them are in the form of static functions moved to ui_local.h, and local
+data or defines moved to new header files.
+
+Where a move like that is required, I've prefered to set up a single
+global value rather than have 2 or more separate values that need to be
+kept identical. The latter method is error prone and much harder to
+maintain.
+
+
+
+------------------------------
+4. Skirmish menu code overview
+------------------------------
+
+* Due to the large number of controls on a page, the MAX_MENUITEMS count
+in ui_local.h must be increased (96 was used). 
+
+* Several functions that were static in ui_qmenu.c have now been made
+global (PText_Init and ScrollList_Init for example).
+
+* The skirmish code gets its own header file: ui_startserver.h
+
+* Some functions implemented in the skirmish code are used outside the
+skirmish menu, they're declared in ui_local.h
+
+
+The code is split up into three separate sections: data, interface, and
+script generation. 
+
+
+4.1 Stored Data
+---------------
+
+The data is held in ui_startserver_data.c and manages all the
+information that can be accessed through the user interface, will be
+archived, or used to generate a game script. All exposed data structures
+are described in ui_startserver.h, as are the public data manipulation
+functions.
+
+Any data that needs to be archived is saved to cvar using
+StartServer_SaveXXXXScriptData(), where XXXX is Map, Bot, Item, or
+Server, corresponding to each of the setup pages. There is an equivalent
+StartServer_LoadXXXXScriptData() function for loading the data. ALL DATA
+MUST BE LOADED AND SAVED THROUGH THOSE TWO FUNCTIONS.
+
+Data is loaded and saved on a per gametype basis. This means that when
+the gametype is changed in the skirmish menu, the current data must be
+saved before the data for the new gametype can be loaded.
+StartServer_SaveScriptData() and StartServer_LoadScriptData() perform
+this role, and *all* data is replaced. This places restrictions
+on how this data is modified from the interface (section 4.4).
+
+Additional services are provided for each group: the safe
+deletion of a map from the data, for example.
+
+
+
+4.2 Script Creation
+-------------------
+
+The script generation is contained within ui_startserver_script.c, and
+uses ui_startserver.h to access the data. There is no reference to the
+interface part, since the script is created from the stored data, and
+not any value stored in the interface.
+
+If you want to maintain the saving of parameters inside script files
+(for later loading) then you'll have to add the cvar name to the array
+of values already saved (more on this later). Note the restrictions on
+certain types of cvar.
+
+The order in which the script is created is as follows:
+
+1) archival data is stored for reloading the script
+2) disabled item list
+3) map rotation list (order fixed)
+4) bot rotation list (order fixed)
+5) server parameters (order fixed)
+
+This order is fixed where noted because the bot rotation list depends on
+the order in which the map rotation is constructed (at least it does for
+the arena script bot generation). The server parameters depend on the
+number of bots needed, so it must appear after the bot list is created.
+
+Random map lists don't just write a map name once, they can write a
+rotation up to four times. This reduces the "deja vue" from writing the
+list once. Random bot lists also try to avoid deja vue by being longer
+than the number of maps in the rotation.
+
+The script buffer is limited to 16k in size, due to an internal Q3
+buffer size for the script. There are some heuristics within the code
+that try and prevent this overflow taking place.
+
+
+
+4.3 User Interface
+------------------
+
+Perhaps the most difficult part of the code to follow, there are still
+some useful conventions to help keep maintenance as easy as possible.
+
+
+There are four pages of data used to create a skirmish: map, bot, item,
+and server. Each is a separate menu page, and they are pushed and popped
+so that the following order is preserved:
+
+Pushed order (first to last): Map, Bot, Item, Server.
+
+If you want to jump from the map page to the server page, then you must
+create and push the bot and item pages also. The data for all pages is
+always loaded in ui_startserver_data.c, but there are specific data
+structures designed to hold data for each of these pages.
+
+There is one exception to this: the item page can also be displayed
+as stand alone. This dual use allows for the items to be enabled and
+disabled from an ingame menu. Some care is required in this code to to
+make sure that the dual usage isn't broken.
+
+
+
+When an interface page is created, several steps are taken:
+
+1) the position and type of controls are initialized
+2) data is loaded into the _controls_ from the _stored data_
+3) the interface is "enabled", depending on data loaded in step 2
+
+Its important to understand the difference each of these steps make. The
+first step doesn't know anything about the data stored in
+ui_startserver_data.c, it is _just_ concerned with the setup of the
+physical controls on the page (position, text colour, etc.). This is
+handled in StartServer_XXXXPage_MenuInit().
+
+The second step retrieves the "state of the interface" from the data
+stored in ui_startserver_data.c - this action is equivalent to changing
+the game type. This sets the data stored in the controls, ready for
+display, and happens in StartServer_XXXXPage_Load().
+
+The third step enables, disables, and hides controls that are visible
+for the given set of data that we just loaded. The function that handles
+all of this is StartServer_XXXXPage_UpdateInterface(). This can be
+called any time after the data has been loaded, to set or reset the
+state of the interface. All controls will be touched from here,
+effectively starting from scratch. You can provide for an optimized
+subsest of controls on a page, but it must be called from
+*_UpdateInterface() as well as any specialized use that you make of it.
+
+Each of the map pages has its own owner menu draw handler
+(StartServer_XXXXPage_MenuDraw), so steps 2 and 3 are both "delayed"
+until the menu is first drawn (uis.firstdraw is qtrue). This allows for
+first creation of the menu, and any changes made by a menu we have just
+popped from (for example: a change of gametype *must* trigger this
+because the data in the controls is no longer accurate).
+
+I have avoided cross dependency within the user interface by setting the
+interface controls as static data. As a matter of principle each menu
+page should also avoid cross reference to data used by another page.
+This keeps the dependency as "clean" as possible, aids debugging, and
+prevents data manipulation from unexpected sources. This is not
+something that can be enforced in C as it can in C++, so tread carefully.
+
+
+
+4.4 Updating data and the interface
+----------------------------------- 
+
+Clearly it is in our best interest to keep the data stored in
+ui_startserver_data.c as accurate as possible. Its done from the user
+interface by this rule:
+
+WHEN THE INTERFACE IS USED A CHANGE OF DATA MUST BE STORED BEFORE THE
+QM_ACTIVATED MESSAGE HAS RETURNED; OR IN THE CASE OF TEXT INPUT
+CONTROLS, BEFORE THE QM_LOSTFOCUS MESSAGE HAS BEEN RETURNED.
+
+While it isn't necessary to archive the data into cvars on each change
+of a value, you MUST keep the data stored in ui_startserver_data.c
+current using this method. Any error checking should also be complete
+before the update is made, and not done on a menu push/pop.
+
+
+When updating the interface with a call to StartServer_XXXXPage_UpdateInterface 
+(which you can use at any time after step 2 above) you should do so
+after data has been stored back into ui_startserver_data.c. The values
+stored in the controls should be used where possible.
+
+
+
+4.5 User Interface common controls
+----------------------------------
+
+Each page of skirmish controls has a common subset of controls: the back
+button, fight button, and buttons for each of the pages of options.
+These controls are stored in a common data structure (commoncontrols_t)
+and have their own handler function on each page
+(StartServer_XXXXPage_CommonEvent).
+
+You could think of these common controls as implementing a dialog box
+with multiple tabbed pages of controls, as you don't have to put values
+into all of the pages of controls in order to run the skirmish. The
+limitations of the Q3 menu system actually make it easier to consider
+each page of controls separately, so this set of common controls gives
+every page a common appearance with relatively little effort.
+
+Activating another page of controls requires the pushing of all
+intermediate pages, and the back function must pop the correct number of
+menus. The remainder of the implementation appears in
+ui_startserver_common.c, and is initialized with a call to
+StartServer_CommonControls_Init().
+
+If the *_CommonEvent() handler isn't implemented correctly then you'll
+have problems moving between pages as menus are over- or under-popped...
+or not known about by other menu tabs on the skirmish page.
+
+
+
+-------------------------------
+5. Model animator code overview
+-------------------------------
+
+
+* Model animation is contained within ui_players.c
+
+* The value of LOW_MEMORY has been moved into local.h
+
+* There are numerous small changes into the model animation code to add
+extra functionality (like sound and footsteps).
+
+* A new data structure modelAnim_t is introduced to manage all the data
+associated with animating the model.
+
+* Many functions have been changed to use this new data structure.
+
+* The public function UIE_PlayerInfo_ChangeTimedAnimation() is provided
+to set the next model animation (e.g. when the model is animated by a
+key control selection)
+
+* Crash protection is provided.
+
+
+
+I introduced the crash protection because of a problem that I found when
+I put the model animation on the main ui menu page. I was still
+developing the model animation code and any crashes caused horrible
+machine lock ups with the VM. This was happening because the bug made
+the ui crash, then Q3 restarted the ui, which promptly crashed again!
+
+To get out of the fatal loop the code sets a cvar which is then
+cleared after a few frames of animation. If, however, there is a crash
+then the cvar is still in memory when the ui restarts. This is detected
+and the model animation system is shutdown.
+
+
+5.1 Adding a new animation
+--------------------------
+
+There are only a few steps required to add a new type of model animation
+to the code.
+
+1) A new ANIM_* index to identify the animation.
+
+2) The effect of the animation on the model in PlayerInfo_SetAnimation()
+
+3) Any weapon animations must be identified in PlayInfo_IsWeaponAnim(),
+and death animations in PlayerInfo_IsDeathAnim().
+
+4) Rejection of the animation occurs in PlayerInfo_UsableAnimation().
+You can either remove it completely (return qfalse), reduce its
+frequency (like ANIM_SWIM), or check for any number of special cases.
+
+5) A weapon must have its repeat time set in PlayerInfo_WeaponCycleTime()
+
+6) By default animations last for 5 seconds, but you can change this in
+PlayerInfo_ChangeTimedAnimation(). You can also force the next animation
+in a sequence if you wish (this is used to give a higher chance of
+weapon fire after a weapon change)
+
+7) Any additional changes to the animation code that are demanded by the
+new animation.
+
+
+
+5.2 Using the new animation data structure
+------------------------------------------
+
+
+There are several house keeping variables stored within modelAnim_t, and
+you should add the data structure to the group of menu page controls.
+The modelAnim_t control must be initialized, particularly the bitmap
+structure that draws the model on screen. This bitmap control should
+also be registered with Menu_AddItem() so it will be drawn by the menu system. 
+
+You must provide an owner drawn callback function to the bitmap that
+draws the model. This is because the drawing routines need to know about
+the modelAnim_t structure, and this isn't stored in the bitmap_s
+structure when the menu is created. A call to
+UIE_PlayerInfo_AnimateModel() will then handle the drawing of the model,
+as well as any animation required.
+
+Initialization of the structure takes the form of a call to
+UIE_PlayerInfo_ModelInit() just after you've initialized the
+bitmap menu control with a call to Menu_AddItem().
+
+
+There are several flags within modelAnim_t that control how the model is
+drawn and updated. By default these flags are qfalse because of a
+memset(0) used to initialize the data structure.
+
+.bNoAutoUpdate - if qtrue will prevent detection of model name changes
+on the console. Used with the model selection page where a change in
+model name would require a change in several controls as well.
+
+.bForceUpdate - provides a means of clearing the model data if a change
+to the model head or torso has been made. Set qtrue to trigger the
+update, the flag is cleared after the next screen redraw.
+
+.bNoIdleAnim - if qtrue then the idle animation is supressed, leaving a
+model that tracks the cursor but doesn't have a mind of its own.
+
+.allowCursorFire - if qtrue then the model will allow firing animation
+to continue while the model tracks the cursor. This behaviour is
+normally supressed by the idle animation routines, since they treat
+cursor movement as stopping all animation instantly.
+
+
+-----------------------------
+6. Dynamic menu code overview
+-----------------------------
+
+
+This code is covered in some detail in my tutorials at Code3Arena. I've
+added two new features and moved the implementation into a new file
+(ui_dynamicmenu.c), along with its own header file (ui_dynamicmenu.h).
+
+DynamicMenu_AddIconItem() allows you to place an icon in front of the
+text for that menu. It must be used in the same way as
+DynamicMenu_AddItem(), i.e. between DynamicMenu_SubMenuInit() and
+DynamicMenu_FinishSubMenuInit(). The extra space taken up by the icon is
+only put in place if one or more of the items on the menu use an icon.
+These icons are sized at about 20x20, and are slightly transparent.
+
+The other addition is that of a background graphic for the menu. This is
+added on a menu by menu basis, and again should be done before
+DynamicMenu_FinishSubMenu() is called. I've only used it in the
+replacement dynamic in-game menu for two reasons: I wanted to
+distinguish it from the bot command menu, and also visually link it to
+the old style ESC menu by reusing the oval border.
+
+
+
+-------------------------------------
+7. Script loading and saving overview
+-------------------------------------
+
+One feature that I've introduced to the user interface is the ability to
+save a script generated by the skirmish menu. This saved script also
+stores the parameters (cvars) used to generate the script, for later
+recovery if required.
+
+If you choose to extend the features within the skirmish menu, and this
+creates new cvars with game data, then you'll need to modify the script
+generation engine so that these values can be saved and recovered. I've
+tried to make the entire process as data driven as possible so that
+additions are made as straightforward as possible.
+
+If you add a new cvar that is used to build the script then you need to
+do the following:
+
+1) Open ui_startserver_script.c and look for the static lists of cvar
+data.
+
+2) Read the documentation that goes with the data arrays, and use the
+following general guide:
+
+   i) A new cvar that you've added that is global across all game types,
+put the name in saveparam_list[].
+
+  ii) If the cvar is specific to a game type then put it in
+saveparam_list[] and replace the gametype specific part of the name with
+an asterisk (*)
+
+ iii) If you're saving a cvar that is already in use by Q3 (but not saved
+by UIE), AND is gametype specific, then put it in the special array
+customsaveparam_list[] along with the gametype that needs that data
+saved. Use this method when the name of the cvar doesn't fit into the 
+substitution naming system used in (ii).
+
+
+
+UIE will only save a cvar in a script if it actaully exists, so you can
+add cvars of type (ii) above and not worry about needing to create cvars
+for all of the gametypes. The flip side of this is that UIE will only
+load data stored in a script if the corresponding cvar actually exists.
+
+NO CVAR VALIDATION IS DONE WHILE THEY ARE LOADED FROM A SCRIPT. IF YOU
+CHANGE THE DATA FORMAT STORED IN A CVAR, WITHOUT CHANGING ITS NAME, THEN
+YOU MUST PROVIDE A WAY FOR THE NEW VERSION TO RECOGNIZE THE OLD DATA AND
+CONVERT IT TO THE NEW FORMAT. THE BEST PLACE TO DO THIS IS IN THE CVAR
+LOADING ROUTINES IN ui_startserver_data.c, AS ALL DATA IS PARSED AND
+VALIDATED THERE.
+
+
+
+-------------------------
+8. Adding a new game type
+-------------------------
+
+
+There are a number of things that you need to do if you're adding a new
+game type to the existing 5 provided by Id (dm, tourney, single, team,
+ctf).
+
+If you've chosen to include only some of the features of UIE, then you
+won't have to do all of these steps.
+
+
+1) You need to add support for the mapping between the GT_* flags
+(GT_FFA, GT_TOURNAMENT, etc.) and a numerical index for each gametype.
+This numerical index is the order in which gametypes are scrolled
+through in the skirmish browser.
+
+Open ui_startserver_data.c and look for the gametype_remap[] and
+gametype_remap2[] arrays. The first array converts the numerical index
+to the GT_* flag, while the second performs the reverse process.
+
+
+2) Add the Cvars that store data for your gametype. These go in
+ui_main.c, and there are quite a few of them for each gametype.
+
+On reflection there are better ways of storing this information, but
+this is the system that has grown with UIE and is the one currently in
+place. I've yet to change over to something better, possibly for a
+future release.
+
+Some values are specific to a given gametype (single player games don't
+get team values for example). 
+
+It is also important for each cvar to start with the same base. This
+automates the recovery of data for the gametype. As you can see, I've
+used uie_ffa_*, uie_tourney_* etc. These base strings should be unique
+in the cvar lists: particularly avoiding the existing groups such as
+cg_* and g_*.
+
+
+3) Identify the base string and put it into the gametype_cvar_base[]
+array in ui_startserver_data.c. The order must match that of the GT_*
+flags in gametype_remap[], otherwise the wrong cvar group will be loaded.
+
+
+4) Add the game type name to gametype_items[] in ui_startserver_data.c.
+This is the text that appears on each skirmish page in the gametype
+list.
+
+
+5) Some assumptions are made in each page of the skirmish menu about how
+controls are displayed. Some are team specific (checked with gametype >=
+GT_TEAM), others are unique to a gametype (particularly CTF). Scan
+through the StartServer_XXXXPage_UpdateInterface() code to check that
+you get the desired behaviour for your gametype.
+
+
+6) Add a map icon to the list maptype_icon[] in the skirmish menu file
+ui_startserver_custommaps.c (again, order specific)
+
+
+7) Add to the filter in ui_ingame_mapvote.c, to both filter_gametype[]
+and filter_gametype_list[].
+
+
+8) Add the gametype to the ingame menu system in ui_ingame.c, both as a
+new menu item in gametypeMenu_data[], and validation in
+IG_CallVoteGameType_Event().
+
+
+If there's something missing from this list then let me know!
+
+
+
+
+-----------
+9. UIE Logo
+-----------
+
+
+There are several places in the code where the UIE logo will be
+displayed. Its relatively unobtrusive, and in most cases appears about
+one time in ten.
+
+If you want to acknowledge your use of UI Enhanced in your code in this
+way then please feel free to leave them in. Its not a requirement that
+you put that code in, so I've made it quite easy to remove.
+
+The logo is displayed as a bitmap and appears in code where I've spent
+the most time and effort: the front page, the skirmish menu (only on the
+map page), the model picker, and the map selection page.
+
+If you don't want this code to be compiled in then you can either remove
+it or define the following constants:
+
+#define NO_UIE_MINILOGO
+#define NO_UIE_MINILOGO_SKIRMISH
+#define NO_UIE_MINILOGO_PLAYERMODEL
+
+
+There are also several variations on the logo, depending on how you want
+to express your use of UIE code:
+
+// logo art, all are 128x32 but they view very well at 64x16
+#define UIE_LOGO_POWERED "menu/uie_art/uie_powered"
+#define UIE_LOGO_ASSISTED "menu/uie_art/uie_assisted"
+#define UIE_LOGO_INCLUDE "menu/uie_art/uie_include"
+#define UIE_LOGO_IMPROVED "menu/uie_art/uie_improved"
+#define UIE_LOGO_USING "menu/uie_art/uie_using"
+#define UIE_LOGO_NAME "menu/uie_art/uie_name"
+
+with UIE_LOGO_NAME being the current choice in all cases.
+
+
+
+--------------------------------------------------------
+10. UIE across different Quake3 versions, and Punkbuster
+--------------------------------------------------------
+
+The source code for UIE includes the changes that incorporate Punkbuster 
+into the 1.32 UI source code. This means that, while the VM can run on 
+older releases (1.29 to 1.31), there will be some code in there that 
+should only be called on the 1.32 platform.
+
+I've attempted to make this compatibility possible, and prevent information
+and calls from occuring on systems that don't have Punkbuster. The
+original ui_startserver.c file isn't included with UIE: any dependencies in
+this code aren't guarded.
+
+A new VM call, trap_FS_Seek(), was also introduced in 1.31 to assist
+in manipulation of files on the filesystem.
+
+
+10.1 Removing Punkbuster code
+-----------------------------
+
+Punkbuster adds another trapped call out of the VM:
+
+void trap_SetPbClStatus( int status );
+
+This call cannot, and should not, be made from pre 1.32 VM builds. To
+protect against this, all related code that I've been able to find
+has been guarded against execution.
+
+A new variable added to the global data structure uiStatic_t, uis.punkbuster,
+is qtrue if Punkbuster has been detected on the system. The method
+that performs this detection can be found in ui_gameinfo.c:
+
+qboolean UIE_IsPunkbusterVersion()
+
+It detects the presence of the cl_punkbuster cvar, and works even if
+cl_punkbuster is defined in q3config.cfg while running 1.31 or earlier.
+
+
+
+10.2 New trap_FS_Seek() VM call in 1.31
+---------------------------------------
+
+This method call to the VM became available in 1.31 (to the best of my
+knowledge), and should not be used in mods that expect to run
+with 1.30 or earlier.
+
+There is no #define guard to protect against or remove this code (it isn't
+used in the UI part of the QVM anyway).
+
+
+
+
+-----------------------------------------------
+11. The notice appearing in all modified files:
+-----------------------------------------------
+
+
+The work contained within this file is software written by various
+copyright holders.  The initial contributor, Id Software holds all
+copyright over their software.  However, software used and written by
+and for UI Enhanced has copyrights held by the initial author of the
+software.
+
+The changes written by and for UI Enhanced are contained alongside the
+original work from Id Software for convenience and ease of interoperability.
+
+For the code contained herein that was written by Id Software, see
+the license agreement on their original archive for restrictions and
+limitations.
+
+The UI Enhanced copyright owner permit free reuse of his code contained
+herein, as long as the following terms are met:
+
+----------------------------------------------------------------------
+1) Credit is given in a place where users of the mod may read
+   it. (Title screen, credit screen or README will do).  The
+   recommended format is: "First, Last, alias, email"
+
+2) There are no attempts to misrepresent the public as to who made the
+   alterations.  The UI Enhanced copyright owner does not give permission
+   for others to release software under the UI Enhanced name.
+----------------------------------------------------------------------
+
+Ian Jefferies   - HypoThermia ( uie@planetquake.com )
+http://www.planetquake.com/uie
+
+

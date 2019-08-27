@@ -1,0 +1,55 @@
+
+
+              -------- Q3Rally Source Code --------
+
+                  Quake 3 Arena Full Conversion
+
+                  Stephen "Stone Lance" Heijster
+                   Programmer for Quake 3 Rally
+
+                        www.quakerally.com
+                               or
+                  www.geocities.com/stone_lance
+
+              -------------------------------------
+
+
+Introduction and Installation
+-----------------------------
+
+I have had a lot of requests for source code for my Maya md3Exporter since
+I no longer have time to work on it.  I have included VC6.0 porject files which
+should allow you to compile the dll versions of the mod.  I have also included the
+batch files i use to compile qvms.  To compile the qvms with the batch files I
+have included, you must have LCC installed.  You will also need to q3 mod source
+code tools including q3asm.  If you dont use LCC it should be fairly simple to
+change the batch files to point to your perfered compiler. You can download LCC
+for free from this site: http://www.cs.virginia.edu/~lcc-win32/
+
+I tried to keep all of my changes from the original source inside of // STONELANCE
+and // END comments.  This should make it easier to track what code is for Q3R and
+what code is original Q3A code, although there may be some new or modified code which
+I forgot to wrap with my // STONELANCE comment.
+
+The codein cg_atmospheric.c is based on the code by Q3F Development team, and is
+modified by myself to include a few new features.  All modifications in this file
+also be wrapped with // STONELANCE and // END comments.
+
+
+Credits
+-------
+Golliwog and Arnout 'RR2DO2' van Meer - Q3F Development Team,
+for atmospheric effects source.
+http://www.q3f.com
+
+Jeff Molofee - NeHe,
+for TGA loading code from Tutorial 24.
+http://nehe.gamedev.net
+
+
+Disclaimer
+----------
+If you use any of our code, modified or not, please give the Q3Rally Development Team
+credit for our contribution.  If you are releasing mods based on the Q3Rally source
+please send me an email so I can point our fans to your work and post some news with
+links on www.quakerally.com

@@ -1,0 +1,13 @@
+defrag modes
+************
+
+cvar 'dfx_mode' controls in what mode you want to play in 'defrag' gametype
+
+DF_DEFAULT    0     // default, like mapper made the map
+
+DF_STRAFE     1     // strafe, no item spawnings, no selfdamage
+DF_ROCKET     2     // rocket, no item spawnings, no selfdamage
+DF_PLASMA     3     // plasma, no item spawnings, no selfdamage
+DF_COMBO      4     // rocket, plasma and nade, no item spawnings, no selfdamage
+
+DF_ICEMODE    5     // strafe, no item spawnings, no selfdamage, all groundsurfaces are slick

@@ -1,0 +1,15 @@
+fastcapmodes
+************
+
+cvar 'dfx_fastcapmode' controls what kind of mode you want to play the 'fastcap' gametype
+
+FC_DEFAULT			0   // default fastcap strafe
+FC_NOTELES			1   // strafe without teleporters
+FC_NOPADS			2   // strafe, jump pads are killers
+FC_NODOORS			3   // strafe, doors won't spawn
+FC_NOTELES_NOPADS	4   // strafe, no teleporters, no jump pads
+FC_DISABLEALL		5   // strafe, no teleporters, no jump pads, no doors
+						// *below weapon modes and settings from FC_DISABLEALL
+FC_ROCKET			6   // rocket launcher
+FC_PLASMA			7   // plasma gun
+FC_COMBO			8	// rocket launcher, plasma gun, grenade launcher

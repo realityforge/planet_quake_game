@@ -1,0 +1,249 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: game - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\STONEL~1\LOCALS~1\Temp\RSP70.tmp" with contents
+[
+/nologo /G5 /MTd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "BUILDING_REF_GL" /D "DEBUG" /D "GLOBALRANK" /D "GAME" /FR".\Debug/" /Fp".\Debug/game.pch" /YX /Fo".\Debug/" /Fd".\Debug/" /FD /c 
+"D:\Quake3\q3rphysics\code\game\ai_chat.c"
+"D:\Quake3\q3rphysics\code\game\ai_cmd.c"
+"D:\Quake3\q3rphysics\code\game\ai_dmnet.c"
+"D:\Quake3\q3rphysics\code\game\ai_dmq3.c"
+"D:\Quake3\q3rphysics\code\game\ai_main.c"
+"D:\Quake3\q3rphysics\code\game\ai_team.c"
+"D:\Quake3\q3rphysics\code\game\ai_vcmd.c"
+"D:\Quake3\q3rphysics\code\game\bg_misc.c"
+"D:\Quake3\q3rphysics\code\game\bg_physics.c"
+"D:\Quake3\q3rphysics\code\game\bg_pmove.c"
+"D:\Quake3\q3rphysics\code\game\bg_slidemove.c"
+"D:\Quake3\q3rphysics\code\game\bg_wheel_forces.c"
+"D:\Quake3\q3rphysics\code\game\g_active.c"
+"D:\Quake3\q3rphysics\code\game\g_arenas.c"
+"D:\Quake3\q3rphysics\code\game\g_bot.c"
+"D:\Quake3\q3rphysics\code\game\g_client.c"
+"D:\Quake3\q3rphysics\code\game\g_cmds.c"
+"D:\Quake3\q3rphysics\code\game\g_combat.c"
+"D:\Quake3\q3rphysics\code\game\g_items.c"
+"D:\Quake3\q3rphysics\code\game\g_main.c"
+"D:\Quake3\q3rphysics\code\game\g_mem.c"
+"D:\Quake3\q3rphysics\code\game\g_misc.c"
+"D:\Quake3\q3rphysics\code\game\g_missile.c"
+"D:\Quake3\q3rphysics\code\game\g_mover.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_hazard.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_mapents.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_mapobjects.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_object_physics.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_observer_cams.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_racetools.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_rearweapon.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_scripted_objects.c"
+"D:\Quake3\q3rphysics\code\game\g_rally_tools.c"
+"D:\Quake3\q3rphysics\code\game\g_session.c"
+"D:\Quake3\q3rphysics\code\game\g_spawn.c"
+"D:\Quake3\q3rphysics\code\game\g_svcmds.c"
+"D:\Quake3\q3rphysics\code\game\g_syscalls.c"
+"D:\Quake3\q3rphysics\code\game\g_target.c"
+"D:\Quake3\q3rphysics\code\game\g_team.c"
+"D:\Quake3\q3rphysics\code\game\g_trigger.c"
+"D:\Quake3\q3rphysics\code\game\g_utils.c"
+"D:\Quake3\q3rphysics\code\game\g_weapon.c"
+"D:\Quake3\q3rphysics\code\game\q_math.c"
+"D:\Quake3\q3rphysics\code\game\q_shared.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\STONEL~1\LOCALS~1\Temp\RSP70.tmp" 
+Creating temporary file "C:\DOCUME~1\STONEL~1\LOCALS~1\Temp\RSP71.tmp" with contents
+[
+kernel32.lib user32.lib winmm.lib /nologo /base:"0x20000000" /subsystem:windows /dll /profile /map:"../../qagamex86.map" /debug /machine:I386 /def:".\game.def" /out:"../../qagamex86.dll" /implib:".\Debug/qagamex86.lib" 
+.\Debug\ai_chat.obj
+.\Debug\ai_cmd.obj
+.\Debug\ai_dmnet.obj
+.\Debug\ai_dmq3.obj
+.\Debug\ai_main.obj
+.\Debug\ai_team.obj
+.\Debug\ai_vcmd.obj
+.\Debug\bg_misc.obj
+.\Debug\bg_physics.obj
+.\Debug\bg_pmove.obj
+.\Debug\bg_slidemove.obj
+.\Debug\bg_wheel_forces.obj
+.\Debug\g_active.obj
+.\Debug\g_arenas.obj
+.\Debug\g_bot.obj
+.\Debug\g_client.obj
+.\Debug\g_cmds.obj
+.\Debug\g_combat.obj
+.\Debug\g_items.obj
+.\Debug\g_main.obj
+.\Debug\g_mem.obj
+.\Debug\g_misc.obj
+.\Debug\g_missile.obj
+.\Debug\g_mover.obj
+.\Debug\g_rally_hazard.obj
+.\Debug\g_rally_mapents.obj
+.\Debug\g_rally_mapobjects.obj
+.\Debug\g_rally_object_physics.obj
+.\Debug\g_rally_observer_cams.obj
+.\Debug\g_rally_racetools.obj
+.\Debug\g_rally_rearweapon.obj
+.\Debug\g_rally_scripted_objects.obj
+.\Debug\g_rally_tools.obj
+.\Debug\g_session.obj
+.\Debug\g_spawn.obj
+.\Debug\g_svcmds.obj
+.\Debug\g_syscalls.obj
+.\Debug\g_target.obj
+.\Debug\g_team.obj
+.\Debug\g_trigger.obj
+.\Debug\g_utils.obj
+.\Debug\g_weapon.obj
+.\Debug\q_math.obj
+.\Debug\q_shared.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\STONEL~1\LOCALS~1\Temp\RSP71.tmp"
+<h3>Output Window</h3>
+Compiling...
+ai_chat.c
+ai_cmd.c
+ai_dmnet.c
+D:\Quake3\q3rphysics\code\game\ai_dmnet.c(3000) : warning C4101: 'accel' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\ai_dmnet.c(3000) : warning C4101: 'a_normal' : unreferenced local variable
+ai_dmq3.c
+ai_main.c
+ai_team.c
+ai_vcmd.c
+bg_misc.c
+D:\Quake3\q3rphysics\code\game\bg_misc.c(1824) : warning C4013: 'isRaceObserver' undefined; assuming extern returning int
+bg_physics.c
+D:\Quake3\q3rphysics\code\game\bg_physics.c(98) : warning C4101: 'delta' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(761) : warning C4101: 'cross2' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(763) : warning C4101: 'impulseNum' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(763) : warning C4101: 'oppositeImpulseNum' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(763) : warning C4101: 'impulseDen' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(758) : warning C4101: 'arm1' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(758) : warning C4101: 'arm2' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(761) : warning C4101: 'cross' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(764) : warning C4101: 'totalMass' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(760) : warning C4101: 'impulseMoment' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(760) : warning C4101: 'impulse' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(1190) : warning C4101: 'arm' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(1418) : warning C4101: 'vec2' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_physics.c(1753) : warning C4101: 'l' : unreferenced local variable
+bg_pmove.c
+D:\Quake3\q3rphysics\code\game\bg_pmove.c(943) : warning C4013: 'PM_InitializeVehicle' undefined; assuming extern returning int
+bg_slidemove.c
+bg_wheel_forces.c
+D:\Quake3\q3rphysics\code\game\bg_wheel_forces.c(206) : warning C4101: 'n2' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_wheel_forces.c(206) : warning C4101: 'v2' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_wheel_forces.c(202) : warning C4101: 'friction' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_wheel_forces.c(206) : warning C4101: 'angle' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_wheel_forces.c(206) : warning C4101: 'v' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\bg_wheel_forces.c(202) : warning C4101: 'dot' : unreferenced local variable
+g_active.c
+D:\Quake3\q3rphysics\code\game\g_active.c(1130) : warning C4013: 'SelectSpectatorSpawnPoint' undefined; assuming extern returning int
+g_arenas.c
+g_bot.c
+g_client.c
+g_cmds.c
+D:\Quake3\q3rphysics\code\game\g_cmds.c(1793) : warning C4101: 'j' : unreferenced local variable
+g_combat.c
+D:\Quake3\q3rphysics\code\game\g_combat.c(1373) : warning C4101: 'v' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\g_combat.c(1378) : warning C4101: 'minDist' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\g_combat.c(1377) : warning C4101: 'o' : unreferenced local variable
+g_items.c
+g_main.c
+g_mem.c
+g_misc.c
+g_missile.c
+g_mover.c
+g_rally_hazard.c
+D:\Quake3\q3rphysics\code\game\g_rally_hazard.c(63) : warning C4013: 'G_RadiusDamage_NoKnockBack' undefined; assuming extern returning int
+D:\Quake3\q3rphysics\code\game\g_rally_hazard.c(137) : warning C4101: 'snapped' : unreferenced local variable
+g_rally_mapents.c
+g_rally_mapobjects.c
+g_rally_object_physics.c
+g_rally_observer_cams.c
+g_rally_racetools.c
+g_rally_rearweapon.c
+D:\Quake3\q3rphysics\code\game\g_rally_rearweapon.c(36) : warning C4013: 'CreateSmokeHazard' undefined; assuming extern returning int
+g_rally_scripted_objects.c
+D:\Quake3\q3rphysics\code\game\g_rally_scripted_objects.c(57) : warning C4101: 'model' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\g_rally_scripted_objects.c(58) : warning C4101: 'deadmodel' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\g_rally_scripted_objects.c(282) : warning C4101: 'i' : unreferenced local variable
+D:\Quake3\q3rphysics\code\game\g_rally_scripted_objects.c(280) : warning C4101: 'delta' : unreferenced local variable
+g_rally_tools.c
+D:\Quake3\q3rphysics\code\game\g_rally_tools.c(83) : warning C4101: 'i' : unreferenced local variable
+g_session.c
+g_spawn.c
+g_svcmds.c
+g_syscalls.c
+g_target.c
+g_team.c
+g_trigger.c
+g_utils.c
+g_weapon.c
+q_math.c
+q_shared.c
+Linking...
+   Creating library .\Debug/qagamex86.lib and object .\Debug/qagamex86.exp
+Creating temporary file "C:\DOCUME~1\STONEL~1\LOCALS~1\Temp\RSP75.tmp" with contents
+[
+/nologo /o".\Debug/game.bsc" 
+.\Debug\ai_chat.sbr
+.\Debug\ai_cmd.sbr
+.\Debug\ai_dmnet.sbr
+.\Debug\ai_dmq3.sbr
+.\Debug\ai_main.sbr
+.\Debug\ai_team.sbr
+.\Debug\ai_vcmd.sbr
+.\Debug\bg_misc.sbr
+.\Debug\bg_physics.sbr
+.\Debug\bg_pmove.sbr
+.\Debug\bg_slidemove.sbr
+.\Debug\bg_wheel_forces.sbr
+.\Debug\g_active.sbr
+.\Debug\g_arenas.sbr
+.\Debug\g_bot.sbr
+.\Debug\g_client.sbr
+.\Debug\g_cmds.sbr
+.\Debug\g_combat.sbr
+.\Debug\g_items.sbr
+.\Debug\g_main.sbr
+.\Debug\g_mem.sbr
+.\Debug\g_misc.sbr
+.\Debug\g_missile.sbr
+.\Debug\g_mover.sbr
+.\Debug\g_rally_hazard.sbr
+.\Debug\g_rally_mapents.sbr
+.\Debug\g_rally_mapobjects.sbr
+.\Debug\g_rally_object_physics.sbr
+.\Debug\g_rally_observer_cams.sbr
+.\Debug\g_rally_racetools.sbr
+.\Debug\g_rally_rearweapon.sbr
+.\Debug\g_rally_scripted_objects.sbr
+.\Debug\g_rally_tools.sbr
+.\Debug\g_session.sbr
+.\Debug\g_spawn.sbr
+.\Debug\g_svcmds.sbr
+.\Debug\g_syscalls.sbr
+.\Debug\g_target.sbr
+.\Debug\g_team.sbr
+.\Debug\g_trigger.sbr
+.\Debug\g_utils.sbr
+.\Debug\g_weapon.sbr
+.\Debug\q_math.sbr
+.\Debug\q_shared.sbr]
+Creating command line "bscmake.exe @C:\DOCUME~1\STONEL~1\LOCALS~1\Temp\RSP75.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+qagamex86.dll - 0 error(s), 37 warning(s)
+</pre>
+</body>
+</html>

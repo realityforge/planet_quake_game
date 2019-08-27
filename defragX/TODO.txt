@@ -1,0 +1,79 @@
+// work out whole documentation. maybe make a pdf...
+// work out the .ent file descriptions
+
+- fix: some entity problem occurs, makes a button sound somewhere repeating forever.. could be wait -2 of movers... figure it out!
+- fix: wait -2 only take effect in gt_Adventure and gt_teamrun, same for locked door spawnflag
+- fix: not proper choosing spawn in teamrun
+- fix: when connected to a server, after a callvote, player does pain sound sometimes without any other effects.
+
+- improve: current 'chs system'
+		   maybe set it up similar to PSF?
+		   make 8 cvars for chs parsing all info in one cvar? like [int info, x, y, color, fontsize, qbool caption]
+		   
+- improve: dfx_reversemap >
+		   cast down a trace at target_stoptimer and put down spawn to ground. if theres no ground try moving around playerstart on x/y axis.
+		   set dfx_nodoors
+			
+- improve: GT_TEAMRUN [start/stop timer by anybody, stoptimer move all to intermission ]
+		   teamrun probably needs default trigger multiple instead of defrag ones
+		   - might replace kill by map restart too
+		   
+- improve: ob detector also disable drawing when targeting a noob surface
+- improve: autorecord, additional option to save without /savedemo, using mapname...
+- improve: autorecord, bein able to record segmented runs
+- improve: func_breakable custom model, custom sound, debris sizes
+- improve: save relevant stuff to recordfile, holding checkpoints, best time, highest speed, amount of /kill, amount of /finished, total time played
+- improve: walljump need a less sharp angle to be triggered (at least 30 degrees to wall),
+           dont wj when wall is smaller than playerheight
+           set also a time for bein too late to walljump... or dont allow walljump as soon as falling?
+
+- improve: target_laser hit detection
+- improve: add laser pointer for grapple
+- improve: instead of drowning sound add another custom sound for burning in lava/melting in slime whatever
+- improve: underwater... put a shader when underwater, kinda blueish transparent one
+
+- improve: Setup UI (clean out pointless gfx settings)
+- improve: UI qmenu, dragable sliders (also show value above slider when dragging)
+
+- improve: whole huds appearance
+- improve: ladder climbing 
+		   move a bit, delay... cutscene borders black bottom/top? not too important tho
+		   no climbing via pitch movement? instead up=jump/down=crouch?
+		   
+- improve: UI start game
+		   merge 1st/2nd to one page,
+		   listbox instead lvlshot selection,
+		   option to filter for tags,
+		   show more information read from .dfx/defi file (longname, author, tags),
+		   use tags to determine weaps/items used in map, draw icons
+- add: award system [overall awards, like perfect cj, perfect gb, 2xrj, 3xrj....]
+- add: achievements [level bound, minimissions], target_achievement
+- add: checkpoint sounds, cg_checkpointsound [0 to disable]
+- add: start/stop trigger sound
+- add: sound spawnstring for target_earthquake, also affect moving of player a bit? instead of only shaking the view.
+- add: action_button (replace gesture button) for several actions... like press button, climb ladder, read sign
+- add: g_competition cvar, if enabled restrict several hud usage, limit fov....
+- add: target_dialogue [will pause game, show a textbox. (only available in GT_ADVENTURE) / probably should handle like an intermission
+- add: dropspawn function for GT_FREESTYLE/GT_FASTCAP (spawn where you want without cheats)
+- add: sound for crouchsliding
+- add: moverintertia (scale playerspeed to mover speed)
+- add: spawnflag for target_teleporter to teleport projectiles
+- add: portal canon (spawn a portal source/dest by rail similar weap)
+- add: all default hook types like in defrag
+- add: target_dlight, can toggle on and off
+- add: func_pushable
+	   object that player can push forwards in 90 degree steps
+	   object able to fall down when bottom ends, but fall down sticked to wall in 90 degrees as well
+	   spawnflags: heavy[can only push when have quad]
+				   continue[once started, will continue movement until hit a solid
+
+- add: target_variable [variable name, int value]
+- add: target_cvar - restricted access to an allowed non malicious list of modifiable cvars
+- add: target_if - check if a certain variable has the given value [match case]
+- add: item_map and item_compass, when have 'map' draw minimap similiar on screen, 'compass' to show maps items and current player position
+- add: item_custom (pickable item without any self actions, used to target something else - set custom sound and model keys)
+- add: circle jump hud
+- add: fastcap route saving, loading offline /callvoting online
+- add: fastcap route editor, option to transfer to server, so it can be callvoted
+- add: Map Stats UI
+- add: ghost recording

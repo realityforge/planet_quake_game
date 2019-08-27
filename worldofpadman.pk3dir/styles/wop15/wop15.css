@@ -1,0 +1,127 @@
+@import url(../common.css);
+
+/* here we go */
+body{
+	margin:      0;
+	padding:     0;
+	border:      0;
+	font-family: "Helvetica", sans-serif;
+	font-size:   16px;
+	line-height: 1.25em;
+	background:  rgb(119, 129, 206) url(./wop-background.png) repeat fixed;
+	color:       rgb(255, 255, 255);
+}
+
+a:link, a:visited{
+	color: #f59912;
+}
+
+a:focus, a:active, a:hover{
+	color: #ffffff;
+}
+
+/** main styles **/
+.outer-box{
+	padding:             4px;
+	background-color:    #cdcbfc;
+	border:              1px solid #ffffff;
+	border-right-color:  #6e6da6;
+	border-bottom-color: #6e6da6;
+}
+
+.inner-box{
+	padding:             4px;
+	background-color:    #190066;
+	border:              1px solid #6e6da6;
+	border-right-color:  #ffffff;
+	border-bottom-color: #ffffff;
+}
+
+.header-box{
+	padding:          0.75em;
+	background-color: #6965a0;
+}
+
+.footer-box{
+	padding:          0.75em;
+	background-color: #6965a0;
+}
+
+.header-box > h1{
+	font-weight: bold;
+	font-size:   175%;
+	line-height: 1em;
+	margin:      0;
+	padding:     0;
+	text-shadow: 0.07em 0.07em 0.075em #190066;
+}
+
+
+.wop-header-slogan{
+	height:     20px;
+	margin:     0 0 0.75em 0;
+	background: url('./wopheader-slogan.png') no-repeat top left;
+}
+
+#wop-header-01{
+	min-width: 850px;
+}
+
+#wop-header-02{
+	height:     210px;
+	background: #190066 url('./wopheader-city.png') no-repeat bottom right;
+}
+
+#wop-header-03{
+	height:     169px;
+	width:      470px;
+	margin:     18px;
+	background: url('./wopheader-title.png') no-repeat top left;
+}
+
+#wop-header-04{
+	position: relative;
+	top:      -26px;
+	left:     0;
+}
+
+#wop-header-05{
+	position:   absolute;
+	bottom:     -45px;
+	right:      3%;
+	height:     293px;
+	width:      347px;
+	background: url('./wopheader-pads.png') no-repeat bottom right;
+}
+
+/* rounded corners or no?*/
+.outer-box{
+	border-radius: 15px;
+}
+
+.inner-box{
+	border-radius: 11px;
+}
+
+.header-box{
+	border-radius: 7px;
+}
+
+.footer-box{
+	border-radius: 7px;
+}
+
+.imagebox > img{
+	border:     2px solid #ffffff;
+	display:    inline-block;
+	background: #ff0000;
+	padding:    0.5em;
+}
+
+#wop-header-05 img{
+	display: none;
+}
+
+.content-box.downloads{
+	text-align: center;
+}

@@ -1,0 +1,17 @@
+gametypes
+*********
+
+dfx_gametype cvar controls the game type what you want to play 
+
+GT_FASTCAP    0     // fastcap mode
+
+GT_ADVENTURE  1     // defrag 'single player' maps, only one client is allowed ingame.
+					// theres alot of differences to the original 'defrag' gameplay.
+					
+GT_DEFRAG     2     // classic 'defrag' gametype
+
+GT_TEAMRUN    3     // like 'defrag' but in co-op style. 
+					// everyone ingame can trigger the start/stoptimer. 
+					// As soon as the stoptimer is triggered, the game is over.
+					
+GT_FREESTYLE  4     // spawn with all weapons and do trick jumping like you want.

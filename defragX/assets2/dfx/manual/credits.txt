@@ -1,0 +1,42 @@
+Defrag X - MOD
+==============
+
+Inspired by the original defrag mod from cgg/marky
+
+CODEBASE
+	baseq3e from cyrax
+
+MAIN MOD DEVELOPMENT
+	sl1k
+
+ADDITIONAL CODE ADAPTED FROM
+	breadsticks
+	eraser
+	neil toronto
+	the reaction factory
+
+CODE ASSISTANCE
+	breadsticks
+	cyrax
+	ztm
+
+ART / SHADERS / MODELS / AUDIO
+	cyrax
+	netgfx
+	oot-community
+	sl1k
+	wolfcamql community
+	worldspawn archive
+	Zarr
+	
+IDEAS AND TESTING
+	brandon
+	breadsticks
+	eksha
+	hairy balls
+	stalker
+	zarr
+	ztm
+
+DOCUMENTATION
+	sl1k

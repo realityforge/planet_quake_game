@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="DefragX" Version="10.0.0" InternalType="">
+  <VirtualDirectory Name="ui">
+    <File Name="code/ui/ui_shared.h"/>
+    <File Name="code/ui/ui_public.h"/>
+    <File Name="code/ui/keycodes.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="q3_ui">
+    <File Name="code/q3_ui/ui_stats.c"/>
+    <File Name="code/q3_ui/ui_callvote.c"/>
+    <File Name="code/q3_ui/ui_ingame_join.c"/>
+    <File Name="code/q3_ui/ui_video.c"/>
+    <File Name="code/q3_ui/ui_startserver.c"/>
+    <File Name="code/q3_ui/ui_sound.c"/>
+    <File Name="code/q3_ui/ui_signup.c"/>
+    <File Name="code/q3_ui/ui_setup.c"/>
+    <File Name="code/q3_ui/ui_servers2.c"/>
+    <File Name="code/q3_ui/ui_serverinfo.c"/>
+    <File Name="code/q3_ui/ui_qmenu.c"/>
+    <File Name="code/q3_ui/ui_preferences.c"/>
+    <File Name="code/q3_ui/ui_playersettings.c"/>
+    <File Name="code/q3_ui/ui_players.c"/>
+    <File Name="code/q3_ui/ui_playermodel.c"/>
+    <File Name="code/q3_ui/ui_options.c"/>
+    <File Name="code/q3_ui/ui_network.c"/>
+    <File Name="code/q3_ui/ui_mods.c"/>
+    <File Name="code/q3_ui/ui_mfield.c"/>
+    <File Name="code/q3_ui/ui_menu.c"/>
+    <File Name="code/q3_ui/ui_main.c"/>
+    <File Name="code/q3_ui/ui_local.h"/>
+    <File Name="code/q3_ui/ui_ingame.c"/>
+    <File Name="code/q3_ui/ui_gameinfo.c"/>
+    <File Name="code/q3_ui/ui_display.c"/>
+    <File Name="code/q3_ui/ui_demo2.c"/>
+    <File Name="code/q3_ui/ui_controls2.c"/>
+    <File Name="code/q3_ui/ui_connect.c"/>
+    <File Name="code/q3_ui/ui_confirm.c"/>
+    <File Name="code/q3_ui/ui_atoms.c"/>
+    <File Name="code/q3_ui/keycodes.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="game">
+    <File Name="code/game/surfaceflags.h"/>
+    <File Name="code/game/q_shared.h"/>
+    <File Name="code/game/q_shared.c"/>
+    <File Name="code/game/q_math.c"/>
+    <File Name="code/game/g_weapon.c"/>
+    <File Name="code/game/g_utils.c"/>
+    <File Name="code/game/g_unlagged.c"/>
+    <File Name="code/game/g_trigger.c"/>
+    <File Name="code/game/g_team.h"/>
+    <File Name="code/game/g_team.c"/>
+    <File Name="code/game/g_target.c"/>
+    <File Name="code/game/g_svcmds.c"/>
+    <File Name="code/game/g_spawn.c"/>
+    <File Name="code/game/g_session.c"/>
+    <File Name="code/game/g_public.h"/>
+    <File Name="code/game/g_mover.c"/>
+    <File Name="code/game/g_missile.c"/>
+    <File Name="code/game/g_misc.c"/>
+    <File Name="code/game/g_mem.c"/>
+    <File Name="code/game/g_main.c"/>
+    <File Name="code/game/g_local.h"/>
+    <File Name="code/game/g_items.c"/>
+    <File Name="code/game/g_combat.c"/>
+    <File Name="code/game/g_cmds.c"/>
+    <File Name="code/game/g_client.c"/>
+    <File Name="code/game/g_active.c"/>
+    <File Name="code/game/bg_slidemove.c"/>
+    <File Name="code/game/bg_shared.h"/>
+    <File Name="code/game/bg_public.h"/>
+    <File Name="code/game/bg_pmove.c"/>
+    <File Name="code/game/bg_misc.c"/>
+    <File Name="code/game/bg_local.h"/>
+    <File Name="code/game/bg_lib.h"/>
+    <File Name="code/game/bg_lib.c"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="cgame">
+    <File Name="code/cgame/tr_types.h"/>
+    <File Name="code/cgame/modulus.c"/>
+    <File Name="code/cgame/cg_weapons.c"/>
+    <File Name="code/cgame/cg_view.c"/>
+    <File Name="code/cgame/cg_snapshot.c"/>
+    <File Name="code/cgame/cg_servercmds.c"/>
+    <File Name="code/cgame/cg_scoreboard.c"/>
+    <File Name="code/cgame/cg_public.h"/>
+    <File Name="code/cgame/cg_predict.c"/>
+    <File Name="code/cgame/cg_playerstate.c"/>
+    <File Name="code/cgame/cg_players.c"/>
+    <File Name="code/cgame/cg_marks.c"/>
+    <File Name="code/cgame/cg_main.c"/>
+    <File Name="code/cgame/cg_localents.c"/>
+    <File Name="code/cgame/cg_local.h"/>
+    <File Name="code/cgame/cg_info.c"/>
+    <File Name="code/cgame/cg_event.c"/>
+    <File Name="code/cgame/cg_ents.c"/>
+    <File Name="code/cgame/cg_effects.c"/>
+    <File Name="code/cgame/cg_drawtools.c"/>
+    <File Name="code/cgame/cg_draw.c"/>
+    <File Name="code/cgame/cg_defrag.c"/>
+    <File Name="code/cgame/cg_consolecmds.c"/>
+  </VirtualDirectory>
+  <Description/>
+  <Dependencies/>
+  <Settings Type="Executable">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="MinGW 32bit ( MSYS2 64bit )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g -Wall" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="-O0" Required="yes">
+        <LibraryPath Value="."/>
+        <LibraryPath Value="Debug"/>
+      </Linker>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./Debug" PauseExecWhenProcTerminates="no" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
+      <Environment EnvVarSetName="&lt;Use Workspace Settings&gt;" DbgSetName="&lt;Use Global Settings&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>

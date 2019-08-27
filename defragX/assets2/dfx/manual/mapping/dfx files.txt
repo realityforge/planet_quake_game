@@ -1,0 +1,17 @@
+DFX Files
+=========
+
+.dfx files are similar to .arena and .defi files
+
+they start with a { and end with a }, within this brackets your map information goes.
+
+sample
+``````
+
+{
+	map	"dfxrun1"			// insert name of your .bsp file here, omit extension
+	longname "dfx run #1"	// the long name of your map
+	type "defrag"			// gametypes, possible values are [fastcap, adventure, defrag, teamrun, freestyle]
+							// multiple values possible, just keep a space char between them
+	author "mapper"			// insert your mapper alias here
+}

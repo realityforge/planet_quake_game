@@ -1,0 +1,14 @@
+TDC Source Code Licensing Terms
+-------------------------------
+
+As we were not able to find any license that was fit for the TDC Code, we are describing, in short, our hopes of how the code will be used by people who download it.
+
+1. FIRST AND MOST IMPORTANT: GIVE US THE CORRESPONDING CREDITS IN YOUR "README.TXT"s AND GAME CREDITS. We have spent lots (i mean LOTS) of hours working in this code for free. We always believed in the quake3 community and it's will for a great single player mod. We think we have done a good job, so we deserve (at least) to appear in your project credits if you use our code in some way. That is, if you copy part of it, use some great idea (such the NPC AI management code), or anything, please do not forget to add the corresponding line to your credits AND "readme"s.
+
+2. The Code is released without warranty of any type, you can guess why... any case, questions can be sent to me (jpl@ing.puc.cl), I would be very glad to help people continue this project or any other project based on it.
+
+3. You can freely distribute the TDC code as long as it contains a copy of both the readme text and the license text.
+
+Well... that's it, enjoy!
+
+JPL - Lead Programmer

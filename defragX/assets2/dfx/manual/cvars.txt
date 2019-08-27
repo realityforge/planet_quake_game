@@ -1,0 +1,140 @@
+List of new CVARS
+=================
+
+Below a list of new CVARS, their purpose and values
+The * indicates the default value
+
+HUD SETTINGS
+++++++++++++
+
+hud_fontColor [0|1|2|3|4|5|6|7*|8|9]
+	- set the font color used for the hud printings
+
+hud_frameColor [0|1|2|3|4|5|6|7*|8|9]
+	- set the color of frames in the hud
+
+hud_useHoldable [0|1*]
+	- [0]Disable [1]Enable text notification when using a holdable item
+
+hud_timer [0|1*]
+	- [0]Disable [1]Enable the drawing of the defrag timer
+	- hud_timerX, hud_timerY to set position of the output window
+
+hud_cgaz [0|1*|2]
+	- [0]Disable [1]Enable drawing of the Camping Gaz HUD including red accel bar [2] without accel bar
+	- hud_cgazAlpha to set opacity of the field
+	- hud_cgazY	to set y position of the cgaz hud
+
+hud_snap [0|1*]
+	- disable/enable drawing of the snap HUD
+	- hud_snapY [216*] to set Y pos of the HUD
+	- hud_snapRGBA, [0 0 0.8 0.4] to set Red/Green/Blue and Opacity of the HUD
+
+hud_bbox [0*|1|2|3|4]
+	- [0] dont draw bbox at all
+	- [1] draw grid bbox
+	- [2] draw grid bbox, only floor
+	- [3] draw grid bbox, filled floor
+	- [4] draw only floor, filled
+
+hud_bboxFPS [0|1*]
+	- if [1]enabled, the bbox will also be drawn in firstperson mode
+
+hud_bboxColor [0|1|2*|3|4|5]
+	- set the color of the bbox
+	- [0]dense grey, [1]white, [2]red, [3]green, [4]blue, [5]yellow
+
+chs_fontColor [0|1|2|3|4|5|6|7*|8|9]
+	- set the default font color for all chs_ elements
+
+chs_fontHighlightColor [0|1|2|3|4|5*|6|7|8|9]
+	-set the highlight font color for all chs_ elements
+
+chs_fontSize [4-16, 8*]
+	- set the default font size for all _chs elements
+
+chs_keypress [0|1*]
+	- [0]Disable [1]Enable output of keypress (movement, jump, crouch)
+
+chs_speed [0|1]
+	- disable/enable output of players xy speed
+	- chs_speedX, chs_speedY to set position of the output
+
+chs_ob [0*|1]
+	- Disable/Enable the overbounce detector
+	- chs_obX, chs_obY to set position of the output
+
+chs_angles [0*|1|2|3]
+	- Disable/Enable the pitch and yaw angles output
+	- chs_anglesX, chs_anglesY to set position of the output
+
+cg_drawWeaponSelect <0|1|2|3*>
+    0 - disabled
+    1 - horozontal with weapon name
+    2 - horizontal with ammo counters
+    3 - vectical with ammo counters
+	
+cp_centerDraw <0|1*>
+	- Disable/Enable drawing of the current checkpoint at the center of the screen
+
+
+EFFECT SETTINGS
++++++++++++++++
+
+cg_teleportEffect [0|1|2*]
+	- Disable/Enable player teleportation effects [not allowed in GT_ADVENTURE]
+	- 0 disable complete
+	- 1 only animation
+	- 2 animation and sound
+
+cg_gibEffect [0|1|2*]
+	- Disable/Enable player gibbing effects when got killed [not allowed in GT_ADVENTURE]
+	- 0 disable complete
+	- 1 only animation
+	- 2 animation and sounds
+
+cg_landingSound [0|1*]
+	- [0]Disable [1]Enable players landing sound [not allowed in GT_ADVENTURE]
+
+cg_painSounds [0|1*]
+	- [0]Disable [1]Enable players pain sounds when he receives damage [not allowed in GT_ADVENTURE]
+
+cg_footsteps [0|1*]
+	- [0]Disable [1]Enable players walking sounds [not allowed in GT_ADVENTURE]
+
+cg_showSpawns [0*|1|2|3|4|5]
+	- [0]Disable
+	- [1]Enable, invis effect
+	- [2]Enable, quad effect
+	- [3]Enable, battlesuit effect
+	- [4]Enable, regeneration effect
+	- [5]Enable, no effect
+
+cg_crosshairColor [0|1|2|3|4|5|6|7*|8|9]
+	- set the color of the crosshair [cg_crosshairHealth must be '0' when want to use a custom color]
+
+
+ITEM SETTINGS
++++++++++++++
+cg_alwaysDrawItems [0|1*]
+	- [0] don't draw after pickup
+	- [1] draw a special shader where item spawn is after pickup
+
+
+GAME SETTINGS
++++++++++++++
+
+cg_fovAdjust <0*|1>
+    - Automatically rescale cg_fov from desired 4x3 screen ratio to widescreen resolution
+
+dfx_interference [0*|1]
+	- [0]Disable [1]Enable player interferences [only optional in GT_FREESTYLE]
+
+dfx_obs [0|1*]
+	- [0]Disable [1]Enable overbounces
+
+dfx_ruleset [0*|1|2|3]
+	- [0] default  vq3 ruleset
+	- [1] default  promode ruleset
+	- [2] extended vq3 ruleset
+	- [3] extended promode ruleset
