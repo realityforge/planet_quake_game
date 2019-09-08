@@ -1,0 +1,77 @@
+
+___________________________________________________
+
+ETXreaL-0.3.0-20111106.7z
+__________________________________________
+
+ETXreaL
+	* IMPORTANT: Changed media license for community contributions to "Creative Commons Attribution-ShareAlike 3.0 Unported"
+
+	* Changed required minimum OpenGL version to 3.2 on Windows
+	* 20 - 80% faster runtime speed by using better Visual Studio compiler options
+	* Replaced VS 2008 and SCons project files by Premake 4.3
+	* Changed default binary installation folders to bin/ to avoid conflicts between different architectures
+	* Improved r_softShadows quality and speed with irregular shadowmap sampling like in Crysis
+	* Implemented Exponential Variance Shadow Mapping to fight the VSM light bleeding problems
+	* Optimized tangent space calculations for ET skeletal models (big speed improvement if r_vboVertexSkinning 0)
+	* Fixed bugs concerning r_vboDeformVertexes
+	* Added more ET specific keywords to the .shader parser
+	* Added top-down view for r_showBspNodes
+	* Added engine version to the console
+	* Updated JPG loader to libjpeg 8c
+	* Added Omni-bot 0.81 to default etmain game
+	* Defaulted com_maxfps to 125
+	* Rewrote HDR tone mapping to use correct RGB <-> XYZ <-> Yxy color space conversions
+	* Added GUID system to generate etkeys which are sent as cl_guid
+	* Renamed r_dynamicLightCastShadows to r_dynamicLightShadows
+
+ETXMap
+	* Improved ETXMap -map2map -format quake3 using additional support for worldspawn detail brushes
+	* Improved ETXMap -map2map -format quake3 to support texture coordinates without GtkRadiant 1.4
+	* Improved alternate BSP splitter algorithm for faster map compiles and better rendering speeds
+	* Updated JPG loader to libjpeg 8c
+	* Changed Unix home dir from .etwolf to .etxreal
+	
+ETMain
+	* Added over 1 GB new high resolution textures using diffuse, normal and specular material information
+	* Added replacement textures for battery and fueldump by Eonfge
+	* Added high quality skyboxes and models by AVOC
+	* Added fueldump additions by KeMoN
+	* Converted original ET maps to the Doom 3 .map format and added an etx_ prefix to them
+	
+	
+___________________________________________________
+
+ET-XreaL_snapshot_20110505.7z
+__________________________________________
+
+	* Optimized all OpenGL shaders by using compile macro combinations
+	* Optimized ET skeletal animation with LOD meshes
+	* Fixed shader problems with the open source Intel driver
+	* Renamed r_noDynamicLighting to r_dynamicLight for better compatibility with ET mods
+	* Fixed sky vs. global fog rendering issues
+	* Enabled SSE math code
+	* Fixed bug in Tess_SurfacePolybuffer() which caused the broken flamethrower flames
+	* Fixed bug concerning .map entity modelscale_vec keyword
+	* Added CPU deformVertexes fallback if there is no OpenGL 3 driver or r_vboDeformVertexes is set to 0
+	* Added r_shadowMapSizeSunUltra - r_shadowMapSizeSunLow
+	* Removed old, broken and unsupported stencil shadow volumes code
+	* Fixed PVS culling by areamasks
+	* Started to rewrite deferred shading path
+
+
+___________________________________________________
+
+ET-XreaL_snapshot_20101115.7z
+__________________________________________
+
+	* Ported XreaL renderer to src/engine/rendererGL3/
+	* Rewrote .mdm/.mdx code to be GPU accelerated
+	* Rewrote .md3/.mdc code to be GPU accelerated
+	* Added support for Linux 64-bit
+	* Replaced Linux sound backend with SDL
+	* Added .avi recorder from ioquake3 including sound support
+	* Added AABB collision optimisations
+	* Added new ETXMap BSP compiler based on NetRadiant's q3map2
+	* Added new ETXRadiant level editor based on DarkRadiant
+

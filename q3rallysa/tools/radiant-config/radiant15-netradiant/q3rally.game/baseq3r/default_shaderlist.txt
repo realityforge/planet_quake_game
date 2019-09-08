@@ -1,0 +1,25 @@
+//*********************************************************//
+//	shaderlist.txt modified for GTKRadiant/Netradiant	    //
+//	by Perle for use with Q3Rally - 30/12/2017		    //
+//                                                        //             //										   //
+//      Rev history:  						   //                                                  //										   //
+//********************************************************//
+
+// this file lists all the separate shader files
+//shaderlist
+common
+glass
+blimp
+building
+dirt_grass
+glass
+metals
+people
+signage
+sponsors
+road
+trees
+skies
+liquids
+q3r_lights
+break
