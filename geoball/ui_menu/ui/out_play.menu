@@ -1,0 +1,1585 @@
+#include "ui/menudef.h"
+
+{
+    menuDef 
+    {
+      name "play"
+      fullScreen MENU_TRUE
+      focusColor 1 1 1 1
+      onOpen 
+      { 
+        playlooped "music/sonic1.wav" ;
+        uiScript LoadSave ;
+        hide singleControls ;
+        hide loadControls ;
+        show playControls ;
+      }
+		
+      onESC 
+      {
+        close play ;
+        open main 
+      }
+//
+// menu background
+//	
+      itemDef 
+      {
+        name background
+        style WINDOW_STYLE_SHADER
+        rect 0 0 640 480
+        background "ui/assets/menu1"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// glowing column
+//
+      itemDef 
+      {
+        name columnglow
+        style WINDOW_STYLE_SHADER
+        rect 30 0 90 480
+        background "ui/assets/menu3"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Title Banner
+//
+      itemDef 
+      {
+        name titlebanner
+        style WINDOW_STYLE_SHADER
+        rect 143 12 470 93
+        background "ui/assets/menu4"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Halo
+//
+      itemDef 
+      {
+        name halo
+        style WINDOW_STYLE_SHADER
+        rect -425 -185 1000 1000
+        background "ui/assets/menu2"
+        forecolor 0.7 0.7 0.7 1
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Rotating Model
+//
+      itemDef
+      {
+        name model
+        type ITEM_TYPE_MODEL
+        model_angle 90
+        model_rotation 3.5
+        rect -123 108 400 400
+        model_fovx 80
+        model_fovy 80
+        asset_model "models/players/monkey/lower.md3"
+        visible MENU_TRUE
+        decoration
+      }
+
+//
+// Play Button
+//
+      itemDef 
+      {
+        name newgamebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 115 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name newgamebutton
+        type ITEM_TYPE_BUTTON
+        rect 115 115 130 24
+        text "PLAY"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show newgamebutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide newgamebutton_glow 
+        }	  
+      }
+//
+// Controls Button
+//
+      itemDef 
+      {
+        name controlsbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 245 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlsbutton
+        text "CONTROLS"
+        type ITEM_TYPE_BUTTON
+        rect 245 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show controlsbutton_glow ;
+          show controlstext
+        }
+        mouseExit 
+        { 
+          hide controlsbutton_glow ;
+          hide controlstext
+        }
+        action
+        {
+          close play;
+          open controls
+        }	  	  
+      }
+//
+// Setup Button
+//
+      itemDef 
+      {
+        name setupbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 375 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setupbutton
+        text "SETUP"
+        type ITEM_TYPE_BUTTON
+        rect 375 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show setupbutton_glow ;
+          show setuptext
+        }
+        mouseExit 
+        { 
+          hide setupbutton_glow ;
+          hide setuptext
+        }
+        action
+        {
+          close play;
+          open setup
+        }	  	  
+      }
+//
+// Exit button
+//
+      itemDef 
+      {
+        name exitbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 500 444 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exitbutton
+        text "QUIT"
+        type ITEM_TYPE_BUTTON
+        rect 500 444 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show exitbutton_glow ;
+          show exittext
+        }
+        mouseExit 
+        { 
+          hide exitbutton_glow ;
+          hide exittext
+        }
+        action
+        {
+          hide exittext ;
+          open quit 
+        }	  	  
+      }
+
+//
+// Credit button
+//
+      itemDef 
+      {
+        name creditbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 505 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name creditbutton
+        text "CREDITS"
+        type ITEM_TYPE_BUTTON
+        rect 505 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show creditbutton_glow ;
+          show credittext
+        }
+        mouseExit 
+        { 
+          hide creditbutton_glow ;
+          hide credittext
+        }
+        action
+        {
+          close play;
+          open credits
+        }	  	  
+      }
+
+//
+// Focus Text for the buttons
+//
+
+      itemDef 
+      {
+        name newgametext
+        rect 50 444 640 24
+        text "Play a Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlstext
+        rect 50 444 640 24
+        text "Configure Game Controls"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setuptext
+        rect 50 444 640 24
+        text "Configure Game Settings"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exittext
+        rect 50 444 640 24
+        text "Exit Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name credittext
+        rect 50 444 640 24
+        text "Show Game Credits"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+//
+// Header line under buttons
+//
+      itemDef 
+      {
+        name header_line
+        style WINDOW_STYLE_SHADER
+        rect 125 136 500 4
+        background "ui/assets/menu_line"
+        visible MENU_TRUE
+        decoration
+      }
+/*********************************************************************/
+//
+// Start of menu Specific Items
+//
+/*********************************************************************/
+//
+// Play Menu Title
+//
+      itemDef 
+      {
+        name play_title
+        group playControls
+        text "START PLAYING"
+        style WINDOW_STYLE_SHADER
+        background "ui/assets/menu_blendbox"
+        rect 150 145 450 16
+        textscale 0.3
+        textalign ITEM_ALIGN_CENTER		
+        textalignx 225
+        textaligny 15
+        visible MENU_TRUE 
+        decoration 
+      }
+//
+// Single Player button
+//
+      itemDef 
+      {
+        name singlebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 275 210 200 30
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name singlebutton
+        group playControls
+        text "NEW GAME"
+        type ITEM_TYPE_BUTTON
+        rect 275 210 200 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 100
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show singlebutton_glow ;
+          show singletext
+        }
+        mouseExit 
+        { 
+          hide singlebutton_glow ;
+          hide singletext
+        }
+        action
+        {
+          hide singlebutton_glow ;
+          hide singletext
+          hide playControls ;
+          show singleControls ;
+          show easybutton_glow ;
+          hide mediumbutton_glow ;
+          hide hardbutton_glow ;
+          hide veryhardbutton_glow ;
+          setitemcolor easybutton forecolor 1 1 1 1 ;
+          setitemcolor mediumbutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor hardbutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor veryhardbutton forecolor 0.65 0.65 0 1 ;
+          setcvar "g_spSkill" 1 ;
+        }	  	  
+      }
+//
+// Load button
+//
+      itemDef 
+      {
+        name loadbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 275 250 200 30
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name loadbutton
+        group playControls
+        text "LOAD GAME"
+        type ITEM_TYPE_BUTTON
+        rect 275 250 200 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 100
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show loadbutton_glow ;
+          show loadtext
+        }
+        mouseExit 
+        { 
+          hide loadbutton_glow ;
+          hide loadtext
+        }
+        action
+        {
+          hide loadbutton_glow ;
+          hide loadtext
+          hide playControls ;
+          show loadControls ;
+        }	  	  
+      }
+//
+// Play Demo button
+//
+      itemDef 
+      {
+        name demobutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 275 290 200 30
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name demobutton
+        group playControls
+        text "PLAY DEMO"
+        type ITEM_TYPE_BUTTON
+        rect 275 290 200 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 100
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show demobutton_glow ;
+          show demotext
+        }
+        mouseExit 
+        { 
+          hide demobutton_glow ;
+          hide demotext
+        }
+        action
+        {
+          close play;
+          open demo
+        }	  	  
+      }
+//
+// Play Mod button
+//
+      itemDef 
+      {
+        name modbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 275 330 200 30
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name modbutton
+        group playControls
+        text "PLAY MOD"
+        type ITEM_TYPE_BUTTON
+        rect 275 330 200 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 100
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show modbutton_glow ;
+          show modtext
+        }
+        mouseExit 
+        { 
+          hide modbutton_glow ;
+          hide modtext
+        }
+        action
+        {
+          close play;
+          open mod
+        }	  	  
+      }
+//
+// Focus Text for Play Menu Buttons
+//
+      itemDef 
+      {
+        name loadtext
+        rect 50 444 640 24
+        text "Load a Saved Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name singletext
+        rect 50 444 640 24
+        text "Start a New Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name demotext
+        rect 50 444 640 24
+        text "Playback a Recorded Demo"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name modtext
+        rect 50 444 640 24
+        text "Play a Mod"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+//
+// Single Controls
+//
+      itemDef 
+      {
+        name single_title
+        group singleControls
+        text "SINGLE PLAYER"
+        style WINDOW_STYLE_SHADER
+        background "ui/assets/menu_blendbox"
+        rect 150 145 450 16
+        textscale 0.3
+        textalign ITEM_ALIGN_CENTER		
+        textalignx 225
+        textaligny 15
+        visible MENU_TRUE 
+        decoration 
+      }
+
+      itemDef 
+      {
+        name sbackbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 110 444 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name sbackbutton
+        group singleControls
+        text "BACK"
+        type ITEM_TYPE_BUTTON
+        rect 110 444 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show sbackbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide sbackbutton_glow ;
+        }
+        action
+        {
+          hide sbackbutton_glow ;
+          hide easybutton_glow ;
+          hide mediumbutton_glow ;
+          hide hardbutton_glow ;
+          hide veryhardbutton_glow ;
+          hide singleControls;
+          show playControls
+        }	  	  
+      }
+
+//chapter2 
+     itemDef 
+      {
+        name sbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 280 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name sbeginbutton
+        group singleControls
+        text "Chapter 2"
+        type ITEM_TYPE_BUTTON
+        rect 250 280 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show sbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide sbeginbutton_glow ;
+        }
+        action
+        {
+          hide sbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c2l1 ;
+        }	  	  
+      }
+//chapter0
+      itemDef 
+      {
+        name hsbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 170 250 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name hsbeginbutton
+        group singleControls
+        text "Chapter -0- Training"
+        type ITEM_TYPE_BUTTON
+        rect 250 170 250 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 120
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show hsbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide hsbeginbutton_glow ;
+        }
+        action
+        {
+          hide hsbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c0l1 ;
+        }	  	  
+      }
+//chapter1
+      itemDef 
+      {
+        name asbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 240 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name asbeginbutton
+        group singleControls
+        text "Chapter 1"
+        type ITEM_TYPE_BUTTON
+        rect 250 240 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show asbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide asbeginbutton_glow ;
+        }
+        action
+        {
+          hide asbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c1l1 ;
+        }	  	  
+      }
+
+//
+//chapter3 
+     itemDef 
+      {
+        name bsbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 320 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name bsbeginbutton
+        group singleControls
+        text "Chapter 3"
+        type ITEM_TYPE_BUTTON
+        rect 250 320 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show bsbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide bsbeginbutton_glow ;
+        }
+        action
+        {
+          hide bsbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c3l1 ;
+        }	  	  
+      }
+
+//chapter4 
+     itemDef 
+      {
+        name csbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 360 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name csbeginbutton
+        group singleControls
+        text "Chapter 4"
+        type ITEM_TYPE_BUTTON
+        rect 250 360 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show csbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide csbeginbutton_glow ;
+        }
+        action
+        {
+          hide csbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c4l1 ;
+        }	  	  
+      }
+//
+//chapter5 
+     itemDef 
+      {
+        name dsbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 350 240 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name dsbeginbutton
+        group singleControls
+        text "Chapter 5"
+        type ITEM_TYPE_BUTTON
+        rect 350 240 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show dsbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide dsbeginbutton_glow ;
+        }
+        action
+        {
+          hide dsbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c5l1 ;
+        }	  	  
+      }
+//
+//chapter6 
+     itemDef 
+      {
+        name esbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 350 280 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name esbeginbutton
+        group singleControls
+        text "Chapter 6"
+        type ITEM_TYPE_BUTTON
+        rect 350 280 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show esbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide esbeginbutton_glow ;
+        }
+        action
+        {
+          hide esbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c6l1 ;
+        }	  	  
+      }
+//
+//chapter7
+     itemDef 
+      {
+        name fsbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 350 320 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name fsbeginbutton
+        group singleControls
+        text "Chapter 7"
+        type ITEM_TYPE_BUTTON
+        rect 350 320 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show fsbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide fsbeginbutton_glow ;
+        }
+        action
+        {
+          hide fsbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c7l1 ;
+        }	  	  
+      }
+//
+//chapter8
+     itemDef 
+      {
+        name gsbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 350 360 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name gsbeginbutton
+        group singleControls
+        text "Chapter 8"
+        type ITEM_TYPE_BUTTON
+        rect 350 360 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show gsbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide gsbeginbutton_glow ;
+        }
+        action
+        {
+          hide gsbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c8l1 ;
+        }	  	  
+      }
+//chapter9
+     itemDef 
+      {
+        name isbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 400 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name isbeginbutton
+        group singleControls
+        text "Chapter 9"
+        type ITEM_TYPE_BUTTON
+        rect 250 400 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show isbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide isbeginbutton_glow ;
+        }
+        action
+        {
+          hide isbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c9l1 ;
+        }	  	  
+      }
+//
+
+//chapter10
+     itemDef 
+      {
+        name ksbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 350 400 120 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name ksbeginbutton
+        group singleControls
+        text "Chapter 10"
+        type ITEM_TYPE_BUTTON
+        rect 350 400 120 40
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show ksbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide ksbeginbutton_glow ;
+        }
+        action
+        {
+          hide ksbeginbutton_glow ;
+          clearcvar "ui_LoadGame" ;
+          uiScript "StartSPGame" geo_c10l1 ;
+        }	  	  
+      }
+      itemDef 
+      {
+        name easybutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 200 250 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name easybutton
+        group singleControls
+        text "Start Adventure"
+        type ITEM_TYPE_BUTTON
+        rect 250 200 280 40
+        textscale 0.33
+        textaligny 28
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 125
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        action
+        {
+          show easybutton_glow ;
+          hide mediumbutton_glow ;
+          hide hardbutton_glow ;
+          hide veryhardbutton_glow ;
+          setitemcolor easybutton forecolor 1 1 1 1 ;
+          setitemcolor mediumbutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor hardbutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor veryhardbutton forecolor 0.65 0.65 0 1 ;
+          setcvar "g_spSkill" 1 ;
+        }	  	  
+      }
+
+      itemDef 
+      {
+        name mediumbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 240 250 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+
+/*
+      itemDef 
+      {
+        name mediumbutton
+        group singleControls
+        text "Level 2"
+        type ITEM_TYPE_BUTTON
+        rect 250 240 250 40
+        textscale 0.33
+        textaligny 28
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 125
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        action
+        {
+          show easybutton_glow ;
+          hide mediumbutton_glow ;
+          hide hardbutton_glow ;
+          hide veryhardbutton_glow ;
+          setitemcolor mediumbutton forecolor 1 1 1 1 ;
+          setitemcolor easybutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor hardbutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor veryhardbutton forecolor 0.65 0.65 0 1 ;
+          setcvar "g_spSkill" 2 ;
+        }	  	  
+      }
+
+      itemDef 
+      {
+        name hardbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 280 250 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+
+      itemDef 
+      {
+        name hardbutton
+        group singleControls
+        text "Level 3"
+        type ITEM_TYPE_BUTTON
+        rect 250 280 250 40
+        textscale 0.33
+        textaligny 28
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 125
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        action
+        {
+          show easybutton_glow ;
+          hide mediumbutton_glow ;
+          hide hardbutton_glow ;
+          hide veryhardbutton_glow ;
+          setitemcolor hardbutton forecolor 1 1 1 1 ;
+          setitemcolor easybutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor mediumbutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor veryhardbutton forecolor 0.65 0.65 0 1 ;
+          setcvar "g_spSkill" 3 ;
+        }	  	  
+      }
+
+      itemDef 
+      {
+        name veryhardbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 250 320 250 40
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+  itemDef 
+      {
+        name veryhardbutton
+        group singleControls
+        text "Level 4"
+        type ITEM_TYPE_BUTTON
+        rect 250 320 250 40
+        textscale 0.33
+        textaligny 28
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 125
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        action
+        {
+          show easybutton_glow ;
+          hide mediumbutton_glow ;
+          hide hardbutton_glow ;
+          hide veryhardbutton_glow ;
+          setitemcolor veryhardbutton forecolor 1 1 1 1 ;
+          setitemcolor easybutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor mediumbutton forecolor 0.65 0.65 0 1 ;
+          setitemcolor hardbutton forecolor 0.65 0.65 0 1 ;
+          setcvar "g_spSkill" 4 ;
+        }	  	  
+      }
+
+*/
+//
+// Load Controls
+//
+
+      itemDef 
+      {
+        name lbackbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 200 400 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name lbackbutton
+        group loadControls
+        text "BACK"
+        type ITEM_TYPE_BUTTON
+        rect 200 400 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show lbackbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide lbackbutton_glow ;
+        }
+        action
+        {
+          hide lbackbutton_glow ;
+          hide loadControls;
+          show playControls
+        }	  	  
+      }
+
+      itemDef 
+      {
+        name savelist
+        group loadControls
+        rect 190 171 370 200
+        type ITEM_TYPE_LISTBOX
+        style WINDOW_STYLE_SHADER
+        elementwidth 120
+        elementheight 20
+        background "ui/assets/menu_box1"
+        textscale 0.25
+        elementtype LISTBOX_TEXT
+        feeder FEEDER_SAVE
+        textalign ITEM_ALIGN_LEFT
+        textaligny 14
+        border WINDOW_BORDER_FULL
+        bordercolor .5 .5 .5 .5
+        outlinecolor .5 .5 .5 .5
+        forecolor 1 1 1 1
+        backcolor 0 0 .5 .25
+        visible MENU_FALSE
+        doubleClick
+        {
+          uiScript LoadGame ;
+          uiScript LoadSPGame ;
+        }
+      }
+
+      itemDef 
+      {
+        name lbeginbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 420 400 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+//newLandi
+    itemDef
+    {
+      name "levelname"
+      rect 20 20 260 20
+      visible MENU_TRUE
+      align ITEM_ALIGN_LEFT
+      textscale 0.4
+      textaligny 28
+      textalignx 0
+      ownerdraw CG_LOAD_LEVELNAME
+    }
+
+    itemDef
+    {
+      name "hostname"
+      rect 20 100 260 20
+      visible MENU_TRUE
+      align ITEM_ALIGN_LEFT
+      textscale 0.4
+      textaligny 28
+      textalignx 0
+      ownerdraw CG_LOAD_HOSTNAME
+    }
+    
+    itemDef
+    {
+      name "motd"
+      rect 20 180 260 20
+      visible MENU_TRUE
+      align ITEM_ALIGN_LEFT
+      textscale 0.4
+      textaligny 28
+      textalignx 0
+      ownerdraw CG_LOAD_MOTD
+    }
+
+    itemDef
+    {
+      name "levelshot"
+      rect 300 20 320 240
+      visible MENU_TRUE
+      ownerdraw CG_LOAD_LEVELSHOT
+    }
+    
+    itemDef
+    {
+      name "media"
+      rect 20 380 380 30
+      visible MENU_TRUE
+      forecolor 0.0 0.8 1 1
+      ownerdraw CG_LOAD_MEDIA
+      align ITEM_ALIGN_CENTER
+      textstyle ITEM_TEXTSTYLE_NEON
+      textscale 0.5
+      special 1.0
+    }
+    
+    itemDef
+    {
+      name "medialabel"
+      textscale 0.6
+      rect 420 380 200 40
+      align ITEM_ALIGN_RIGHT
+      textaligny 28
+      textalignx 0
+      forecolor 0.0 0.8 1 1
+      visible MENU_TRUE 
+      ownerdraw CG_LOAD_MEDIA_LABEL
+    }
+
+    itemDef
+    {
+      name "sound"
+      rect 20 300 380 30
+      visible MENU_TRUE
+      forecolor 0.0 0.8 1 1
+      ownerdraw CG_LOAD_SOUND
+      align ITEM_ALIGN_CENTER
+      textstyle ITEM_TEXTSTYLE_NEON
+      textscale 0.5
+      special 1.0
+    }
+    
+    itemDef
+    {
+      name "soundlabel"
+      textscale 0.6
+      rect 420 300 200 40
+      align ITEM_ALIGN_RIGHT
+      textaligny 28
+      textalignx 0
+      forecolor 0.0 0.8 1 1
+      visible MENU_TRUE 
+      ownerdraw CG_LOAD_SOUND_LABEL
+    }
+
+    itemDef
+    {
+      name "graphic"
+      rect 20 340 380 30
+      visible MENU_TRUE
+      forecolor 0.0 0.8 1 1
+      ownerdraw CG_LOAD_GRAPHIC
+      align ITEM_ALIGN_CENTER
+      textstyle ITEM_TEXTSTYLE_NEON
+      textscale 0.5
+      special 1.0
+    }
+    
+    itemDef
+    {
+      name "graphiclabel"
+      textscale 0.6
+      rect 420 340 200 40
+      align ITEM_ALIGN_RIGHT
+      textaligny 28
+      textalignx 0
+      forecolor 0.0 0.8 1 1
+      visible MENU_TRUE 
+      ownerdraw CG_LOAD_GRAPHIC_LABEL
+    }
+
+      itemDef 
+      {
+        name lbeginbutton
+        group loadControls
+        text "BEGIN"
+        type ITEM_TYPE_BUTTON
+        rect 420 400 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show lbeginbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide lbeginbutton_glow ;
+        }
+        action
+        {
+          hide lbeginbutton_glow ;
+          uiScript LoadGame ;
+          uiScript LoadSPGame ;
+        }	  	  
+      }
+
+    }
+}

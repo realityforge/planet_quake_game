@@ -1,0 +1,561 @@
+#include "ui/menudef.h"
+
+{
+    menuDef 
+    {
+      name "insave"
+      rect 0 0 640 480
+      focusColor 1 1 1 1
+      onOpen 
+      { 
+        playlooped "music/sonic1.wav" ;
+        uiScript LoadSave ;
+        setcvar ui_SaveGame "Autosave" 
+      }
+	
+      onClose
+      {
+        clearcvar ui_SaveGame
+      }
+	
+      onESC 
+      {
+        clearcvar ui_SaveGame ;
+        uiScript "closeingame" 
+      }
+//
+// menu background
+//	
+      itemDef 
+      {
+        name background
+        style WINDOW_STYLE_SHADER
+        rect 0 0 640 480
+        background "ui/assets/menu1"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// glowing column
+//
+      itemDef 
+      {
+        name columnglow
+        style WINDOW_STYLE_SHADER
+        rect 30 0 90 480
+        background "ui/assets/menu3"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Title Banner
+//
+      itemDef 
+      {
+        name titlebanner
+        style WINDOW_STYLE_SHADER
+        rect 143 12 470 93
+        background "ui/assets/menu4"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Halo
+//
+      itemDef 
+      {
+        name halo
+        style WINDOW_STYLE_SHADER
+        rect -425 -185 1000 1000
+        background "ui/assets/menu2"
+        forecolor 0.7 0.7 0.7 1
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Rotating Model
+//
+      itemDef
+      {
+        name model
+        type ITEM_TYPE_MODEL
+        model_angle 90
+        model_rotation 3.5
+        rect -123 108 400 400
+        model_fovx 80
+        model_fovy 80
+        asset_model "models/players/monkey/lower.md3"
+        visible MENU_TRUE
+        decoration
+      }
+
+//
+// Save Button
+//
+      itemDef 
+      {
+        name savegamebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 115 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name savegamebutton
+        type ITEM_TYPE_BUTTON
+        rect 115 115 130 24
+        text "SAVE"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show savegamebutton_glow ;
+          show savegametext 
+        }
+        mouseExit 
+        { 
+          hide savegamebutton_glow 
+          hide savegametext
+        }
+        action
+        {
+        }	  	  
+      }
+//
+// Controls Button
+//
+      itemDef 
+      {
+        name controlsbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 245 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlsbutton
+        text "CONTROLS"
+        type ITEM_TYPE_BUTTON
+        rect 245 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show controlsbutton_glow ;
+          show controlstext
+        }
+        mouseExit 
+        { 
+          hide controlsbutton_glow ;
+          hide controlstext
+        }
+        action
+        {
+          close insave;
+          open incontrols
+        }	  	  
+      }
+//
+// Setup Button
+//
+      itemDef 
+      {
+        name setupbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 375 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setupbutton
+        text "SETUP"
+        type ITEM_TYPE_BUTTON
+        rect 375 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show setupbutton_glow ;
+          show setuptext
+        }
+        mouseExit 
+        { 
+          hide setupbutton_glow ;
+          hide setuptext
+        }
+        action
+        {
+          close insave ;
+          open "insetup"
+        }	  	  
+      }
+//
+// Load button
+//
+      itemDef 
+      {
+        name loadbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 505 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name loadbutton
+        text "LOAD"
+        type ITEM_TYPE_BUTTON
+        rect 505 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show loadbutton_glow ;
+          show loadtext
+        }
+        mouseExit 
+        { 
+          hide loadbutton_glow ;
+          hide loadtext
+        }
+        action
+        {
+          close insave ;
+          open "inload"
+        }	  	  
+      }
+//
+// Quit button
+//
+      itemDef 
+      {
+        name exitbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 115 444 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exitbutton
+        text "QUIT"
+        type ITEM_TYPE_BUTTON
+        rect 115 444 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show exitbutton_glow ;
+          show exittext
+        }
+        mouseExit 
+        { 
+          hide exitbutton_glow ;
+          hide exittext
+        }
+        action
+        {
+          hide exittext ;
+          open inquit 
+        }	  	  
+      }
+//
+// Resume button
+//
+      itemDef 
+      {
+        name resumebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 505 444 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name resumebutton
+        text "RESUME"
+        type ITEM_TYPE_BUTTON
+        rect 505 444 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show resumebutton_glow ;
+          show resumetext
+        }
+        mouseExit 
+        { 
+          hide resumebutton_glow ;
+          hide resumetext
+        }
+        action
+        {
+          clearcvar ui_SaveGame ;
+          uiScript "closeingame" ;
+
+        }	  	  
+      }
+//
+// Focus Text for the buttons
+//
+
+      itemDef 
+      {
+        name savegametext
+        rect 50 444 640 24
+        text "Save Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlstext
+        rect 50 444 640 24
+        text "Configure Game Controls"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setuptext
+        rect 50 444 640 24
+        text "Configure Game Settings"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exittext
+        rect 50 444 640 24
+        text "Exit Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name loadtext
+        rect 50 444 640 24
+        text "Load a Saved Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name resumetext
+        rect 50 444 640 24
+        text "Resume Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+//
+// Header line under buttons
+//
+      itemDef 
+      {
+        name header_line
+        style WINDOW_STYLE_SHADER
+        rect 125 136 500 4
+        background "ui/assets/menu_line"
+        visible MENU_TRUE
+        decoration
+      }
+/*********************************************************************/
+//
+// Start of menu Specific Items
+//
+/*********************************************************************/
+//
+// Load Menu Title
+//
+      itemDef 
+      {
+        name load_title
+        text "SAVE GAME"
+        style WINDOW_STYLE_SHADER
+        background "ui/assets/menu_blendbox"
+        rect 150 145 450 16
+        textscale 0.3
+        textalign ITEM_ALIGN_CENTER		
+        textalignx 225
+        textaligny 15
+        visible MENU_TRUE 
+        decoration 
+      }
+//
+// Save Controls
+//
+      itemDef
+      {
+        name savegame
+        type ITEM_TYPE_EDITFIELD
+        text "Name:"
+        cvar "ui_SaveGame"
+        rect 190 171 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_TRUE
+      }
+
+      itemDef 
+      {
+        name savelist
+        rect 190 201 370 170
+        type ITEM_TYPE_LISTBOX
+        style WINDOW_STYLE_SHADER
+        elementwidth 120
+        elementheight 20
+        background "ui/assets/menu_box1"
+        textscale 0.25
+        elementtype LISTBOX_TEXT
+        feeder FEEDER_SAVE
+        textalign ITEM_ALIGN_LEFT
+        textaligny 14
+        border WINDOW_BORDER_FULL
+        bordercolor .5 .5 .5 .5
+        outlinecolor .5 .5 .5 .5
+        forecolor 1 1 1 1
+        backcolor 0 0 .5 .25
+        visible MENU_TRUE
+        doubleClick
+        {
+          uiScript SaveGame ;
+        }
+      }
+
+      itemDef 
+      {
+        name lsavebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 310 400 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name lsavebutton
+        text "SAVE"
+        type ITEM_TYPE_BUTTON
+        rect 310 400 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show lsavebutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide lsavebutton_glow ;
+        }
+        action
+        {
+          hide lsavebutton_glow ;
+          uiScript "SaveSPGame" ;
+          uiScript "closeingame"
+        }	  	  
+      }
+
+    }
+}

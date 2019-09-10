@@ -1,0 +1,1623 @@
+#include "ui/menudef.h"
+#include "ui/animdef.h"
+
+{
+    menuDef 
+    {
+      name "controls"
+      fullScreen MENU_TRUE
+      focusColor 1 1 1 1
+
+      onOpen 
+      { 
+        playlooped "music/sonic1.wav" ;
+        uiScript "loadControls" ;
+        setcvar "ui_q3model" 0 ;
+        setcvar "model" monkey ;
+        setcvar "headmodel" monkey ;
+        uiScript UpdateModel ;
+        show lookControls ;
+        hide moveControls ;
+        hide shootControls ;
+        hide weaponControls ;
+        hide miscControls ;
+        setitemcolor lookbutton forecolor 1 1 1 1 ;
+        setitemcolor movebutton forecolor 0.64 0.65 1 1 ;
+        setitemcolor shootbutton forecolor 0.64 0.65 1 1 ;
+        setitemcolor miscbutton forecolor 0.64 0.65 1 1 ;
+        setitemcolor weaponbutton forecolor 0.64 0.65 1 1 ;
+      }
+
+      onClose
+      {
+        uiScript "saveControls" ;
+      }
+
+      onESC 
+      {
+        close controls ;
+        open main 
+      }
+//
+// menu background
+//	
+      itemDef 
+      {
+        name background
+        style WINDOW_STYLE_SHADER
+        rect 0 0 640 480
+        background "ui/assets/menu1"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// glowing column
+//
+      itemDef 
+      {
+        name columnglow
+        style WINDOW_STYLE_SHADER
+        rect 30 0 90 480
+        background "ui/assets/menu3"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Title Banner
+//
+      itemDef 
+      {
+        name titlebanner
+        style WINDOW_STYLE_SHADER
+        rect 143 12 470 93
+        background "ui/assets/menu4"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Halo
+//
+      itemDef 
+      {
+        name halo
+        style WINDOW_STYLE_SHADER
+        rect -425 -185 1000 1000
+        background "ui/assets/menu2"
+        forecolor 0.7 0.7 0.7 1
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Rotating Model
+//
+      itemDef
+      {
+        name model
+        type ITEM_TYPE_MODEL
+        model_angle 90
+        model_rotation 3.5
+        rect -123 108 400 400
+        model_fovx 80
+        model_fovy 80
+        asset_model "models/players/monkey/lower.md3"
+        visible MENU_TRUE
+        decoration
+      }
+
+//
+// Play Button
+//
+      itemDef 
+      {
+        name newgamebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 115 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name newgamebutton
+        type ITEM_TYPE_BUTTON
+        rect 115 115 130 24
+        text "PLAY"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show newgamebutton_glow ;
+          show newgametext 
+        }
+        mouseExit 
+        { 
+          hide newgamebutton_glow 
+          hide newgametext
+        }
+        action
+        {
+          close controls;
+          open play
+        }	  	  
+      }
+//
+// Controls Button
+//
+      itemDef 
+      {
+        name controlsbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 245 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlsbutton
+        text "CONTROLS"
+        type ITEM_TYPE_BUTTON
+        rect 245 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show controlsbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide controlsbutton_glow ;
+        }
+      }
+//
+// Setup Button
+//
+      itemDef 
+      {
+        name setupbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 375 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setupbutton
+        text "SETUP"
+        type ITEM_TYPE_BUTTON
+        rect 375 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show setupbutton_glow ;
+          show setuptext
+        }
+        mouseExit 
+        { 
+          hide setupbutton_glow ;
+          hide setuptext
+        }
+        action
+        {
+          close controls;
+          open setup
+        }	  	  
+      }
+//
+// Exit button
+//
+      itemDef 
+      {
+        name exitbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 115 444 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exitbutton
+        text "QUIT"
+        type ITEM_TYPE_BUTTON
+        rect 115 444 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show exitbutton_glow ;
+          show exittext
+        }
+        mouseExit 
+        { 
+          hide exitbutton_glow ;
+          hide exittext
+        }
+        action
+        {
+          hide exittext ;
+          open quit 
+        }	  	  
+      }
+
+//
+// Credit button
+//
+      itemDef 
+      {
+        name creditbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 505 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name creditbutton
+        text "CREDITS"
+        type ITEM_TYPE_BUTTON
+        rect 505 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show creditbutton_glow ;
+          show credittext
+        }
+        mouseExit 
+        { 
+          hide creditbutton_glow ;
+          hide credittext
+        }
+        action
+        {
+          close controls;
+          open credits
+        }	  	  
+      }
+//
+// Player Model
+//
+      itemDef
+      {
+        name modelselection
+        ownerdraw UI_PLAYERMODEL
+        rect -20 178 260 260
+        decoration 
+        visible MENU_TRUE
+      }
+//
+// Focus Text for the buttons
+//
+
+      itemDef 
+      {
+        name newgametext
+        rect 50 444 640 24
+        text "Play a Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlstext
+        rect 50 444 640 24
+        text "Configure Game Controls"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setuptext
+        rect 50 444 640 24
+        text "Configure Game Settings"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exittext
+        rect 50 444 640 24
+        text "Exit Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name credittext
+        rect 50 444 640 24
+        text "Show Game Credits"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+//
+// Header line under buttons
+//
+      itemDef 
+      {
+        name header_line
+        style WINDOW_STYLE_SHADER
+        rect 125 136 500 4
+        background "ui/assets/menu_line"
+        visible MENU_TRUE
+        decoration
+      }
+/*********************************************************************/
+//
+// Start of menu Specific Items
+//
+/*********************************************************************/
+//
+// Controls Menu Title
+//
+      itemDef 
+      {
+        name controls_title
+        text "CONFIGURE CONTROLS"
+        style WINDOW_STYLE_SHADER
+        background "ui/assets/menu_blendbox"
+        rect 150 145 450 16
+        textscale 0.3
+        textalign ITEM_ALIGN_CENTER		
+        textalignx 225
+        textaligny 15
+        visible MENU_TRUE 
+        decoration 
+      }
+//
+// Look button
+//
+      itemDef 
+      {
+        name lookbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 173 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name lookbutton
+        text "Look"
+        type ITEM_TYPE_BUTTON
+        rect 120 173 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show lookbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide lookbutton_glow ;
+        }
+        action
+        {
+          show lookControls ;
+          hide moveControls ;
+          hide shootControls ;
+          hide weaponControls ;
+          hide miscControls ;
+          setitemcolor lookbutton forecolor 1 1 1 1 ;
+          setitemcolor movebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor shootbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor miscbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor weaponbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Move button
+//
+      itemDef 
+      {
+        name movebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 203 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name movebutton
+        text "Move"
+        type ITEM_TYPE_BUTTON
+        rect 120 203 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show movebutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide movebutton_glow ;
+        }
+        action
+        {
+          hide lookControls ;
+          show moveControls ;
+          hide shootControls ;
+          hide weaponControls ;
+          hide miscControls ;
+          setitemcolor movebutton forecolor 1 1 1 1 ;
+          setitemcolor lookbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor shootbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor miscbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor weaponbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Shoot button
+//
+      itemDef 
+      {
+        name shootbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 233 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name shootbutton
+        text "Shoot"
+        type ITEM_TYPE_BUTTON
+        rect 120 233 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show shootbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide shootbutton_glow ;
+        }
+        action
+        {
+          hide lookControls ;
+          hide moveControls ;
+          show shootControls ;
+          hide weaponControls ;
+          hide miscControls ;
+          setitemcolor shootbutton forecolor 1 1 1 1 ;
+          setitemcolor lookbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor movebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor miscbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor weaponbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Weapons button
+//
+      itemDef 
+      {
+        name weaponbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 263 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name weaponbutton
+        text "Weapons"
+        type ITEM_TYPE_BUTTON
+        rect 120 263 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show weaponbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide weaponbutton_glow ;
+        }
+        action
+        {
+          hide lookControls ;
+          hide moveControls ;
+          hide shootControls ;
+          show weaponControls ;
+          hide miscControls ;
+          setitemcolor weaponbutton forecolor 1 1 1 1 ;
+          setitemcolor lookbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor shootbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor movebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor miscbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Misc button
+//
+      itemDef 
+      {
+        name miscbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 293 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name miscbutton
+        text "Misc"
+        type ITEM_TYPE_BUTTON
+        rect 120 293 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show miscbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide miscbutton_glow ;
+        }
+        action
+        {
+          hide lookControls ;
+          hide moveControls ;
+          hide shootControls ;
+          hide weaponControls ;
+          show miscControls ;
+          setitemcolor miscbutton forecolor 1 1 1 1 ;
+          setitemcolor lookbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor shootbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor movebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor weaponbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Bind Background
+//
+      itemDef 
+      {
+        name bind_background
+        style WINDOW_STYLE_SHADER
+        rect 300 171 300 250	
+        background "ui/assets/menu_box1"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Highlights for each line in Bind Box
+//
+      itemDef
+      {
+        name highlight1
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 171 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight2
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 191 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight3
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 211 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight4
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 231 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight5
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 251 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight6
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 271 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight7
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 291 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight8
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 311 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight9
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 331 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight10
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 351 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight11
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 371 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight12
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 391 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+//
+// Key Bind Status Message
+//
+      itemDef 
+      {
+        name keyBindStatus
+        ownerdraw UI_KEYBINDSTATUS
+        text ""      
+        rect 375 425 1 20
+        textStyle ITEM_TEXTSTYLE_NORMAL
+        textscale 0.28
+        textalign ITEM_ALIGN_CENTER
+        textalignx 0
+        textaligny 12
+        forecolor 1 1 0 1
+        visible MENU_FALSE
+        decoration 
+      }
+//
+// Yes/No Message
+//
+      itemDef
+      {
+        name yesno_message
+        rect 375 425 1 20 
+        text "Select the Item to Toggle to Yes or No"      
+        forecolor 1 1 0 1
+        textscale .28
+        textStyle ITEM_TEXTSTYLE_NORMAL
+        textalignx 0
+        textalign ITEM_ALIGN_CENTER
+        textaligny 12
+        visible MENU_FALSE
+        decoration 
+      }
+
+//
+// Look Controls
+//
+      itemDef
+      {
+        name lookup
+        group lookControls
+        type ITEM_TYPE_BIND
+        text "Look Up:"
+        cvar "+lookup"
+        rect 325 171 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight1 ;
+          setcvarfloat "ui_PlayerViewAnglePitch" -40 ;
+          uiScript UpdateModel
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight1 ;
+          setcvarfloat "ui_PlayerViewAnglePitch" 10 ;
+          uiScript UpdateModel
+        }
+    	}
+
+      itemDef
+      {
+        name lookdown
+        group lookControls
+        type ITEM_TYPE_BIND
+        text "Look Down:"
+        cvar "+lookdown"
+        rect 325 191 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight2 ;
+          setcvarfloat "ui_PlayerViewAnglePitch" 40 ;
+          uiScript UpdateModel
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight2 ;
+          setcvarfloat "ui_PlayerViewAnglePitch" 10 ;
+          uiScript UpdateModel
+        }
+    	}
+
+      itemDef
+      {
+        name mlook
+        group lookControls
+        type ITEM_TYPE_BIND
+        text "Mouse Look:"
+        cvar "+mlook"
+        rect 325 211 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight3 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight3 ;
+        }
+    	}
+
+      itemDef
+      {
+        name center
+        group lookControls
+        type ITEM_TYPE_BIND
+        text "Centerview:"
+        cvar "centerview"
+        rect 325 231 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight4 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight4 ;
+        }
+    	}
+
+      itemDef
+      {
+        name zoom
+        group lookControls
+        type ITEM_TYPE_BIND
+        text "Zoomview:"
+        cvar "+zoom"
+        rect 325 251 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight5 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight5 ;
+        }
+    	}
+
+      itemDef
+      {
+        name free
+        group lookControls
+        type ITEM_TYPE_BIND
+        text "Free Look:"
+        cvar "cl_freelook"
+        rect 325 271 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight6 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight6 ;
+        }
+    	}
+//
+// Move Controls
+//
+      itemDef
+      {
+        name runwalk
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Run / Walk:"
+        cvar "+speed"
+        rect 325 171 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight1 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight1 ;
+        }
+    	}
+
+      itemDef
+      {
+        name alwaysrun
+        group moveControls
+        type ITEM_TYPE_YESNO
+        text "Always Run:"
+        cvar "cl_run"
+        rect 325 191 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        { 
+          show highlight2 ;
+          show yesno_message ;
+          setcvar "ui_LowerAnim" LEGS_RUN ;
+          uiScript UpdateModel
+        }
+        mouseexit
+        {
+          hide highlight2 ;
+          hide yesno_message ;
+          setcvar "ui_LowerAnim" LEGS_IDLE ;
+          uiScript UpdateModel
+        }
+      }
+
+      itemDef
+      {
+        name forward
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Forward:"
+        cvar "+forward"
+        rect 325 211 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight3 ;
+          setcvar "ui_LowerAnim" LEGS_WALK ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight3 ;
+          setcvar "ui_LowerAnim" LEGS_IDLE ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name backward
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Backpedal:"
+        cvar "+back"
+        rect 325 231 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight4 ;
+          setcvar "ui_LowerAnim" LEGS_BACK ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight4 ;
+          setcvar "ui_LowerAnim" LEGS_IDLE ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name moveleft
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Move Left:"
+        cvar "+moveleft"
+        rect 325 251 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight5 ;
+          setcvar "ui_LowerAnim" LEGS_WALK ;
+          setcvarfloat "ui_PlayerMoveAngleYaw" 255 ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight5 ;
+          setcvar "ui_LowerAnim" LEGS_IDLE ;
+          setcvarfloat "ui_PlayerMoveAngleYaw" 165 ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name moveright
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Move Right:"
+        cvar "+moveright"
+        rect 325 271 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight6 ;
+          setcvar "ui_LowerAnim" LEGS_WALK ;
+          setcvarfloat "ui_PlayerMoveAngleYaw" 75 ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight6 ;
+          setcvar "ui_LowerAnim" LEGS_IDLE ;
+          setcvarfloat "ui_PlayerMoveAngleYaw" 165 ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name jump
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Jump:"
+        cvar "+moveup"
+        rect 325 291 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight7 ;
+          setcvar "ui_LowerAnim" LEGS_JUMP ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight7 ;
+          setcvar "ui_LowerAnim" LEGS_IDLE ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name crouch
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Crouch:"
+        cvar "+movedown"
+        rect 325 311 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight8 ;
+          setcvar "ui_LowerAnim" LEGS_IDLECR ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight8 ;
+          setcvar "ui_LowerAnim" LEGS_IDLE ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name turnleft
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Turn Left:"
+        cvar "+left"
+        rect 325 331 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight9 ;
+          setcvarfloat "ui_PlayerViewAngleYaw" 255 ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight9 ;
+          setcvarfloat "ui_PlayerViewAngleYaw" 165 ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name turnright
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Turn Right:"
+        cvar "+right"
+        rect 325 351 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight10 ;
+          setcvarfloat "ui_PlayerViewAngleYaw" 75 ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight10 ;
+          setcvarfloat "ui_PlayerViewAngleYaw" 165 ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name strafe
+        group moveControls
+        type ITEM_TYPE_BIND
+        text "Strafe:"
+        cvar "+strafe"
+        rect 325 371 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight11 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight11 ;
+        }
+    	}
+//
+// Shoot Controls
+//
+      itemDef
+      {
+        name attack
+        group shootControls
+        type ITEM_TYPE_BIND
+        text "Attack:"
+        cvar "+attack"
+        rect 325 171 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight1 ;
+          setcvar "ui_UpperAnim" TORSO_ATTACK ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight1 ;
+          setcvar "ui_UpperAnim" TORSO_STAND ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name prev
+        group shootControls
+        type ITEM_TYPE_BIND
+        text "Prev Weapon:"
+        cvar "weapprev"
+        rect 325 191 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight2 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight2 ;
+        }
+    	}
+
+      itemDef
+      {
+        name next
+        group shootControls
+        type ITEM_TYPE_BIND
+        text "Next Weapon:"
+        cvar "weapnext"
+        rect 325 211 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight3 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight3 ;
+        }
+    	}
+
+      itemDef
+      {
+        name auto
+        group shootControls
+        type ITEM_TYPE_YESNO
+        text "Autoswitch:"
+        cvar "cg_autoswitch"
+        rect 325 231 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        { 
+          show highlight4 ;
+          show yesno_message ;
+        }
+        mouseexit
+        {
+          hide highlight4 ;
+          hide yesno_message ;
+        }
+      }
+//
+// Weapon Controls
+//
+      itemDef
+      {
+        name weapon1
+        group weaponControls
+        type ITEM_TYPE_BIND
+        text "Bone:"
+        cvar "weapon 1"
+        rect 345 171 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight1 ;
+          setcvar "ui_Weapon" WP_GAUNTLET ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight1 ;
+          setcvar "ui_Weapon" WP_MACHINEGUN ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name weapon2
+        group weaponControls
+        type ITEM_TYPE_BIND
+        text "Pistol:"
+        cvar "weapon 2"
+        rect 345 191 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight2 ;
+          setcvar "ui_Weapon" WP_MACHINEGUN ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight2 ;
+          setcvar "ui_Weapon" WP_MACHINEGUN ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name weapon3
+        group weaponControls
+        type ITEM_TYPE_BIND
+        text "Shotgun:"
+        cvar "weapon 3"
+        rect 345 211 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight3 ;
+          setcvar "ui_Weapon" WP_SHOTGUN ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight3 ;
+          setcvar "ui_Weapon" WP_MACHINEGUN ;
+          uiScript UpdateModel 
+        }
+    	}
+
+      itemDef
+      {
+        name weapon4
+        group weaponControls
+        type ITEM_TYPE_BIND
+        text "Machine Gun:"
+        cvar "weapon 4"
+        rect 345 231 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight4 ;
+          setcvar "ui_Weapon" WP_GRENADE_LAUNCHER ;
+          uiScript UpdateModel 
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight4 ;
+          setcvar "ui_Weapon" WP_MACHINEGUN ;
+          uiScript UpdateModel 
+        }
+    	}
+//
+// Misc Controls
+//
+      itemDef
+      {
+        name useitem
+        group miscControls
+        type ITEM_TYPE_BIND
+        text "Use Item:"
+        cvar "+button2"
+        rect 325 191 300 20 
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 100 
+        textaligny 17    
+        textscale .333            
+        forecolor 1 1 1 1
+        visible MENU_FALSE 
+        mouseenter
+        {
+          show keyBindStatus ;
+          show highlight2 ;
+        }
+        mouseexit
+        {
+          hide keyBindStatus ;
+          hide highlight2 ;
+        }
+    	}
+    }
+}
+

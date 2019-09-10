@@ -1,0 +1,106 @@
+#include "ui/menudef.h"
+
+{
+    menuDef 
+    {
+      name "driverinfo"
+      rect 200 100 400 370
+      focusColor 1 1 1 1
+      popup
+
+      onESC 
+      {
+        close "driverinfo" ;
+      }
+//
+// menu background
+//	
+      itemDef 
+      {
+        name background
+        style WINDOW_STYLE_SHADER
+        rect 0 0 400 370
+        background "ui/assets/menu1"
+        border WINDOW_BORDER_FULL
+        bordercolor .5 .5 .5 1
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Driver Menu Title
+//
+      itemDef 
+      {
+        name driver_title
+        text "Driver Info"
+        style WINDOW_STYLE_SHADER
+        background "ui/assets/menu_blendbox"
+        rect 0 2 400 30
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textscale 0.3
+        textalign ITEM_ALIGN_CENTER		
+        textalignx 200
+        textaligny 22
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE 
+        decoration 
+      }
+//
+// Accept button
+//
+      itemDef 
+      {
+        name acceptbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 135 345 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name acceptbutton
+        text "DONE"
+        type ITEM_TYPE_BUTTON
+        rect 135 345 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show acceptbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide acceptbutton_glow ;
+        }
+        action
+        {
+          close "driverinfo" ;
+        }	  	  
+      }
+
+      itemDef
+      {
+        name driver
+        rect 20 30 380 340	
+        ownerdraw UI_GLINFO
+        textalign ITEM_ALIGN_LEFT
+        textalignx 0
+        textaligny 23
+        textscale .25
+        forecolor 1 1 1 1
+        visible MENU_TRUE
+        decoration
+        style WINDOW_STYLE_FILLED
+      }
+
+    }
+}
+

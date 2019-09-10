@@ -1,0 +1,83 @@
+#include "ui/menudef.h"
+
+{
+
+	assetGlobalDef {
+ 	   	font "fonts/font" 16				// font
+  	  	smallFont "fonts/font" 12			// font
+  	  	bigFont "fonts/font" 20				// font
+		shadowColor 0.1 0.1 0.1 0.25			// shadow color
+  	}
+
+	menudef {
+		name "Race Items"
+		rect 50 300 0 0
+		visible MENU_TRUE
+//		ownerDrawFlag CG_SHOW_TIMER
+
+		itemDef {
+			name "Current Time"
+			rect 0 20 0 0
+			visible MENU_TRUE
+			forecolor 1 1 1 1
+			textscale .4
+			textalign ITEM_ALIGN_LEFT
+			textstyle ITEM_TEXTSTYLE_SHADOWED
+			ownerDraw CG_TIMER_CURRENT
+		}
+		itemDef {
+			name "Best Time"
+			rect 0 40 0 0
+			visible MENU_TRUE
+			forecolor 1 1 1 1
+			textscale .4
+			textalign ITEM_ALIGN_LEFT
+			textstyle ITEM_TEXTSTYLE_SHADOWED
+			ownerDraw CG_TIMER_BEST
+		}
+	}
+
+	menudef {
+		name "Player Items"
+		visible MENU_TRUE
+
+		itemDef {
+			name "Player Speed"
+			rect 320 20 0 0
+			visible MENU_TRUE
+			forecolor 1 1 1 1
+			textscale .4
+			textalign ITEM_ALIGN_CENTER
+			textstyle ITEM_TEXTSTYLE_SHADOWED
+			ownerDraw CG_PLAYER_SPEED
+		}
+	}
+
+	menudef {
+		name "System Items"
+		rect 592 50 0 0
+		visible MENU_TRUE
+
+		// Race Time
+		itemDef {
+			name "FPS"
+			rect 0 48 48 48
+			visible MENU_TRUE
+			forecolor 1 1 1 1
+			textscale .3
+			textalign ITEM_ALIGN_LEFT
+			textstyle ITEM_TEXTSTYLE_SHADOWED
+			ownerDraw CG_SYSTEM_FPS
+		}
+
+		itemDef {
+			name "Lagometer"
+			rect 0 100 48 48
+			visible MENU_TRUE
+			ownerDraw CG_SYSTEM_LAGOMETER
+		}
+
+	}
+
+
+}

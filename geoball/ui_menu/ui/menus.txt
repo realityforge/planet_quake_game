@@ -1,0 +1,18 @@
+//
+// menu defs for non-ingame menus
+// 
+{	
+	loadMenu { "ui/out_main.menu" }
+	loadMenu { "ui/out_play.menu" }
+	loadMenu { "ui/out_demo.menu" }
+	loadMenu { "ui/out_credits.menu" }
+	loadMenu { "ui/out_controls.menu" }
+	loadMenu { "ui/out_setup.menu" }
+	loadMenu { "ui/out_mod.menu" }
+
+	loadMenu { "ui/out_connect.menu" }
+	loadMenu { "ui/out_driver.menu" }
+	loadMenu { "ui/out_quit.menu" }
+        loadMenu { "ui/out_error.menu" }
+	loadMenu { "ui/loading.menu" }
+}

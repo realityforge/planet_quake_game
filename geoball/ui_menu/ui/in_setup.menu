@@ -1,0 +1,2136 @@
+#include "ui/menudef.h"
+
+{
+    menuDef 
+    {
+      name "insetup"
+      fullScreen MENU_TRUE
+      focusColor 1 1 1 1
+
+      onOpen 
+      { 
+        playlooped "music/sonic1.wav" ;
+        uiScript update "ui_GetName" ;
+        setcvar "ui_q3model" 0 ;
+        setcvar "model" monkey ;
+        setcvar "headmodel" monkey ;
+        uiScript UpdateModel ;
+        uiScript loadMods ;
+        show playerControls ;
+        hide model ;
+        hide videoControls ;
+        hide mvideoControls ;
+        hide soundControls ;
+        hide gameControls ;
+        hide defaultControls ;
+        hide applyChanges ;
+        hide vidset ;
+        setitemcolor playerbutton forecolor 1 1 1 1 ;
+        setitemcolor videobutton forecolor 0.64 0.65 1 1 ;
+        setitemcolor mvideobutton forecolor 0.64 0.65 1 1 ;
+        setitemcolor soundbutton forecolor 0.64 0.65 1 1 ;
+        setitemcolor gamebutton forecolor 0.64 0.65 1 1 ;
+        setitemcolor defaultbutton forecolor 0.64 0.65 1 1 ;
+      }
+	
+      onClose
+      {
+        uiScript update "ui_SetName"
+      }
+	
+      onESC 
+      {
+        close insetup ;
+        open ingame 
+      }
+//
+// menu background
+//	
+      itemDef 
+      {
+        name background
+        style WINDOW_STYLE_SHADER
+        rect 0 0 640 480
+        background "ui/assets/menu1"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// glowing column
+//
+      itemDef 
+      {
+        name columnglow
+        style WINDOW_STYLE_SHADER
+        rect 30 0 90 480
+        background "ui/assets/menu3"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Title Banner
+//
+      itemDef 
+      {
+        name titlebanner
+        style WINDOW_STYLE_SHADER
+        rect 143 12 470 93
+        background "ui/assets/menu4"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Halo
+//
+      itemDef 
+      {
+        name halo
+        style WINDOW_STYLE_SHADER
+        rect -425 -185 1000 1000
+        background "ui/assets/menu2"
+        forecolor 0.7 0.7 0.7 1
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Rotating Model
+//
+      itemDef
+      {
+        name model
+        type ITEM_TYPE_MODEL
+        model_angle 90
+        model_rotation 3.5
+        rect -123 108 400 400
+        model_fovx 80
+        model_fovy 80
+        asset_model "models/players/monkey/lower.md3"
+        visible MENU_TRUE
+        decoration
+      }
+
+//
+// Save Button
+//
+      itemDef 
+      {
+        name savegamebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 115 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name savegamebutton
+        type ITEM_TYPE_BUTTON
+        rect 115 115 130 24
+        text "SAVE"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show savegamebutton_glow ;
+          show savegametext 
+        }
+        mouseExit 
+        { 
+          hide savegamebutton_glow 
+          hide savegametext
+        }
+        action
+        {
+          close insetup ;
+          open "insave"
+        }	  	  
+      }
+//
+// Controls Button
+//
+      itemDef 
+      {
+        name controlsbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 245 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlsbutton
+        text "CONTROLS"
+        type ITEM_TYPE_BUTTON
+        rect 245 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show controlsbutton_glow ;
+          show controlstext
+        }
+        mouseExit 
+        { 
+          hide controlsbutton_glow ;
+          hide controlstext
+        }
+        action
+        {
+          close insetup;
+          open incontrols
+        }	  	  
+      }
+//
+// Setup Button
+//
+      itemDef 
+      {
+        name setupbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 375 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setupbutton
+        text "SETUP"
+        type ITEM_TYPE_BUTTON
+        rect 375 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show setupbutton_glow ;
+          show setuptext
+        }
+        mouseExit 
+        { 
+          hide setupbutton_glow ;
+          hide setuptext
+        }
+        action
+        {
+        }	  	  
+      }
+//
+// Load button
+//
+      itemDef 
+      {
+        name loadbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 505 115 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name loadbutton
+        text "LOAD"
+        type ITEM_TYPE_BUTTON
+        rect 505 115 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show loadbutton_glow ;
+          show loadtext
+        }
+        mouseExit 
+        { 
+          hide loadbutton_glow ;
+          hide loadtext
+        }
+        action
+        {
+          close insetup ;
+          open "inload"
+        }	  	  
+      }
+//
+// Quit button
+//
+      itemDef 
+      {
+        name exitbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 115 444 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exitbutton
+        text "QUIT"
+        type ITEM_TYPE_BUTTON
+        rect 115 444 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show exitbutton_glow ;
+          show exittext
+        }
+        mouseExit 
+        { 
+          hide exitbutton_glow ;
+          hide exittext
+        }
+        action
+        {
+          hide exittext ;
+          open inquit 
+        }	  	  
+      }
+//
+// Resume button
+//
+      itemDef 
+      {
+        name resumebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 505 444 130 24
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name resumebutton
+        text "RESUME"
+        type ITEM_TYPE_BUTTON
+        rect 505 444 130 24
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show resumebutton_glow ;
+          show resumetext
+        }
+        mouseExit 
+        { 
+          hide resumebutton_glow ;
+          hide resumetext
+        }
+        action
+        {
+          uiScript "closeingame" ;
+
+        }	  	  
+      }
+//
+// Focus Text for the buttons
+//
+
+      itemDef 
+      {
+        name savegametext
+        rect 50 444 640 24
+        text "Save Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name controlstext
+        rect 50 444 640 24
+        text "Configure Game Controls"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name setuptext
+        rect 50 444 640 24
+        text "Configure Game Settings"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name exittext
+        rect 50 444 640 24
+        text "Exit Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name loadtext
+        rect 50 444 640 24
+        text "Load a Saved Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name resumetext
+        rect 50 444 640 24
+        text "Resume Game"
+        textscale 0.33
+        textaligny 20
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED
+        textalignx 320
+        forecolor .235 .882 .847 1
+        visible MENU_FALSE
+        decoration
+      }
+
+//
+// Header line under buttons
+//
+      itemDef 
+      {
+        name header_line
+        style WINDOW_STYLE_SHADER
+        rect 125 136 500 4
+        background "ui/assets/menu_line"
+        visible MENU_TRUE
+        decoration
+      }
+/*********************************************************************/
+//
+// Start of menu Specific Items
+//
+/*********************************************************************/
+//
+// Setup Menu Title
+//
+      itemDef 
+      {
+        name setup_title
+        text "SETUP OPTIONS"
+        style WINDOW_STYLE_SHADER
+        background "ui/assets/menu_blendbox"
+        rect 150 145 450 16
+        textscale 0.3
+        textalign ITEM_ALIGN_CENTER		
+        textalignx 225
+        textaligny 15
+        visible MENU_TRUE 
+        decoration 
+      }
+//
+// Player button
+//
+      itemDef 
+      {
+        name playerbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 173 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name playerbutton
+        text "Player"
+        type ITEM_TYPE_BUTTON
+        rect 120 173 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show playerbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide playerbutton_glow ;
+        }
+        action
+        {
+          show playerControls ;
+          hide model ;
+          hide videoControls ;
+          hide mvideoControls ;
+          hide soundControls ;
+          hide gameControls ;
+          hide defaultControls ;
+          hide applyChanges ;
+          hide vidset ;
+          setitemcolor playerbutton forecolor 1 1 1 1 ;
+          setitemcolor videobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor mvideobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor soundbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor gamebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor defaultbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Video button
+//
+      itemDef 
+      {
+        name videobutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 203 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name videobutton
+        text "Video"
+        type ITEM_TYPE_BUTTON
+        rect 120 203 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show videobutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide videobutton_glow ;
+        }
+        action
+        {
+          hide playerControls ;
+          show videoControls ;
+          hide mvideoControls ;
+          hide soundControls ;
+          hide gameControls ;
+          hide defaultControls ;
+          hide applyChanges ;
+          show model ;
+          hide vidset ;
+          setitemcolor videobutton forecolor 1 1 1 1 ;
+          setitemcolor playerbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor mvideobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor soundbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor gamebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor defaultbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// More Video button
+//
+      itemDef 
+      {
+        name mvideobutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 233 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name mvideobutton
+        text "More Video"
+        type ITEM_TYPE_BUTTON
+        rect 120 233 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show mvideobutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide mvideobutton_glow ;
+        }
+        action
+        {
+          hide playerControls ;
+          hide videoControls ;
+          show mvideoControls ;
+          hide soundControls ;
+          hide gameControls ;
+          hide defaultControls ;
+          hide applyChanges ;
+          show model ;
+          hide vidset ;
+          setitemcolor mvideobutton forecolor 1 1 1 1 ;
+          setitemcolor playerbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor videobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor soundbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor gamebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor defaultbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Sound button
+//
+      itemDef 
+      {
+        name soundbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 263 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name soundbutton
+        text "Sound"
+        type ITEM_TYPE_BUTTON
+        rect 120 263 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show soundbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide soundbutton_glow ;
+        }
+        action
+        {
+          hide playerControls ;
+          hide videoControls ;
+          hide mvideoControls ;
+          show soundControls ;
+          hide gameControls ;
+          hide defaultControls ;
+          hide applyChanges ;
+          show model ;
+          hide vidset ;
+          setitemcolor soundbutton forecolor 1 1 1 1 ;
+          setitemcolor playerbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor videobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor mvideobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor gamebutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor defaultbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Game Options button
+//
+      itemDef 
+      {
+        name gamebutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 293 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name gamebutton
+        text "Game Options"
+        type ITEM_TYPE_BUTTON
+        rect 120 293 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show gamebutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide gamebutton_glow ;
+        }
+        action
+        {
+          hide playerControls ;
+          hide videoControls ;
+          hide mvideoControls ;
+          hide soundControls ;
+          show gameControls ;
+          hide defaultControls ;
+          hide applyChanges ;
+          show model ;
+          hide vidset ;
+          setitemcolor gamebutton forecolor 1 1 1 1 ;
+          setitemcolor playerbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor videobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor mvideobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor soundbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor defaultbutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+//
+// Default button
+//
+      itemDef 
+      {
+        name defaultbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 323 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name defaultbutton
+        text "Defaults"
+        type ITEM_TYPE_BUTTON
+        rect 120 323 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show defaultbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide defaultbutton_glow ;
+        }
+        action
+        {
+          hide playerControls ;
+          hide videoControls ;
+          hide mvideoControls ;
+          hide soundControls ;
+          show defaultControls ;
+          hide applyChanges ;
+          show model ;
+          hide vidset ;
+          setitemcolor defaultbutton forecolor 1 1 1 1 ;
+          setitemcolor playerbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor videobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor mvideobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor soundbutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor gamebutton forecolor 0.64 0.65 1 1 ;
+        }	  	  
+      }
+
+//
+// Box Background
+//
+      itemDef 
+      {
+        name setup_background
+        style WINDOW_STYLE_SHADER
+        rect 300 171 300 270	
+        background "ui/assets/menu_box1"
+        visible MENU_TRUE
+        decoration
+      }
+//
+// Highlights for each line in Box
+//
+      itemDef
+      {
+        name highlight1
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 171 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight2
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 191 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight3
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 211 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight4
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 231 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight5
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 251 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight6
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 271 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight7
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 291 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight8
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 311 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight9
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 331 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight10
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 351 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight11
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 371 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight12
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 305 391 300 20
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name highlight13
+        group highlights
+        style WINDOW_STYLE_SHADER
+        rect 458 330 50 50
+        background "ui/assets/menu_blendbox"
+        visible MENU_FALSE
+        decoration
+      }
+
+//
+// Player Controls
+//
+      itemDef 
+      {
+        name namefield
+        group playerControls
+        type ITEM_TYPE_EDITFIELD
+        text "Name:"
+        cvar "ui_Name"
+        maxChars 25
+        rect 335 191 300 20
+        textalign ITEM_ALIGN_LEFT		
+        textscale .30
+        textalignx 0
+        textaligny 16
+        visible MENU_FALSE
+
+        mouseEnter
+        {
+          show highlight2 ;
+        }
+        mouseExit
+        {
+          hide highlight2 ;
+        }
+      }
+
+      itemDef
+      {
+        name effect
+        group playerControls
+        text "Effect:"
+        rect 335 271 300 20 
+        textalign ITEM_ALIGN_LEFT		
+        textalignx 0
+        textaligny 16 
+        textscale .3  
+        visible MENU_FALSE
+    	}
+
+      itemDef
+      {
+        name effect
+        group playerControls
+        text "            "
+        ownerdraw UI_EFFECTS
+        rect 335 275 300 20 
+        textalign ITEM_ALIGN_LEFT		
+        textalignx 0
+        textaligny 16 
+        textscale .3  
+        visible MENU_FALSE
+
+        mouseEnter
+        {
+          show highlight6 ;
+        }
+        mouseExit
+        {
+          hide highlight6 ;
+        }
+    	}
+
+      itemDef
+      {
+        name playermodel
+        group playerControls
+        ownerdraw UI_PLAYERMODEL
+        rect -20 178 260 260
+        decoration 
+        visible MENU_TRUE
+      }
+//
+// Sound Controls
+//
+      itemDef 
+      {
+        name effects_volume
+        group soundControls
+        type ITEM_TYPE_SLIDER
+        text "Effects Volume:"
+        cvarfloat "s_volume" 0 0 1
+        rect 305 191 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 120
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight2
+        }
+        mouseexit 
+        { 
+          hide highlight2
+        } 
+      }
+
+      itemDef 
+      {
+        name music_volume
+        group soundControls
+        type ITEM_TYPE_SLIDER
+        text "Music Volume:"
+        cvarfloat "s_musicvolume" 0 0 1
+        rect 305 231 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 120
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight4
+        }
+        mouseexit 
+        { 
+          hide highlight4
+        } 
+      }
+
+      itemDef
+      {
+        name soundquality
+        group soundControls
+        type ITEM_TYPE_MULTI
+        text "Sound Quality:"
+        cvar "s_khz"
+        cvarFloatList { "22 khz (high)" 22 "11 khz (low)" 11 }
+        rect 305 291 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 120
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight7
+        }
+        mouseexit 
+        { 
+          hide highlight7
+        } 
+      }
+
+      itemDef
+      {
+        name doppler
+        group soundControls
+        type ITEM_TYPE_YESNO
+        text "Doppler Sound:"
+        cvar "s_doppler"
+        rect 305 311 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 120
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight8
+        }
+        mouseexit 
+        { 
+          hide highlight8
+        } 
+      }
+//
+// Game Option Controls
+//
+      itemDef
+      {
+        name simpleitems
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "Simple Items:"
+        cvar "cg_simpleItems"
+        cvarFloatList { "On" 1 "Off" 0 }
+        rect 305 171 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight1
+        }
+        mouseexit 
+        { 
+          hide highlight1
+        } 
+      }
+
+      itemDef
+      {
+        name wallmarks
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "Marks On Walls:"
+        cvar "cg_marks"
+        cvarFloatList { "On" 1 "Off" 0 }
+        rect 305 191 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight2
+        }
+        mouseexit 
+        { 
+          hide highlight2
+        } 
+      }
+
+      itemDef
+      {
+        name brass
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "Ejecting Brass:"
+        cvar "cg_brassTime"
+        cvarFloatList { "High" 2500 "Med" 1250 "Off" 0 }
+        rect 305 211 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight3
+        }
+        mouseexit 
+        { 
+          hide highlight3
+        } 
+      }
+
+      itemDef
+      {
+        name dlight
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "Dynamic Lights:"
+        cvar "r_dynamiclight"
+        cvarFloatList { "On" 1 "Off" 0 }
+        rect 305 231 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight4
+        }
+        mouseexit 
+        { 
+          hide highlight4
+        } 
+      }
+
+      itemDef
+      {
+        name identify
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "Identify Target:"
+        cvar "cg_drawCrosshairNames"
+        cvarFloatList { "On" 1 "Off" 0 }
+        rect 305 251 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight5
+        }
+        mouseexit 
+        { 
+          hide highlight5
+        } 
+      }
+
+      itemDef
+      {
+        name sky
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "High Quality Sky:"
+        cvar "r_fastsky"
+        cvarFloatList { "On" 0 "Off" 1 }
+        rect 305 271 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight6
+        }
+        mouseexit 
+        { 
+          hide highlight6
+        } 
+      }
+
+      itemDef
+      {
+        name sync
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "Sync Every Frame:"
+        cvar "r_finish"
+        cvarFloatList { "On" 1 "Off" 0 }
+        rect 305 291 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight7
+        }
+        mouseexit 
+        { 
+          hide highlight7
+        } 
+      }
+
+      itemDef
+      {
+        name network
+        group gameControls
+        type ITEM_TYPE_MULTI
+        text "Network Data Rate:"
+        cvar "rate"
+        cvarFloatList { "<=28.8k" 2500 "33.6k" 3000 "56k" 4000 "ISDN" 5000 "LAN/CABLE/xDSl" 25000  }
+        rect 305 311 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          uiScript update ui_setRate
+        }
+        mouseenter 
+        { 
+          show highlight8
+        }
+        mouseexit 
+        { 
+          hide highlight8
+        } 
+      }
+
+      itemDef
+      {
+        name crosstext
+        group gameControls
+        text "Crosshair:"
+        rect 455 341 20 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 0
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name crosshair
+        group gameControls
+        ownerdraw UI_CROSSHAIR
+        text " "
+        rect 455 335 40 40
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 0
+        textaligny 40
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight13
+        }
+        mouseexit 
+        { 
+          hide highlight13
+        } 
+      }
+//
+// Default Controls
+//
+      itemDef 
+      {
+        name vidrestart
+        group defaultControls
+        style WINDOW_STYLE_SHADER
+        rect 300 171 300 250	
+        background "ui/assets/menu_boxred.jpg"
+        forecolor 1 1 1 0.5
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name vidrestart
+        group defaultControls
+        text "WARNING"
+        rect 305 191 300 20
+        textalign ITEM_ALIGN_CENTER
+        textalignx 150
+        textaligny 20
+        textscale 0.4    
+        forecolor 1 1 0 1
+        visible MENU_TRUE
+        decoration
+      }
+
+      itemDef 
+      {
+        name warning
+        group defaultControls
+        text "This will set all Game Options"
+        rect 305 231 300 20
+        textalign ITEM_ALIGN_CENTER
+        textalignx 150
+        textaligny 20
+        textscale 0.33    
+        forecolor 1 1 0 1
+        visible MENU_TRUE
+        decoration
+      }
+
+      itemDef 
+      {
+        name warning
+        group defaultControls
+        text "to the Factory Defaults"
+        rect 305 261 300 20
+        textalign ITEM_ALIGN_CENTER
+        textalignx 150
+        textaligny 20
+        textscale 0.33    
+        forecolor 1 1 0 1
+        visible MENU_TRUE
+        decoration
+      }
+
+      itemDef 
+      {
+        name warning
+        group defaultControls
+        text "Continue?"
+        rect 305 291 300 20
+        textalign ITEM_ALIGN_CENTER
+        textalignx 150
+        textaligny 20
+        textscale 0.33    
+        forecolor 1 1 0 1
+        visible MENU_TRUE
+        decoration
+      }
+
+      itemDef 
+      {
+        name defaultyesbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 467 386 120 32
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name defaultyesbutton
+        group defaultControls
+        text "YES"
+        type ITEM_TYPE_BUTTON
+        rect 467 386 120 32
+        textscale 0.33
+        textaligny 24
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show defaultyesbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide defaultyesbutton_glow ;
+        }
+        action
+        {
+          hide defaultyesbutton_glow ;
+          close "all" ; 
+          uiscript resetdefaults
+        }	  	  
+      }
+
+      itemDef 
+      {
+        name defaultnobutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 305 386 120 32
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name defaultnobutton
+        group defaultControls
+        text "NO"
+        type ITEM_TYPE_BUTTON
+        rect 305 386 120 32
+        textscale 0.33
+        textaligny 24
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show defaultnobutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide defaultnobutton_glow ;
+        }
+        action
+        {
+          hide defaultnobutton_glow ;
+          close "all" ; 
+          open main
+        }	  	  
+      }
+//
+// Apply Button
+//
+      itemDef 
+      {
+        name applybutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 120 383 170 30
+        background "ui/assets/menu_blendbox2"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name applyChanges
+        text "Apply Changes"
+        type ITEM_TYPE_BUTTON
+        rect 120 383 170 30
+        textscale 0.33
+        textaligny 23
+        textalign ITEM_ALIGN_RIGHT
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 150
+        forecolor 0.65 0.65 0 1
+        visible MENU_FALSE
+
+        mouseEnter 
+        { 
+          show applybutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide applybutton_glow ;
+        }
+        action
+        {
+          setitemcolor videobutton forecolor 0.64 0.65 1 1 ;
+          setitemcolor mvideobutton forecolor 0.64 0.65 1 1 ;
+          hide videoControls;
+          hide mvideoControls;
+          hide applybutton_glow ;
+          show vidrestart ;
+          show vidset ;
+
+          uiScript update "ui_SetName" ;
+        }	  	  
+      }
+
+      itemDef 
+      {
+        name awarning
+        group vidset
+        text "This will apply the video settings"
+        rect 305 231 300 20
+        textalign ITEM_ALIGN_CENTER
+        textalignx 150
+        textaligny 20
+        textscale 0.33    
+        forecolor 1 1 0 1
+        visible MENU_TRUE
+        decoration
+      }
+
+      itemDef 
+      {
+        name awarning
+        group vidset
+        text "and return to the Main menu"
+        rect 305 261 300 20
+        textalign ITEM_ALIGN_CENTER
+        textalignx 150
+        textaligny 20
+        textscale 0.33    
+        forecolor 1 1 0 1
+        visible MENU_TRUE
+        decoration
+      }
+
+      itemDef 
+      {
+        name awarning
+        group vidset
+        text "Continue?"
+        rect 305 291 300 20
+        textalign ITEM_ALIGN_CENTER
+        textalignx 150
+        textaligny 20
+        textscale 0.33    
+        forecolor 1 1 0 1
+        visible MENU_TRUE
+        decoration
+      }
+
+      itemDef 
+      {
+        name adefaultyesbutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 467 386 120 32
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name adefaultyesbutton
+        group vidset
+        text "YES"
+        type ITEM_TYPE_BUTTON
+        rect 467 386 120 32
+        textscale 0.33
+        textaligny 24
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show adefaultyesbutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide adefaultyesbutton_glow ;
+        }
+        action
+        {
+          close "all" ; 
+          exec "vid_restart"
+        }	  	  
+      }
+
+      itemDef 
+      {
+        name adefaultnobutton_glow
+        style WINDOW_STYLE_SHADER
+        rect 305 386 120 32
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name adefaultnobutton
+        group vidset
+        text "NO"
+        type ITEM_TYPE_BUTTON
+        rect 305 386 120 32
+        textscale 0.33
+        textaligny 24
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 65
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show adefaultnobutton_glow ;
+        }
+        mouseExit 
+        { 
+          hide adefaultnobutton_glow ;
+        }
+        action
+        {
+          hide adefaultnobutton_glow ;
+          hide vidrestart ;
+          hide vidset ;
+          hide applyChanges ;
+          show playerControls ;
+          hide model ;
+          setitemcolor playerbutton forecolor 1 1 1 1 ;
+        }	  	  
+      }
+//
+// Video Controls
+//
+      itemDef
+      {
+        name graphics				
+        group videoControls
+        text "Quality:"
+        type ITEM_TYPE_MULTI	
+        cvar "ui_glCustom"
+        cvarFloatList { "High Quality" 0 "Normal" 1 "Fast" 2 "Fastest" 3 "Custom" 4 }
+        rect 305 191 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript update "ui_glCustom" ;
+        }
+        mouseenter 
+        { 
+          show highlight2
+        }
+        mouseexit 
+        { 
+          hide highlight2
+        } 
+	}
+
+      itemDef
+      {
+        name gldriver
+        group videoControls
+        type ITEM_TYPE_EDITFIELD
+        text "GL Driver:"
+        cvar "r_gldriver"
+        rect 305 171 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef
+      {
+        name videomode				
+        group videoControls
+        text "Video Mode:"
+        type ITEM_TYPE_MULTI	
+        cvar "r_mode"
+        cvarFloatList { "320*240" 0 "400*300" 1 "512*384" 2 "640*480" 3 "800*600" 4 "960*720" 5 "1024*768" 6 "1152*864" 7 "1280*1024" 8 "1600*1200" 9 "2048*1536" 10 "856*480 WS" 11 }
+        rect 305 211 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+        }
+        mouseenter 
+        { 
+          show highlight3
+        }
+        mouseexit 
+        { 
+          hide highlight3
+        } 
+	}
+
+      itemDef
+      {
+        name colordepth				
+        group videoControls
+        text "Color Depth:"
+        type ITEM_TYPE_MULTI	
+        cvar "r_colorbits"
+        cvarFloatList { "Desktop Default" 0 "16-bit" 16 "32-bit" 32 }
+        rect 305 231 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+          uiScript update "r_colorbits"
+        }
+        mouseenter 
+        { 
+          show highlight4
+        }
+        mouseexit 
+        { 
+          hide highlight4
+        } 
+	}
+
+      itemDef
+      {
+        name fullscreen				
+        group videoControls
+        text "Fullscreen:"
+        type ITEM_TYPE_YESNO	
+        cvar "r_fullscreen"
+        rect 305 251 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+        }
+        mouseenter 
+        { 
+          show highlight5
+        }
+        mouseexit 
+        { 
+          hide highlight5
+        } 
+	}
+
+      itemDef
+      {
+        name lighting				
+        group videoControls
+        text "Lighting:"
+        type ITEM_TYPE_MULTI	
+        cvar "r_vertexlight"
+        cvarFloatList { "Light Map (high)" 0 "Vertex (low)" 1  }
+        rect 305 271 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+        }
+        mouseenter 
+        { 
+          show highlight6
+        }
+        mouseexit 
+        { 
+          hide highlight6
+        } 
+	}
+
+      itemDef
+      {
+        name geodetail				
+        group videoControls
+        text "Geometric Detail:"
+        type ITEM_TYPE_MULTI	
+        cvar "r_lodbais"
+        cvarFloatList { "High" 0 "Medium" 1 "Low" 2 }
+        rect 305 291 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+        }
+        mouseenter 
+        { 
+          show highlight7
+        }
+        mouseexit 
+        { 
+          hide highlight7
+        } 
+	}
+
+      itemDef
+      {
+        name texdetail				
+        group videoControls
+        text "Texture Detail:"
+        type ITEM_TYPE_MULTI	
+        cvar "r_picmip"
+        cvarFloatList { "Low" 2 "Normal" 1 "High" 0 }
+        rect 305 311 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+        }
+        mouseenter 
+        { 
+          show highlight8
+        }
+        mouseexit 
+        { 
+          hide highlight8
+        } 
+	}
+
+      itemDef
+      {
+        name texquality				
+        group videoControls
+        text "Texture Quality:"
+        type ITEM_TYPE_MULTI	
+        cvar "r_texturebits"
+        cvarFloatList { "Default" 0 "16 bit" 16 "32 bit" 32 }
+        rect 305 331 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+        }
+        mouseenter 
+        { 
+          show highlight9
+        }
+        mouseexit 
+        { 
+          hide highlight9
+        } 
+	}
+
+      itemDef
+      {
+        name texfilter				
+        group videoControls
+        text "Texture Filter:"
+        type ITEM_TYPE_MULTI	
+        cvar "r_texturemode"
+        cvarStrList { "Bilinear", "GL_LINEAR_MIPMAP_NEAREST", "Trilinear", "GL_LINEAR_MIPMAP_LINEAR"  }
+        rect 305 351 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+        }
+        mouseenter 
+        { 
+          show highlight10
+        }
+        mouseexit 
+        { 
+          hide highlight10
+        } 
+	}
+
+      itemDef
+      {
+        name texcompress				
+        group videoControls
+        text "Compress Textures:"
+        type ITEM_TYPE_YESNO	
+        cvar "r_ext_compressed_textures"
+        rect 305 371 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 150
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        action
+        {
+          show applyChanges ;
+          uiScript glCustom ;
+        }
+        mouseenter 
+        { 
+          show highlight11
+        }
+        mouseexit 
+        { 
+          hide highlight11
+        } 
+	}
+//
+// More Video Controls
+//
+      itemDef 
+      {
+        name brightness
+        group mvideoControls
+        type ITEM_TYPE_SLIDER
+        text "Brightness:"
+        cvarfloat "r_gamma" 1 0.5 2
+        rect 305 191 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 120
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight2
+        }
+        mouseexit 
+        { 
+          hide highlight2
+        } 
+      }
+
+      itemDef 
+      {
+        name screensize
+        group mvideoControls
+        type ITEM_TYPE_SLIDER
+        text "Screen Size:"
+        cvarfloat "cg_viewsize" 100 30 100
+        rect 305 231 300 20
+        textalign ITEM_ALIGN_RIGHT
+        textalignx 120
+        textaligny 16
+        textscale 0.3
+        visible MENU_FALSE
+
+        mouseenter 
+        { 
+          show highlight4
+        }
+        mouseexit 
+        { 
+          hide highlight4
+        } 
+      }
+
+      itemDef 
+      {
+        name driver_glow
+        style WINDOW_STYLE_SHADER
+        rect 355 271 200 32
+        background "ui/assets/menu_buttonback"
+        visible MENU_FALSE
+        decoration
+      }
+
+      itemDef 
+      {
+        name driverbutton
+        group mvideoControls
+        text "Driver Info"
+        type ITEM_TYPE_BUTTON
+        rect 355 271 200 32
+        textscale 0.33
+        textaligny 24
+        textalign ITEM_ALIGN_CENTER
+        textstyle ITEM_TEXTSTYLE_SHADOWED 
+        textalignx 100
+        forecolor 0.65 0.65 0 1
+        visible MENU_TRUE
+
+        mouseEnter 
+        { 
+          show driver_glow ;
+        }
+        mouseExit 
+        { 
+          hide driver_glow ;
+        }
+        action
+        {
+          hide driver_glow ;
+          open driverinfo ;
+        }	  	  
+      }
+    }
+}
+
+
