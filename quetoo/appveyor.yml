@@ -1,0 +1,79 @@
+version: 1.0.{build}
+image:
+- Visual Studio 2017
+branches:
+  only:
+  - master
+configuration: Release
+platform:
+- Win32
+- x64
+init:
+- ps: 
+install:
+- ps: >-
+    md -Path "..\Objectively"
+
+    Push-Location "..\Objectively\"
+
+    [Environment]::CurrentDirectory = $PWD
+
+    (New-Object System.Net.WebClient).DownloadFile("https://ci.appveyor.com/api/projects/Paril/objectively/artifacts/__dep.zip?job=Platform%3A+" + $env:PLATFORM, "tmp.zip")
+
+    7z x tmp.zip -aos "*"
+
+    Remove-Item "tmp.*"
+
+    Pop-Location
+
+    [Environment]::CurrentDirectory = $PWD
+
+    md -Path "..\ObjectivelyMVC"
+
+    Push-Location "..\ObjectivelyMVC\"
+
+    [Environment]::CurrentDirectory = $PWD
+
+    (New-Object System.Net.WebClient).DownloadFile("https://ci.appveyor.com/api/projects/Paril/objectivelymvc/artifacts/__dep.zip?job=Platform%3A+" + $env:PLATFORM, "tmp.zip")
+
+    7z x tmp.zip -aos "*"
+
+    Remove-Item "tmp.*"
+
+    Pop-Location
+
+    [Environment]::CurrentDirectory = $PWD
+build:
+  parallel: false
+  verbosity: minimal
+  project: Quetoo.vs15\quetoo.sln
+before_build:
+- ps: >-
+    Push-Location "Quetoo.vs15\"
+
+    [Environment]::CurrentDirectory = $PWD
+
+    .\VERSION.ps1
+    
+    Pop-Location
+
+    [Environment]::CurrentDirectory = $PWD
+test: off
+on_success:
+- ps:  >-
+    Push-Location "Quetoo.vs15\"
+
+    [Environment]::CurrentDirectory = $PWD
+
+    Remove-Item .\Quetoo\* -include *.exp,*.lib,*.ilk -recurse
+
+    .\AWS_UPDATER.ps1
+
+    7z a ..\Quetoo.zip Quetoo\
+
+    .\AWS.ps1
+
+    Pop-Location
+
+    [Environment]::CurrentDirectory = $PWD
+deploy: off

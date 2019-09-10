@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:Quetoo.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:../ObjectivelyMVC/ObjectivelyMVC.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:../Objectively/Objectively.xcodeproj">
+   </FileRef>
+</Workspace>

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Configuration">
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <UseNativeEnvironment>true</UseNativeEnvironment>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PlatformToolset>v141_Clang_C2</PlatformToolset>
+    <QuetooOutDir>bin\$(Platform)$(Configuration)\</QuetooOutDir>
+    <QuetooIntDir>tmp\$(MSBuildProjectName)\$(Platform)$(Configuration)\</QuetooIntDir>
+
+    <UseMultiToolTask>true</UseMultiToolTask>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+
+  <PropertyGroup Label="UserMacros">
+    <QuetooObjectivelyPath>$(SolutionDir)..\..\Objectively\</QuetooObjectivelyPath>
+    <QuetooObjectivelyWinPath>$(QuetooObjectivelyPath)Objectively.vs15\</QuetooObjectivelyWinPath>
+    <QuetooObjectivelyLibsPath>$(QuetooObjectivelyWinPath)libs\</QuetooObjectivelyLibsPath>
+    <QuetooObjectivelyIncludePath>$(QuetooObjectivelyPath)Sources\;$(QuetooObjectivelyWinPath)Sources\;$(QuetooObjectivelyWinPath)Sources\gnu\</QuetooObjectivelyIncludePath>
+    <QuetooObjectivelyLibraryPath>$(QuetooObjectivelyWinPath)bin\$(Platform)$(Configuration)\</QuetooObjectivelyLibraryPath>
+
+    <QuetooObjectivelyMVCPath>$(SolutionDir)..\..\ObjectivelyMVC\</QuetooObjectivelyMVCPath>
+    <QuetooObjectivelyMVCWinPath>$(QuetooObjectivelyMVCPath)ObjectivelyMVC.vs15\</QuetooObjectivelyMVCWinPath>
+    <QuetooObjectivelyMVCLibsPath>$(QuetooObjectivelyMVCWinPath)libs\</QuetooObjectivelyMVCLibsPath>
+    <QuetooObjectivelyMVCIncludePath>$(QuetooObjectivelyMVCPath)Sources\;$(QuetooObjectivelyMVCWinPath)Sources\</QuetooObjectivelyMVCIncludePath>
+    <QuetooObjectivelyMVCLibraryPath>$(QuetooObjectivelyMVCWinPath)bin\$(Platform)$(Configuration)\</QuetooObjectivelyMVCLibraryPath>
+
+    <QuetooPath>$(SolutionDir)..\</QuetooPath>
+    <QuetooWinPath>$(SolutionDir)</QuetooWinPath>
+    <QuetooLibsPath>$(SolutionDir)libs\</QuetooLibsPath>
+    <QuetooIncludePath>$(QuetooPath);$(QuetooPath)src\;$(QuetooWinPath)src\</QuetooIncludePath>
+    <QuetooLibraryPath>$(QuetooLibsPath)bin\$(Platform)$(Configuration)\</QuetooLibraryPath>
+
+    <QuetooGlibPath>$(QuetooLibsPath)glib\</QuetooGlibPath>
+    <QuetooGlibIncludePath>$(QuetooGlibPath)include\</QuetooGlibIncludePath>
+    <QuetooGlibLibraryPath>$(QuetooGlibPath)$(Platform)\lib\</QuetooGlibLibraryPath>
+
+    <QuetooCursesPath>$(QuetooLibsPath)curses\</QuetooCursesPath>
+    <QuetooCursesIncludePath>$(QuetooCursesPath)</QuetooCursesIncludePath>
+    <QuetooCursesLibraryPath>$(QuetooCursesPath)lib\$(Platform)\</QuetooCursesLibraryPath>
+
+    <QuetooPhysFSPath>$(QuetooLibsPath)physfs\</QuetooPhysFSPath>
+    <QuetooPhysFSIncludePath>$(QuetooPhysFSPath)</QuetooPhysFSIncludePath>
+    <QuetooPhysFSLibraryPath>$(QuetooPhysFSPath)bin\$(Platform)\</QuetooPhysFSLibraryPath>
+    <QuetooPhysFSDefs>PHYSFS_DECL=;alloca=_alloca;PHYSFS_SUPPORTS_ZIP=1;PHYSFS_SUPPORTS_7Z=0;PHYSFS_SUPPORTS_GRP=0;PHYSFS_SUPPORTS_HOG=0;PHYSFS_SUPPORTS_MVL=0;PHYSFS_SUPPORTS_WAD=0;PHYSFS_SUPPORTS_QPAK=1;PHYSFS_SUPPORTS_SLB=0;PHYSFS_SUPPORTS_ISO9660=0;PHYSFS_SUPPORTS_VDF=0</QuetooPhysFSDefs>
+
+    <QuetooLibXMLPath>$(QuetooLibsPath)xml\</QuetooLibXMLPath>
+    <QuetooLibXMLIncludePath>$(QuetooLibXMLPath)include\</QuetooLibXMLIncludePath>
+    <QuetooLibXMLLibraryPath>$(QuetooLibXMLPath)lib\$(Platform)\</QuetooLibXMLLibraryPath>
+
+    <QuetooPthreadPath>$(QuetooObjectivelyLibsPath)pthread\</QuetooPthreadPath>
+    <QuetooPthreadIncludePath>$(QuetooPthreadPath)include\</QuetooPthreadIncludePath>
+    <QuetooPthreadLibraryPath>$(QuetooPthreadPath)lib\$(Platform)\</QuetooPthreadLibraryPath>
+
+    <QuetooDLFCNIncludePath>$(QuetooObjectivelyLibsPath)dlfcn\</QuetooDLFCNIncludePath>
+    <QuetooDLFCNLibraryPath>$(QuetooDLFCNIncludePath)$(Platform)\</QuetooDLFCNLibraryPath>
+
+    <QuetooIconvPath>$(QuetooObjectivelyLibsPath)iconv\</QuetooIconvPath>
+    <QuetooIconvIncludePath>$(QuetooIconvPath)include\</QuetooIconvIncludePath>
+    <QuetooIconvLibraryPath>$(QuetooIconvPath)lib\$(Platform)\</QuetooIconvLibraryPath>
+
+    <QuetooCURLPath>$(QuetooObjectivelyLibsPath)curl\</QuetooCURLPath>
+    <QuetooCURLIncludePath>$(QuetooCURLPath)include\</QuetooCURLIncludePath>
+    <QuetooCURLLibraryPath>$(QuetooCURLPath)lib\$(Platform)\</QuetooCURLLibraryPath>
+
+    <QuetooFontConfigPath>$(QuetooObjectivelyMVCLibsPath)fontconfig\</QuetooFontConfigPath>
+    <QuetooFontConfigIncludePath>$(QuetooFontConfigPath)</QuetooFontConfigIncludePath>
+    <QuetooFontConfigLibraryPath>$(QuetooFontConfigPath)lib\$(Platform)\</QuetooFontConfigLibraryPath>
+
+    <QuetooFreeTypePath>$(QuetooObjectivelyMVCLibsPath)freetype\</QuetooFreeTypePath>
+    <QuetooFreeTypeIncludePath></QuetooFreeTypeIncludePath>
+    <QuetooFreeTypeLibraryPath>$(QuetooFreeTypePath)lib\$(Platform)\</QuetooFreeTypeLibraryPath>
+
+    <QuetooSDLPath>$(QuetooObjectivelyMVCLibsPath)sdl\</QuetooSDLPath>
+    <QuetooSDLIncludePath>$(QuetooSDLPath);$(QuetooSDLPath)SDL2\</QuetooSDLIncludePath>
+    <QuetooSDLLibraryPath>$(QuetooSDLPath)lib\$(Platform)\</QuetooSDLLibraryPath>
+
+    <QuetooSDLTTFPath>$(QuetooObjectivelyMVCLibsPath)sdl_ttf\</QuetooSDLTTFPath>
+    <QuetooSDLTTFIncludePath>$(QuetooSDLTTFPath)SDL2</QuetooSDLTTFIncludePath>
+    <QuetooSDLTTFLibraryPath>$(QuetooSDLTTFPath)lib\$(Platform)\</QuetooSDLTTFLibraryPath>
+
+    <QuetooSDLImagePath>$(QuetooObjectivelyMVCLibsPath)sdl_image\</QuetooSDLImagePath>
+    <QuetooSDLImageIncludePath>$(QuetooSDLImagePath)SDL2</QuetooSDLImageIncludePath>
+    <QuetooSDLImageLibraryPath>$(QuetooSDLImagePath)lib\$(Platform)\</QuetooSDLImageLibraryPath>
+
+    <QuetoolibsndfilePath>$(QuetooLibsPath)libsndfile\</QuetoolibsndfilePath>
+    <QuetoolibsndfileIncludePath>$(QuetoolibsndfilePath)\include</QuetoolibsndfileIncludePath>
+    <QuetoolibsndfileLibraryPath>$(QuetoolibsndfilePath)$(Platform)\</QuetoolibsndfileLibraryPath>
+
+    <OpenALPath>$(QuetooLibsPath)openal</OpenALPath>
+    <OpenALIncludePath>$(OpenALPath)\</OpenALIncludePath>
+    <OpenALLibraryPath>$(OpenALPath)\libs\$(Platform)\</OpenALLibraryPath>
+
+    <QuetooFullIncludePath>$(OpenALIncludePath);$(QuetooIncludePath);$(QuetooPath)src\client\;$(QuetooPath)src\client\ui\;$(QuetooPath)src\cgame\default\;$(QuetooPath)src\cgame\default\ui\common\;$(QuetooPath)src\cgame\default\ui\home\;$(QuetooPath)src\cgame\default\ui\main\;$(QuetooPath)src\cgame\default\ui\play\;$(QuetooPath)src\cgame\default\ui\controls\;$(QuetooPath)src\cgame\default\ui\settings\;$(QuetooObjectivelyIncludePath);$(QuetooObjectivelyMVCIncludePath);$(QuetooPthreadIncludePath);$(QuetooIconvIncludePath);$(QuetooCURLIncludePath);$(QuetooGlibIncludePath);$(QuetooLibXMLIncludePath);$(QuetooPhysFSIncludePath);$(QuetooZlibIncludePath);$(QuetooCursesIncludePath);$(QuetooFontConfigIncludePath);$(QuetooFreeTypeIncludePath);$(QuetooSDLIncludePath);$(QuetooSDLTTFIncludePath);$(QuetooSDLImageIncludePath);$(QuetoolibsndfileIncludePath);$(QuetooDLFCNIncludePath)</QuetooFullIncludePath>
+    <QuetooFullLibraryPath>$(OpenALLibraryPath);$(QuetooLibraryPath);$(QuetooObjectivelyLibraryPath);$(QuetooObjectivelyMVCLibraryPath);$(QuetooPthreadLibraryPath);$(QuetooIconvLibraryPath);$(QuetooCURLLibraryPath);$(QuetooGlibLibraryPath);$(QuetooLibXMLLibraryPath);$(QuetooPhysFSLibraryPath);$(QuetooCursesLibraryPath);$(QuetooFontConfigLibraryPath);$(QuetooFreeTypeLibraryPath);$(QuetooSDLLibraryPath);$(QuetooSDLTTFLibraryPath);$(QuetooSDLImageLibraryPath);$(QuetoolibsndfileLibraryPath);$(QuetooDLFCNLibraryPath)</QuetooFullLibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>$(QuetooPhysFSDefs);HAVE_DLFCN_H=1;G_DISABLE_DEPRECATED;WIN32_LEAN_AND_MEAN;SDL_MAIN_HANDLED;NOCRYPT;CURL_STATICLIB;HAVE_STRUCT_TIMESPEC=1;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CLanguageStandard>gnu99</CLanguageStandard>
+      <AdditionalOptions>%(AdditionalOptions) -ferror-limit=0 -Weverything -Wno-unreachable-code-return -Wno-unreachable-code-break -Wno-unused-parameter -Wno-reserved-id-macro -Wno-conversion -Wno-double-promotion -Wno-documentation -Wno-switch-enum -Wno-float-equal -Wno-undef -Wno-gnu-conditional-omitted-operand -Wno-cast-qual -Wno-vla -Wno-documentation-unknown-command -Wno-disabled-macro-expansion -Wno-gnu-statement-expression -Wno-dollar-in-identifier-extension -Wno-cast-align -Wno-language-extension-token -Wno-newline-eof -Wno-date-time -Wno-covered-switch-default -Wno-bad-function-cast -Wno-gnu-zero-variadic-macro-arguments -Wno-gcc-compat -Wno-pointer-arith -Wno-assign-enum -Wno-shadow</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <DebugInformationFormat>FullDebug</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+      <BuildMacro Include="QuetooOutDir"><Value>$(QuetooOutDir)</Value></BuildMacro>
+      <BuildMacro Include="QuetooIntDir"><Value>$(QuetooIntDir)</Value></BuildMacro>
+
+      <BuildMacro Include="QuetooFullIncludePath"><Value>$(QuetooFullIncludePath)</Value></BuildMacro>
+      <BuildMacro Include="QuetooFullLibraryPath"><Value>$(QuetooFullLibraryPath)</Value></BuildMacro>
+  </ItemGroup>
+</Project>

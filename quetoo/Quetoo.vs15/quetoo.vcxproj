@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main\main.c" />
+    <ClCompile Include="src\main\winmain.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\src\main\quetoo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\src\main\quetoo-icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\QUETOO.H" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A05CAC53-F8F2-4A14-9C81-8A34F4EA9085}</ProjectGuid>
+    <RootNamespace>quetoo</RootNamespace>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="build_settings.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <OutDir>$(QuetooOutDir)</OutDir>
+    <IntDir>$(QuetooIntDir)</IntDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup>
+    <IncludePath>$(QuetooFullIncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>$(QuetooFullLibraryPath);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>libparse.lib;libcmodel.lib;libcommon.lib;libconsole.lib;libclient.lib;libfilesystem.lib;libimage.lib;libmatrix.lib;libmem.lib;libnet.lib;librenderer.lib;libserver.lib;libshared.lib;libsound.lib;libswap.lib;libsys.lib;libthread.lib;libui.lib;curses.lib;glib-2.0.lib;libcurl.lib;SDL2.lib;OpenAL32.lib;SDL2_ttf.lib;SDL2_image.lib;libsndfile.lib;physfs.lib;ws2_32.lib;opengl32.lib;Wldap32.lib;ObjectivelyMVC.lib;Objectively.lib;dbghelp.lib;dlfcn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <GenerateDebugInformation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>COPY_DEPENDENCIES "$(LocalDebuggerWorkingDirectory)\.." "$(Platform)" "$(Configuration)" &amp;&amp; COPY_QUETOO "$(LocalDebuggerWorkingDirectory)\.." "$(Platform)$(Configuration)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

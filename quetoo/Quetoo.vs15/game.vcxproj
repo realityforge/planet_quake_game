@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="game.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\game\default\g_ai.h" />
+    <ClInclude Include="..\src\game\default\g_ballistics.h" />
+    <ClInclude Include="..\src\game\default\g_client.h" />
+    <ClInclude Include="..\src\game\default\g_client_chase.h" />
+    <ClInclude Include="..\src\game\default\g_client_stats.h" />
+    <ClInclude Include="..\src\game\default\g_client_view.h" />
+    <ClInclude Include="..\src\game\default\g_cmd.h" />
+    <ClInclude Include="..\src\game\default\g_combat.h" />
+    <ClInclude Include="..\src\game\default\g_entity.h" />
+    <ClInclude Include="..\src\game\default\g_entity_func.h" />
+    <ClInclude Include="..\src\game\default\g_entity_info.h" />
+    <ClInclude Include="..\src\game\default\g_entity_misc.h" />
+    <ClInclude Include="..\src\game\default\g_entity_target.h" />
+    <ClInclude Include="..\src\game\default\g_entity_trigger.h" />
+    <ClInclude Include="..\src\game\default\g_item.h" />
+    <ClInclude Include="..\src\game\default\g_local.h" />
+    <ClInclude Include="..\src\game\default\g_main.h" />
+    <ClInclude Include="..\src\game\default\g_map_list.h" />
+    <ClInclude Include="..\src\game\default\g_mysql.h" />
+    <ClInclude Include="..\src\game\default\g_physics.h" />
+    <ClInclude Include="..\src\game\default\g_types.h" />
+    <ClInclude Include="..\src\game\default\g_util.h" />
+    <ClInclude Include="..\src\game\default\g_weapon.h" />
+    <ClInclude Include="..\src\game\game.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\game\default\g_ai.c" />
+    <ClCompile Include="..\src\game\default\g_ballistics.c" />
+    <ClCompile Include="..\src\game\default\g_client.c" />
+    <ClCompile Include="..\src\game\default\g_client_chase.c" />
+    <ClCompile Include="..\src\game\default\g_client_stats.c" />
+    <ClCompile Include="..\src\game\default\g_client_view.c" />
+    <ClCompile Include="..\src\game\default\g_cmd.c" />
+    <ClCompile Include="..\src\game\default\g_combat.c" />
+    <ClCompile Include="..\src\game\default\g_entity.c" />
+    <ClCompile Include="..\src\game\default\g_entity_func.c" />
+    <ClCompile Include="..\src\game\default\g_entity_info.c" />
+    <ClCompile Include="..\src\game\default\g_entity_misc.c" />
+    <ClCompile Include="..\src\game\default\g_entity_target.c" />
+    <ClCompile Include="..\src\game\default\g_entity_trigger.c" />
+    <ClCompile Include="..\src\game\default\g_item.c" />
+    <ClCompile Include="..\src\game\default\g_main.c" />
+    <ClCompile Include="..\src\game\default\g_map_list.c" />
+    <ClCompile Include="..\src\game\default\g_mysql.c" />
+    <ClCompile Include="..\src\game\default\g_physics.c" />
+    <ClCompile Include="..\src\game\default\g_util.c" />
+    <ClCompile Include="..\src\game\default\g_weapon.c" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A663B8E2-126D-45DA-B3F8-B381AB866E7D}</ProjectGuid>
+    <RootNamespace>cgame</RootNamespace>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="build_settings.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <OutDir>$(QuetooOutDir)</OutDir>
+    <IntDir>$(QuetooIntDir)</IntDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup>
+    <IncludePath>$(QuetooFullIncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>$(QuetooFullLibraryPath);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>glib-2.0.lib;libparse.lib;libshared.lib;libpmove.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>game.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>COPY_GAME "$(LocalDebuggerWorkingDirectory)\.." "$(Platform)$(Configuration)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\deps\minizip\ioapi.c" />
+    <ClCompile Include="..\deps\minizip\miniz.c" />
+    <ClCompile Include="..\deps\minizip\zip.c" />
+    <ClCompile Include="..\src\tools\quemap\brush.c" />
+    <ClCompile Include="..\src\tools\quemap\bspfile.c" />
+    <ClCompile Include="..\src\tools\quemap\csg.c" />
+    <ClCompile Include="..\src\tools\quemap\faces.c" />
+    <ClCompile Include="..\src\tools\quemap\flow.c" />
+    <ClCompile Include="..\src\tools\quemap\leakfile.c" />
+    <ClCompile Include="..\src\tools\quemap\lightmap.c" />
+    <ClCompile Include="..\src\tools\quemap\main.c" />
+    <ClCompile Include="..\src\tools\quemap\map.c" />
+    <ClCompile Include="..\src\tools\quemap\materials.c" />
+    <ClCompile Include="..\src\tools\quemap\monitor.c" />
+    <ClCompile Include="..\src\tools\quemap\patches.c" />
+    <ClCompile Include="..\src\tools\quemap\polylib.c" />
+    <ClCompile Include="..\src\tools\quemap\portals.c" />
+    <ClCompile Include="..\src\tools\quemap\prtfile.c" />
+    <ClCompile Include="..\src\tools\quemap\qaas.c" />
+    <ClCompile Include="..\src\tools\quemap\qbsp.c" />
+    <ClCompile Include="..\src\tools\quemap\qlight.c" />
+    <ClCompile Include="..\src\tools\quemap\qmat.c" />
+    <ClCompile Include="..\src\tools\quemap\qvis.c" />
+    <ClCompile Include="..\src\tools\quemap\qzip.c" />
+    <ClCompile Include="..\src\tools\quemap\scriptlib.c" />
+    <ClCompile Include="..\src\tools\quemap\textures.c" />
+    <ClCompile Include="..\src\tools\quemap\threads.c" />
+    <ClCompile Include="..\src\tools\quemap\tjunctions.c" />
+    <ClCompile Include="..\src\tools\quemap\tree.c" />
+    <ClCompile Include="..\src\tools\quemap\writebsp.c" />
+    <ClCompile Include="src\main\winmain.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\deps\minizip\ioapi.h" />
+    <ClInclude Include="..\deps\minizip\miniz.h" />
+    <ClInclude Include="..\deps\minizip\zip.h" />
+    <ClInclude Include="..\src\tools\quemap\bspfile.h" />
+    <ClInclude Include="..\src\tools\quemap\materials.h" />
+    <ClInclude Include="..\src\tools\quemap\monitor.h" />
+    <ClInclude Include="..\src\tools\quemap\polylib.h" />
+    <ClInclude Include="..\src\tools\quemap\qbsp.h" />
+    <ClInclude Include="..\src\tools\quemap\qlight.h" />
+    <ClInclude Include="..\src\tools\quemap\quemap.h" />
+    <ClInclude Include="..\src\tools\quemap\qvis.h" />
+    <ClInclude Include="..\src\tools\quemap\scriptlib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\src\tools\quemap\quemap.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\src\tools\quemap\quemap-icon.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{082FC21A-6D83-4960-9C9E-5C4B71409E92}</ProjectGuid>
+    <RootNamespace>quemap</RootNamespace>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="build_settings.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <OutDir>$(QuetooOutDir)</OutDir>
+    <IntDir>$(QuetooIntDir)</IntDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup>
+    <IncludePath>$(QuetooFullIncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>$(QuetooFullLibraryPath);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>QUETOO_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;glib-2.0.lib;libparse.lib;libswap.lib;libimage.lib;libmatrix.lib;libthread.lib;libcmodel.lib;libmem.lib;libfilesystem.lib;libshared.lib;libcommon.lib;libsys.lib;libnet.lib;dbghelp.lib;Wldap32.lib;physfs.lib;libxml2.lib;ws2_32.lib;dlfcn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>COPY_DEPENDENCIES "$(LocalDebuggerWorkingDirectory)\.." "$(Platform)" "$(Configuration)" &amp;&amp; COPY_QUEMAP "$(LocalDebuggerWorkingDirectory)\.." "$(Platform)$(Configuration)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

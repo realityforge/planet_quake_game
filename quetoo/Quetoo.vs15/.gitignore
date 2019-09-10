@@ -1,0 +1,11 @@
+/*.user
+/*.db
+/*.opendb
+/tmp
+/bin
+/ipch
+*.suo
+/libs/*
+/.vs
+*.psess
+*.vspx
