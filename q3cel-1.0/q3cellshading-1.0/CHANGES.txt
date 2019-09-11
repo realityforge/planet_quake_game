@@ -1,0 +1,15 @@
+Version 1.0
+=================================
+New features:
+* Alternative cell shading algorithm (white texture). You can try using the supplied shortcut or by running "quake3.cs +set r_celshadalgo 2".
+* Rocket smoke trail and sprites like fonts do not have the cel shading contourn. That should make things easy to read and multiple rockets in a game won't bug the players.
+* Sprites (such as buttons, and most text) are not been cel shaded. That should make text and buttons easier to read.
+
+Bug fixes:
+* Mirrors weren't working as expected, now it's fixed.
+* Sky/depth bug fixed. This was very noticeable ;-)
+* New Makefile. Should be easier to make under Linux.
+
+New variables:
+* r_celshadalgo Disable(0), Enable Kuwahara Filtering(1), Enable White Texture(2) for Cel Shading.
+* r_celoutline Disable(0) or Enable(1) cell shading contourn.

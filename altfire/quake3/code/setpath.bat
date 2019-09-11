@@ -1,0 +1,1 @@
+set PATH=%PATH%;c:\quake3\bin_nt

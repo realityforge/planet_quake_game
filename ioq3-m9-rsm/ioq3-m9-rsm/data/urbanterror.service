@@ -1,0 +1,10 @@
+[Unit]
+Description=UrbanTerror server
+
+[Service]
+User=urbanterror
+ExecStart=/opt/urbanterror/urbanterror-server-m9
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

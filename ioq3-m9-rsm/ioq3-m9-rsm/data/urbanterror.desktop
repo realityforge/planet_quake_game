@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=UrbanTerror (mickael9 build)
+Exec=urbanterror-m9
+Icon=urbanterror
+Type=Application
+Terminal=false
+Encoding=UTF-8
+Categories=Game;ActionGame;
