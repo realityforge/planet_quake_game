@@ -1,0 +1,50 @@
+include ../share.mk.PSP
+
+TARGET = neverball
+       
+CFLAGS = \
+    $(COMMON_CFLAGS) \
+    -DCONFIG_USER=\"./user\" \
+    -DCONFIG_DATA=\"./data\" \
+    -DCONFIG_LOCALE=\"./locale\"
+
+LIBS = $(COMMON_LIBS)
+
+OBJS = \
+    $(COMMON_OBJS) \
+	hud.o          \
+	game_common.o  \
+	game_client.o  \
+	game_server.o  \
+	game_proxy.o   \
+	game_draw.o    \
+	score.o        \
+	level.o        \
+	progress.o     \
+	set.o          \
+	demo.o         \
+	demo_dir.o     \
+	util.o         \
+	st_conf.o      \
+	st_demo.o      \
+	st_save.o      \
+	st_goal.o      \
+	st_fail.o      \
+	st_done.o      \
+	st_level.o     \
+	st_over.o      \
+	st_play.o      \
+	st_set.o       \
+	st_start.o     \
+	st_title.o     \
+	st_help.o      \
+	st_name.o      \
+	st_shared.o    \
+	st_pause.o     \
+	st_ball.o      \
+	main.o
+
+PSP_EBOOT_TITLE = Neverball SVN
+PSP_EBOOT_ICON = ../dist/neverball_64.png
+    
+include $(PSPSDK)/lib/build.mak

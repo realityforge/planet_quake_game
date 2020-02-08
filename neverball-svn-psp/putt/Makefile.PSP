@@ -1,0 +1,26 @@
+include ../share.mk.PSP
+
+TARGET = neverputt
+
+CFLAGS = \
+    $(COMMON_CFLAGS) \
+    -DCONFIG_USER=\"../neverball-svn/user\" \
+    -DCONFIG_DATA=\"../neverball-svn/data\" \
+    -DCONFIG_LOCALE=\"../neverball-svn/locale\"
+
+LIBS = $(COMMON_LIBS)
+
+OBJS = \
+    $(COMMON_OBJS) \
+	hud.o          \
+	game.o         \
+	hole.o         \
+	course.o       \
+	st_all.o       \
+	st_conf.o      \
+	main.o
+
+PSP_EBOOT_TITLE = Neverputt SVN
+PSP_EBOOT_ICON = ../dist/neverputt_64.png
+    
+include $(PSPSDK)/lib/build.mak
