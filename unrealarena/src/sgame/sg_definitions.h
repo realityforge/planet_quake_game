@@ -1,0 +1,58 @@
+/*
+ * Unvanquished GPL Source Code
+ * Copyright (C) 2015-2016  Unreal Arena
+ * Copyright (C) 2012-2013  Unvanquished Developers
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+#ifndef SG_DEFINITIONS_H_
+#define SG_DEFINITIONS_H_
+
+// ------------------
+// shared definitions
+// ------------------
+
+#define S_BUILTIN_LAYOUT           "*BUILTIN*"
+
+#define N_( text ) text
+#define P_( one, many, count ) ( ( count ) == 1 ? ( one ) : ( many ) )
+
+#ifndef UNREALARENA
+// factor applied to burning durations for randomization
+#define BURN_PERIODS_RAND_MOD ( 1.0f + ( random() - 0.5f ) * 2.0f * BURN_PERIODS_RAND )
+#endif
+
+// resolves a variatingTime_t to a variated next level.time
+#define VariatedLevelTime( variableTime ) level.time + ( variableTime.time + variableTime.variance * crandom() ) * 1000
+
+#define QUEUE_PLUS1(x)  ((( x ) + 1 ) % MAX_CLIENTS )
+#define QUEUE_MINUS1(x) ((( x ) + MAX_CLIENTS - 1 ) % MAX_CLIENTS )
+
+
+// TODO: Move to HealthComponent.
+#define DAMAGE_PURE          0x00000001 /**< Amount won't be modified. */
+#define DAMAGE_KNOCKBACK     0x00000002 /**< Push the target in damage direction. */
+#define DAMAGE_NO_PROTECTION 0x00000004 /**< Game settings don't prevent damage. */
+#define DAMAGE_NO_LOCDAMAGE  0x00000008 /**< Don't apply locational modifier. */
+
+#define MAX_DAMAGE_REGIONS     16
+#define MAX_DAMAGE_REGION_TEXT 8192
+
+#define MAX_NAME_CHARACTERS 32
+
+#define FOFS(x) ((size_t)&(((gentity_t *)0 )->x ))
+
+#endif // SG_DEFINITIONS_H_

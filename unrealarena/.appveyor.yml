@@ -1,0 +1,91 @@
+#---------------------------------#
+#      General Configuration      #
+#---------------------------------#
+
+# Build version format
+version: "#{build}"
+
+# Git clone depth
+clone_depth: 50
+
+
+#---------------------------------#
+#    Environment Configuration    #
+#---------------------------------#
+
+# Build worker image (VM template)
+image: Visual Studio 2017
+
+# Scripts called before repo cloning
+# init:
+#   - git config --global core.autocrlf input
+
+# Build matrix configuration
+environment:
+  matrix:
+    - PLATFORM: x86
+      OS: win32
+      VCVARS: vcvars32.bat
+    - PLATFORM: x64
+      OS: win64
+      VCVARS: vcvars64.bat
+
+# Environment configuration
+install:
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\%VCVARS%"
+
+
+#---------------------------------#
+#       Build Configuration       #
+#---------------------------------#
+
+# Scripts called before build
+before_build:
+  - if defined APPVEYOR_REPO_TAG_NAME
+      (set ARTIFACT=unrealarena-%OS%.pre.zip)
+    else
+      (set ARTIFACT=artifacts.zip)
+
+# Build configuration
+build_script:
+  - mkdir build
+  - cd build
+  - cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_GAME_NATIVE_EXE=0 -DBUILD_GAME_NATIVE_DLL=0 -DBUILD_GAME_NACL=0 -DBUILD_SERVER=0 -DBUILD_TTY_CLIENT=0 ..
+  - cmake --build .
+
+# Scripts called after build
+after_build:
+  - copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\14.16.27012\%PLATFORM%\Microsoft.VC141.CRT\*"
+  - copy "C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\%PLATFORM%\*"
+  - 7z a %APPVEYOR_BUILD_FOLDER%\%ARTIFACT% *.dll *.exe *.nexe
+
+
+#---------------------------------#
+#       Tests Configuration       #
+#---------------------------------#
+
+# Disable automatic tests
+test: off
+
+
+#---------------------------------#
+#      Artifacts Configuration    #
+#---------------------------------#
+
+# Artifacts uploading
+artifacts:
+  - path: $(ARTIFACT)
+
+
+#---------------------------------#
+#     Deployment Configuration    #
+#---------------------------------#
+
+# Deploy configuration
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: ATT0lKSboRg0TTzpnmObgHUrpUwgYkXeXCWwS/aGRz0xM02IL+vY//Xe/FjClqPQ
+  draft: true
+  on:
+    appveyor_repo_tag: true

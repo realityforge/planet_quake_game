@@ -1,0 +1,43 @@
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+    - os: osx
+
+notifications:
+  irc:
+    channels:
+      - "irc.quakenet.org#unrealarena"
+    template:
+      - "%{repository_slug} (%{branch}) \"%{commit_subject}\" [%{result}]"
+      - "%{build_url}"
+      - "%{compare_url}"
+
+before_install:
+  - ./.travis.sh before_install
+
+install:
+  - ./.travis.sh install
+
+before_script:
+  - ./.travis.sh before_script
+
+script:
+  - ./.travis.sh script
+
+before_deploy:
+  - ./.travis.sh before_deploy
+
+deploy:
+  provider: releases
+  api_key:
+    secure: g0fP4VPn5mhioa1Nuyd3A47ytBs2YhEChMCFCjKTQaWmd4FPjDJYLU3mMzRDDNK1zw6oh3A9x0tIDbjifT80zAFpmjbTjQ2sepklnksbvwaUqgzm0AqElnY1XVPpHr8Jxr6+4mnItrbDqAGj2TiDKJ79verYm4evq0E9WsLSgTwLHmPE8TS2gw/vBvupWUHLb2hqzlyW9mwiI7yTfKQeEOPDDml8Sb9iafwChILaVe+0aNrRDZixs1v8KYre90qpNDPlmzEA+LfY3bqxTZp6How6HYWikJE2Hs9Eg3MhGHVzJVWLIg7th/SKhznrhaKFCO4Lme9hvzHXzs+H1n623CgG4MVyOnvmhvSV3BTBhRnBt/WYUt9aFd+o0g3B5ZQIGGRXOmo3jkmNmuaKcU9MPH8he2D/wJ2G5bWjFdh4NeMr5uaQGdKiSkymv5PuavFz/z0WEIRTOfpRZyYXvDvqpG3PYb2haPnnkeudZTqKaKoyo62to3G25RAVvNI3f/D3eegFY+jukMbwmLbAVDJdKG/k+cGggQ8GkfMEUM0+kF9Q3Rc1BUULS3Nu39fZZ/mFlR9ksKs4vYj/BVy09G5veCRGhRYIN02in7ciSPUUTgBuvTCz608LTl5/00evD/iygqNitkR9m+brZh0Hzxrd1/BjDvmR27D8bE+djZ+MfMQ=
+  file: "unrealarena-${TRAVIS_OS_NAME}.pre.zip"
+  skip_cleanup: true
+  draft: true
+  on:
+    tags: true
+    repo: unrealarena/unrealarena
