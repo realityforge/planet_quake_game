@@ -1,0 +1,10 @@
+common --jobs=2
+common --show_progress_rate_limit=300
+
+build --compilation_mode=opt
+build --dynamic_mode=off
+build --cxxopt=-std=c++11
+
+test --test_output=errors
+test --test_tag_filters=-notravis
+test --trim_test_configuration
