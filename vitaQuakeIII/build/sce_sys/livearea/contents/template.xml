@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<livearea style="a1" format-ver="01.00" content-rev="1">
+	<livearea-background>
+		<image>bg.png</image>
+	</livearea-background>
+	
+	<gate>
+		<startup-image>startup.png</startup-image>
+	</gate>
+	
+	<frame id='frame1' multi='o' autoflip='3' >
+		<liveitem>
+			<target>psla:team</target>
+			<image>teamarena.png</image>
+		</liveitem>
+	</frame>
+	
+	<frame id='frame2' multi='o' autoflip='3' >
+		<liveitem>
+			<target>psla:open</target>
+			<image>openarena.png</image>
+		</liveitem>
+	</frame>
+	
+	<frame id='frame3' multi='o' autoflip='3' >
+		<liveitem>
+			<target>psla:terror</target>
+			<image>urbanterror.png</image>
+		</liveitem>
+	</frame>
+	
+</livearea>
