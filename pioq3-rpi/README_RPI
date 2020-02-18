@@ -1,0 +1,26 @@
+This is a port of Quake3 to run on BCM2835, based on the
+ioq3 codebase. All BCM2835-specific modifications are enclosed by one of
+
+RPIMODS_MISC - small miscellaneous changes
+RPIMODS_OPENGLES - remove desktop GL dependencies
+RPIMODS_DEPTH - remove depth buffer clears
+RPIMODS_REPLACETRIG - replace sin with sinf etc
+RPIMODS_NOSDL - remove SDL dependencies
+
+There is a suitable prebuilt sdl lib in "lib".
+
+Also you'll need to copy the pak files from a legitimate Quake 3 CD to q3/baseq3
+
+Run:
+./build-rpi.sh
+
+to build. Tested with bcm2708-gcc toolchain from here:
+https://github.com/raspberrypi/tools
+
+cd q3
+sudo LD_LIBARARY_PATH=<path to sdl lib> ./ioquake3.arm
+
+to run
+
+When I tried with the files from openarena (http://www.openarena.ws) it didn't work. 
+It seems there's been some updates to the source since we branched. I'd imagine a merge with latest source may get this working.
