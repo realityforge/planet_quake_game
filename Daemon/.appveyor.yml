@@ -1,0 +1,40 @@
+branches:
+  except:
+    - debian
+
+environment:
+  configuration: Debug
+  matrix:
+    # see 96d5c1f3ed77b09c64ce7c3c7cbd37c70456b3db
+    # for NMake template
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      generator: Visual Studio 16 2019
+      platform: x64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      generator: Visual Studio 15 2017
+      platform: win32
+
+build:
+  parallel: true
+
+before_build:
+  - git submodule update --init --recursive
+
+build_script:
+  # simple line break: space
+  # double line break: line break
+  - cmd: >
+      cmake --version
+
+      set cmake=cmake
+
+      if not "x%generator:Visual Studio=%"=="x%generator%"
+      set cmake=%cmake% -A"%platform%"
+
+      %cmake% -G"%generator%"
+      -DUSE_WERROR=1 -DBE_VERBOSE=1
+      -DUSE_PRECOMPILED_HEADER=0 -DBUILD_GAME_NACL=0
+      -DCMAKE_BUILD_TYPE="%configuration%"
+      -S. -Bbuild
+
+      cmake --build build
