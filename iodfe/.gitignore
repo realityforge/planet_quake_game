@@ -1,0 +1,6 @@
+build
+Makefile.local
+*.sdf
+*.suo
+*.opensdf
+*.ipch
