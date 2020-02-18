@@ -1,0 +1,902 @@
+
+DD Mmm 20 - 1.52
+
+add: FreeBSD x64 support
+
+add: r_backend <GL2|GL3|D3D11> (default: D3D11 on Windows, GL3 otherwise) selects the rendering back-end
+  GL2   - OpenGL 2.0 minimum, OpenGL 3+ features used for r_msaa
+  GL3   - OpenGL 3.2 minimum, OpenGL 4+ features used for faster geometry upload, compute shaders, etc
+  D3D11 - Direct3D 11 hardware feature level 10.1 minimum, feature level 11.0 for compute shaders
+
+               r_backend | GL2    | GL3    | D3D11              |
+  feature                |        |        |                    |
+  -----------------------|--------|--------|--------------------|
+  MSAA                   | GL 3.0 | always | always             |
+  MSAA centroid sampling | never  | always | always             |
+  depth sprites          | never  | always | always             |
+  alpha to coverage AA   | never  | always | always             |
+  dithering              | never  | always | always             |
+  GPU mip-map generation | never  | GL 4.3 | feature level 11.0 |
+
+add: r_softSprite <0|1> (default: 1) enables depth sprites (soft particles)
+  this helps explosions, smoke, blood, etc. not having "sharp edges" when intersecting geometry
+
+add: r_alphaToCoverage <0|1> (default: 1) enables alpha to coverage anti-aliasing
+  A2C AA can only work if MSAA is enabled (i.e. r_msaa > 1)
+  it is used to super-sample all fragments of alpha-tested surfaces
+
+add: r_dither <0|1> (default: 0) enables the addition of noise to fight color banding artifacts
+
+add: r_noiseScale <0.125 to 8.0> (default: 1.0) controls the strength of the dithering noise
+
+add: r_gpuMipGen <0|1> (default: 1) enables GPU-side mip-map generation
+  this helps improve map load time (less to upload) and offers greater quality preservation options
+
+add: r_mipGenGamma <1.0 to 3.0> (default: 1.8) specifies the gamma space in which the textures are stored
+  r_gpuMipGen 1 is required
+  it should be closer to 2.4 but defaults lower to not break the looks of some things (e.g. cpm3a tele)
+  while 1.0 will preserve the original engine's look, higher values will preserve contrast better
+
+add: r_mipGenFilter <filter> (default: "L4") specified which filter window is used to generate mips
+  r_gpuMipGen 1 is required
+  the numbers specify the "radius" of the window filters
+  r_mipGenFilter L4  = Lanczos
+  r_mipGenFilter L3  = Lanczos
+  r_mipGenFilter BL  = Bi-linear
+  r_mipGenFilter MN2 = Mitchell-Netravali (B = 1/3, C = 1/3)
+  r_mipGenFilter BH4 = 3-term Blackman-Harris
+  r_mipGenFilter BH3 = 3-term Blackman-Harris
+  r_mipGenFilter BH2 = 3-term Blackman-Harris
+  r_mipGenFilter T2  = Tent (1/3 2/3) -> same as the CPU version (r_gpuMipGen 0)
+
+add: r_frameSleep <0|1|2> (default: 2) selects the frame capping mode
+  r_frameSleep 0 = forced OFF (when V-Sync is enabled)
+  r_frameSleep 1 = forced ON  (when V-Sync is disabled)
+  r_frameSleep 2 = automatic  (detects V-Sync status)
+  this only applies to OpenGL rendering back-ends
+  for Direct3D 11, the behavior is always equivalent to "automatic"
+
+add: r_gl3_geoStream <0 to 4> (default: 0) sets the geometry upload strategy
+  r_gl3_geoStream 0 = decide automatically
+  r_gl3_geoStream 1 = BufferSubData
+  r_gl3_geoStream 2 = Map Unsychronized
+  r_gl3_geoStream 3 = Map Persistent when possible, else automatic
+  r_gl3_geoStream 4 = AMD pinned memory when available, else automatic
+
+add: r_d3d11_syncOffsets <0|1|2> (default: 2) synchronizes vertex buffer offsets
+  r_d3d11_syncOffsets 0 = split  buffer offsets (more data transferred)
+  r_d3d11_syncOffsets 1 = sync'd buffer offsets (more API calls)
+  r_d3d11_syncOffsets 2 = decide automatically
+
+add: r_d3d11_maxQueuedFrames <1 to 16> (default: 3) sets the maximum pre-rendered frame count
+
+add: r_khr_debug <0|1|2> (default: 2) decides whether to create an OpenGL debug context
+  r_khr_debug 0 = forced OFF
+  r_khr_debug 1 = forced ON
+  r_khr_debug 2 = only in debug builds
+
+add: r_rtColorFormat <0|1|2> (default: 0) selects the color format for render targets
+  r_rtColorFormat 0 = R8G8B8A8
+  r_rtColorFormat 1 = R10G10B10A2
+  r_rtColorFormat 2 = R16G16B16A16
+
+add: r_lightmapGreyscale <0.0 to 1.0> (default: 0) to control how monochromatic the lightmaps look
+  r_lightmapGreyscale 0 = full color (nothing done)
+  r_lightmapGreyscale 1 = completely monochrome
+
+add: r_mapBrightness now works on q3map2's external lightmap atlas images
+
+add: the renderer can now batch surfaces with different (but sufficiently similar) shaders
+  this new optimization works with the output of "Frozen Sand Particle Studio"
+
+chg: searching for valid sample counts for MSAA in GL2 and GL3 instead of failing right away
+
+add: /modellist /skinlist /imagelist /shaderlist can now filter results with pattern matching
+
+chg: SSE2 instruction set support is now required
+
+chg: removed FreeType 2 and the unused R_REGISTERFONT syscalls that were using it
+
+chg: removed light flares and all related cvars (r_flare*)
+
+chg: r_textureMode <filter> (default: "best") is now latched and only supports 2 modes:
+	r_textureMode GL_NEAREST    = LEGO(R) mode - nearest-neighbor filtering for a subset of surfaces
+	r_textureMode anything else = normal  mode - the engine picks the most appropriate filters
+
+chg: r_measureOverdraw was removed
+
+chg: r_speeds 1 now reports more precise timings, V-Sync status, GPU time and the selected back-end
+
+chg: using the roundss SSE4.1 instruction for inlining floor and ceil syscalls when possible
+
+chg: improved face and grid processing performance with SSE2
+
+chg: r_lightmap is now latched again
+  the implementation is now more correct and will apply to all surfaces referencing a lightmap
+  it now also supports surfaces referencing q3map2's "external lightmap" atlas images
+
+chg: r_fullbright is now latched again
+  it now also supports surfaces referencing q3map2's "external lightmap" atlas images
+
+chg: negative r_swapInterval values will request adaptive v-sync when using an OpenGL back-end
+
+fix: crash due to lack of memory for the sound system
+
+fix: incorrect shader state when loading a map with no lighting
+
+fix: fog-only non-sky shaders were incorrectly handled as sky shaders, which broke fog on many maps
+
+fix: r_monitor on Linux/FreeBSD is now 0-based and the value doesn't change incorrectly on its own anymore
+
+fix: when a latched cvar's value is set to its default, the cvar is no longer marked as changed
+
+fix: broken face normals get fixed up on map load, which helps with dynamic lights (e.g. industrial)
+
+fix: classes of transparent surfaces (sprites, beams, etc) now get drawn in the right order
+
+fix: dynamic lights can now affect transparent surfaces
+
+fix: dynamic lights no longer "reveal" the diffuse texture when r_lightmap is 1
+
+fix: incorrect image flags for various things (clamp mode, mip generation, anisotropic filtering, ...)
+
+
+31 Mar 19 - 1.51
+
+add: now showing the cvar's current and latched values in the help panel
+
+add: new console and chat keyboard shortcuts
+   Ctrl-left/right arrow | move caret to previous/next word
+  Shift-left/right arrow | move caret to previous/next argument
+
+add: new console keyboard shortcuts
+  Ctrl-I | insert cvar's current value
+  Ctrl-D | insert cvar's default value
+
+add: demo recording status query extension for CPMA 1.52+
+
+add: /cvar_add <cvar> <number> to add a number to a cvar
+
+add: /cvar_mul <cvar> <number> to multiply a cvar by a number
+
+add: /unset <cvar> to remove a user-created cvar
+
+add: /setempty <cvar> to set a string cvar to an empty string
+
+add: /toggle can now accept a value sequence (2 or more entries) to loop through
+  syntax: /toggle <cvar> [<value1> <value2> [value3]..]
+  if the cvar's current value is in the sequence and not in the last spot, the next one is used
+  otherwise, the first value in the sequence is used
+
+chg: r_lodCurveError <250.0 to 10000.0> (default: 2000) is now archived and no longer cheat-protected
+
+chg: multi-monitor support improvements
+  add: /monitorlist will print all detected monitors and the indices to use with r_monitor
+  chg: the monitor list now gets updated during video restarts and calls to /monitorlist
+  chg: Linux   | r_monitor is a 0-based index and monitors are sorted top-to-bottom, left-to-right
+  fix: Windows | the Windows + shift + left/right arrow key shortcuts should be usable now
+
+chg: bundling lightmap tiles into texture atlases for improved rendering performance
+
+chg: faster map loads by limiting the rendering back-end's frame-rate
+
+chg: on Windows, the upper limit of open stdio file handles was raised from 512 to 2048
+
+fix: the presence of .shader files outside of PK3s no longer triggers a drop error
+
+fix: shader stage collapsing was happening in cases where it would yield incorrect results
+
+fix: map download improvements
+  add: using numeric addresses as fallbacks in case DNS resolves fail
+  chg: made connections non-blocking so the engine won't freeze for long when starting a download
+  chg: writing to $(fs_homepath)/baseq3 instead of $(fs_basepath)/baseq3
+  fix: only using valid (TCP/stream) addresses from getaddrinfo
+  fix: setting send time-outs so the engine can't freeze indefinitely
+  fix: creating the destination directory when it doesn't already exist
+  fix: the file name suffixes generated by /dlmapf would often repeat due to a constant seed
+
+fix: the last byte of a maximum length bitstream string wasn't parsed ("q3msgboom")
+
+fix: aborting demo playback would crash when the "nextdemo" cvar was set to play a demo
+
+fix: no longer feeding cs commands that came from a previous gamestate to cgame
+	example in CPMA: "/map cpm22" -> "/cv map cpm25" -> elevator sound was broken
+
+fix: on Windows, could sometimes click outside the engine's window in raw mouse input mode
+
+fix: when r_msaa was in the range [2, 16], the requested sample count was always 4
+
+fix: /video and /stopvideo fixes
+  chg: /video can only be used during demo playback
+  fix: broken audio in the output files
+  fix: properly named file sequences
+  fix: using a better supported video codec (FourCC 0x00000000) for raw BGR output
+  fix: broken raw video output when r_width wasn't a multiple of 4
+  fix: /stopvideo no longer leaves sound output broken for a while after stopping
+
+fix: /cv and /callvote map auto-completion was disabled after cgame was shut down at least once
+
+
+12 Feb 18 - 1.50
+
+add: on Windows, "/crashreport:yes" and "/crashreport:no" command-line arguments
+  they enable the crash handler's quiet mode (no dialog window will be shown)
+
+add: the fs_restart command to manually restart the file system
+
+chg: the client executable will now write to q3config.cfg on exit
+
+chg: even lower CPU usage when minimized
+
+chg: during id downloads (cl_allowDownload -1), the time-out is 5 seconds instead of cl_timeout
+
+chg: the "nextdemo" cvar is now also used when playback stops before reaching the demo's end
+
+chg: mouse motion is no longer forwarded to the mod when the console is down
+
+chg: with 2+ monitors, having the console down will always disable input grabbing
+
+chg: on Windows, a fatal error will move the early console window to the foreground
+
+chg: com_hunkMegs doesn't have a maximum value anymore
+  a value too high would reset it and the engine might fail to load with the default value
+
+fix: broken pk3 files could cause crashes (entry names too long) and mess up the FS
+
+fix: using /demo when running a listen server would load the map and then abort playback
+
+fix: no longer making local copies of all the system info cvars of the current server
+  this avoids undesired local changes to cvars such as sv_pure
+
+fix: now updating the FS (connected to pure server, pak references) on client disconnects
+
+fix: the condump command was truncating its file path argument to 64 characters
+
+fix: "timedemo" playback runs at full speed again
+
+fix: on Windows, when unfocused, the client would always sleep 5+ ms regardless of com_maxFPS
+
+fix: conditional FS restarts will always re-order the pak list when connected to a pure server
+
+fix: lifted the directory scanning restriction that affected pure listen servers
+
+fix: getting stuck on "Awaiting snapshot..." when the server shuts down during client connection
+
+fix: demo playback would crash when delta entities/players had an invalid field count
+
+fix: strcpy calls with overlapping buffers (undefined behavior), which were responsible for the
+  "chars.h not found" / "couldn't load any skills" issue preventing bots from being added
+
+fix: on Linux, the 'Z' and '9' keys could not be bound
+
+fix: cl_allowDownload 1 failing on "connect" (error 10047 on Windows)
+
+fix: cl_allowDownload 1 was using the current directory instead of fs_basepath
+
+fix: jitter due to snapshots piling up with the same server timestamp for loopback and LAN clients
+
+fix: the Windows crash handler would incorrectly consider certain exceptions as fatal
+
+
+07 Jan 18 - 1.49
+
+add: color cvars for console customization
+  con_colBG     <RGBA> (default: "101013F6") - console and help panel background
+  con_colBorder <RGBA> (default: "4778B2FF") - the console and help panel borders
+  con_colArrow  <RGBA> (default: "4778B2FF") - console backscroll arrows
+  con_colShadow <RGBA> (default: "000000FF") - text shadows
+  con_colHL     <RGBA> (default: "303033FF") - auto-completion highlight (see con_completionStyle 1)
+  con_colText   <RGB>  (default: "E2E2E2")   - normal text
+  con_colCVar   <RGB>  (default: "4778B2")   - cvar names
+  con_colCmd    <RGB>  (default: "4FA7BD")   - command names
+  con_colValue  <RGB>  (default: "E5BC39")   - cvar values
+  con_colHelp   <RGB>  (default: "ABC1C6")   - help text
+
+add: con_drawHelp <bitmask> (default: 1) controls the help panel displayed below the console
+  1 - enables the help panel
+  2 - draws the help panel even if the current cvar/cmd has no help text
+  4 - draws the list of modules the current cvar/cmd belongs to
+  8 - draws the list of attributes of the current cvar
+
+add: r_blitMode <0|1|2> (default: 0) selects the upscale mode used by r_mode 1
+  r_blitMode 0 = aspect-ratio preserving (black bars if necessary)
+  r_blitMode 1 = no scaling, centered
+  r_blitMode 2 = full-screen stretching (no black bars)
+
+add: cvar_trim command to remove all user-created cvars
+
+add: with compatible mods, drop and disconnect errors will be displayed in the UI
+
+add: s_autoMute <0|1|2> (default: 1) selects when the audio output should be disabled
+  s_autoMute 0 = never mute
+  s_autoMute 1 = mute when the window doesn't have input focus
+  s_autoMute 2 = mute when the window is minimized
+
+add: cl_matchAlerts <bitmask> (default: 7) lets you know when a match is starting
+  1 - when unfocused (otherwise only when minimized)
+  2 - flash the task bar (Windows only)
+  4 - beep once (Windows only)
+  8 - unmute (temporarily overrides s_autoMute)
+
+add: new commands to take screenshots with the console hidden
+  screenshotnc for TARGA (.tga) images
+  screenshotncJPEG for JPEG (.jpg) images
+  they will be used for end-game screenshots by compatible mods like CPMA 1.50
+
+add: in_noGrab <0|1> (default: 0) disables input grabbing
+
+add: bindkeylist command to print all bindable key names
+
+add: uptime command that prints uptimes for the process, the current map and the parent process
+
+add: keys F13 to F24 are now bindable
+
+add: new cvar type and range extension for compatible mods like CPMA 1.50
+
+add: new help commands for commands and cvars of the engine and compatible mods like CPMA 1.50
+  help|man   <cvar|cmd> to display the help of a cvar or command
+  searchhelp <pattern>  to list all cvars and commands whose help or name matches the pattern
+
+add: new CNQ3 download system that uses checksums to get the right pak files
+  the CNQ3 download system will use the WorldSpawn map server for inexact queries
+  (when loading demos or using /dlmap) when the CNQ3 map server doesn't have the file
+
+  system | speed | cases               | source(s)     | file availability | server requirements
+  -------|-------|---------------------|---------------|-------------------|--------------------
+  CNQ3   | fast  | pure servers, demos | map server(s) | not guaranteed    | none
+  id     | slow  | pure servers only   | the Q3 server | guaranteed        | sv_allowDownload 1
+
+add: new commands for manually initiating and canceling fast downloads:
+  dlpak  <checksum> to download a pak by its checksum if the pak doesn't exist locally
+  dlmap  <map_name> to download a map by name if no map with such a name exists locally
+  dlmapf <map_name> to force download a map by name
+  dlstop            to cancel the download in progress, if any
+
+add: r_greyscale <0.0 to 1.0> (default: 0) to control how monochromatic the final image looks
+  r_greyscale 0 = full color (nothing done)
+  r_greyscale 1 = completely monochrome
+
+add: con_completionStyle <0|1> (default: 0) to select the auto-completion style
+  con_completionStyle 0 = always print all results
+  con_completionStyle 1 = print once, then cycle results like Enemy Territory's console
+
+add: m_accelStyle <0|1> (default: 0) to control the mouse accel style
+  m_accelStyle 0 = legacy CNQ3 accel style
+  m_accelStyle 1 = new accel style, similar to quake3e's cl_mouseAccelStyle 1
+
+add: m_accelOffset <0.001 to 5000> (default: 5) to control the power offset with m_accelStyle 1
+
+add: sv_minRestartDelay <2 to 48> (default: 2)
+	the min. amount of hours to wait for before restarting the server
+	a scheduled restart won't happen until there are no more human players connected
+
+add: con_scaleMode <0|1|2> (default: 0) specifies the console text scaling mode
+  con_scaleMode 0 = text size scales with con_scale but not the resolution
+  con_scaleMode 1 = text size scales with con_scale and the resolution
+  con_scaleMode 2 = text size is always 8x12
+
+add: command history saving with con_history (default: 1)
+
+add: r_monitor <0 to monitor count> (default: 0) to select the monitor to display the game on
+  r_monitor is the 1-based index of the monitor to use
+  r_monitor 0 = use the primary monitor
+  r_monitor N = use monitor number N
+
+add: crash handlers with crash report generation
+
+add: improved auto-completion with support for map names, bind key names, etc
+
+add: 64-bit support
+
+chg: new system requirements: OpenGL 2, SDL 2 on the Linux client, Windows Vista or later
+
+chg: sv_pure 1 now allows new image files (no overrides) to be read from directories
+
+chg: now ignoring q3config.cfg and autoexec.cfg outside fs_game to avoid config poisoning
+
+chg: removed the r_maplight* cvars
+
+chg: reduced CPU usage in the client
+
+chg: console/messagemode input buffers now display the "^" character of color codes
+
+chg: r_brightness    <0.25 to 32.0> (default: 2) replaces r_overBrightBits
+     r_mapBrightness <0.25 to 32.0> (default: 2) replaces r_mapOverBrightBits
+  the new cvars use floating-point values (more control) and a linear scale (more intuitive)
+  to convert the old engine values to the new values:
+  r_brightness    = pow(2, r_overBrightBits)
+  r_mapBrightness = pow(2, max(r_mapOverBrightBits - r_overBrightBits, 0))
+
+chg: r_mode <0|1|2> (default: 0) selects the video mode
+  r_mode 0 = no screen mode change, desktop resolution
+  r_mode 1 = no screen mode change, custom resolution, custom upscale mode
+  r_mode 2 = screen mode change, custom resolution (for the CRT users)
+  Custom resolution means using r_width and r_height.
+  Custom upscale mode means using r_blitMode.
+
+chg: cl_allowDownload <-1|0|1> (default: 1) can be used to select the download system
+  cl_allowDownload -1 = id's original download system
+  cl_allowDownload  0 = downloads disabled
+  cl_allowDownload  1 = CNQ3 download system
+
+chg: cvars and commands are alphabetically sorted
+
+chg: removed r_stencilbits, r_depthbits, r_colorbits, r_texturebits and r_ext_compressed_textures
+
+chg: using stb_image to load png and tga images
+
+chg: con_scale <0.25 to 10.0> (default: 1.2) specifies the console text scaling factor and nothing else
+
+chg: replaced monitor gamma by a post-process gamma shader and removed r_ignorehwgamma
+
+chg: removed stereo rendering
+
+chg: anti-aliasing sample count is set with r_msaa on all platforms (on Windows, it was r_ext_multisample)
+
+chg: file system start-up will now verify the presence and integrity of baseq3/pak0-8.pk3 instead of only pak0
+
+chg: replaced id's Huffman codec code with something both simpler and much faster
+
+chg: tweaked console scrolling speeds, fixed backtip insertion on Windows
+
+chg: improved level load times
+
+chg: sound fall-off is linear instead of using a power function
+
+chg: switch from libjpeg 6 to libjpeg-turbo
+
+chg: removed the byzantine r_mode usage added in 1.47
+
+fix: console/messagemode input buffers would ignore the last off-screen color modifier when scrolled
+
+fix: console/messagemode input buffers would sometimes display the cursor at the wrong position
+
+fix: taking screenshots with a render width (r_width) that wasn't a multiple of 4
+  would either crash or produce bad screenshots
+
+fix: false positives of the "SCR_UpdateScreen: recursively called" fatal error
+  repro: connect, get kicked, connect, get kicked
+
+fix: crash when the number of shader stages was wrong (would happen with the "brandon" player model)
+
+fix: the release of a key bound to "+vstr a b" would execute "b" even though the key press didn't execute "a"
+
+fix: /bind was treating single-character key names in a case sensitive manner
+
+fix: r_fullbright is no longer latched and actually does its job
+
+fix: r_lightmap is now archived and actually does its job
+
+fix: commands registered by cgame no longer auto-complete after the cgame qvm has shut down
+
+fix: libjpeg errors no longer shut down the engine
+
+fix: broken rendering when the 2nd stage of a collapsed shader stage pair had non-white colors
+
+fix: shader stages using "wave" were not animated when the server time was too large
+
+fix: the pukka3tourney2 slime wasn't green with r_vertexLight 1
+
+fix: the ct3ctf1 grate near quad was getting picmipped when it wasn't supposed to be
+
+fix: improved the player name look-up behavior for these commands: kick, banUser, dumpuser
+  if 2 players had the same name, it would just pick the first one (lowest client number)
+
+fix: multi-view mouse input sensitivity is now the same as in the UI for compatible mods like CPMA 1.50
+
+fix: fixed the start-up console window staying visible when starting in full-screen
+
+
+Windows:
+
+add: in_minimize registers a hotkey to minimize/restore the client
+  key names must be separated by white space and there can be at most 2 modifier keys
+	
+add: auto-completion and command history in the dedicated server console window
+
+add: new bindable key: BACKSLASH (the key to the right of the left shift button)
+
+chg: removed DirectInput mouse input mode
+
+chg: updated mouse input for better grab (de-)activation and fixed window dragging not working
+
+chg: reduced raw mouse input latency and added cl_drawMouseLag
+
+fix: disabled DPI scaling on the client
+
+fix: the crash handler will reset the system timer resolution
+
+fix: if requesting a resolution too high for the display, the image would be offset vertically
+
+fix: in raw mouse input mode, keeping any button pressed while focusing the window would keep
+  the cursor visible even after releasing all buttons
+
+
+Linux:
+
+add: m_relative <0|1> (default: 1) enables SDL's relative mouse mode
+  you might want to set it to 0 if you have a messed up input driver
+
+add: in_focusDelay <0 to 100> (default: 5) is the time in ms keypresses are ignored after the window gets the focus
+
+add: minimize command to minimize the client's window
+
+add: automatic dedicated server process restarts for crashes and timed reboots (sv_minRebootDelayMins)
+  this means 2 CNQ3 processes run per server: a parent (fixed pid) and a child (new pid after each restart)
+  this behavior can be disabled by passing "nohardreboot" as a command-line argument
+  the new command sv_restartProcess can be used to shut down the child process and start a new one
+
+chg: the client requires SDL 2 - the following things are handled by it:
+  window, GL context, video modes, audio, kb and mouse input, monitor list, clipboard
+
+chg: tty input behavior matches in-game behavior when cgame is running and fixed the truncated tty input
+
+fix: color codes (e.g. "^1") don't get printed to the terminal anymore
+
+fix: tty handling of the leading "]" character
+
+fix: dedicated servers no longer insert a leading backslash when running auto-completion
+
+fix: the crash handler will reset tty input mode correctly
+
+
+17 Sep 11 - 1.47
+
+add: backported another bunch of dlight stuff from the pmx branch
+  adds support for bmodel entities (doors, plats, etc)
+
+add: back directInput mouse (in_mouse 2)
+
+add: back flare support
+
+add: disable/enable windows keyboard shortcuts
+
+add: cnq3 windows can minimize/restore
+
+add: dynamic light by GLSL shaders
+
+add: r_maplightBrightness (from 0 to 8) and r_maplightSaturation(0-4). to use this parameters set r_maplightColorMode 1.
+
+add: r_maplightColorMode to configure lightmaps
+
+add: r_mode can be set resolution and frequency display. For example, r_mode "640x480@100"
+
+fix: in_mouse -1 kept relocating the system cursor even if not focused
+
+fix: implement the sound change from 1.45 *correctly*  :P
+
+fix: default build does not create option r_smp. To assemble the build 
+      with the option r_smp need to use preprocessor USE_R_SMP
+
+fix: small fixes to CVA rendering code
+
+fix: fix opStack and rename targets for unix
+
+fix: GTV/spectator can't change POV after map changed
+
+fix: render shader time overflow (fix splashdamage bug).
+
+fix: mouse event queue
+
+
+24 Nov 09 - 1.46
+
+add: hopefully worked around some vistajoke mousewheel issues
+
+add: m_limit (default: 0 = off), the maximum post-accel speed to use
+
+chg: sensitivity renamed to m_speed
+
+chg: rewrote pretty much all the mouse code
+
+chg: removed the DI code in favor of "raw" mouse input
+  this means only mouse1-mouse5 are supported on windows, sigh MS...
+
+chg: updated freetype from 2.3.5 to 2.3.11
+
+
+05 Nov 09 - 1.45
+note: this release REQUIRES arb shader support
+  if your card doesn't have it, use an older version
+
+add: hw gamma should work on Vista
+
+add: r_measureoverdraw is actually useful
+
+add: r_speeds is far more useful now
+
+chg: sound attenuation is biased
+  i.e. distant sounds are much louder than in 1.43
+  since it's still more correctly spatialised than pre-1.43, this is
+  the best compromise i can come up with
+
+chg: r_fullbright works in vertexlight mode (only)
+  instead of lightmap only, where it just wasted bandwidth and vram
+
+chg: r_customwidth, r_customheight renamed to r_width, r_height
+
+chg: hardcoded r_mode garbage and modelist removed:
+  r_mode 0 (default) = current desktop resolution, depth, hz, etc
+  r_mode 1 = custom resolution etc
+  note: r_mode 1 WILL NOT tolerate invalid r_displayRefresh values any more
+
+chg: require opengl 1.4 or higher
+  removed r_allowExtensions, r_primitives, r_ext_compiled_vertex_array,
+  r_ext_multitexture, r_ext_texture_env_add
+
+chg: removed a bunch of useless/obsolete cvars:
+  r_logfile, r_showcluster, r_facePlaneCull, r_ignoreFastPath, r_drawSun,
+  r_simpleMipMaps, r_offsetFactor, r_offsetUnits
+
+chg: don't tablist cheatvar noise if cheats are off
+
+chg: removed the last bits of legacy altivec cruft
+
+chg: rewrote pretty much all the dlight stuff
+  not only does it actually work reliably now
+  but it's also massively improved in terms of quality
+
+fix: ignorehwgamma 1 would fail to apply sw gamma to some images
+
+fix: roqs failed to apply sw gamma
+
+fix: sv_floodprotect could block all commands indefinitely
+
+
+12 Aug 09 - 1.44 (server only)
+
+fix: unbannable player exploit (stanway/auriemma)
+
+
+08 Aug 08 - 1.43
+
+fixed sfx0 using a real sound and thus "hiding" it
+
+corrected sv_pure back to CVAR_ROM
+
+added the correct "fastsky!=0 == disable portals" test, ffs me  :P
+
+removed long-obsoleted r_lastValidRenderer
+
+removed long-obsoleted r_ext_gamma_control
+
+removed pointless cl_forceavidemo
+
+removed r_rail* and marked the never-used RT_BEAM etc as such
+
+removed RAVENMD4 completely
+
+r_fullbright is not a cheat var
+
+fixed a bug with CVAR_CHEAT
+
+fixed another bug in \video (hopefully)
+
+fixed distance culling on dlit patch seams
+
+changed r_ext_max_anisotropy default to 16
+
+added con_scale for console font scaling
+0 = Q3 style, always 8x12 pixels regardless of screen rez
+1 = Q4 style, scales with screen rez
+!0 = scale with screen rez and a custom multiplier
+
+straightened out the con cvar mess:
+cl_noprint -> con_noprint
+scr_conspeed -> con_speed and correctly CVAR_ARCHIVE
+con_notifytime correctly CVAR_ARCHIVE
+removed cl_conXOffset since it basically doesn't work
+
+sleep correctly if an unfocused client (win32-only)
+don't sleep INcorrectly if a dedicated server (win32-only)
+
+fixed a (huge) memory leak in the vm
+
+fixed sv_pure 1 problems on listen servers
+
+another overhaul of the sound code:
+
+spatialisation is now correct, which has two huge impacts:
+  you can "place" sounds MUCH more accurately than before,
+  but as a result, distant sounds are MUCH quieter
+
+removed s_doppler, it's almost right but it just sounds like shit
+
+most of the s_mixprestep hackery has been removed, and you can
+probably set it to 0 if your sound drivers work properly
+
+OAL support has been dropped completely and indefinitely
+  it's crap and i'm tired of it poisoning the codebase
+
+
+Mar 08 - 1.42
+
+bots are no longer kicked by devmap
+
+legacy cack like joystick/midi support only pollutes configs if enabled
+
+fixed a memory leak in the sound code
+
+fixed even more (hopefully all) dropped sound issues in snd_dma
+
+made com_soundmegs SLIGHTLY less broken: now only 2x instead of 3x  :P
+note that "soundmegs" are taken FROM THE HUNK now to fix the leak
+so you need to increase com_hunkmegs by 2x your com_soundmegs
+
+removed the explicit and incorrect "fastsky==1 == disable portals" test
+
+r_noportals is not a cheat var
+
+hyperspace is a bit less annoying
+
+purged the unused (never finished) idMD4 model code
+
+fixed some bugs in referencedpak list generation
+
+fixed roqs ignoring s_volume
+
+fixed widescreen modes crashing on listen servers
+
+fixed downloads not completing properly
+
+
+18 Feb 08 - 1.41
+
+removed all bs references to GT_SINGLE_PLAYER and ui_singlePlayerActive
+(except from the bot code, which has bigger problems)
+added sv_singleplayer
+
+improved TTF overhead a lot: now as fast as crappy bitmap fonts  :D
+
+removed the stupidity of every key aborting demo playback: now ESC only
+
+only play the id logo cin the FIRST time, not every fkn time
+
+removed the broken stencil/projection shadow code
+
+avis produced by \video actually work (bug+fix both from ioq3)
+
+fixed some ABSURD buffer overruns and broken code in snd_dma
+which caused random dropped sounds for no reason
+it's a miracle it doesn't segfault any real OS
+also dumped the unused-since-TA adpcm/mulaw/etc cruft
+
+fixed a TA-era (surprise, surprise) bug that broke loopsound behavior
+
+loop (ie ambient) sounds are now 75% volume
+
+q3config is NEVER autowritten just because of bind/cvar changes
+it sucks if you're playing and it sucks even more if you're on GTV
+UI/SP code should write it EXPLICITLY if they want to save something
+
+
+19 Dec 07 - 1.40
+
+the code now requires a C++ compiler
+MASSIVE cleanups of the codebase, tho still plenty of bits left
+
+screenshot filename is YYYY_MM_DD-HH_MM_SS-TTT
+this means they'll never collide *; moviemakers won't run out;
+and the engine DOESN'T STAT 10,000 FILES EVERY FRAME
+(* except at 2am on an autumn night if you're amazingly unlucky :P)
+
+demo filename is YYYY_MM_DD-HH_MM_SS
+
+fixed demos to be MAX_OSPATH instead of MAX_QPATH, ie 256 chars now
+
+renamed cl_mouseAccel to m_accel
+
+removed ioq3 "qkey" rubbish
+
+removed support for BMP and PCX
+
+removed fs_cdpath, fs_copyfiles, touchfile, fs_restrict
+
+removed support for IPX
+
+removed in_logitechbug
+
+updated cpu detection
+
+added TTF support
+
+fixed a bunch of stuff in ScanAndLoadShaderFiles, but it's still crap
+
+fixed the patch collision epsilon bugs of 1.34
+
+reverted to id's tab-completion since ioq3's is so hated
+i've semi-merged them atm, will fix up when i get time
+
+interpreted vm is never used on platforms that support compiled vm
+
+clampmaps and nomip images use GL_CLAMP_TO_EDGE rather than GL_CLAMP
+
+disabled curl until it's brought up to standard
+
+merged platform-specific *_net.* into qcommon/net_ip.cpp, <3 timbo  :)
+
+fixed USERINFO vars not being sent properly during connect
+
+remove some network stuff (buffer sizes and TOS) http://support.microsoft.com/kb/248611
+
+
+12 Sep 07 - released as 1.34, since it was about time we did  :P
+
+increased default MAX_POLYS to 8K and MAX_POLYVERTS to 32K
+
+
+Aug 07
+
+fixed a bug in the skybox code that tried to use a 0-length CVA
+which makes recent nvidia drivers go into spaz mode 
+
+changed r_ext_multisample default to 0 to stop ix nagging  :P
+
+
+July 07
+
+added support for curl
+
+improved some network stuff (buffer sizes and TOS)
+
+added support for mouse5-mouse8
+
+
+1 May 07
+
+remove broken useless cl_freezeDemo and make demo pausing work
+just use timescale 0
+
+
+27 Apr 07
+
+ripped out all support for legacy substandard hw/drivers (ie Voodoo etc)
+and r_maskMinidriver
+
+uncorrected mode 8 back to 1280x1024
+
+
+
+18 Jul 06
+
+update various cvar defaults
+r_stencilbits: 0
+r_picmip: 0
+r_roundImagesDown: 0
+r_simpleMipMaps: 0
+s_useOpenAL: 0
+
+default fs_game to cpma
+
+
+30 Jun 06 - initial build from ioq3 svn v810
+
+mode 8 corrected to 1280x960
+
+undefined USE_OPENAL
+
+removed GetUserName call
+
+removed stupid+broken r_dlightbacks
+
+created dlight texture correctly
+
+fixed the dlight code
+
+removed the explicit and incorrect "vertexlight==1 == disable dlights" test
+
+removed redundant r_ext_texture_filter_anisotropic
+
+removed retarded cl_consoleHistory
+
+removed redundant cl_autoRecordDemo
+
+shader spew made developer 1
+
+gl extensions spew made developer 1
+
+pak list made fs_debug 1
+
+removed the TA cvars that were hacked into the engine
+
+reordered demo_protocols to reduce spew
