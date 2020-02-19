@@ -1,0 +1,15 @@
+bin/
+build/
+tags
+update.sh
+Makefile
+.build*
+
+*.DS_Store
+*.dylib
+*.so*
+
+*~
+*.swp
+*.swo
+

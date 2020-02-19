@@ -1,0 +1,17 @@
+
+BINDIR=/media/winG/games/openarena-0.8.1
+BINNAME=openarena.x86_64
+MODNAME=elimination
+
+if [ -r $BINDIR/$BINNAME ] ; then
+	echo Binary found
+else
+	echo Binary not found!
+	exit 1
+fi
+
+#Create the mod dir
+mkdir -p $BINDIR/$MODNAME
+
+#Build, pak it and start
+make && cd build/release-linux-x86_64/baseq3 && zip -r $BINDIR/$MODNAME/$MODNAME.pk3 vm && $BINDIR/$BINNAME +set fs_game $MODNAME +set debug 1 +set sv_pure 0

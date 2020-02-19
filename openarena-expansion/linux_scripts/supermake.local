@@ -1,0 +1,4 @@
+BINNAME=/mnt/winG/games/openarena-0.8.1/openarena.x86_64
+MODNAME=oax
+#ARCH should be either i386 (32 bit) or x86_64 (64 bit)
+ARCH=x86_64

@@ -1,0 +1,250 @@
+#!/bin/bash
+#  Copyright 2013 Jesse 'Jeaye' Wilkerson
+#  See licensing in LICENSE file, or at:
+#      http://www.opensource.org/licenses/BSD-3-Clause
+#
+#  File: configure
+#  Author: Jesse 'Jeaye' Wilkerson
+#  Description:
+#    Submodule and configuration manager.
+#
+
+# Re-invoke the configure script
+# and keep the output at bay.
+if [ $# -ne 1 -o "$1" != "quiet" ];
+then
+  $0 "quiet" > /dev/null
+  exit $?
+fi
+
+# Exit on errors
+set -o errexit
+# Exit if we try to use an unbound variable
+set -o nounset
+
+# Determine system
+UNAME_LINUX=0
+UNAME_CYGWIN=0
+UNAME_OSX=0
+UNAME=$(uname)
+if [ "$UNAME" = "Linux" ];
+then
+  UNAME_LINUX=1
+elif [ "$UNAME" = "Darwin" ];
+then
+  UNAME_OSX=1
+elif [ "$(uname -o)" = "Cygwin" ];
+then
+  UNAME_CYGWIN=1
+else
+  echo "Invalid uname ($UNAME): Unsuppported platform" 1>&2
+  exit 1
+fi
+
+# Colors
+COLOR_OFF=$(tput sgr0)
+COLOR_RED=$(tput setaf 1)
+COLOR_YELLOW=$(tput setaf 3)
+COLOR_GREEN=$(tput setaf 2)
+
+# Output colorizing
+ECHO_PREFIX=$COLOR_GREEN"»»»"$COLOR_OFF
+if [ "$UNAME" = "Linux" ];
+then
+	ECHO="echo -e $ECHO_PREFIX"
+else
+	ECHO="echo $ECHO_PREFIX"
+fi
+
+log() { $ECHO "$@" 1>&2; }
+
+log "Configuring Q³"
+log "WARNING: This project is not actively under development"
+log "WARNING: This script will build an old Rust version to run Q³"
+
+if [ "1" -eq "$UNAME_LINUX" ];
+then
+  log "Platform: Linux"
+elif [ "1" -eq "$UNAME_OSX" ];
+then
+  log "Platform: OSX"
+elif [ "1" -eq "$UNAME_CYGWIN" ];
+then
+  log "Platform: Cygwin"
+fi
+
+# BWD is the build directory
+BWD=$PWD/build 
+log "Build directory: $BWD"
+
+# SWD is the source directory
+SWD=$(cd $(dirname $0) && pwd) 
+log "Source directory: $SWD"
+
+function readlink() {
+  DIR=$(echo "${1%/*}")
+  cd "$DIR"
+  link_res=$(pwd -P)
+}
+
+# Update submodules
+log "Updating submodules"
+pushd $SWD
+  git submodule update --recursive --init
+popd
+
+# Clean up any previous build data
+rm -rf build
+mkdir -p build
+cd build
+
+## Rust
+log "Building rust (will be a while)"
+mkdir -p rust
+pushd rust
+  sh $SWD/lib/rust/configure --prefix=$SWD
+  make -j8 && make install
+popd
+PATH=$SWD/bin:$PATH
+
+## Build GLFW3 (doesn't support out of source builds)
+mkdir -p glfw_static glfw_shared
+
+# Static
+log "Building glfw_static"
+pushd glfw_static
+  cmake $SWD/lib/glfw/CMakeLists.txt -DBUILD_SHARED_LIBS=OFF
+  pushd $SWD/lib/glfw
+    make clean
+    make glfw
+    cp src/libglfw3.a $BWD/glfw_static
+    ln -sf $BWD/glfw_static/libglfw3.a $BWD/glfw_static/libglfw.a
+  popd
+popd
+
+# Dynamic
+log "Building glfw_shared"
+pushd glfw_shared
+  cmake $SWD/lib/glfw/CMakeLists.txt -DBUILD_SHARED_LIBS=ON
+  pushd $SWD/lib/glfw
+    make clean
+    make glfw
+
+    if [ "1" -eq "$UNAME_LINUX" -o "1" -eq "$UNAME_CYGWIN" ];
+    then
+      # Linux
+      cp src/libglfw.so $BWD/../
+      ln -sf $BWD/../libglfw.so $BWD/../libglfw.so.3
+      ln -sf $BWD/../libglfw.so $BWD/../libglfw.so.3.0
+    elif [ "1" -eq "$UNAME_OSX" ];
+    then
+      # Mac
+      cp src/libglfw.3.0.dylib $BWD/../
+      ln -sf $BWD/../libglfw.3.0.dylib $BWD/../libglfw.3.dylib
+      ln -sf $BWD/../libglfw.3.0.dylib $BWD/../libglfw.dylib
+    fi
+  popd
+popd
+
+## GLFW3 Rust
+log "Building glfw-rs"
+mkdir -p glfw-rs
+pushd glfw-rs
+  pushd $SWD/lib/glfw-rs
+    ln -sf $BWD/glfw_static/libglfw* ./
+    ln -sf $SWD/lib/glfw/src/libglfw* ./
+    touch src/glfw/lib.rs
+    $SWD/bin/rustpkg clean glfw
+    $SWD/bin/rustpkg build glfw
+
+    if [ "0" -eq "$UNAME_LINUX" -o "0" -eq "$UNAME_CYGWIN" ];
+    then
+      # Linux
+      rm -f $BWD/../libglfw-*.so
+      for file in `find build -name '*.so'`; do
+        cp $file $BWD/../
+      done
+    elif [ "0" -eq "$UNAME_OSX" ];
+    then
+      # Mac
+      rm -f $BWD/../libglfw-*.dylib
+      for file in `find build -name '*.dylib'`; do
+        cp $file $BWD/../
+      done
+    fi
+  popd
+popd
+
+## OpenGL ES
+log "Building rust-opengles"
+mkdir -p rust-opengles
+pushd rust-opengles
+  sh $SWD/lib/rust-opengles/configure
+  make clean
+  make -B
+popd
+
+## Rust OpenGL
+log "Building gl-rs"
+mkdir -p gl-rs
+pushd $SWD/lib/gl-rs
+  rustpkg clean gl
+  rustpkg build --opt-level=3 gl
+  if [ "0" -eq "$UNAME_LINUX" -o "0" -eq "$UNAME_CYGWIN" ];
+  then
+    # Linux
+    rm -f $BWD/../libgl-*.so
+    for file in `find build -name '*.so'`; do
+      cp $file $BWD/../
+    done
+  elif [ "0" -eq "$UNAME_OSX" ];
+  then
+    # Mac
+    rm -f $BWD/../libgl-*.dylib
+    for file in `find build -name '*.dylib'`; do
+      cp $file $BWD/../
+    done
+  fi
+popd
+
+## STB-Image
+log "Building stb-image"
+mkdir -p stb-image
+pushd stb-image
+  sh $SWD/lib/stb-image/configure
+  make clean
+  make -B
+popd
+
+## STB-Image
+log "Building ncurses-rs"
+mkdir -p ncurses-rs
+pushd ncurses-rs
+  pushd $SWD/lib/ncurses-rs
+    make clean
+    make -B
+    mv lib/libncurses* $BWD/ncurses-rs/
+  popd
+popd
+
+## Q³
+cd .. # Back to the original invoking directory
+
+# Move over the make file
+sed "s#%PROJ_DIR%#${SWD}#" $SWD/Makefile.stub > Makefile 
+
+readlink $SWD/build
+swd_link=$link_res
+readlink $BWD
+bwd_link=$link_res
+if [ "$swd_link" != "$bwd_link" ];
+then
+  # Link the data directory, since this is an out of source build
+  ln -sf $SWD/data data
+fi
+
+# Require a clean build
+find . -maxdepth 1 -type f -name '.build_*' | grep -v git | xargs rm -f || true
+
+log "Done configuring Q³."
+

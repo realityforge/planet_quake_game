@@ -1,0 +1,1 @@
+make && cd build/release-linux-x86_64/baseq3 && zip -r /mnt/winG/games/openarena-0.8.1/elimination/elimination.pk3 vm && /mnt/winG/games/openarena-0.8.1/openarena.x86_64 +set fs_game elimination +set debug 1 +set sv_pure 0

@@ -1,0 +1,11 @@
+--- code/botlib/be_ai_move.c	(revision 2115)
++++ code/botlib/be_ai_move.c	(revision 2116)
+@@ -3187,7 +3187,7 @@
+ 			else if ((reach.traveltype & TRAVELTYPE_MASK) == TRAVEL_ELEVATOR ||
+ 				(reach.traveltype & TRAVELTYPE_MASK) == TRAVEL_FUNCBOB)
+ 			{
+-				if ((result->flags & MOVERESULT_ONTOPOF_FUNCBOB) ||
++				if ((result->flags & MOVERESULT_ONTOPOF_ELEVATOR) ||
+ 					(result->flags & MOVERESULT_ONTOPOF_FUNCBOB))
+ 				{
+ 					ms->reachability_time = AAS_Time() + 5;

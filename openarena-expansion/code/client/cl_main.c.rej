@@ -1,0 +1,12 @@
+--- code/client/cl_main.c	(revision 2122)
++++ code/client/cl_main.c	(revision 2123)
+@@ -47,7 +47,9 @@
+ cvar_t	*cl_voip;
+ #endif
+ 
++#ifdef USE_RENDERER_DLOPEN
+ cvar_t	*cl_renderer;
++#endif
+ 
+ cvar_t	*cl_nodelta;
+ cvar_t	*cl_debugMove;

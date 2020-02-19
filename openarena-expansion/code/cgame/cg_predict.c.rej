@@ -1,0 +1,14 @@
+--- code/cgame/cg_predict.c	(revision 2115)
++++ code/cgame/cg_predict.c	(revision 2116)
+@@ -287,10 +287,8 @@
+ 			return;
+ 		}
+ 	}
+-	if( cgs.gametype == GT_CTF || cgs.gametype == GT_HARVESTER ) {
+-#else
+-	if( cgs.gametype == GT_CTF ) {
+ #endif
++	if( cgs.gametype == GT_CTF ) {
+ 		if (cg.predictedPlayerState.persistant[PERS_TEAM] == TEAM_RED &&
+ 			item->giTag == PW_REDFLAG)
+ 			return;
