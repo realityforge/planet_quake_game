@@ -1,0 +1,39 @@
+/**
+ * Copyright (c) 2018 Aleksej Komarov
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
+.Motto {
+  background-color: $color-bg-lighter;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.Motto__header {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.Motto__quote {
+  display: flex;
+}
+
+.Motto__quote-symbol {
+  font-size: 8em;
+  line-height: 1em;
+  margin-bottom: -0.5em;
+}
+
+.Motto__quote-author {
+  margin-right: 2em;
+}
+
+@media screen and (max-width: 640px) {
+  .Motto__quote {
+    display: block;
+  }
+
+  .Motto__quote-author {
+    margin-bottom: 2em;
+  }
+}

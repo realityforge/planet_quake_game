@@ -1,0 +1,157 @@
+/**
+ * Copyright (c) 2018 Aleksej Komarov
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
+.ServerCardContainer {
+  @media screen and (min-width: 900px) {
+    display: grid;
+    grid-template-areas: "x x";
+    grid-gap: 20px;
+    grid-auto-columns: calc(50% - 10px);
+  }
+}
+
+.ServerCard {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  background-color: #222;
+  // margin-bottom: 1rem;
+}
+
+.ServerCard__header {
+  position: relative;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  // Ellipsis
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ServerCard__name {
+  font-size: 1.25em;
+  line-height: 1.5em;
+  font-weight: bold;
+}
+
+.ServerCard__meta {
+  background-color: #222;
+  @media screen and (min-width: 600px) {
+    position: absolute;
+    top: 0; right: 0;
+    padding: 0.5rem 1rem 0 0.2rem;
+    background-color: #222;
+    box-shadow: 0 0 15px #222;
+    text-align: right;
+    input {
+      text-align: right;
+    }
+  }
+}
+
+.ServerCard__gametype {
+  font-size: 0.75em;
+  line-height: 1em;
+}
+
+.ServerCard__ip {
+  font-size: 0.75em;
+  line-height: 1em;
+  color: white-alpha(0.5);
+  // Input specific
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  background-color: inherit;
+  width: 7rem;
+}
+
+@mixin server-team($color) {
+  flex: 1 100%;
+  background-color: rgba($color, 0.1);
+  // font-size: 0.9em;
+
+  h3 {
+    position: relative;
+    background-color: rgba($color, 0.3);
+    display: block;
+    padding: 0.2rem 0.75rem;
+    margin-right: 2rem;
+    margin: 0;
+    overflow: hidden;
+
+    strong {
+      position: absolute;
+      right: 0.75rem;
+    }
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  td, th {
+    text-align: left;
+    padding: 0 0.4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    background: rgba($color, 0.25);
+    &:nth-child(even) {
+      background: rgba($color, 0.2);
+    }
+    &:first-child {
+      padding-left: 0.75rem;
+    }
+    &:last-child {
+      padding-right: 0.75rem;
+    }
+    &:nth-child(2) { width: 4.0rem; text-align: right }
+    &:nth-child(3) { width: 2.2rem; text-align: right }
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  td {
+    font-style: italic;
+    background: rgba($color, 0.1);
+    &:nth-child(even) {
+      background: rgba($color, 0.05);
+    }
+  }
+}
+
+.ServerCard__team {}
+
+.ServerCard__team--alpha {
+  @include server-team(rgba(255, 70, 45, 1));
+  flex: 1 14rem;
+}
+
+.ServerCard__team--beta {
+  @include server-team(rgba(70, 255, 45, 1));
+  flex: 1 14rem;
+}
+
+.ServerCard__team--players {
+  @include server-team(rgba(70, 70, 70, 1));
+}
+
+.ServerCard__team--spec {
+  @include server-team(rgba(70, 70, 70, 1));
+
+  h3 {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
+
+.ServerCard__spec {
+  display: inline-block;
+  margin: 0 0.75rem;
+  font-style: italic;
+}

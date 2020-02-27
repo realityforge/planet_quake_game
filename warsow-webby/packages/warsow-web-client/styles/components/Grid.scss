@@ -1,0 +1,16 @@
+/**
+ * Copyright (c) 2018 Aleksej Komarov
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
+.Grid--flex {
+  display: flex;
+
+  @media screen and (max-width: $page-width-mobile) {
+    display: block;
+  }
+}
+
+.Grid__item {
+  flex: 1;
+}

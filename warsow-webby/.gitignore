@@ -1,0 +1,58 @@
+# .gitignore
+
+## ------------------------------------
+##  Project build rubbish
+## ------------------------------------
+
+/vendor
+/storage
+/public/bundles
+/config/override.*
+npm-debug.log
+package-lock.json
+yarn-error.log
+node_modules
+*.socket
+
+
+## ------------------------------------
+##  Normally ignored rubbish
+## ------------------------------------
+
+## IDE files
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+## shared hosting files
+/.ftpquota
+/error_log*
+/cgi-bin/**
+/npm-debug.log
+
+## homedir files
+/.login
+/.login_conf
+/.mail_aliases
+/.mailrc
+/.profile
+/.rhosts
+/.shrc
+/.bash_profile
+/.bashrc
+
+## temp files
+*~
+*.tmp
+*.swp
+*.swo
+.swp.*
+
+## OS generated files
+__MACOSX
+.DS_Store
+.Spotlight*
+.Trash*
+ehthumbs.db
+Thumbs.db
