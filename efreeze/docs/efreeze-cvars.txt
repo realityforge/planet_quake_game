@@ -1,0 +1,128 @@
+// eFreeze Client Variables
+// ========================
+// v 1.01
+// 10 Sep 05
+
+u can use black color in names without two "^"! (e.g: ^0te^1s^0t)
+
+ef_scoreboard <0|1|2>
+	0 - oldschool scoreboard
+	1 - new efreeze scoreboard
+	2 - smaller version of new scoreboard
+
+ef_grappleStyle <0|1>
+	0 - oldschool grapple
+	1 - rail like grapple trail
+
+ef_grappleTrailColor <0-9>
+	if grappleStyle is on 1, u can change rail grapple trail color with that
+	variable .. colors from 0-7 are same as normal, 8 and 9 are special
+	
+ef_noChatBeep <0|1>
+	0 - chat beeps are present when someone wrote something
+	1 - chat beeps are disabled
+
+ef_noChatTeamBeep <0|1>
+	0 - team chat beeps are present when someone wrote something in team chat
+	1 - team chat beeps are disabled
+
+ef_noVoiceChats <0|1>
+	0 - voice chats are enabled
+	1 - no sound for voice chats when vsay, vsay_team
+
+ef_noVoiceText <0|1>
+	0 - voice texts are present when vsay or vsay_team
+	1 - voice texts are disabled when vsay or vsay_team. Notice it doens't have
+	    effect on sound, just voice texts which are written when vsay, vsay_Team
+	
+ef_drawPlayersWarning <value>
+	How much alive players should be in team to get a warning of how much team
+	players are alive in the team
+
+ef_drawClock <0-4>
+	0 - disables clock to be drawn on right upper corner
+	1 - draw it in 24h style: HH:MM:SS
+	2 - draw it in short 24h style: HH:MM
+	3 - draw it in 12h style: HH:MM:SS am/pm
+	4 - draw it in short 12h style: HH:MM am/pm
+
+ef_drawDate <0-22>
+	0 - disables date to be drawn on right upper corner
+	other numbers represent different styles of date, eg. 1 is 09/09/2005,
+	22 is Friday, September 09 2005.
+
+ef_autoScreenShot <0|1>
+	0 - disables .. 
+	1 - enables automatically taking screenshots after map is finish
+
+
+ef_autoScreenShotJpg <0|1>
+	same as above, just that istead of tga it makes jpg
+
+ef_autoRecord <0|1>
+	0 - disables ..
+	1 - enables automatically recording maps, filename will be in format
+	    DATE-HOSTNAME-MAP
+
+ef_crosshairColor <0-8>
+	0 - normal white crosshair
+	player is able to pick up different colors between 1-8, where 8 is 
+	black instead of 0 .. also notice u have to have lightmap for colors
+	to be shown
+
+ef_forceRailTrails <00>
+	first number forces enemy rail color, while seconds forces players team rail
+	color
+
+
+admin <password>
+	if password is same as on server, player gets access to admin commands
+
+admin comands:
+	ad_listcommands, ad_commands:
+		admin is able to check which admin commands are available for him
+		(server admin can limit them)
+
+	ad_clientlist:
+		for a list of client numbers, nicknames, ips
+       
+	ad_kick <clientnum/name>
+		a players client number or nickname in colors or without them can
+		be entered to kick a player
+
+        ad_kickban <clientnum/name>
+		same as above ++ players ip is put into ban list
+
+	ad_listip
+		lists banned ips
+
+	ad_addip <ip>
+		adding an ip to ban list
+
+	ad_removeip <ip>
+		removing an ip from ban list
+
+	ad_forceteam <clientnum/name> <team>
+		admin is able to force players team by typing client number or
+		nickname (with or without colors) and wanted team (red,blue,spectator)
+		r, b, s can be used instead of red, blue, spectator!
+		eg. ad_forceteam 4 s (will force client 4 to spectators) or
+
+	ad_vote <yes/no>
+		if vote is present and "yes" (y or 1) is typed, vote will immediately pass and
+		vice versa for "no" (n or 0)
+
+	ad_mute <clientnum/nick>
+		player is unable to send any messages (say/say_team)
+		admin can check who's muted and who's not with ad_clientlist
+	
+	ad_unmute <clientnum/nick>
+	        remove mute flag from a player
+	
+	ad_listcheatips <ip>
+		lists ip in cheat list
+
+	ad_removecheatip <ip>
+		removes an ip from cheat list
+
+(notice: only anticheat protection can add an ip into cheat list)

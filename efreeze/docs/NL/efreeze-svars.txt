@@ -1,0 +1,143 @@
+// eFreeze Server Variables
+// ========================
+// opmerking: standaard waarden geven de standaard instafreezetag waarden weer zonder enige efreeze features
+//         
+//
+// v 1.01
+// 10 Sep 05
+
+
+g_hook <0|1> (default: 1)
+	0 - zet de "hook" uit
+        1 - staat het gebruik van de "hook" toe spelers kunnen hem gebruiken door het volgende commando: bind <key> +button5
+
+g_hookSpeed <units/sec> (default: 800)
+	snelheid waarmee de hook zich van de speler verwijderd totdat het een oppervlakte raakt.
+
+g_hookSpeedPull <units/sec> (default: 800)
+	snelheid waarmee de de speler word voortbewogen nadat de hook een oppervlakte heeft geraakt.
+
+g_hookDelay <milliseconds> (default: 400)
+	geeft aan hoeveel miliseconden de speler moet wachten totdat hij de hook weer kan gebruiken nadat hij de hook heeft 
+	gebruikt.
+
+g_hookHoldTime <seconds> (default: 0)
+	hier kan het aantal seconden in worden gevult dat een persoon aan de hook kan blijven hangen.
+	0 - zet deze functie uit.
+
+g_hookSky <0|1> (default: 0)
+	0 - de hook zal niet vast haken aan de lucht.
+	1 - hierdoor kan men aan de lucht hooken.
+
+g_hookDamage <value> (default: 0)
+	hoeveelheid damage een speler krijgt als hij de hook van een andere speler tegen zich aan krijgt.
+
+g_thawTime <milliseconds> (default: 2000)
+	aantal miliseconden dat een speler er over doet om een andere speler te ontdooien.
+
+g_autothawTime <seconds> (default: 150)
+	aantal seconden voordat een speler automatisch ontdooit.
+
+g_lavaThaw <milliseconds> (default: 5000)
+	aantal milliseconden dat lava of slijm in de maps er over doet om iemand te ontdooien.
+
+g_teamKnockBack <units/sec> (default: 1000)
+	geeft aan hoeveel knockback effect een wapen heeft op een bevroren speler.
+	
+g_teamSwitchTime <milliseconds> (default: 5000)
+	aantal seconden dat nodig is voor een speler om van team te wisselen.
+
+
+wp_railReloadTime <milliseconds> (default: 1500)
+	hiermee kan de reload tijd van de railgun ingesteld worden.
+
+wp_railjump <units/sec> (default: 0)
+	aantal units dat een speler word weggeslingerd door met een railgun tegen een oppervlakte aan te schieten.
+
+wp_railSplashDamage <0|1> (default: 0)
+	0 - zet splashdamage voor railgun uit
+	1 - zet splashdamage voor railgun aan net als bij rockets.
+
+wp_gauntletjump <units/sec> (default: 0)
+	aantal units dat een speler word weggeslingerd als hij de gunlet op de grond of muur richt.
+
+wp_switchDelay <milliseconds> (default: 450)
+	aantal miliseconden dat een speler nodig heeft om van wapen te wisselen.
+
+g_voteClientLimit <value> (default: 0)
+	aantal votes dat een speler kan aanroepen per map.
+		
+g_voteGameLimit <value> (default: 0)
+	aantal votes dat in totaal kan worden aangeroepen in een map.
+
+g_spawnInVuln <milliseconds> (default: 0)
+	tijd dat een speler niet kan schieten en niet kan worden gedood na een spawn.
+
+g_spawnEnemyRadius <units> (default: 0)
+	radius waarin de mod kijkt hoeveel tegenstanders in het gebied rond een spawnpunt zijn waardoor de speler
+	op het punt spawned waar het minste aantal tegenstanders zijn.
+
+g_noWrongPlace <0|1> (default: 0)
+	0 - "Wrong Place" plekken (ruimte lava) dood spelers.
+	1 - wanneer een speler in een "wrong place" gebied valt word hij terug geteleporteerd naar het spawnpunt wat
+	daar het dichtst bij is. 
+
+g_nameFloodProtect <milliseconds> (default: 0)
+	aantal seconden dat er minimaal tussen het wisselen van nickname moet zitten.
+
+g_showSpecChat <0|1> (default: 1)
+	0 - spectator chat is alleen zichtbaar voor spectators.
+	1 - iedereen kan spectator chat zien.
+	(notice: alleen van toepassing op CTF en TDM gameplay)
+
+sv_maxMaxPackets <value> (default: 0)
+	maximale waarde voor maxpackets die een client kan gebruiken.
+sv_minMaxPackets <value> (default: 0)
+	minimale waarde voor maxpackets die een client kan gebruiken.
+
+sv_maxSnaps <value> (default: 0)
+	maximale waarde voor snaps die een client kan gebruiken.
+
+sv_minSnaps <value> (default: 0)
+	minimale waarde voor snaps die een client kan gebruiken.
+
+sv_maxTimeNudge <value> (default: 0)
+	maximale waarde voor timenudge die een client kan gebruiken.
+
+sv_minTimeNudge <value> (default: 0)
+	minimale waarde voor timenudge die een client kan gebruiken.
+
+sv_minRate <value> (default: 0)
+	minimale rate die een client kan gebruiken.
+
+g_cheatProtect <0|1|2> (default: 2)
+	0 - zet cheat protection uit
+	1 - schrijft cheaters in het logboek en verwijderd ze van de server
+	2 - schrijft cheaters in het logboek en banned ze van de server.
+
+g_cheatlog <filename> (default: logs/cheat.log)
+	pad naar het cheatlog bestand het is mogelijk dit in submappen te stoppen.
+
+g_adminpass <password> (default: "")
+	hier kan het admin password voor de server worden ingevult.
+
+g_adminlimit <value> (default: 0)
+	0 - geeft admin toegang tot alle admin functies
+	het is mogelijk om sommige functies uit te schakelen dit doe je door de nummers voor de 
+	verschillende commando's die je wilt uitschakelen bij elkaar op te tellen. bv 24 (16 + 8  schakeld de commando's
+	ad_listop en ad_remove ip uit.)	
+
+	           1 ad_clientlist
+	           2 ad_kick
+	           4 ad_kickban
+	           8 ad_listip
+	          16 ad_addip
+	          32 ad_removeip
+	          64 ad_forceteam
+	         128 ad_vote
+	         256 ad_mute
+	         512 ad_unmute
+	        1024 ad_listcheatips
+	        2048 ad_removecheatip
+		====
+		4095 (totaal)

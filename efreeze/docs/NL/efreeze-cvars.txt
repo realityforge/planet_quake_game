@@ -1,0 +1,128 @@
+// eFreeze Client variabelen
+// =========================
+// v 1.01
+// 10 Sep 05
+
+je kan nu zwarte letters gebruiken in namen zonder 2 "^"(dakjes) te gebruiken!
+(bv: ^0te^1s^0t)
+
+ef_scoreboard <0|1|2>
+	0 - standaard quake scorebord
+	1 - het nieuwe Efreeze scorebord
+	2 - kleinere versie van het Efreeze scorebord.
+
+ef_grappleStyle <0|1>
+	0 - oude freezegrapple (zoals in de oude freeze mod)
+	1 - rail grapple. (zoals in OSP freeze)
+
+ef_grappleTrailColor <0-9>
+	als grapplestyle is ingesteld op '1' kan met dit variable de kleur van de grapple worden aangepast
+	de kleuren 0 tm 7 zijn de normale kleuren en op 8 en negen zijn speciale kleuren geplaatst.
+	
+ef_noChatBeep <0|1>
+	0 - chat piepjes zijn hoorbaar Wanneer iemand wat schrijft in de generalchat.
+	1 - alle chat piepjes staan uit.
+
+ef_noChatTeamBeep <0|1>
+	0 - chat piepjes zijn hoorbaar als iemand wat schrijft in teamchat.
+	1 - team chat piepjes zijn uitgeschakeld.
+
+ef_noVoiceChats <0|1>
+	0 - voicechats staan aan (geluid bij i'm frozen enz)
+	1 - de geluiden van voicechat worden onderdrukt.
+
+ef_noVoiceText <0|1>
+	0 - teksten die bij de voicechat horen worden weergegeven.
+	1 - teksten die bij de voicechat horen worden onderdrukt (dit staat los van het geluid.)
+
+ef_drawPlayersWarning <waarde>
+	bij waarde kan worden ingevuld bij hoeveel overgebleven spelers er een waarschuwing op het scherm word
+	weergegeven.
+
+ef_drawClock <0-4>
+	0 - schakeld de klok in de rechter bovenhoek uit.
+	1 - klok in 24 uurs mode: UU:MM:SS
+	2 - klok in verkorte 24 uurs mode : UU:MM
+	3 - klok in 12 uurs mode: UU:MM:SS am/pm
+	4 - klok in verkorte 12 uurs mode: HH:MM am/pm
+
+ef_drawDate <0-22>
+	0 - schakeld het weergeven van de datum in de rechter bovenhoek uit.
+	overige nummers zijn verschillende modussen waarin de datum kan worden weergegeven, bv. '1' is 09/09/2005 en
+	'22' is Friday, September 09 2005.
+
+ef_autoScreenShot <0|1>
+	0 - autoschreenshot is uitgeschakeld 
+	1 - schakeld autoschreenshot in waardoor er aan het eind van iedere map een schreenshot word gemaakt van de scores.
+
+
+ef_autoScreenShotJpg <0|1>
+	zelfde als hierboven maar dan word het bestand in het JPG formaat opgeslagen ipv TGA.
+
+ef_autoRecord <0|1>
+	0 - schakeld autorecord uit.
+	1 - er word automatisch van iedere map een demo gemaakt, de name van de bestanden worden als volgt weergegeven
+	    DATUM-SERVERNAAM-MAP
+
+ef_crosshairColor <0-8>
+	0 - normale witte crosshair.
+	speler kan kiezen tussen verschillende kleuren voor zijn crosshair (genummerd van 1 t\m 8 waarbij 8 zwart is ipv 0) 
+	je moet lightmap hebben aanstaan om de kleuren te kunnen zien.
+
+ef_forceRailTrails <00>
+	hiermee kan je de kleur van de grapple van andere spelers locken, hierbij is het eerste nummer de kleur 
+	van het vijandelijke team en het 2e nummer de kleur van de spelers van je eigen team.
+
+
+admin <password>
+	als hier het juiste password word ingevuld krijgt de speler toegang tot de admin commando's
+
+admin comands:
+	ad_listcommands, ad_commands:
+		dmin kan hiermee checken welke admin commando's er voor hem beschikbaar zijn.
+		de server admin kan dit limiteren)
+	
+	ad_clientlist:
+		geeft een lijst weer met clientnummers, nicknames en IP adressen.
+       
+	ad_kick <clientnum/name>
+		als achter dit commando een clientnummer or naam van speler (met of zonder kleurcode) word ingedrukt word hij
+		van de server verwijderd.
+
+        ad_kickban <clientnum/name>
+		zelfde als commando hier boven maar er hiermee word het ip van de persoon ook op de banlist gezet waardoor hij 
+		in meeste gevallen niet meer de server op kan komen.
+
+	ad_listip
+		geeft een lijst weer met gebande IP adressen.
+
+	ad_addip <ip>
+		voeg een ip aan de banlist toe.
+
+	ad_removeip <ip>
+		voor het verwijderen van een ip van de banlist.
+
+	ad_forceteam <clientnum/name> <team>
+		de admin kan een speler naar een ander team toe dwingen door het clientnummer of nickname (met of zonder 
+		kleurcodes) en vervolgens het gewenste team in te voeren (red, blue, spectator) of verkort r,b,s
+		bv ad_forceteam 4 s (client 4 word naar de spectators toe verplaatst)
+
+	ad_vote <yes/no>
+		als er een vote word geplaatst kan door yes (y of 1) of no (n or 0) in te typen een vote direct worden 
+		geaccepteerd (yes) of geweigerd (no)
+		
+	ad_mute <clientnum/nick>
+		speler kan tot zwijgen worden geroepen met dit commando door clientnummer of naar achter dit commando in te voeren
+		is het voor de speler niet meer mogelijk iets te schrijven in de chat of teamchat met ad_clientlist kan een 
+		admin nagaan welke spelers er zijn gemute.
+	
+	ad_unmute <clientnum/nick>
+	      de speler wiens naam hier word ingetikt kan weer chatten.
+	
+	ad_listcheatips <ip>
+		geeft een lijst weer met ip's van spelers die zijn gesnapt op cheaten.
+
+	ad_removecheatip <ip>
+		verwijderd een ip van de lijst met ip's van cheaters.
+
+(opmerking: alleen de anticheat kan ip's toevoegen aan de cheatlist.)

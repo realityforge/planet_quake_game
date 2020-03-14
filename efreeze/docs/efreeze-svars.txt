@@ -1,0 +1,151 @@
+// eFreeze Server Variables
+// ========================
+// notice: default values represent default insta freezetag values, without
+//         any eFreeze features
+//
+// v 1.01
+// 10 Sep 05
+
+
+g_hook <0|1> (default: 1)
+	0 - Disables grappling hook
+        1 - Enables grappling hook, players can use it with: bind <key> +button5
+
+g_hookSpeed <units/sec> (default: 800)
+	The speed at which the hook leaves from the player's position till
+	it hit a surface
+
+g_hookSpeedPull <units/sec> (default: 800)
+	The speed at which a player is pulled along the hook's path after it has
+	hit a surface
+
+g_hookDelay <milliseconds> (default: 400)
+	Specifies the minimum number of MILLISECONDS that a player can redeploy
+	a hook after use
+
+g_hookHoldTime <seconds> (default: 0)
+	Specifies the maximum number of seconds that a player's hook will remain 
+	attached
+	0 - Disables
+
+g_hookSky <0|1> (default: 0)
+	0 - Players cannot hook the "sky" surface
+	1 - Players can hook onto any surface
+	
+g_hookDamage <value> (default: 0)
+	Amount of damage hook does on impact
+
+g_thawTime <milliseconds> (default: 2000)
+	Amount of time in milliseconds a player will need to thaw a person
+
+g_autothawTime <seconds> (default: 150)
+	Amount of time in seconds a frozen body will need to thaw itself
+
+g_lavaThaw <milliseconds> (default: 5000)
+	Amount of time in milliseconds lava or slime will need to thaw a frozen body
+
+g_teamKnockBack <units/sec> (default: 1000)
+	Knockback force a weapon will do on team player. This won't effect on frozen
+	team bodies.
+	
+g_teamSwitchTime <milliseconds> (default: 5000)
+	Amount of time in seconds needed between a player is able to swith teams
+
+
+wp_railReloadTime <milliseconds> (default: 1500)
+	Amount of time in milliseconds railgun will need to reload
+
+wp_railjump <units/sec> (default: 0)
+	Amount of units a rail will knock player back with
+
+wp_railSplashDamage <0|1> (default: 0)
+	0 - Disables rail splash damage
+	1 - Enables rail splash damage, similar to rocket splash damage
+
+wp_gauntletjump <units/sec> (default: 0)
+	Amount of units a gauntlet will knock player back with when hitting a wall
+
+wp_switchDelay <milliseconds> (default: 450)
+	Amount of time in milliseconds needed to switch weapons
+
+g_voteClientLimit <value> (default: 0)
+	Amount of votes a client is allowed to vote per map
+		
+g_voteGameLimit <value> (default: 0)
+	Amount of votes allowed to be voted per map
+
+g_spawnInVuln <milliseconds> (default: 0)
+	Amount of time in milliseconds player won't be able to get killed or shoot
+
+g_spawnEnemyRadius <units> (default: 0)
+	Distance, in units, around a spawn point to check for enemies. Spawn on a
+	spawn point where there are no or fewest enemies.
+
+g_noWrongPlace <0|1> (default: 0)
+	0 - "Wrong Place" surface kills player
+	1 - When falling into "Wrong Place" surface it will teleport player to 
+	    nearest spawn point instead of killing him
+
+g_nameFloodProtect <milliseconds> (default: 0)
+	Amount of milliseconds between needed before nick changing will be possible
+
+g_showSpecChat <0|1> (default: 1)
+	0 - Spectator chats will be seen only to spectators and not to those who play
+	1 - Spectator chats are shown to everybody
+	(notice: this is only for tdm/ctf)
+
+sv_maxMaxPackets <value> (default: 0)
+	Maximum number of MaxPackets a client will be able to set
+
+sv_minMaxPackets <value> (default: 0)
+	Minimum number of MaxPackets a client will be able to set
+
+sv_maxSnaps <value> (default: 0)
+	Maximum number of Snaps a client will be able to set
+
+sv_minSnaps <value> (default: 0)
+	Minimum number of Snaps a client will be able to set
+
+sv_maxTimeNudge <value> (default: 0)
+	Maximum number of TimeNudge a client will be able to set
+
+sv_minTimeNudge <value> (default: 0)
+	Minimum number of TimeNudge a client will be able to set
+
+sv_minRate <value> (default: 0)
+	Minimum Rate a client will be able to set
+
+g_cheatProtect <0|1|2> (default: 2)
+	0 - Disables cheat protection
+	1 - Enables logging and kicks cheater
+	2 - Enables logging and kick-ban cheater
+
+g_cheatlog <filename> (default: logs/cheat.log)
+	Filename where cheaters ip, nickname and date will be logged. It is also possible
+	to include a directory in filename
+
+g_adminpass <password> (default: "")
+	A Password admin will need to access admin commands. If no password will be set
+	it will disable access to admin commands. Player can set admin password on client
+	side with: admin <password>
+
+g_adminlimit <value> (default: 0)
+	0 - enables all admin commands
+	sum of the numbers at each command will prevent it's useage. For Example a number
+	70 (2 + 4 + 64) will disable admin to be able to kick, kickban and force teams.
+	Admin can also check available commands with: ad_commands, ad_listcommands
+	
+	           1 ad_clientlist
+	           2 ad_kick
+	           4 ad_kickban
+	           8 ad_listip
+	          16 ad_addip
+	          32 ad_removeip
+	          64 ad_forceteam
+	         128 ad_vote
+	         256 ad_mute
+	         512 ad_unmute
+	        1024 ad_listcheatips
+	        2048 ad_removecheatip
+		====
+		4095 (total sum)
