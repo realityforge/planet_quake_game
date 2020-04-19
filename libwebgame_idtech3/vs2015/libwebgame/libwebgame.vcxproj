@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{293D7AD7-DB3A-4F48-9DE2-2A7B608EB05F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libwebgame</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)\..\..\code;$(ProjectDir)\..\..\code\kung;$(ProjectDir)\..\..\deps\SDL2-2.0.6\include;$(ProjectDir)\..\..\deps\AL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\..\deps\AL\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)/../../code;$(ProjectDir)/../../code/kung;$(ProjectDir)/../../deps/SDL2-2.0.6/include;$(ProjectDir)/../../deps/AL/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)/../../deps/SDL2-2.0.6;$(ProjectDir)/../../deps/AL;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBWEBGAME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;LIBWEBGAME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies);ws2_32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBWEBGAME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;LIBWEBGAME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\bg_airmove.cpp" />
+    <ClCompile Include="..\..\code\bg_ladder.cpp" />
+    <ClCompile Include="..\..\code\bg_misc.cpp" />
+    <ClCompile Include="..\..\code\bg_pmove.cpp" />
+    <ClCompile Include="..\..\code\bg_slidemove.cpp" />
+    <ClCompile Include="..\..\code\cg_consolecmds.cpp" />
+    <ClCompile Include="..\..\code\cg_draw.cpp" />
+    <ClCompile Include="..\..\code\cg_drawtools.cpp" />
+    <ClCompile Include="..\..\code\cg_effects.cpp" />
+    <ClCompile Include="..\..\code\cg_ents.cpp" />
+    <ClCompile Include="..\..\code\cg_event.cpp" />
+    <ClCompile Include="..\..\code\cg_huds.cpp" />
+    <ClCompile Include="..\..\code\cg_info.cpp" />
+    <ClCompile Include="..\..\code\cg_localents.cpp" />
+    <ClCompile Include="..\..\code\cg_main.cpp" />
+    <ClCompile Include="..\..\code\cg_particles.cpp" />
+    <ClCompile Include="..\..\code\cg_players.cpp" />
+    <ClCompile Include="..\..\code\cg_playerstate.cpp" />
+    <ClCompile Include="..\..\code\cg_predict.cpp" />
+    <ClCompile Include="..\..\code\cg_scoreboard.cpp" />
+    <ClCompile Include="..\..\code\cg_servercmds.cpp" />
+    <ClCompile Include="..\..\code\cg_snapshot.cpp" />
+    <ClCompile Include="..\..\code\cg_syscalls_engine.cpp" />
+    <ClCompile Include="..\..\code\cg_vars.cpp" />
+    <ClCompile Include="..\..\code\cg_view.cpp" />
+    <ClCompile Include="..\..\code\cg_weapons.cpp" />
+    <ClCompile Include="..\..\code\cg_weapon_bazooka.cpp" />
+    <ClCompile Include="..\..\code\cg_weapon_crowbar.cpp" />
+    <ClCompile Include="..\..\code\cg_weapon_kar98.cpp" />
+    <ClCompile Include="..\..\code\cg_weapon_mp44.cpp" />
+    <ClCompile Include="..\..\code\cg_weapon_panzerschreck.cpp" />
+    <ClCompile Include="..\..\code\cg_weapon_sword.cpp" />
+    <ClCompile Include="..\..\code\client_cgame.cpp" />
+    <ClCompile Include="..\..\code\client_input.cpp" />
+    <ClCompile Include="..\..\code\client_keys.cpp" />
+    <ClCompile Include="..\..\code\client_main.cpp" />
+    <ClCompile Include="..\..\code\client_parse.cpp" />
+    <ClCompile Include="..\..\code\client_render.cpp" />
+    <ClCompile Include="..\..\code\client_scrn.cpp" />
+    <ClCompile Include="..\..\code\client_ui.cpp" />
+    <ClCompile Include="..\..\code\cmd.cpp" />
+    <ClCompile Include="..\..\code\cm_load.cpp" />
+    <ClCompile Include="..\..\code\cm_patch.cpp" />
+    <ClCompile Include="..\..\code\cm_polylib.cpp" />
+    <ClCompile Include="..\..\code\cm_test.cpp" />
+    <ClCompile Include="..\..\code\cm_trace.cpp" />
+    <ClCompile Include="..\..\code\common.cpp" />
+    <ClCompile Include="..\..\code\cvar.cpp" />
+    <ClCompile Include="..\..\code\files.cpp" />
+    <ClCompile Include="..\..\code\g_active.cpp" />
+    <ClCompile Include="..\..\code\g_arenas.cpp" />
+    <ClCompile Include="..\..\code\g_bot.cpp" />
+    <ClCompile Include="..\..\code\g_client.cpp" />
+    <ClCompile Include="..\..\code\g_cmds.cpp" />
+    <ClCompile Include="..\..\code\g_combat.cpp" />
+    <ClCompile Include="..\..\code\g_items.cpp" />
+    <ClCompile Include="..\..\code\g_julia.cpp" />
+    <ClCompile Include="..\..\code\g_main.cpp" />
+    <ClCompile Include="..\..\code\g_mem.cpp" />
+    <ClCompile Include="..\..\code\g_misc.cpp" />
+    <ClCompile Include="..\..\code\g_missile.cpp" />
+    <ClCompile Include="..\..\code\g_mover.cpp" />
+    <ClCompile Include="..\..\code\g_spawn.cpp" />
+    <ClCompile Include="..\..\code\g_svcmds.cpp" />
+    <ClCompile Include="..\..\code\g_syscalls.cpp" />
+    <ClCompile Include="..\..\code\g_target.cpp" />
+    <ClCompile Include="..\..\code\g_team.cpp" />
+    <ClCompile Include="..\..\code\g_trigger.cpp" />
+    <ClCompile Include="..\..\code\g_utils.cpp" />
+    <ClCompile Include="..\..\code\g_weapon.cpp" />
+    <ClCompile Include="..\..\code\g_weapon_bazooka.cpp" />
+    <ClCompile Include="..\..\code\huffman.cpp" />
+    <ClCompile Include="..\..\code\include_math.cpp" />
+    <ClCompile Include="..\..\code\main.cpp" />
+    <ClCompile Include="..\..\code\msg.cpp" />
+    <ClCompile Include="..\..\code\net_chan.cpp" />
+    <ClCompile Include="..\..\code\net_ip.cpp" />
+    <ClCompile Include="..\..\code\puff.cpp" />
+    <ClCompile Include="..\..\code\q_math.cpp" />
+    <ClCompile Include="..\..\code\q_shared.cpp" />
+    <ClCompile Include="..\..\code\ramfile.cpp" />
+    <ClCompile Include="..\..\code\randomcrap.cpp" />
+    <ClCompile Include="..\..\code\server_bot.cpp" />
+    <ClCompile Include="..\..\code\server_ccmds.cpp" />
+    <ClCompile Include="..\..\code\server_client.cpp" />
+    <ClCompile Include="..\..\code\server_game.cpp" />
+    <ClCompile Include="..\..\code\server_init.cpp" />
+    <ClCompile Include="..\..\code\server_main.cpp" />
+    <ClCompile Include="..\..\code\server_net_chan.cpp" />
+    <ClCompile Include="..\..\code\server_snapshot.cpp" />
+    <ClCompile Include="..\..\code\server_world.cpp" />
+    <ClCompile Include="..\..\code\client_sound.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\code\bg_airmove.h" />
+    <ClInclude Include="..\..\code\bg_ladder.h" />
+    <ClInclude Include="..\..\code\bg_local.h" />
+    <ClInclude Include="..\..\code\bg_pmove.h" />
+    <ClInclude Include="..\..\code\bg_public.h" />
+    <ClInclude Include="..\..\code\bg_slidemove.h" />
+    <ClInclude Include="..\..\code\cg_huds.h" />
+    <ClInclude Include="..\..\code\cg_huds_structs.h" />
+    <ClInclude Include="..\..\code\cg_local.h" />
+    <ClInclude Include="..\..\code\cg_public.h" />
+    <ClInclude Include="..\..\code\cg_vars.h" />
+    <ClInclude Include="..\..\code\cg_weapon.h" />
+    <ClInclude Include="..\..\code\client.h" />
+    <ClInclude Include="..\..\code\client_render.h" />
+    <ClInclude Include="..\..\code\cm_local.h" />
+    <ClInclude Include="..\..\code\cm_patch.h" />
+    <ClInclude Include="..\..\code\cm_polylib.h" />
+    <ClInclude Include="..\..\code\cm_public.h" />
+    <ClInclude Include="..\..\code\g_local.h" />
+    <ClInclude Include="..\..\code\g_public.h" />
+    <ClInclude Include="..\..\code\g_team.h" />
+    <ClInclude Include="..\..\code\g_weapon.h" />
+    <ClInclude Include="..\..\code\include_ccall.h" />
+    <ClInclude Include="..\..\code\include_math.h" />
+    <ClInclude Include="..\..\code\keys.h" />
+    <ClInclude Include="..\..\code\puff.h" />
+    <ClInclude Include="..\..\code\qcommon.h" />
+    <ClInclude Include="..\..\code\qfiles.h" />
+    <ClInclude Include="..\..\code\q_platform.h" />
+    <ClInclude Include="..\..\code\q_shared.h" />
+    <ClInclude Include="..\..\code\ramfile.h" />
+    <ClInclude Include="..\..\code\server.h" />
+    <ClInclude Include="..\..\code\client_sound.h" />
+    <ClInclude Include="..\..\code\surfaceflags.h" />
+    <ClInclude Include="..\..\code\sv.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\code\cg_newdraw.c.nope" />
+    <None Include="..\..\README.md" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
