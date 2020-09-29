@@ -1,0 +1,76 @@
+
+Image: rectangle.png
+
+Raw Moments
+M00=1275106
+M10=175327075
+M01=175327075
+M11=24452482196
+M20=24970869645
+M02=24572453117
+M21=3528372156650
+M12=3473589884050
+M22=507277761485960
+M30=3670928705125
+M03=3506581887325
+
+Central Moments
+m00=1275106
+m10=0
+m01=0
+m11=3.45009e+08
+m20=8.63397e+08
+m02=4.6498e+08
+m21=0
+m12=0
+m22=2.89889e+11
+m30=0
+m03=0
+
+Normalized Central Moments
+n00=1
+n10=0
+n01=0
+n11=0.0002121963043
+n20=0.0005310286651
+n02=0.0002859839587
+n21=0
+n12=0
+n22=1.398275913e-07
+n30=0
+n03=0
+
+Hu Invariant Moments
+I1=0.0008170126239
+I2=2.401559982e-07
+I3=0
+I4=0
+I5=0
+I6=0
+I7=0
+I8=0
+
+Maitra Invariant Moments
+B1=0.5888187885
+B2=0
+B3=DBZ
+B4=DBZ
+B5=DBZ
+B6=DBZ
+
+
+Miscellaneous Parameters
+Total Mass = 1275106
+Mean = 16.73894691
+X Center of Mass (XCOM) = 137.5
+Y Center of Mass (YCOM) = 137.5
+X Radius of Gyration = 138.8197021
+Y Radius of Gyration = 139.9405823
+COM Radius of Gyration = 32.27658081
+Ellipse Angle (radians) = 0.5235797763
+Ellipse Angle (degrees) = 29.9989109
+Ellipse Semi-Major Axis = 57.73477936
+Ellipse Semi-Minor Axis = 28.87569618
+Ellipse Eccentricity = 0.707005024
+Ellipse Intensity = 243.4593353
+

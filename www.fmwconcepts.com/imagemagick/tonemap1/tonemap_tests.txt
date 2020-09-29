@@ -1,0 +1,190 @@
+# HDRI tests (imh 6.7.8.2/6.7.8.3-beta) (im6h 6.7.4.10/6.7.2.0 see more below) (imoh 6.7.6.10)
+
+Tonemap1
+
+# all slightly darker than original
+im6h tonemap1 -m all -s -10 -h 0 -e 100 -S 2.5 IMG_3133And8more_640x480.hdr 1tmp6a.jpg
+imh tonemap1 -m all -s -10 -h 0 -e 100 -S 2.5 IMG_3133And8more_640x480.hdr 1tmpa.jpg
+imbh tonemap1 -m all -s -10 -h 0 -e 100 -S 2.5 IMG_3133And8more_640x480.hdr 1tmpba.jpg
+imoh tonemap1 -m all -s -10 -h 0 -e 100 -S 2.5 IMG_3133And8more_640x480.hdr 1tmpoa.jpg
+# this is closer (increase shadows and decrease sat)
+im6h tonemap1 -m all -s 0 -h 0 -e 100 -S 2 IMG_3133And8more_640x480.hdr 1tmp6a2.jpg
+imh tonemap1 -m all -s 0 -h 0 -e 100 -S 2 IMG_3133And8more_640x480.hdr 1tmpa2.jpg
+imbh tonemap1 -m all -s 0 -h 0 -e 100 -S 2 IMG_3133And8more_640x480.hdr 1tmpba2.jpg
+imoh tonemap1 -m all -s 0 -h 0 -e 100 -S 2 IMG_3133And8more_640x480.hdr 1tmpoa2.jpg
+
+# all slightly darker than original
+im6h tonemap1 -m intensity -s -10 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmp6a_int.jpg
+imh tonemap1 -m intensity -s -10 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmpa_int.jpg
+imoh tonemap1 -m intensity -s -10 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmpoa_int.jpg
+im6h tonemap1 -m intensity -s -10 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmp6a_int.jpg
+# this is closer (increase shadows)
+im6h tonemap1 -m intensity -s 0 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmp6a_int.jpg
+imh tonemap1 -m intensity -s 0 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmpa_int.jpg
+imoh tonemap1 -m intensity -s 0 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmpoa_int.jpg
+im6h tonemap1 -m intensity -s 0 -h 0 -e 100 -S 0.5 IMG_3133And8more_640x480.hdr 1tmp6a_int.jpg
+
+# all ok
+im6h tonemap1 -m all -s 20 -h -10 -e 100 -S 2 doll_small.exr 1tmp6b.jpg
+imb tonemap1 -m all -s 20 -h -10 -e 100 -S 2 doll_small.exr 1tmpb.jpg
+imbh tonemap1 -m all -s 20 -h -10 -e 100 -S 2 doll_small.exr 1tmpbb.jpg
+imoh tonemap1 -m all -s 20 -h -10 -e 100 -S 2 -C sRGB doll_small.exr 1tmpob.jpg
+
+# all ok
+im6h tonemap1 -m intensity -s 20 -h -10 -e 100 -S 0.5 doll_small.exr 1tmp6b_int.jpg
+imbh tonemap1 -m intensity -s 20 -h -10 -e 100 -S 0.5 doll_small.exr 1tmpb_int.jpg
+imoh tonemap1 -m intensity -s 20 -h -10 -e 100 -S 0.5 -C sRGB doll_small.exr 1tmpob_int.jpg
+
+# all better colorization than original
+im6h tonemap1 -m all -s 30 -h -10 -e 50 -S 2 sala_com_janela_small.exr 1tmp6c.jpg
+imbh tonemap1 -m all -s 30 -h -10 -e 50 -S 2 sala_com_janela_small.exr 1tmpc.jpg
+imoh tonemap1 -m all -s 30 -h -10 -e 50 -S 2 -C sRGB sala_com_janela_small.exr 1tmpoc.jpg
+
+# all better colorization than original
+im6h tonemap1 -m all -s 30 -h -10 -e 50 -S 2 sala_com_janela_small.exr 1tmp6c_int.jpg
+imbh tonemap1 -m all -s 30 -h -10 -e 50 -S 2 sala_com_janela_small.exr 1tmpc_int.jpg
+imoh tonemap1 -m all -s 30 -h -10 -e 50 -S 2 -C sRGB sala_com_janela_small.exr 1tmpoc_int.jpg
+
+# all fine if use im6h 6.7.2.0 to 6.7.4.0 (actual tests: 6.7.2.0/6.7.2.1/6.7.2.10/6.7.3.10/6.7.4.0)
+# but result for im6h are gray rather than white, if use  6.7.4.1 to 6.7.6.6 (actual tests: 6/7.4.1/6.7.4.6/6.7.4.10/6.7.5.10/6.7.6.5/6.7.6.6)
+im6h tonemap1 -m all -s -40 -h -40 -e 100 -S 3 lampickaHDR_small.hdr 1tmp6d.jpg
+imh tonemap1 -m all -s -40 -h -40 -e 100 -S 3 lampickaHDR_small.hdr 1tmpd.jpg
+imbh tonemap1 -m all -s -40 -h -40 -e 100 -S 3 lampickaHDR_small.hdr 1tmpbd.jpg
+imoh tonemap1 -m all -s -40 -h -40 -e 100 -S 3 lampickaHDR_small.hdr 1tmpod.jpg
+
+
+
+Tonemap2
+
+# first and fourth ok, second and third slightly too little contrast/color, so increased sat in fifth
+# note special processing added for second and third cases
+im6h tonemap2 -t none -s -20 -h -10 -e -30 -S 0.5 -C sRGB IMG_3133And8more_640x480.hdr 2tmp6a.jpg
+imbh tonemap2 -t none -s -20 -h -10 -e -30 -S 0.5 -C RGB IMG_3133And8more_640x480.hdr 2tmp1ba.jpg
+imh tonemap2 -t none -s -20 -h -10 -e -30 -S 0.5 -C RGB IMG_3133And8more_640x480.hdr 2tmp1a.jpg
+imoh tonemap2 -t none -s -20 -h -10 -e -30 -S 0.5 -C RGB IMG_3133And8more_640x480.hdr 2tmp1oa.jpg
+imbh tonemap2 -t none -s -20 -h -10 -e -30 -S 0.7 -C RGB IMG_3133And8more_640x480.hdr 2tmp1ba2.jpg
+
+# all ok
+im6h tonemap2 -t none -s 50 -h 0 -e -30 -S 0.5 sala_com_janela_small.exr 2tmp6b.jpg
+imh tonemap2 -t none -s 50 -h 0 -e -30 -S 0.5 sala_com_janela_small.exr 2tmpb.jpg
+imoh tonemap2 -t none -s 50 -h 0 -e -30 -S 0.5 -C sRGB sala_com_janela_small.exr 2tmpob.jpg
+
+# all ok
+im6h tonemap2 -t retinex -s 30 -h 0 -e -30 -S 0.5 sala_com_janela_small.exr 2tmp6b2.jpg
+imh tonemap2 -t retinex -s 30 -h 0 -e -30 -S 0.5 sala_com_janela_small.exr 2tmpb2.jpg
+imoh tonemap2 -t retinex -s 30 -h 0 -e -30 -S 0.5 -C sRGB sala_com_janela_small.exr 2tmpob2.jpg
+
+# all ok
+im6h tonemap2 -t none -s 70 -h -15 -e -30 -S 0.6 lampickaHDR_small.hdr 2tmp6c.jpg
+imh tonemap2 -t none -s 70 -h -15 -e -30 -S 0.6 lampickaHDR_small.hdr 2tmpc.jpg
+imoh tonemap2 -t none -s 70 -h -15 -e -30 -S 0.6 lampickaHDR_small.hdr 2tmpoc.jpg
+
+# all ok
+im6h tonemap2 -t none -s 50 -h 0 -e -30 -S 0.5 zona_zen_vodafone_small.exr 2tmp6d.jpg
+imh tonemap2 -t none -s 50 -h 0 -e -30 -S 0.5 zona_zen_vodafone_small.exr 2tmpd.jpg
+imoh tonemap2 -t none -s 50 -h 0 -e -30 -S 0.5 -C sRGB zona_zen_vodafone_small.exr 2tmpod.jpg
+
+# all ok
+im6h tonemap2 -t retinex -s 70 -h 30 -e -30 -S 0.6 lampickaHDR_small.hdr 2tmp6e.jpg
+imh tonemap2 -t retinex -s 70 -h 30 -e -30 -S 0.6 lampickaHDR_small.hdr 2tmpe.jpg
+imoh tonemap2 -t retinex -s 70 -h 30 -e -30 -S 0.6 lampickaHDR_small.hdr 2tmpoe.jpg
+
+
+
+Tonemap3
+
+# first and fourth ok, second and third too much sat, so reduce sat and increase shadows in fourth
+im6h tonemap3 -t none -s -30 -h -15 -e 2 -S 50 -c OHTA -C sRGB IMG_3133And8more_640x480.hdr 3tmp6a.jpg
+imh tonemap3 -t none -s -30 -h -15 -e 2 -S 50 -c OHTA -C RGB IMG_3133And8more_640x480.hdr 3tmpa.jpg
+imbh tonemap3 -t none -s -30 -h -15 -e 2 -S 50 -c OHTA -C RGB IMG_3133And8more_640x480.hdr 3tmpba.jpg
+imoh tonemap3 -t none -s -30 -h -15 -e 2 -S 50 -c OHTA -C RGB IMG_3133And8more_640x480.hdr 3tmpoa.jpg
+imbh tonemap3 -t none -s -25 -h -15 -e 2 -S 30 -c OHTA -C RGB IMG_3133And8more_640x480.hdr 3tmpbba.jpg
+
+# all fine
+im6h tonemap3 -t none -s 5 -h -10 -e 2 -S 50 -c OHTA -C RGB IMG_3133And8more_640x480.hdr 3tmp6aa.jpg
+imh tonemap3 -t none -s 5 -h -10 -e 2 -S 50 -c OHTA -C sRGB IMG_3133And8more_640x480.hdr 3tmpaa.jpg
+imbh tonemap3 -t none -s 5 -h -10 -e 2 -S 50 -c OHTA -C sRGB IMG_3133And8more_640x480.hdr 3tmpbaa.jpg
+imoh tonemap3 -t none -s 5 -h -10 -e 2 -S 50 -c OHTA -C sRGB IMG_3133And8more_640x480.hdr 3tmppaa.jpg
+
+# all fine
+im6h tonemap3 -t none -s 10 -h -10 -e 2 -S 50 -c OHTA doll_small.exr 3tmp6b.jpg
+imh tonemap3 -t none -s 10 -h -10 -e 2 -S 50 -c OHTA doll_small.exr 3tmpb.jpg
+imbh tonemap3 -t none -s 10 -h -10 -e 2 -S 50 -c OHTA doll_small.exr 3tmpbb.jpg
+imoh tonemap3 -t none -s 10 -h -10 -e 2 -S 50 -c OHTA -C sRGB doll_small.exr 3tmpob.jpg
+
+# all fine
+im6h tonemap3 -t none -s 30 -h -10 -e 2 -S 50 -c OHTA sala_com_janela_small.exr 3tmp6c.jpg
+imh tonemap3 -t none -s 30 -h -10 -e 2 -S 50 -c OHTA sala_com_janela_small.exr 3tmpc.jpg
+imbh tonemap3 -t none -s 30 -h -10 -e 2 -S 50 -c OHTA sala_com_janela_small.exr 3tmpbc.jpg
+imoh tonemap3 -t none -s 30 -h -10 -e 2 -S 50 -c OHTA -C sRGB sala_com_janela_small.exr 3tmpoc.jpg
+
+# first and fourth ok, second and third under saturated, so increase sat in fifth
+im6h tonemap3 -t retinex -s -30 -h 10 -e 2 -S 50 -c OHTA -C sRGB -A lampickaHDR_small.hdr 3tmp6d.jpg
+imh tonemap3 -t retinex -s -30 -h 10 -e 2 -S 50 -c OHTA -C RGB -A lampickaHDR_small.hdr 3tmpd.jpg
+imbh tonemap3 -t retinex -s -30 -h 10 -e 2 -S 50 -c OHTA -C RGB -A lampickaHDR_small.hdr 3tmpbd.jpg
+imoh tonemap3 -t retinex -s -30 -h 10 -e 2 -S 50 -c OHTA -C RGB -A lampickaHDR_small.hdr 3tmpod.jpg
+imbh tonemap3 -t retinex -s -30 -h 10 -e 2 -S 70 -c OHTA -C RGB -A lampickaHDR_small.hdr 3tmpbbd.jpg
+
+
+Tonemap4
+
+# all fine (after fix auto-level bug) 
+im6h tonemap4 -m ramp -k none -b 5 -e 3 -l 3 -A IMG_3133And8more_640x480.hdr 4tmp6a.jpg
+imbh tonemap4 -m ramp -k none -b 5 -e 3 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpa.jpg
+imoh tonemap4 -m ramp -k none -b 5 -e 3 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpoa.jpg
+
+# all fine (after fix auto-level bug) 
+im6h tonemap4 -m adaptive -k none -b 10 -e 3 -l 3 -A IMG_3133And8more_640x480.hdr 4tmp6a2.jpg
+imbh tonemap4 -m adaptive -k none -b 10 -e 3 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpa2.jpg
+imoh tonemap4 -m adaptive -k none -b 10 -e 3 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpoa2.jpg
+
+# all fine (after fix auto-level bug and retinex) 
+im6h tonemap4 -m ramp -k retinex -b 10 -e 1 -l 3 -A IMG_3133And8more_640x480.hdr 4tmp6a3.jpg
+imbh tonemap4 -m ramp -k retinex -b 10 -e 1 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpa3.jpg
+imoh tonemap4 -m ramp -k retinex -b 10 -e 1 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpoa3.jpg
+
+# all fine (after fix auto-level bug) 
+im6h tonemap4 -m ramp -k space -e 1 -l 3 -A IMG_3133And8more_640x480.hdr 4tmp6a4.jpg
+imbh tonemap4 -m ramp -k space -e 1 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpa4.jpg
+imoh tonemap4 -m ramp -k space -e 1 -l 3 -A IMG_3133And8more_640x480.hdr 4tmpoa4.jpg
+
+# all are fine
+im6h tonemap4 -m ramp -k none -b 10 -c 10 -e 2 doll_small.exr 4tmp6b.jpg
+imbh tonemap4 -m ramp -k none -b 10 -c 10 -e 2 doll_small.exr 4tmpb.jpg
+imoh tonemap4 -m ramp -k none -b 10 -c 10 -e 2 -C sRGB doll_small.exr 4tmpob.jpg
+
+# all are fine
+im6h tonemap4 -m adaptive -k none -b 10 -c 10 -e 2 doll_small.exr 4tmp6b2.jpg
+imbh tonemap4 -m adaptive -k none -b 10 -c 10 -e 2 doll_small.exr 4tmpb2.jpg
+imoh tonemap4 -m adaptive -k none -b 10 -c 10 -e 2 -C sRGB doll_small.exr 4tmpob2.jpg
+
+# all are fine
+im6h tonemap4 -m ramp -k none -b 5 -c -5 -e 2 sala_com_janela_small.exr 4tmp6c.jpg
+imbh tonemap4 -m ramp -k none -b 5 -c -5 -e 2 sala_com_janela_small.exr 4tmpc.jpg
+imoh tonemap4 -m ramp -k none -b 5 -c -5 -e 2 -C sRGB sala_com_janela_small.exr 4tmpoc.jpg
+
+# all are fine
+im6h tonemap4 -m adaptive -k none -b 8 -c -10 -e 2 sala_com_janela_small.exr 4tmp6c2.jpg
+imbh tonemap4 -m adaptive -k none -b 8 -c -10 -e 2 sala_com_janela_small.exr 4tmpc2.jpg
+imoh tonemap4 -m adaptive -k none -b 8 -c -10 -e 2 -C sRGB sala_com_janela_small.exr 4tmpoc2.jpg
+
+# all are fine
+im6h tonemap4 -m ramp -k none -c 30 -e 3 -l 4 -A lampickaHDR_small.hdr 4tmp6d.jpg
+imbh tonemap4 -m ramp -k none -c 30 -e 3 -l 4 -A lampickaHDR_small.hdr 4tmpd.jpg
+imoh tonemap4 -m ramp -k none -c 30 -e 3 -l 4 -A lampickaHDR_small.hdr 4tmpod.jpg
+
+# all are fine
+im6h tonemap4 -m ramp -k none -b 10 -e 2 zona_zen_vodafone_small.exr 4tmp6e.jpg
+imbh tonemap4 -m ramp -k none -b 10 -e 2 zona_zen_vodafone_small.exr 4tmpe.jpg
+imoh tonemap4 -m ramp -k none -b 10 -e 2 -C sRGB zona_zen_vodafone_small.exr 4tmpoe.jpg
+
+# all are fine
+im6h tonemap4 -m ramp -k none -b 10 -e 2 cascata_praia_da_ursa_small.exr 4tmp6f.jpg
+imbh tonemap4 -m ramp -k none -b 10 -e 2 cascata_praia_da_ursa_small.exr 4tmpf.jpg
+imoh tonemap4 -m ramp -k none -b 10 -e 2 -C sRGB cascata_praia_da_ursa_small.exr 4tmpof.jpg
+
+# all are fine
+im6h tonemap4 -m adaptive -k none -b 10 -e 2 cascata_praia_da_ursa_small.exr 4tmp6f2.jpg
+imbh tonemap4 -m adaptive -k none -b 10 -e 2 cascata_praia_da_ursa_small.exr 4tmpf2.jpg
+imoh tonemap4 -m adaptive -k none -b 10 -e 2 -C sRGB cascata_praia_da_ursa_small.exr 4tmpof2.jpg
+

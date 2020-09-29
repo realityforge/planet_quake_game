@@ -1,0 +1,3 @@
+red      green1
+green1   blue
+blue     red

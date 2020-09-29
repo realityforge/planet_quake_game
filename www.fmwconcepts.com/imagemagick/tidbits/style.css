@@ -1,0 +1,173 @@
+<style type="text/css" title="text/css">
+<!--
+body {font:11pt Arial, Helvetica, sans-serif; background-color: white;}
+div {font:11pt Arial, Helvetica, sans-serif;}
+p {font: inherit; margin-left: 20px; margin-right: 20px;}
+//p.white {font: inherit; color: white;}
+//p.red {font: inherit; color: red;}
+//p.blue {font: inherit; color: blue;}
+.indent {font: inherit; margin-left: 30px;}
+.indent2 {font: inherit; margin-left: 50px;}
+.checks {background-image: url(http://www.fmwconcepts.com/imagemagick/tidbits/image/checks.gif);}
+p.text
+	{
+	font: inherit; 
+	margin-left: 50px; 
+	margin-right: 50px; 
+	}
+p.title
+	{
+	font: inherit; 
+	font-weight: bold; 
+	margin-left: 50px; 
+	margin-right: 50px; 
+	}
+p.subtitle
+	{
+	font: inherit; 
+	text-decoration: underline; 
+	margin-left: 50px; 
+	margin-right: 50px; 
+	}
+p.header
+	{
+	font: inherit; 
+	text-decoration: underline; 
+	}
+th {font:11pt Arial, Helvetica, sans-serif; font-weight: bold;}
+th.larger {font:12pt Arial, Helvetica, sans-serif; font-weight: bold;}
+td {font:11pt Arial, Helvetica, sans-serif;}
+td.fixedwidth {font:10pt Monaco, "Lucida Sans Typewriter", "Andale Mono", Courier;}
+td.larger {font:12pt Arial, Helvetica, sans-serif;}
+h2 {font:14pt Arial, Helvetica, sans-serif; font-weight: bold;}
+h3 {font:12pt Arial, Helvetica, sans-serif; font-weight: bold;}
+.bold {font-weight: bold;}
+.red {color: red;}
+.blue  {color: blue;}
+.white {color: white;}
+.purple {color: #c0f;}
+.backblue {background-color: #025aa4;}
+.smaller {font:10pt Arial, Helvetica, sans-serif;}
+
+a:link, a:active, a:visited 
+	{
+	color: #00f;
+	text-decoration: none; 
+	font:11pt Arial, Helvetica, sans-serif;
+	}
+
+a:hover
+	{
+	color: #00f;
+	background-color: mistyrose;
+	text-decoration: none;
+	font:11pt Arial, Helvetica, sans-serif;
+	}
+
+#nav
+	{
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding: 0 0 0 10px;
+	list-style: none;
+	background-color: #025aa4;
+	}
+	
+#nav li
+	{
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	}
+
+#nav a
+	{
+	float: left;
+	display: block;
+	margin: 0 2px 0 0;
+	padding: 4px 8px;
+	color: black;
+	text-decoration: none;
+	border: 1px solid black;
+	border-bottom: none;
+	background-color: wheat;
+	}
+
+#nav a:hover
+	{
+	color: blue;
+	background-color: mistyrose;
+	}
+
+#nav body#homepage #t_homepage a, body#im_info #t_im_info a, 
+body#image_info #t_image_info a, body#graphics #t_graphics a, body#image #t_image a
+	{
+	color: blue;
+	background-color: lemonchiffon;
+	}
+
+#nav a span {display: none;}
+
+#nav a:hover span 
+	{
+	display: block;
+	position: absolute;
+	top: 195px; /* top of navbar roll-over message */
+	left: 10px; 
+	border: 1px solid black;
+	padding: 5px; 
+	margin: 10px; 
+	z-index: 100;
+	color: red; 
+	background-color: white;
+	font: 11px  Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+	}
+
+#cat_list 
+	{
+	position: relative;
+	margin-bottom: 30px;
+	}
+
+
+#cat_list li a {text-decoration: none;}
+#cat_list li a span {display: none;}
+
+#cat_list a:link, a:active, a:visited 
+	{
+	color: #00f;
+	text-decoration: none; 
+	font:11pt Arial, Helvetica, sans-serif;
+	}
+
+#cat_list a:hover
+	{
+	color: #00f;
+	background-color: mistyrose;
+	text-decoration: none;
+	font:11pt Arial, Helvetica, sans-serif;
+	}
+	
+#cat_list li a:hover span 
+	{
+	display: inline;
+	position: relative;
+	left: 20px;		/* horizontal offset of category hover information */
+	top: 0px;
+	width: 350px; /* width of category hover information */
+	border: 1px solid black;
+	padding: 5px; 
+	margin: 0px; 
+	z-index: 100;
+	color: red; 
+	background-color: white;
+	font: 11px  Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+	}
+
+-->
+</style>

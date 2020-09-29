@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fred's ImageMagick Tidbits</title>
+<meta name="author" content="Fred Weinhaus">
+<meta name="description" content="Fred's ImageMagick Tidbits">
+<meta name="keywords" content="ImageMagick, tidbits, image information">
+<link rel="stylesheet" href="style.css">
+</head>
+<body marginwidth=0 marginheight=0 id="im_info">
+
+<div class="backblue">
+<br />
+<h2 align="center" class="white"><img src="../images/im_logo_small_sharp.gif" border=2 width="120" height="90" hspace="20" vspace="0" border="0" align="absmiddle" class="red">Fred's ImageMagick Tidbits</h2>
+<br />
+</div>
+
+<ul id="nav">
+	<li id="t_homepage"><a href="index.php.html">Home Page
+		<span>Tidbits Home Page</span></a></li></a></li>
+	<li id="t_im_info"><a href="im_info.php.html">ImageMagick Information
+		<span>ImageMagick configuration and parameters</span></a></li>
+	<li id="t_image_info"><a href="image_info.php.html">Image Information
+		<span>Image specific information</span></a></li></a></li>
+	<li id="t_graphics"><a href="graphics.php.html">Graphics Processing
+		<span>Color information and creating specific color images</span></a></li></a></li>
+	<li id="t_image"><a href="image.php.html">Image Processing
+		<span>Miscellaneous image processing techniques</span></a></li></a></li>
+</ul>
+<p>&nbsp;</p>
+
+<br /><br />
+
+<a name="top"></a>
+<h2 align="center">ImageMagick Information</h2>
+
+<table border="0" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle">
+		<ul id="menu_list">
+			<li><a href="im_info.php.html#im_version_info">IM Version Information</a></li>
+			<br />
+			<li><a href="im_info.php.html#im_installed">Is IM Installed</a></li>
+			<br />
+			<li><a href="im_info.php.html#im_version_number">IM Version Number With Minor Release</a></li>
+			<br />
+			<li><a href="im_info.php.html#function_support">Does Your IM Version Support A Given Command</a></li>
+			<br />
+			<li><a href="im_info.php.html#quantumrange">IM QuantumDepth</a></li>
+			<br />
+			<li><a href="im_info.php.html#quantumrange">IM QuantumRange</a></li>
+			<br />
+			<li><a href="im_info.php.html#delegates">Compiled Delegate Libraries</a></li>
+		</ul>
+		</td>
+	</tr>
+</table>
+
+<br /><br />
+
+<a name="im_version_info"></a>
+<p class="title">	
+IM Version Information
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			identify -version
+			</p>
+			<p align="left">	
+			Version: ImageMagick 6.4.3 2008-08-27 Q16 http://www.imagemagick.org
+			<br />
+			Copyright: Copyright (C) 1999-2008 ImageMagick Studio LLC
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="im_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="im_installed"></a>
+<p class="title">	
+Is IM Installed
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			[ "$(identify -version)" != "" ] && echo "$(identify -version)" || echo "not installed"
+			</p>
+			<p align="left">	
+			Version: ImageMagick 6.4.3 2008-08-27 Q16 http://www.imagemagick.org
+			<br />
+			Copyright: Copyright (C) 1999-2008 ImageMagick Studio LLC
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="im_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="im_version_number"></a>
+<p class="title">	
+IM Version Number With Minor Release
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert -list configure | sed -n 's/^LIB_VERSION_NUMBER \([,0-9]*\)$/\1/p' | tr "," "."
+			</p>
+			<p>	
+			or
+			</p>
+			<p class="red">	
+			convert -list configure | grep 'LIB_VERSION_NUMBER' | cut -d\ &nbsp; -f2 | tr "," "."
+			</p>
+			<p class="blue">	
+			(note: requires two spaces between -d\ and -f2)
+			</p>
+			<p align="left">	
+			6.4.3.5
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text">	
+See Anthony's 
+<a href="http://www.imagemagick.org/Usage/api/#version" target="_blank">alternate approach</a> 
+that is useful for extracting the version number for use in scripts. It allows one to 
+switch between two different cases based upon the 4-digit version number expressed with 
+leading zeros rather than periods, for example, as 06040204.
+</p>
+
+<br /><br />
+
+<a name="function_support"></a>
+<p class="title">	
+Does Your IM Version Support A Given Command
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			List All Commands
+			</p>
+			<p class="red">	
+			convert -list command
+			</p>
+			<p align="left">	
+			+adjoin<br />
+			-adjoin<br />
+			-adaptive-sharpen<br />
+			+adaptive-sharpen<br />
+			-adaptive-threshold<br />
+			+adaptive-threshold<br />
+			+affine<br />
+			-affine<br />
+			+affinity<br />
+			-affinity<br />
+			+alpha<br />
+			-alpha<br />
+			+annotate<br />
+			-annotate<br />
+			...
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Search For Specific Command
+			</p>
+			<p class="red">	
+			command="distort"<br />
+			echo "FOUND=`convert -list command | grep "$command" | tr "\n" " "`"
+			</p>
+			<p align="left">	
+			FOUND=+distort -distort 
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			List All Command Options
+			</p>
+			<p>	
+			(limited to certain commands -- see convert -list list)
+			</p>
+			<p class="red">
+			command="distort"<br />
+			convert -list "$command"
+			</p>
+			<p align="left">	
+			Affine<br />
+			AffineProjection<br />
+			ScaleRotateTranslate<br />
+			SRT<br />
+			Perspective<br />
+			PerspectiveProjection<br />
+			Bilinear<br />
+			Arc<br />
+			Polar<br />
+			DePolar<br />
+			Barrel<br />
+			BarrelInverse<br />
+			Shepards
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="im_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="quantumdepth"></a>
+<p class="title">	
+IM QuantumDepth
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert xc: -format "%q" info:
+			</p>
+			<p align="left">	
+			16
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="im_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="quantumrange"></a>
+<p class="title">	
+IM QuantumRange
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert xc: -format "%[fx:quantumrange]" info:
+			</p>
+			<p align="left">	
+			65535
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="im_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="delegates"></a>
+<p class="title">	
+Compiled Delegate Libraries<br />
+(see <a href="http://www.imagemagick.org/download/delegates/" target="_blank">repository</a>)
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert -list configure | sed -n 's/^\(DELEGATES.*\)$/\1/p'
+			</p>
+			<p>	
+			or
+			</p>
+			<p class="red">	
+			convert -list configure | grep 'DELEGATES'
+			</p>
+			<p align="left">	
+			DELEGATES     bzlib fontconfig freetype gs jpeg jp2 lcms lqr openexr png tiff x11 xml zlib
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="im_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+
+</body>
+</html>

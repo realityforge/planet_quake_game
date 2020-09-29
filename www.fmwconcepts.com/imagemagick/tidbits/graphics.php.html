@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fred's ImageMagick Tidbits</title>
+<meta name="author" content="Fred Weinhaus">
+<meta name="description" content="Fred's ImageMagick Tidbits">
+<meta name="keywords" content="ImageMagick, tidbits, graphics processing">
+<link rel="stylesheet" href="style.css">
+</head>
+<body marginwidth=0 marginheight=0 id="graphics">
+
+<div class="backblue">
+<br />
+<h2 align="center" class="white"><img src="../images/im_logo_small_sharp.gif" border=2 width="120" height="90" hspace="20" vspace="0" border="0" align="absmiddle" class="red">Fred's ImageMagick Tidbits</h2>
+<br />
+</div>
+
+<ul id="nav">
+	<li id="t_homepage"><a href="index.php.html">Home Page
+		<span>Tidbits Home Page</span></a></li></a></li>
+	<li id="t_im_info"><a href="im_info.php.html">ImageMagick Information
+		<span>ImageMagick configuration and parameters</span></a></li>
+	<li id="t_image_info"><a href="image_info.php.html">Image Information
+		<span>Image specific information</span></a></li></a></li>
+	<li id="t_graphics"><a href="graphics.php.html">Graphics Processing
+		<span>Color information and creating specific color images</span></a></li></a></li>
+	<li id="t_image"><a href="image.php.html">Image Processing
+		<span>Miscellaneous image processing techniques</span></a></li></a></li>
+</ul>
+<p>&nbsp;</p>
+
+<br /><br />
+
+<a name="top"></a>
+<h2 align="center">Graphics Processing</h2>
+
+<table border="0" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle">
+		<ul id="menu_list">
+			<li><a href="graphics.php.html#bold_text">Creating Bold Text</a></li>
+			<br />
+			<li><a href="graphics.php.html#vertical_text">Aligning Text Vertically</a></li>
+			<br />
+			<li><a href="graphics.php.html#rainbow">Rainbows And Step Gradients</a></li>
+			<br />
+			<li><a href="graphics.php.html#random">Random Color Squares Image</a></li>
+			<br />
+			<li><a href="graphics.php.html#colors">Convert Colors To RGB(A) Values</a></li>
+			<br />
+		</ul>
+		</td>
+	</tr>
+</table>
+
+<br /><br />
+
+<a name="bold_text"></a>
+<p class="title">	
+Creating Bold Text
+</p>
+<p class="text">
+This is a quick and dirty approach. The best technique is really to find a bold font 
+and specify that using -font
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>Normal Weight Text</u>
+			</p>
+			<p class="red">	
+			convert -background white -font Arial -pointsize 48 label:"Test" text.jpg
+			</p>
+			<p align="center">	
+			<img src="graphics/text.jpg" width="86" height="56" />
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>Bold Text</u> (add -stroke black)
+			</p>
+			<p class="red">	
+			convert -background white -font Arial -pointsize 48 -stroke black label:"Test" textbold.jpg
+			</p>
+			<p align="center">	
+			<img src="graphics/textbold.jpg" width="86" height="56" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="graphics.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="vertical_text"></a>
+<p class="title">	
+Aligning Text Vertically
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			<ul>
+				<li>Use space and newline character, \n, between each letter, then -trim</li>
+			</ul>
+			</p>
+			<p class="red">	
+			convert -background white -fill blue -font Arial -pointsize 24 -gravity center \<br />
+				<span class="indent">label:'V\ne\nr\nt\ni\nc\na\nl' label_vertical.gif</span>
+			</p>
+			<p align="center">	
+			<img src="graphics/label_vertical.gif" width="17" height="225" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="graphics.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="rainbow"></a>
+<p class="title">	
+Rainbow And Step Gradients
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>Cyclic Color Rainbow</u>
+			</p>
+			<p>	
+			<ul>
+				<li>create a pure red (any non-gray) color image and convert to HSL colorspace</li>
+				<li>at the same time create a grayscale gradient of the same size</li>
+				<li>use the gradient to replace the hue channel of red image</li>
+				<li>convert the HSL image back to RGB and rotate 90 degrees</li>
+			</p>
+			<p class="red">	
+			convert -size 30x600 xc:"rgb(100%,0%,0%)" -colorspace hsl gradient: \<br />
+				<span class="indent">-compose CopyRed -composite \<br /></span>
+				<span class="indent">-colorspace RGB -rotate 90 rainbow1.jpg</span>
+			</p>
+			<p align="center">	
+			<img src="graphics/rainbow1.jpg" width="600" height="30" />
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>Non-Cyclic Color Rainbow</u>
+			</p>
+			<p>	
+			<ul>
+				<li>create black, red, orange, yellow, green1, cyan, blue, blueviolet and black images</li>
+				<li>append them together horizontally and resize using a Cubic interpolation filter to the desired size</li>
+			</p>
+			<p class="red">	
+			convert xc:black xc:red xc:orange xc:yellow xc:green1 xc:cyan xc:blue xc:blueviolet xc:black \<br />
+				<span class="indent">+append -filter Cubic -resize 600x30! rainbow2.jpg</span>
+			</p>
+			<p align="center">	
+			<img src="graphics/rainbow2.jpg" width="600" height="30" />
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>10 Step Red, Blue, Green And Gray Gradient</u>
+			</p>
+			<p>	
+			<ul>
+				<li>create a 1x10 red-black, green1-black, blue-black, gray gradients</li>
+				<li>append them together horizontally, rotate 90 degrees and scale to desired size</li>
+			</p>
+			<p class="red">	
+			convert -size 1x10 gradient:red-black gradient:green1-black gradient:blue-black gradient: \<br>
+				<span class="indent">+append -rotate 90 -scale 600x120! step_gradient.jpg</span>
+			</p>
+			<p align="center">	
+			<img src="graphics/step_gradient.jpg" width="600" height="120" />
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>Circular Color Rainbow</u>
+			</p>
+			<p>	
+			<ul>
+				<li>create a pure red (any non-gray) color image and convert to HSL colorspace</li>
+				<li>create a circular grayscale gradient</li>
+				<li>use the gradient to replace the hue channel of red image</li>
+				<li>convert the HSL image back to RGB to create a rainbow image</li>
+				<li>create a circular mask and apply to rainbow image</li>
+			</p>
+			<p class="red">
+			convert \( -size 151x151 xc:"rgb(100%,0%,0%)" -colorspace hsl \) \<br />
+				<span class="indent">\( -size 100x300 gradient: -rotate 90 +distort Polar '75,0,.5,.5' +repage -rotate 90 \) \<br /></span>
+				<span class="indent">-compose CopyRed -composite -colorspace RGB \<br /></span>
+				<span class="indent">\( -size 151x151 xc:black -fill white -draw "circle 75.5,75.5 75.5,151" -alpha off \) \<br /></span>
+				<span class="indent">-compose copy_opacity -composite polar_rainbow.png</span>
+			</p>
+			<p align="center">	
+			<img src="graphics/polar_rainbow.png" width="151" height="151" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="graphics.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="random"></a>
+<p class="title">	
+Random Color Squares Image
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<ul>
+				<li>Create a 16x16 image, fill with random noise, scale a factor 10 <br>
+					to make a 160x160 image of random 10x10 color squares</li>
+			</p>
+			<p class="red">	
+			convert -size 16x16 xc: +noise Random -scale 1000% random_squares.gif
+			</p>
+			<p align="center">	
+			<img src="graphics/random_squares.gif" width="160" height="160" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="graphics.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="colors"></a>
+<p class="title">	
+Convert Colors To RGB(A) Values In Range 0 to 255
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>IM Commands Only</u>
+			</p>
+			<p class="red">
+			color="some_color_value"<br />
+			convert -size 1x1 xc:$color \<br />
+				<span class="indent">-format "(%[fx:floor(255*r)],%[fx:floor(255*g)],%[fx:floor(255*b)])" info:</span>
+			</p>
+			<p>	
+			color="red" => (255,0,0)
+			</p>
+			<p>	
+			color="skyblue" => (135,206,235)
+			</p>
+			<p>	
+			color="#fe9843" => (254,152,67)
+			</p>
+			<p>	
+			color="rgb(75%,50%,25%)" => (191,127,63)
+			</p>
+			<p>	
+			color="hsl(180,100%,50%)" => (0,255,255)
+			</p>
+			<p>	
+			color="cmyk(100%,100%,0%,50%)" => (0,0,127)
+			</p>
+			<p>	
+			color="rgba(100%,75%,50%,0.25)" => (255,191,127,63)
+			</p>
+			<p>	
+			color="hsla(180,100%,50%,0.5)" => (0,255,255,127)
+			</p>
+			<p>	
+			color="cmyka(100%,100%,0%,50%,0.25)" => (0,0,127,63)
+			</p>
+			<p>	
+			color="#fe9843ca" => (254,152,67,202)
+			</p>
+			<p>	
+			color="gray75" => (191,191,191)
+			</p>
+			<p>	
+			color="graya(50%,0.25)" => (127,127,127,63)
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<u>IM &amp; Sed Commands</u>
+			</p>
+			<p class="red">
+			color="some_color_value"<br />
+			convert -size 1x1 xc:$color -depth 8 txt: | \<br />
+				<span class="indent">sed -n 's/ //g; s/^.*[^(]\((.*)\)[^)].*$/\1/p'</span>
+			</p>
+			<p>	
+			color="red" => (255,0,0)
+			</p>
+			<p>	
+			color="skyblue" => (135,206,235)
+			</p>
+			<p>	
+			color="#fe9843" => (254,152,67)
+			</p>
+			<p>	
+			color="rgb(75%,50%,25%)" => (191,127,63)
+			</p>
+			<p>	
+			color="hsl(180,100%,50%)" => (0,255,255)
+			</p>
+			<p>	
+			color="cmyk(100%,100%,0%,50%)" => (0,0,127)
+			</p>
+			<p>	
+			color="rgba(100%,75%,50%,0.25)" => (255,191,127,64)
+			</p>
+			<p>	
+			color="hsla(180,100%,50%,0.5)" => (0,255,255,128)
+			</p>
+			<p>	
+			color="cmyka(100%,100%,0%,50%,0.25)" => (0,0,127,64)
+			</p>
+			<p>	
+			color="#fe9843ca" => (254,152,67,202)
+			</p>
+			<p>	
+			color="gray75" => (191,191,191)
+			</p>
+			<p>	
+			color="graya(50%,0.25)" => (127,127,127,64)
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="graphics.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+</body>
+</html>

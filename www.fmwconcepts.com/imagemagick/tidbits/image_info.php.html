@@ -1,0 +1,1134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fred's ImageMagick Tidbits</title>
+<meta name="author" content="Fred Weinhaus">
+<meta name="description" content="Fred's ImageMagick Tidbits">
+<meta name="keywords" content="ImageMagick, tidbits, ImageMagick information">
+<link rel="stylesheet" href="style.css">
+</head>
+<body marginwidth=0 marginheight=0 id="image_info">
+
+<div class="backblue">
+<br />
+<h2 align="center" class="white"><img src="../images/im_logo_small_sharp.gif" border=2 width="120" height="90" hspace="20" vspace="0" border="0" align="absmiddle" class="red">Fred's ImageMagick Tidbits</h2>
+<br />
+</div>
+
+<ul id="nav">
+	<li id="t_homepage"><a href="index.php.html">Home Page
+		<span>Tidbits Home Page</span></a></li></a></li>
+	<li id="t_im_info"><a href="im_info.php.html">ImageMagick Information
+		<span>ImageMagick configuration and parameters</span></a></li>
+	<li id="t_image_info"><a href="image_info.php.html">Image Information
+		<span>Image specific information</span></a></li></a></li>
+	<li id="t_graphics"><a href="graphics.php.html">Graphics Processing
+		<span>Color information and creating specific color images</span></a></li></a></li>
+	<li id="t_image"><a href="image.php.html">Image Processing
+		<span>Miscellaneous image processing techniques</span></a></li></a></li>
+</ul>
+<p>&nbsp;</p>
+
+<br /><br />
+
+<a name="top"></a>
+<h2 align="center">Image Information</h2>
+
+<table border="0" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle">
+		<ul id="menu_list">
+			<li><a href="image_info.php.html#aspect">Image Aspect Ratio (Width/Height)</a></li>
+			<br />
+			<li><a href="image_info.php.html#ave_color">Average RGB Color Of An Image</a></li>
+			<br />
+			<li><a href="image_info.php.html#gray_stats">Grayscale Minimum, Maximum, Mean And Standard Deviation Of An Image (Percent)</a></li>
+			<br />
+			<li><a href="image_info.php.html#channel_stats">All Channel Minimum, Maximum, Mean And Standard Deviation Of An Image (Percent)</a></li>
+			<br />
+			<li><a href="image_info.php.html#identify">Custom Identify With Ticks And Quality</a></li>
+			<br />
+			<li><a href="image_info.php.html#gray">Test If Image Is Grayscale Or Color</a></li>
+			<br />
+			<li><a href="image_info.php.html#alpha">Test If Image Has An Alpha Channel</a></li>
+			<br />
+			<li><a href="image_info.php.html#ave_alpha">Measure The Average Opacity Or Transparency Of An Image</a></li>
+			<br />
+			<li><a href="image_info.php.html#compare">Sending Results From Compare -Metric To A Variable Or Text File</a></li>
+			<br />
+			<li><a href="image_info.php.html#histog">Forcing An Image Histogram To Be Generated</a></li>
+			<br />
+			<li><a href="image_info.php.html#color_percent">Find The Percentage Of Pixels In An Image With A Given Color</a></li>
+			<br />
+			<li><a href="image_info.php.html#color_location">Find The Locations Of Every Pixel In An Image With A Given Color</a></li>
+			<br />
+		</ul>
+		</td>
+	</tr>
+</table>
+
+<br /><br />
+
+<a name="aspect"></a>
+<p class="title">	
+Image Aspect Ratio (Width/Height)
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert rose: -format "%[fx:w/h]" info:
+			</p>
+			<p>	
+			1.52174
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="ave_color"></a>
+<p class="title">	
+Average RGB Color Of An Image
+<p class="text">	
+Note: %% is an escape of %
+</p>
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 -format "%[pixel:p{0,0}]" info:
+				</p>
+				<p>	
+				rgb(146,89,80)
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 -fx "debug(u)" null:
+				</p>
+				<p>	
+				ROSE[0,0].red: u=0.57142<br />
+				ROSE[0,0].red: u=0.57142<br />
+				ROSE[0,0].red: u=0.57142<br />
+				ROSE[0,0].green: u=0.350042<br />
+				ROSE[0,0].blue: u=0.315557<br />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 3
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 -depth 8 txt:
+				</p>
+				<p>	
+				# ImageMagick pixel enumeration: 1,1,255,rgb<br />
+				0,0: (145, 89, 80)  #915950  rgb(145,89,80)
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 4
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 -depth 16 txt:
+				</p>
+				<p>	
+				# ImageMagick pixel enumeration: 1,1,65535,rgb<br />
+				0,0: (37448,22940,20680)  #9248599C50C8  rgb(57.142%,35.0042%,31.5557%)
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 5
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Fraction
+				</p>
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 \<br />
+					<span class="indent">-format "%[fx:r],%[fx:g],%[fx:b]" info:</span>
+				</p>
+				<p>	
+				0.57142,0.350042,0.315557
+				<br /><br />
+				</p>
+				<p class="header">	
+				Percent
+				</p>
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 \<br />
+					<span class="indent">-format "%[fx:100*r]%%,%[fx:100*g]%%,%[fx:100*b]%%" info:</span>
+				</p>
+				<p>
+				57.142%,35.0042%,31.5557%
+				<br /><br />
+				</p>
+				<p class="header">	
+				Range 0 to 255
+				</p>
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 \<br />
+					<span class="indent">-format "%[fx:floor(255*r)],%[fx:floor(255*g)],%[fx:floor(255*b)]" info:</span>
+				</p>
+				<p>	
+				145,89,80
+				<br /><br />
+				</p>
+				<p class="header">	
+				Range 0 to QuantumRange (Q16)
+				</p>
+				<p class="red">	
+				convert rose: -colorspace rgb -scale 1x1 \<br />
+					<span class="indent">-format "%[fx:floor(quantumrange*r)],%[fx:floor(quantumrange*g)],%[fx:floor(quantumrange*g)]" info:</span>
+				</p>
+				<p>	
+				37448,22940,22940
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="gray_stats"></a>
+<p class="title">	
+Grayscale Minimum, Maximum, Mean And Standard Deviation Of An Image (Percent)
+</p>
+<p class="text">	
+Note 1: %% is an escape of %
+<br /><br />
+Note 2: Statistics for any single channel can be extracted by substituting 
+"-channel xxx" for "-colorspace gray", where xxx can be either red or green or blue.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1 (Any IM Version)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				data=`convert rose: -colorspace gray -verbose info:`<br /><br />
+				min=`echo "$data" | sed -n '/^.*[Mm]in:.*[(]\([0-9.]*\).*$/{ s//\1/; p; q; }'`<br />
+				convert xc: -format "%[fx:100*$min]%%" info:
+				</p>
+				<p>	
+				14.6151%
+				</p>
+				<p class="red">	
+				max=`echo "$data" | sed -n '/^.*[Mm]ax:.*[(]\([0-9.]*\).*$/{ s//\1/; p; q; }'`<br />
+				convert xc: -format "%[fx:100*$max]%%" info:
+				</p>
+				<p>	
+				100%
+				</p>
+				<p class="red">	
+				mean=`echo "$data" | sed -n '/^.*[Mm]ean:.*[(]\([0-9.]*\).*$/{ s//\1/; p; q; }'`<br />
+				convert xc: -format "%[fx:100*$mean]%%" info:
+				</p>
+				<p>	
+				41.2302%
+				</p>
+				<p class="red">	
+				std=`echo "$data" | sed -n '/^.*[Ss]tandard.*[(]\([0-9.]*\).*$/{ s//\1/; p; q; }'`<br />
+				convert xc: -format "%[fx:100*$std]%%" info:
+				</p>
+				<p>	
+				18.581%
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2 (IM Version 6.3.9-1 Or Higher)
+			</p>
+			<p>
+			(note: as of version 6.4.2-6, one can use either "%[standard-deviation]" or "%[standard_deviation]")
+			</p>
+			<div class="indent">
+				<p class="red">	
+				min=`convert rose: -colorspace gray -format "%[min]" info:`<br />
+				convert xc: -format "%[fx:100*$min/quantumrange]%%" info:
+				<p class="blue">
+				or
+				</p>
+				<p class="red">
+				convert xc: -format "%[fx:100*$(convert rose: -colorspace gray -format "%[min]" info:)/quantumrange]%%" info:
+				</p>
+				<p>	
+				14.6151%
+				</p>
+				<p class="red">	
+				max=`convert rose: -colorspace gray -format "%[max]" info:`<br />
+				convert xc: -format "%[fx:100*$max/quantumrange]%%" info:
+				</p>
+				<p class="blue">
+				or
+				</p>
+				<p class="red">
+				convert xc: -format "%[fx:100*$(convert rose: -colorspace gray -format "%[max]" info:)/quantumrange]%%" info:
+				</p>
+				<p>	
+				100%
+				</p>
+				<p class="red">	
+				mean=`convert rose: -colorspace gray -format "%[mean]" info:`<br />
+				convert xc: -format "%[fx:100*$mean/quantumrange]%%" info:
+				<p class="blue">
+				or
+				</p>
+				<p class="red">
+				convert xc: -format "%[fx:100*$(convert rose: -colorspace gray -format "%[mean]" info:)/quantumrange]%%" info:
+				</p>
+				<p>	
+				41.2302%
+				</p>
+				<p class="red">	
+				std=`convert rose: -colorspace gray -format "%[standard-deviation]" info:`<br />
+				convert xc: -format "%[fx:100*$std/quantumrange]%%" info:
+				<p class="blue">
+				or
+				</p>
+				<p class="red">
+				convert xc: -format "%[fx:100*$(convert rose: -colorspace gray -format "%[standard-deviation]" info:)/quantumrange]%%" info:
+				</p>
+				<p>	
+				18.5811%
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 3 (IM Version 6.4.0-11 Or Higher)
+			</p>
+			<div class="indent">
+				<p class="red">
+				convert rose: -colorspace gray -format "%[fx:100*image.minima]%%" info:
+				</p>
+				<p>	
+				14.6151%
+				</p>
+				<p class="red">	
+				convert rose: -colorspace gray -format "%[fx:100*image.maxima]%%" info:
+				</p>
+				<p>	
+				100%
+				</p>
+				<p class="red">
+				convert rose: -colorspace gray -format "%[fx:100*image.mean]%%" info:
+				</p>
+				<p>	
+				41.2302%
+				</p>
+				<p class="red">
+				convert rose: -colorspace gray -format "%[fx:100*image.standard_deviation]%%" info:
+				</p>
+				<p>	
+				18.5811%
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 4 (IM Version 6.4.2-6 Or Higher)
+			</p>
+			<div class="indent">
+				<p class="red">
+				convert rose: -colorspace gray -format "%[fx:100*minima]%%" info:
+				</p>
+				<p>	
+				14.6151%
+				</p>
+				<p class="red">	
+				convert rose: -colorspace gray -format "%[fx:100*maxima]%%" info:
+				</p>
+				<p>	
+				100%
+				</p>
+				<p class="red">
+				convert rose: -colorspace gray -format "%[fx:100*mean]%%" info:
+				</p>
+				<p>	
+				41.2302%
+				</p>
+				<p class="red">
+				convert rose: -colorspace gray -format "%[fx:100*standard_deviation]%%" info:
+				</p>
+				<p>	
+				18.5811%
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="channel_stats"></a>
+<p class="title">	
+All Channel Minimum, Maximum, Mean And Standard Deviation Of An Image (Percent)
+</p>
+<p class="text">	
+Note: %% is an escape of %
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1: IM Version 6.4.0-11 Or Higher
+			</p>
+			<p>
+			(usage: image.minima, image.maxima, image.mean and image.standard_deviation)
+			</p>
+			<div class="indent">
+				<p class="red">
+				convert rose: -colorspace rgb -separate -format "%[fx:100*image.minima]%%" info:
+				</p>
+				<p>	
+				13.7255%<br />
+				8.62745%<br />
+				9.41176%
+				</p>
+				<p class="red">	
+				convert rose: -colorspace rgb -separate -format "%[fx:100*image.maxima]%%" info:
+				</p>
+				<p>	
+				100%<br />
+				100%<br />
+				100%
+				</p>
+				<p class="red">
+				convert rose: -colorspace rgb -separate -format "%[fx:100*image.mean]%%" info:
+				</p>
+				<p>	
+				57.142%<br />
+				35.004%<br />
+				31.5563%
+				</p>
+				<p class="red">
+				convert rose: -colorspace rgb -separate -format "%[fx:100*image.standard_deviation]%%" info:
+				</p>
+				<p>	
+				27.1746%<br />
+				20.5763%<br />
+				21.6123%
+				</p>
+			
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2: IM Version 6.4.2-6 Or Higher
+			</p>
+			<p>
+			(usage: minima, maxima, mean and standard_deviation)
+			</p>
+			<div class="indent">
+				<p class="red">
+				convert rose: -colorspace rgb -separate -format "%[fx:100*minima]%%" info:
+				</p>
+				<p>	
+				13.7255%<br />
+				8.62745%<br />
+				9.41176%
+				</p>
+				<p class="red">	
+				convert rose: -colorspace rgb -separate -format "%[fx:100*maxima]%%" info:
+				</p>
+				<p>	
+				100%<br />
+				100%<br />
+				100%
+				</p>
+				<p class="red">
+				convert rose: -colorspace rgb -separate -format "%[fx:100*mean]%%" info:
+				</p>
+				<p>	
+				57.142%<br />
+				35.004%<br />
+				31.5563%
+				</p>
+				<p class="red">
+				convert rose: -colorspace rgb -separate -format "%[fx:100*standard_deviation]%%" info:
+				</p>
+				<p>	
+				27.1746%<br />
+				20.5763%<br />
+				21.6123%
+				</p>
+			
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 3: IM Version 6.4.2-6 Or Higher
+			</p>
+			<p>
+			(usage: minima.channel, maxima.channel, mean.channel and standard_deviation.channel)
+			</p>
+			<div class="indent">
+				<p class="red">
+				convert rose: -format \<br />
+					<span class="indent">"\n red:\n min=%[fx:100*minima.r]%%\n max=%[fx:100*maxima.r]%%\n \</span><br />
+					<span class="indent">mean=%[fx:100*mean.r]%%\n std=%[fx:100*standard_deviation.r]%%\n\n \</span><br />
+					<span class="indent">green:\n min=%[fx:100*minima.g]%%\n max=%[fx:100*maxima.g]%%\n \</span><br />
+					<span class="indent">mean=%[fx:100*mean.g]%%\n std=%[fx:100*standard_deviation.g]%%\n\n \</span><br />
+					<span class="indent">blue:\n min=%[fx:100*minima.b]%%\n max=%[fx:100*maxima.b]%%\n \</span><br />
+					<span class="indent">mean=%[fx:100*mean.b]%%\n std=%[fx:100*standard_deviation.b]%%\n" \</span><br />
+					<span class="indent">info:</span>
+				</p>
+				<p>	
+				red:<br />
+				min=13.7255%<br />
+				max=100%<br />
+				mean=57.142%<br />
+				std=57.142%<br />
+				<br />
+				green:<br />
+				min=8.62745%<br />
+				max=100%<br />
+				mean=35.004%<br />
+				std=35.004%<br />
+				<br />
+				blue:<br />
+				min=9.41176%<br />
+				max=100%<br />
+				mean=31.5563%<br />
+				std=31.5563%
+				</p>
+			
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="identify"></a>
+<p class="title">	
+Custom Identify With Ticks And Quality
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Example 1
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Create GIF Animation
+				</p>
+				<p class="blue">
+				convert -delay 100 rose: -delay 50 rose: -delay 25 rose: -loop 0 rose_animation.gif
+				</p>
+				<p class="header">	
+				identify
+				</p>
+				<p class="red">	
+				identify rose_animation.gif
+				</p>
+				<p>	
+				animation.gif[0] GIF 70x46 70x46+0+0 8-bit PseudoClass 256c 10.6kb <br />
+				animation.gif[1] GIF 70x46 70x46+0+0 8-bit PseudoClass 256c 10.6kb <br />
+				animation.gif[2] GIF 70x46 70x46+0+0 8-bit PseudoClass 256c 10.6kb <br />
+				</p>
+				<p class="header">	
+				"custom" identify (showing ticks)
+				</p>
+				<p class="red">	
+				info="%f[%s] %m %Tticks %wx%h %P%O %r %z-bit %Q%%qual %bbytes\n"<br />
+				identify -format "$info" rose_animation.gif
+				</p>
+				<p>	
+				animation.gif[0] GIF 100ticks 70x46 70x46+0+0 8-bit PseudoClassRGB 256c 0%qual 10878bytes<br />
+				animation.gif[1] GIF 50ticks 70x46 70x46+0+0 8-bit PseudoClassRGB 256c 0%qual 10878bytes<br />
+				animation.gif[2] GIF 25ticks 70x46 70x46+0+0 8-bit PseudoClassRGB 256c 0%qual 10878bytes<br />
+				</p>
+			<div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Example 2
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Create JPEG Image
+				</p>
+				<p class="blue">
+				convert rose: rose.jpg
+				</p>
+				<p class="header">	
+				identify (jpeg)
+				</p>
+				<p class="red">	
+				identify rose.jpg
+				</p>
+				<p>	
+				rose.jpg JPEG 70x46 70x46+0+0 8-bit DirectClass 1.54kb 
+				</p>
+				<p class="header">	
+				"custom" identify (jpeg showing quality)
+				</p>
+				<p class="red">	
+				info="%f[%s] %m %Tticks %wx%h %P%O %r %z-bit %Q%%qual %bbytes\n"<br />
+				identify -format "$info" rose.jpg
+				</p>
+				<p>	
+				rose.jpg[0] JPEG 0ticks 70x46 70x46+0+0 8-bit DirectClassRGB  85%qual 1580bytes
+				</p>
+			<div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="gray"></a>
+<p class="title">	
+Test If Image Is Grayscale Or Color
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1 (Any IM Version)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				test=`convert rose: -scale 1x1! -format "%[fx:r==g&&r==b?1:0]" info:`<br />
+				[ $test -eq 1 ] && echo "Gray" || echo "Color"
+				</p>
+				<p>	
+				Color
+				</p>
+				<p class="red">	
+				test=`convert rose: -colorspace gray -scale 1x1! -format "%[fx:r==g&&r==b?1:0]" info:`<br />
+				[ $test -eq 1 ] && echo "Gray" || echo "Color"
+				</p>
+				<p>	
+				Gray
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2 (Any IM Version)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -verbose info: | sed -n 's/^.*Colorspace: \([^ ]*\).*$/\1/p'
+				</p>
+				<p>	
+				RGB
+				</p>
+				<p class="red">	
+				convert rose: -colorspace gray -verbose info: | sed -n 's/^.*Colorspace: \([^ ]*\).*$/\1/p'
+				</p>
+				<p>	
+				Gray
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 3 (IM Version 6.3.9-2 Or Higher)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -format "%[colorspace]" info:
+				</p>
+				<p>	
+				RGB
+				</p>
+				<p class="red">	
+				convert rose: -colorspace gray -format "%[colorspace]" info:
+				</p>
+				<p>	
+				Gray
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="alpha"></a>
+<p class="title">	
+Test If Image Has Alpha Channel
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1 (Any IM Version)
+			</p>
+			<p class="blue">	
+			convert -size 100x100 xc:white white.png
+			</p>
+			<p class="red">	
+			[ "$(identify -verbose white.png | grep 'alpha')" = "" ] && echo "alpha off" || echo "alpha on"<br />
+			</p>
+			<p>	
+			alpha off
+			</p>
+			</p>
+			<p class="blue">	
+			convert white.png -alpha on white_alpha.png
+			</p>
+			<p class="red">	
+			[ "$(identify -verbose white_alpha.png | grep 'alpha')" = "" ] && echo "alpha off" || echo "alpha on"<br />
+			</p>
+			<p>	
+			alpha on
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2 (IM Version 6.4.3-7 Or Higher)
+			</p>
+			<p class="blue">	
+			convert -size 100x100 xc:white white.png
+			</p>
+			<p class="red">	
+			convert white.png -format "%A" info:
+			</p>
+			<p>	
+			False
+			</p>
+			<p class="blue">	
+			convert white.png -alpha on white_alpha.png
+			</p>
+			<p class="red">	
+			convert white_alpha.png -format "%A" info:<br />
+			</p>
+			<p>	
+			True
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="ave_alpha"></a>
+<p class="title">	
+Measure The Average Opacity Or Transparency Of An Image
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			IM 6.4.3-7 To IM ?.?.?.?
+			</p>
+			<p> -channel o and -channel a mean the same thing. 
+			Originally they both referred to opacity.
+			</p>
+			<br />
+			<p>
+			Set 60% Opacity (40% Transparency)
+			<p class="blue">	
+			convert logo.jpg -alpha on -channel o -evaluate set 60% logo_opacity60.png
+			</p>
+			<p class="red">	
+			convert logo_opacity60.png -format "%[fx:u.o]" info:
+			</p>
+			<p>	
+			returns opacity of 0.6
+			</p>
+			<p class="red">	
+			convert logo_opacity60.png -format "%[fx:u.a]" info:
+			</p>
+			<p>	
+			returns alpha/transparency of 0.4
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			IM ?.?.?.? Or Higher
+			</p>
+			<p> -channel o and -channel a mean the same thing. 
+			Originally they both referred to opacity. <br />
+			But at some unknown point it switched so 
+			that they now both refer to transparency.
+			</p>
+			<br />
+			<p>
+			Set 60% Transparcy (40% Opacity)
+			<p class="blue">	
+			convert logo.jpg -alpha on -channel a -evaluate set 60% logo_transparency60.png
+			</p>
+			<p class="red">	
+			convert logo_transparency60.png -format "%[fx:u.a]" info:
+			</p>
+			<p>	
+			returns alpha/transparency of 0.6
+			</p>
+			<p class="red">	
+			convert logo_transparency60.png -format "%[fx:u.o]" info:
+			</p>
+			<p>	
+			returns opacity of 0.4
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="compare"></a>
+<p class="title">	
+Sending Results From Compare -Metric To A Variable Or Text File
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Convert rose: To JPEG And GIF For Comparison
+			</p>
+			<p class="blue">	
+			convert rose: rose.jpg
+			<br /><br />
+			convert rose: rose.gif
+			</p>
+			<p class="header">	
+			Do Comparison And Save In Variable
+			</p>
+			<p class="red">	
+			str=`compare -metric rmse rose.jpg rose.gif null: 2>&1`<br />
+			echo $str
+			</p>
+			<p>	
+			2561.35 (0.0390838)
+			</p>
+			<p class="header">	
+			Do Comparison And Save In Text File
+			</p>
+			<p class="red">	
+			compare -metric rmse rose.jpg rose.gif null: 2> compare.txt<br />
+			cat compare.txt
+			</p>
+			<p>	
+			2561.35 (0.0390838)
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="histog"></a>
+<p class="title">	
+Forcing An Image Histogram To Be Generated
+</p>
+<p class="text">	
+Images with more than 1024 colors will not have a histogram. To generate a histogram 
+one must reduce the number of colors to 1024 or less.
+</p>
+<p class="text">	
+Due to a slight difference in values, two methods are presented. We will use an example 
+with 10 colors for simplicity. I have highlighted one place where the color values 
+differ slightly. This would appear to be a bug, which has, as of IM 6.4.2-5, been fixed 
+so that the histogram generated by the first method matches that of the second method.
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -colorspace rgb -colors 10 -format "%c" histogram:info:
+				</p>
+				<p>	
+				575: ( 51, 50, 45) #33322D rgb(51,50,45)<br />
+				544: (221, 54, 48) #DD3630 rgb(221,54,48)<br />
+				376: (175, 65, 56) #AF4138 rgb(175,65,56)<br />
+				289: ( 94, 93, 78) #5E5D4E rgb(94,93,78)<br />
+				277: (110,<span class="red">146</span>, 86) #6E9256 rgb(110,146,86)<br />
+				277: (231, 81, 88) #E75158 rgb(231,81,88)<br />
+				266: (212,211,217) #D4D3D9 rgb(212,211,217)<br />
+				262: ( 98, 56, 47) #62382F rgb(98,56,47)<br />
+				206: (139,133,145) #8B8591 rgb(139,133,145)<br />
+				148: ( 83, 76, 55) #534C37 rgb(83,76,55)<br />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rose: -colorspace rgb -colors 10 miff:- | convert - -format "%c" histogram:info:
+				</p>
+				<p>	
+				575: ( 51, 51, 45) #33332D rgb(51,51,45)<br />
+				544: (221, 54, 48) #DD3630 rgb(221,54,48)<br />
+				376: (175, 66, 57) #AF4239 rgb(175,66,57)<br />
+				289: ( 94, 93, 79) #5E5D4F rgb(94,93,79)<br />
+				277: (110,<span class="red">147</span>, 86) #6E9356 rgb(110,147,86)<br />
+				277: (232, 81, 89) #E85159 rgb(232,81,89)<br />
+				266: (213,211,217) #D5D3D9 rgb(213,211,217)<br />
+				262: ( 98, 57, 47) #62392F rgb(98,57,47)<br />
+				206: (140,133,146) #8C8592 rgb(140,133,146)<br />
+				148: ( 83, 76, 56) #534C38 rgb(83,76,56)
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="color_percent"></a>
+<p class="title">	
+Find The Percentage Of Pixels In An Image With A Given Color
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Select Color From Histogram
+				</p>
+				<p class="blue">	
+				convert rose: -colorspace rgb -colors 10 -format "%c" histogram:info:
+				</p>
+				<p>	
+				575: ( 51, 50, 45) #33322D rgb(51,50,45)<br />
+				544: (221, 54, 48) #DD3630 rgb(221,54,48)<br />
+				376: (175, 65, 56) #AF4138 rgb(175,65,56)<br />
+				289: ( 94, 93, 78) #5E5D4E rgb(94,93,78)<br />
+				<span class="red">277: (110,146, 86) #6E9256 rgb(110,146,86)</span><br />
+				277: (231, 81, 88) #E75158 rgb(231,81,88)<br />
+				266: (212,211,217) #D4D3D9 rgb(212,211,217)<br />
+				262: ( 98, 56, 47) #62382F rgb(98,56,47)<br />
+				206: (139,133,145) #8B8591 rgb(139,133,145)<br />
+				148: ( 83, 76, 55) #534C37 rgb(83,76,55)
+				</p>
+				<p class="header">	
+				Extract Percent
+				<ul>
+					<li>get historgram</li>
+					<li>filter histogram information using sed to extract count for given color</li>
+					<li>load above into variable</li>
+					<li>calculate percentage from variable and image size</li>
+				</ul>
+				</p>
+				<p class="red">	
+				str=`convert rose: -colorspace rgb -colors 10 -format "%c" histogram:info: | \<br />
+					<span class="indent">sed -n 's/^[ ]*\([0-9]*\):.*rgb(110,146,86)$/\1/p'`</span><br />
+				convert rose: -format "%[fx:100*$str/(w*h)]%%" info:
+				</p>
+				<p>	
+				8.60248%
+				</p>
+			</div>
+		</td>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Select Color From Histogram
+				</p>
+				<p class="blue">	
+				convert rose: -colorspace rgb -colors 10 miff:- | convert - -format "%c" histogram:info:
+				</p>
+				<p>	
+				575: ( 51, 51, 45) #33332D rgb(51,51,45)<br />
+				544: (221, 54, 48) #DD3630 rgb(221,54,48)<br />
+				376: (175, 66, 57) #AF4239 rgb(175,66,57)<br />
+				289: ( 94, 93, 79) #5E5D4F rgb(94,93,79)<br />
+				<span class="red">277: (110,147, 86) #6E9356 rgb(110,147,86)</span><br />
+				277: (232, 81, 89) #E85159 rgb(232,81,89)<br />
+				266: (213,211,217) #D5D3D9 rgb(213,211,217)<br />
+				262: ( 98, 57, 47) #62392F rgb(98,57,47)<br />
+				206: (140,133,146) #8C8592 rgb(140,133,146)<br />
+				148: ( 83, 76, 56) #534C38 rgb(83,76,56)
+				</p>
+				<p class="header">	
+				Extract Percent
+				<ul>
+					<li>put color into a variable</li>
+					<li>convert image to miff: to be consistent with histogram</li>
+					<li>replace selected color (from variable) with white</li>
+					<li>replace all non-white pixels with black</li>
+					<li>average image to 1 pixel and get percent grayscale value</li>
+				</ul>
+				</p>
+				<p class="red">	
+				color="rgb(110,147,86)"<br />
+				convert rose: -colorspace rgb -colors 10 miff:- | \<br />
+					<span class="indent">convert - -fill white -opaque $color \</span><br />
+					<span class="indent">-fill black +opaque white \<span><br />
+					<span class="indent">-scale 1x1! -format "%[fx:100*u]%%" info:</span>
+				</p>
+				<p>	
+				8.60304%<br />
+				note: rose: image is 70x46 pixels; thus count of 277 => 100*277/(70*46)%=8.60248
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="color_location"></a>
+<p class="title">	
+Find The Location Of Every Pixel In An Image With A Given Color
+</p>
+</div>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Select Color From Histogram
+			</p>
+			<p class="blue">	
+			convert rose: -colorspace rgb -colors 256 -depth 8 -format "%c" histogram:info:
+			</p>
+			<p>	
+			.<br />
+			.<br />
+			.<br />
+			 6: ( 60, 69, 75) #3C454B rgb(60,69,75)<br />
+			 6: (115, 59, 51) #733B33 rgb(115,59,51)<br />
+			 6: (121,119,165) #7977A5 rgb(121,119,165)<br />
+			  <span class="red">6: (137,168,119) #89A877 rgb(137,168,119)</span><br />
+			 6: (142,150,141) #8E968D rgb(142,150,141)<br />
+			 6: (149,144,204) #9590CC rgb(149,144,204)<br />
+			 6: (153, 68, 70) #994446 rgb(153,68,70)<br />
+			.<br />
+			.<br />
+			.
+			</p>
+			<p class="header">	
+			Find All (6) X,Y Pixel Locations For Color (138,168,119)
+			<ul>
+				<li>use txt: format to list all pixels in the image</li>
+				<li>use grep to find only those lines of the txt file that contain the color</li>
+				<li>use cut to extract just the coordinates</li>
+			</ul>
+			</p>
+			<p class="red">
+			color="( *137, *168, *119)"<br />
+			convert rose: -colorspace rgb -colors 256 -depth 8 txt: | \<br />
+				<span class="indent">grep "$color" | cut -d: -f1</span>
+			</p>
+			<p>	
+			or
+			</p>
+			<p class="red">	
+			color="(137,168,119)"<br />
+			convert rose: -colorspace rgb -colors 256 -depth 8 txt: | \<br />
+				<span class="indent">sed 's/ *,/,/g' | grep "$color" | cut -d: -f1</span>
+			</p>
+			<p>	
+			48,7<br />
+			49,7<br />
+			61,20<br />
+			62,20<br />
+			68,21<br />
+			17,38<br />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image_info.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+</body>
+</html>

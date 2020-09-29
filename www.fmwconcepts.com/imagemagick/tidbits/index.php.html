@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fred's ImageMagick Tidbits</title>
+<meta name="author" content="Fred Weinhaus">
+<meta name="description" content="Fred's ImageMagick Tidbits">
+<meta name="keywords" content="ImageMagick, tidbits, ImageMagick information, image information, graphics, color infomation, image processing">
+<link rel="stylesheet" href="style.css">
+</head>
+<body marginwidth=0 marginheight=0 id="homepage">
+
+<div class="backblue">
+<br />
+<h2 align="center" class="white"><img src="../images/im_logo_small_sharp.gif" border=2 width="120" height="90" hspace="20" vspace="0" border="0" align="absmiddle" class="red">Fred's ImageMagick Tidbits</h2>
+<br />
+</div>
+
+<ul id="nav">
+	<li id="t_homepage"><a href="index.php.html">Home Page
+		<span>Tidbits Home Page</span></a></li></a></li>
+	<li id="t_im_info"><a href="im_info.php.html">ImageMagick Information
+		<span>ImageMagick configuration and parameters</span></a></li>
+	<li id="t_image_info"><a href="image_info.php.html">Image Information
+		<span>Image specific information</span></a></li></a></li>
+	<li id="t_graphics"><a href="graphics.php.html">Graphics Processing
+		<span>Color information and creating specific color images</span></a></li></a></li>
+	<li id="t_image"><a href="image.php.html">Image Processing
+		<span>Miscellaneous image processing techniques</span></a></li></a></li>
+</ul>
+<p>&nbsp;</p>
+
+<br /><br />
+
+<h2 align="center">ImageMagick Tidbits</h2>
+
+<table border="0" cellspacing="0" cellpadding="5" align="center" width="650">
+	<tr>
+		<td align="left" valign="middle">
+		<p align="left">These pages provide some useful ImageMagick Tidbits that I have 
+		collected. They are expressed in <font color="red">command line format</font> and 
+		may involve the use of <font color="red">Unix commands</font> as well.</p>
+		
+		<p align="left">Most are not included in Anthony Thyssen's extensive 
+		<a href="http://www.imagemagick.org/Usage/" target="_blank">Examples</a> pages.</p>
+		
+		<p align="left">However, I have to thank Anthony, since many of these techniques 
+		were learned from him.</p>
+
+		<p align="left">For use of these commands on Windows, PHP and other APIs, 
+		see Anthony's page on <a href="http://www.imagemagick.org/Usage/api/" target="_blank">API And Scripting</a></p>
+
+		<p align="left">The <a href="http://www.rubblewebs.co.uk/imagemagick/" target="_blank">RubbleWebs</a> 
+		site also has some good notes on implementing IM with PHP and a 
+		<a href="http://www.rubblewebs.co.uk/imagemagick/snippets/Index.php" target="_blank">snippets section.</a></p>
+
+		<p align="left">My <a href="../index.html" target="_blank">ImageMagick Scripts</a> are also available</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+		&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+		<b>Tidbit Categories:</b><br />
+		<ul id="cat_list">
+			<li id="c_im_info"><a href="im_info.php.html">ImageMagick Information
+				<span>ImageMagick configuration and parameters</span></a></li>
+			<br />
+			<li id="c_image_info"><a href="image_info.php.html">Image Information
+				<span>Image specific information</span></a></li>
+			<br />
+			<li id="c_graphics"><a href="graphics.php.html">Graphics Processing
+				<span>Color information and creating specific color images</span></a></li>
+			<br />
+			<li id="c_image"><a href="image.php.html">Image Processing
+				<span>Miscellaneous image processing techniques</span></a></li>
+		</ul>
+		</td>
+	</tr>
+</table>
+
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle">
+		<p align="center">USEFUL LINKS</p>
+		<p align="left"><a href="http://www.imagemagick.org/" target="_blank">ImageMagick Home Page</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/install-source.php" target="_blank">ImageMagick Installations</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/command-line-options.php" target="_blank">ImageMagick Command Options</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/Usage/reference.html" target="_blank">ImageMagick Reference Index</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/Usage/" target="_blank">ImageMagick Usage Examples</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/escape.php" target="_blank">ImageMagick String Formats</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/Usage/images/" target="_blank">ImageMagick Test Images</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/formats.php#supported" target="_blank">ImageMagick Image Formats</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/formats.php#pseudo" target="_blank">ImageMagick Pseudo-Image Formats</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/formats.php#builtin-patterns" target="_blank">ImageMagick Image Patterns</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/command-line-options.php?#fill" target="_blank">ImageMagick Color Formats</a></p>
+		<p align="left"><a href="http://imagemagick.org/script/color.php" target="_blank">ImageMagick Color Names</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/command-line-options.php?#type" target="_blank">ImageMagick Image Types</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/command-line-options.php?#colorspace" target="_blank">ImageMagick Color Spaces</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/command-line-options.php#draw" target="_blank">ImageMagick Drawing Primitives</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/Usage/scripts/show_fonts" target="_blank">ImageMagick Show_Fonts Script</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/Usage/scripts/" target="_blank">ImageMagick Scripts</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/script/display.php" target="_blank">ImageMagick Display Options</a></p>
+		<p align="left"><a href="http://www.imagemagick.org/download/delegates/" target="_blank">Delegates Repository</a></p>
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="center" colspan=2>
+			USEFUL IMAGEMAGICK INFORMATION COMMANDS<br />
+			(as of IM 6.3.5.7)
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list
+		</td>
+		<td align="left" valign="middle">
+			list all functions
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list list		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#list" target="_blank">list all -list options</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list channel
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#channel" target="_blank">list of all image -channel options</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list color
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#fill" target="_blank">list of all color names and values</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list colorspace
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#colorspace" target="_blank">list of all -colorspace options</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list compose
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#compose" target="_blank">list of all -compose options</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list configure
+		</td>
+		<td align="left" valign="middle">
+			list of your IM version information
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list decoration
+		</td>
+		<td align="left" valign="middle">
+			list of all text decorations
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list filter
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#filter" target="_blank">list of all -filter options</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list font
+		</td>
+		<td align="left" valign="middle">
+			list of all supported fonts (on your system)
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list format
+		</td>
+		<td align="left" valign="middle">
+			list of all image formats
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list gravity
+		</td>
+		<td align="left" valign="middle">
+			list of all -gravity positioning options
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list primitive
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#draw" target="_blank">list of all -draw primitive shapes</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list style
+		</td>
+		<td align="left" valign="middle">
+			list of all text styles
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list threshold
+		</td>
+		<td align="left" valign="middle">
+			list of all dither/halftone options
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list type
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php?#type" target="_blank">list of all image types</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="middle">
+			convert -list virtual-pixel
+		</td>
+		<td align="left" valign="middle">
+			<a href="http://www.imagemagick.org/script/command-line-options.php#virtual-pixel" target="_blank">list of all -virtual-pixel options</a>
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+</body>
+</html>

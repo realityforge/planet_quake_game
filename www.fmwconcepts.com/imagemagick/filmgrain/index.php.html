@@ -1,0 +1,1527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>Fred's ImageMagick Scripts: FILMGRAIN</title>
+<meta name="author" content="Fred Weinhaus">
+<meta name="description" content="Fred's ImageMagick Scripts - filmgrain - applies film grain noise to an image.">
+<meta name="keywords" content="ImageMagick, scripts, image processing, filmgrain, film, grain, gaussian, noise, blur">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body marginwidth=0 marginheight=0 id="filmgrain">
+
+<div class="blue">
+<br />
+<h2 align="center" class="white"><img src="../images/im_logo_small_sharp.gif" border=2 width="120" height="90" hspace="20" vspace="0" border="0" align="absmiddle" class="red">Fred's ImageMagick Scripts</h2>
+<br />
+<br />
+</div>
+
+<ul id="nav">
+	<li id="t_homepage"><a href="../index.php.html">Home Page</a></li>
+	<li id="t_2colorthresh"><a href="../2colorthresh/index.php.html">2colorthresh
+		<span>Automatically thresholds an image to binary (b/w) format using
+		an adaptive spatial subdivision color reduction technique</span></a></li>
+	<li id="t_3Dbox"><a href="../3Dbox/index.php.html">3Dbox
+		<span>Generates a perspective view of a 3D box at any orientation with 
+		pictures pasted on each of its sides</span></a></li>
+	<li id="t_3Dcover"><a href="../3Dcover/index.php.html">3Dcover
+		<span>Wraps an image around the front and left or right side of box viewed 
+		in rotated perspective</span></a></li>
+	<li id="t_3Dreflection"><a href="../3Dreflection/index.php.html">3Dreflection
+		<span>Adds a fading reflection below an image and views it in perspective</span></a></li>
+	<li id="t_3Drotate"><a href="../3Drotate/index.php.html">3Drotate
+		<span>Applies a perspective distortion to an image by providing three 
+		rotation angles, zoom, offsets, background color, perspective exaggeration 
+		and auto zoom/centering</span></a></li>
+	<li id="t_3Dtext"><a href="../3Dtext/index.php.html">3Dtext
+		<span>Converts text into an image with a 3D extrusion effect</span></a></li>
+	<li id="t_accentedges"><a href="../accentedges/index.php.html">accentedges
+		<span>Applies accented edges to an image</span></a></li>
+	<li id="t_adaptivegamma"><a href="../adaptivegamma/index.php.html">adaptivegamma
+		<span>Enhances the contrast/brightness in an image using a locally adaptive gamma method</span></a></li>
+	<li id="t_adaptivegamma2"><a href="../adaptivegamma2/index.php.html">adaptivegamma2
+		<span>Enhances the contrast/brightness in an image using an adaptive gamma method</span></a></li>
+	<li id="t_anglegradient"><a href="../anglegradient/index.php.html">anglegradient
+		<span>Creates a gradient effect at a specific orientation angle</span></a></li>
+	<li id="t_aspect"><a href="../aspect/index.php.html">aspect
+		<span>Resizes an image to a specific size allowing either cropping or 
+		padding to deal with the aspect ratio change</span></a></li>
+	<li id="t_aspectcrop"><a href="../aspectcrop/index.php.html">aspectcrop
+		<span>Crops an image to a specified aspect ratio</span></a></li>
+	<li id="t_aspectpad"><a href="../aspectpad/index.php.html">aspectpad
+		<span>Pads an image with a color to a specified aspect ratio 
+		and orientation</span></a></li>
+	<li id="t_autocaption"><a href="../autocaption/index.php.html">autocaption
+		<span>Places text automatically in a specified square size region that has 
+		the least color variation</span></a></li>
+	<li id="t_autocolor"><a href="../autocolor/index.php.html">autocolor
+		<span>Automatically color balances an image</span></a></li>
+	<li id="t_autogamma"><a href="../autogamma/index.php.html">autogamma
+		<span>Modifies an image to automatically apply a gamma correction</span></a></li>
+	<li id="t_autolevel"><a href="../autolabel/index.php.html">autolabel
+		<span>Places text automatically in a specified size region that best matches a 
+		reference color</span></a></li>
+	<li id="t_autolevel"><a href="../autolevel/index.php.html">autolevel
+		<span>Modifies an image to automatically stretch the dynamic range between 
+		full black and white and automatically apply a gamma correction</span></a></li>
+	<li id="t_autotone"><a href="../autotone/index.php.html">autotone
+		<span>Automatically tone balances an image</span></a></li>
+	<li id="t_autotone2"><a href="../autotone2/index.php.html">autotone2
+		<span>Automatically tone balances an image</span></a></li>
+	<li id="t_autotrim"><a href="../autotrim/index.php.html">autotrim
+		<span>Automatically trims the background border around a normally oriented or 
+		rotated image</span></a></li>
+	<li id="t_autowhite"><a href="../autowhite/index.php.html">autowhite
+		<span>Automatically adjusts the white balance of an image</span></a></li>
+	<li id="t_balance"><a href="../balance/index.php.html">balance
+		<span>Transforms the image to enhance the shadows, midtones and highlight 
+		regions of the image</span></a></li>
+	<li id="t_bcimage"><a href="../bcimage/index.php.html">bcimage
+		<span>Changes the brightness, contrast and/or saturation of 
+		an image</span></a></li>
+	<li id="t_bcmatch"><a href="../bcmatch/index.php.html">bcmatch
+		<span>Modifies one image to try to match its brightness, contrast 
+		and optionally saturation to that of another image</span></a></li>
+	<li id="t_bevel"><a href="../bevel/index.php.html">bevel
+		<span>Applies an inner bevel or outer bevel or emboss effect 
+		to an image</span></a></li>
+	<li id="t_bevelborder"><a href="../bevelborder/index.php.html">bevelborder
+		<span>Applies a bevel effect to border of an image</span></a></li>
+	<li id="t_bilinearwarp"><a href="../bilinearwarp/index.php.html">bilinearwarp
+		<span>bilinearwarp --- Generates a proper four-point bilinear warp of the 
+		input image</span></a></li>
+	<li id="t_binomial"><a href="../binomial/index.php.html">binomial
+		<span>Generates high pass or low pass filtered images based upon convolution 
+		kernels whose weights are derived from the binomial coefficients</span></a></li>
+	<li id="t_binomialedge"><a href="../binomialedge/index.php.html">binomialedge
+		<span>Sharpens (or blurs) an image near edges using a Binomial 
+		shaped filter.</span></a></li>
+	<li id="t_bokeh"><a href="../bokeh/index.php.html">bokeh
+		<span>Applies a bokeh blurring effect to an image.</span></a></li>
+	<li id="t_bordereffects"><a href="../bordereffects/index.php.html">bordereffects
+		<span>Creates various dispersion-like effects in the border of 
+		an image</span></a></li>
+	<li id="t_bordergrid"><a href="../bordergrid/index.php.html">bordergrid
+		<span>Creates various grid effects in the border of an image</span></a></li>
+	<li id="t_bubblewarp"><a href="../bubblewarp/index.php.html">bubblewarp
+		<span>Applies or reverses a warp of an image onto a bubble</span></a></li>
+	<li id="t_bump"><a href="../bump/index.php.html">bump
+		<span>Applies a hemispherical-like bump distortion to 
+		an image</span></a></li>
+	<li id="t_bumptext"><a href="../bumptext/index.php.html">bumptext
+		<span>Applies a raised text effect onto an image.</span></a></li>
+	<li id="t_camerablur"><a href="../camerablur/index.php.html">camerablur
+		<span>Blurs an image in the frequency domain using an ideal blurring filter for 
+		either motion blur or lens defocus</span></a></li>
+	<li id="t_cameradeblur"><a href="../cameradeblur/index.php.html">cameradeblur
+		<span>Deblurs an image in the frequency domain using an ideal deblurring filter 
+		for either motion blur or lens defocus</span></a></li>
+	<li id="t_captcha"><a href="../captcha/index.php.html">captcha
+		<span>Creates a six-alphanumeric-character image for use as a challenge 
+		response test</span></a></li>
+	<li id="t_cartoon"><a href="../cartoon/index.php.html">cartoon
+		<span>Creates a cartoon-like appearance to an image</span></a></li>
+	<li id="t_centertrim"><a href="../centertrim/index.php.html">centertrim
+		<span>Trims an image so as to preserve the image center</span></a></li>
+	<li id="t_cepstrum"><a href="../cepstrum/index.php.html">cepstrum
+		<span>Creates the cepstrum to depict the type, amount and orientation 
+		of camera type blurring in an image</span></a></li>
+	<li id="t_chrome"><a href="../chrome/index.php.html">chrome
+		<span>Applies a chrome effect to a binary image</span></a></li>
+	<li id="t_clip"><a href="../clip/index.php.html">clip
+		<span>Stretches the channels of an image to full black and white 
+		according to a clip amount on each end of the histogram</span></a></li>
+	<li id="t_collage"><a href="../collage/index.php.html">collage
+		<span>Creates a multi-variant collage of the input image</a></li>
+	<li id="t_color2alpha"><a href="../color2alpha/index.php.html">color2alpha
+		<span>Creates a ramped alpha channel from the input image according to the specified color.</span></a></li>
+	<li id="t_color2gray"><a href="../color2gray/index.php.html">color2gray
+		<span>Mixes the color channels from an image into a single grayscale image 
+		using a weighted combination</span></a></li>
+	<li id="t_coloration"><a href="../coloration/index.php.html">coloration
+		<span>Mixes the color channels from an image into a grayscale image 
+		and then tints it</span></a></li>
+	<li id="t_colorbalance"><a href="../colorbalance/index.php.html">colorbalance
+		<span>Manually color balances an image</span></a></li>
+	<li id="t_colorbalance2"><a href="../colorbalance2/index.php.html">colorbalance2
+		<span>Manually color balances an image</span></a></li>
+	<li id="t_colorboost"><a href="../colorboost/index.php.html">colorboost
+		<span>Enhances the color in an under saturated image</span></a></li>
+	<li id="t_colorcells"><a href="../colorcells/index.php.html">colorcells
+		<span>Randomly modifies the color of rectangular cells of an image</span></a></li>
+	<li id="t_colorconverter"><a href="../colorconverter/index.php.html">colorconverter
+		<span>To convert any valid ImageMagick color specification to the other 
+		ImageMagick color representations</span></a></li>
+	<li id="t_colorcoords"><a href="../colorcoords/index.php.html">colorcoords
+		<span>Locates in the image the first location and/or last location for the closest 
+		pixel within the fuzz value to the color specified</span></a></li>
+	<li id="t_colorfilter"><a href="../colorfilter/index.php.html">colorfilter
+		<span>Applies a photographic color filter to an image</span></a></li>
+	<li id="t_colorfulness"><a href="../colorfulness/index.php.html">colorfulness
+		<span>Computes a metric that represents the colorfulness of an image</span></a></li>
+	<li id="t_colorglow"><a href="../colorglow/index.php.html">colorglow
+		<span>Applies a color glow effect to an image</span></a></li>
+	<li id="t_colorspectrum"><a href="../colorspectrum/index.php.html">colorspectrum
+		<span>Generates a spectrum-like image from the colors in an image</span></a></li>
+	<li id="t_colortemp"><a href="../colortemp/index.php.html">colortemp
+		<span>Transforms an image's overall color balance according to a desired color 
+		temperature change</span></a></li>
+	<li id="t_colortoning"><a href="../colortoning/index.php.html">colortoning
+		<span>Color tones an image in highlights and/or shadows and/or overall</span></a></li>
+	<li id="t_cone"><a href="../cone/index.php.html">cone
+		<span>Draws a cone-shaped object on an image</span></a></li>
+	<li id="t_conformal"><a href="../conformal/index.php.html">conformal
+		<span>Applies a conformal mapping to an image</span></a></li>
+	<li id="t_contour"><a href="../contour/index.php.html">contour
+		<span>Applies a contour outline to the image content</span></a></li>
+	<li id="t_corners"><a href="../corners/index.php.html">corners
+		<span>Detects corner structures in an image</span></a></li>
+	<li id="t_cosinebell"><a href="../cosinebell/index.php.html">cosinebell
+		<span>Creates a cosine-bell-shaped tapered alpha channel in an image and optionally 
+		blends the image into a background image.</span></a></li>
+	<li id="t_crosshatch"><a href="../crosshatch/index.php.html">crosshatch
+		<span>Applies a crosshatch effect to an image</span></a></li>
+	<li id="t_crossprocess"><a href="../crossprocess/index.php.html">crossprocess
+		<span>Applies a color crossprocessing effect to an image</span></a></li>
+	<li id="t_crystallize"><a href="../crystallize/index.php.html">crystallize
+		<span>Creates random crystal-like regions in an image</span></a></li>
+	<li id="t_cube2sphericalpano"><a href="../cube2sphericalpano/index.php.html">cube2sphericalpano
+		<span>Transforms 6 cube face images into a spherical panorama image</span></a></li>
+	<li id="t_cumhist"><a href="../cumhist/index.php.html">cumhist
+		<span>Creates the combined grayscale cumulative histogram of 
+		one or more images</span></a></li>
+	<li id="t_curves"><a href="../curves/index.php.html">curves
+		<span>Generate a smoothly interpolated, curved mapping look up table from a 
+		set of break points and applies it to an image</span></a></li>
+	<li id="t_cylinderize"><a href="../cylinderize/index.php.html">cylinderize
+		<span>Applies a cylinder distortion to an image so that the image is wrapped 
+		about the cylinder</span></a></li>
+	<li id="t_cylinderwarp"><a href="../cylinderwarp/index.php.html">cylinderwarp
+		<span>Applies a cylinder distortion to an image using a displacement map and 
+		arguments provided by the script cylinderize</span></a></li>
+	<li id="t_davehilleffect"><a href="../davehilleffect/index.php.html">davehilleffect
+		<span>Applies a DaveHill-like effect to an image</span></a></li>
+	<li id="t_defisheye"><a href="../defisheye/index.php.html">defisheye
+		<span>Corrects for fisheye distortion in an image</span></a></li>
+	<li id="t_denoise"><a href="../denoise/index.php.html">denoise
+		<span>Reduces the noise in an image</span></a></li>
+	<li id="t_derivative"><a href="../derivative/index.php.html">derivative
+		<span>Applies a first directional derivative filter to an image</span></a></li>
+	<li id="t_diagcollage"><a href="../diagcollage/index.php.html">diagcollage
+		<span>Collages three images in a diagonal orientation</span></a></li>
+	<li id="t_dice"><a href="../dice/index.php.html">dice
+		<span>Randomly rotates each successive square-sized patch 
+		in the image</span></a></li>
+	<li id="t_disperse"><a href="../disperse/index.php.html">disperse
+		<span>Applies a dispersion effect to an image</span></a></li>
+	<li id="t_dog"><a href="../dog/index.php.html">dog
+		<span>Create an edge extracted image using the difference of 
+		two Gaussian blurs</span></a></li>
+	<li id="t_dominantcolor"><a href="../dominantcolor/index.php.html">dominantcolor
+		<span>Finds the dominant color in an image</span></a></li>
+	<li id="t_dotproductcorr"><a href="../dotproductcorr/index.php.html">dotproductcorr
+		<span>Computes the dot product correlation surface to find where a small image best matches 
+		within a larger image</span></a></li>
+	<li id="t_downsize"><a href="../downsize/index.php.html">downsize
+		<span>Downsizes (reduces) an image to a specified file size</span></a></li>
+	<li id="t_draganeffect"><a href="../draganeffect/index.php.html">draganeffect
+		<span>Applies a Dragan-like effect to an image to enhance wrinkles 
+		creating a 'gritty' effect</span></a></li>
+	<li id="t_dualtonemap"><a href="../dualtonemap/index.php.html">dualtonemap
+		<span>Enhances the shadows and/or highlight regions in an image</span></a></li>
+	<li id="t_duotonemap"><a href="../duotonemap/index.php.html">duotonemap
+		<span>Enhances the shadows and/or highlight regions in an image</span></a></li>
+	<li id="t_edgefx"><a href="../edgefx/index.php.html">edgefx
+		<span>Extracts the edges in an image and optionally composes them 
+		with the image to create interesting effects</span></a></li>
+	<li id="t_edges"><a href="../edges/index.php.html">edges
+		<span>Applies edge extraction to image</span></a></li>
+	<li id="t_emboss"><a href="../emboss/index.php.html">emboss
+		<span>Applies an emboss effect to an image</span></a></li>
+	<li id="t_embroidery"><a href="../embroidery/index.php.html">embroidery
+		<span>Applies an embroidery effect to each color in an image</span></a></li>
+	<li id="t_endpoints"><a href="../endpoints/index.php.html">endpoints
+		<span>Applies a Photoshop-like curves operation on an image that only adjusts 
+		the linear endpoints</span></a></li>
+	<li id="t_enhancelab"><a href="../enhancelab/index.php.html">enhancelab
+		<span>Applies brightness/contrast/colorization enhancement on an image via 
+		LAB colorspace</span></a></li>
+	<li id="t_enrich"><a href="../enrich/index.php.html">enrich
+		<span>Enhances an image by high pass filtering and composition</span></a></li>
+	<li id="t_entropy"><a href="../entropy/index.php.html">entropy
+		<span>Computes the normalized entropy of an image channel-by-channel</span></a></li>
+	<li id="t_exposure"><a href="../exposure/index.php.html">exposure
+		<span>Changes the exposure level of an image</span></a></li>
+	<li id="t_feather"><a href="../feather/index.php.html">feather
+		<span>Feathers (smoothes) the white-to-black transition in a 
+		binary mask image</span></a></li>
+	<li id="t_fftconvol"><a href="../fftconvol/index.php.html">fftconvol
+		<span>Performs convolution on an image in the frequency domain</span></a></li>
+	<li id="t_fftdeconvol"><a href="../fftdeconvol/index.php.html">fftdeconvol
+		<span>Performs deconvolution on an image in the frequency domain</span></a></li>
+	<li id="t_fftfilter"><a href="../fftfilter/index.php.html">fftfilter
+		<span>Performs filtering on an image in the frequency domain</span></a></li>
+	<li id="t_filmgrain"><a href="index.php.html">filmgrain
+		<span>Applies film grain noise to an image</span></a></li>
+	<li id="t_fisheye"><a href="../fisheye/index.php.html">fisheye
+		<span>Applies a fisheye distortion to an image</span></a></li>
+	<li id="t_fisheye2pano"><a href="../fisheye2pano/index.php.html">fisheye2pano
+		<span>Generates a strip panoramic image from a linear type fisheye image 
+		with optional vertical perspective correction</span></a></li>
+	<li id="t_fisheye2rect"><a href="../fisheye2rect/index.php.html">fisheye2rect
+		<span>Generates a perspective (rectilinear) image from a region of a vertically 
+		viewed fisheye image</span></a></li>
+	<li id="t_flicker"><a href="../flicker/index.php.html">flicker
+		<span>Displays and optionally save an animation of the input images</span></a></li>
+	<li id="t_flickerchannel"><a href="../flickerchannel/index.php.html">flickerchannel
+		<span>Displays and optionally save an animation of the channels in 
+		an image</span></a></li>
+	<li id="t_frosted"><a href="../frosted/index.php.html">frosted
+		<span>Applies a frosted glass effect to an image</span></a></li>
+	<li id="t_furrowed"><a href="../furrowed/index.php.html">furrowed
+		<span>Applies a furrowed-looking effect to an image to enhance wrinkles 
+		creating a "gritty" look</span></a></li>
+	<li id="t_fuzzythresh"><a href="../fuzzythresh/index.php.html">fuzzythresh
+		<span>Automatically thresholds an image to binary (b/w) format using the 
+		fuzzy c-means technique</span></a></li>
+	<li id="t_fxtransitions"><a href="../fxtransitions/index.php.html">fxtransitions
+		<span>Creates an animated transition between two images using a special 
+		effect distortion</span></a></li>
+	<li id="t_gaussian"><a href="../gaussian/index.php.html">gaussian
+		<span>Generates high pass or low pass filtered images based upon a Gaussian 
+		shaped convolution</span></a></li>
+	<li id="t_gaussianedge"><a href="../gaussianedge/index.php.html">gaussianedge
+		<span>Sharpens (or blurs) an image near edges using a Gaussian 
+		shaped filter.</span></a></li>
+	<li id="t_glasseffects"><a href="../glasseffects/index.php.html">glasseffects
+		<span>Modifies an image so that it appears to be viewed through 
+		textured and/or tiled glass</span></a></li>
+	<li id="t_glow"><a href="../glow/index.php.html">glow
+		<span>Creates a glowing effect in an image</span></a></li>
+	<li id="t_gradient"><a href="../gradient/index.php.html">gradient
+		<span>Applies a gradient filter to an image.</span></a></li>
+	<li id="t_graytoning"><a href="../graytoning/index.php.html">graytoning
+		<span>Mixes color channels from an image into a grayscale image and 
+		optionally tints it.</span></a></li>
+	<li id="t_greenscreen"><a href="../greenscreen/index.php.html">greenscreen
+		<span>Removes background green color in a green screen image.</span></a></li>
+	<li id="t_grid"><a href="../grid/index.php.html">grid
+		<span>Superimposes a set of horizontal and/or vertical grid lines 
+		on an image</span></a></li>
+	<li id="t_halo"><a href="../halo/index.php.html">halo
+		<span>Applies a circular halo to an image</span></a></li>
+	<li id="t_hamming"><a href="../hamming/index.php.html">hamming
+		<span>Computes the percent hamming distance between two binary string 
+		perceptual hashes</span></a></li>
+	<li id="t_hexagons"><a href="../hexagons/index.php.html">hexagons
+		<span>Creates a hexagonal grid of the randomly rotated input image</span></a></li>
+	<li id="t_histcompare"><a href="../histcompare/index.php.html">histcompare
+		<span>Computes one of several metrics characterizing the difference between 
+		the histograms of two images</span></a></li>
+	<li id="t_histmatch"><a href="../histmatch/index.php.html">histmatch
+		<span>Modifies one image to try to match its histogram and 
+		optionally saturation to that of another image</span></a></li>
+	<li id="t_histog"><a href="../histog/index.php.html">histog
+		<span>Generates an output image which is composed of the histograms
+		from each channel of the input image</span></a></li>
+	<li id="t_houghlines"><a href="../houghlines/index.php.html">houghlines
+		<span>Uses the Hough Transform technique to compute and display straight lines 
+		from a binary edge image</span></a></li>
+	<li id="t_huemap"><a href="../huemap/index.php.html">huemap
+		<span>Transforms the hues in an image from one range to another</span></a></li>
+	<li id="t_imageborder"><a href="../imageborder/index.php.html">imageborder
+		<span>Appends an image border by extending the outer regions of 
+		the image</span></a></li>
+	<li id="t_innercrop"><a href="../innercrop/index.php.html">innercrop
+		<span>Crops an image to a rectangle that will just trim any 
+		irregularly shaped outer boundary color</span></a></li>
+	<li id="t_interleave"><a href="../interleave/index.php.html">interleave
+		<span>Interleaves the channels of a single image or each image of a set of 
+		multiple images</span></a></li>
+	<li id="t_interweave"><a href="../interweave/index.php.html">interweave
+		<span>Interleaves two images together in swaths</span></a></li>
+	<li id="t_isodatathresh"><a href="../isodatathresh/index.php.html">isodatathresh
+		<span>Automatically thresholds an image to binary (b/w) format using the 
+		isodata technique</span></a></li>
+	<li id="t_isolatecolor"><a href="../isolatecolor/index.php.html">isolatecolor
+		<span>Isolates a particular color in an image</span></a></li>
+	<li id="t_isonoise"><a href="../isonoise/index.php.html">isonoise
+		<span>Reduces isolated noise in an image</span></a></li>
+	<li id="t_juliaset"><a href="../juliaset/index.php.html">juliaset
+		<span>Creates a julia set fractal image</span></a></li>
+	<li id="t_kaleidoscope"><a href="../kaleidoscope/index.php.html">kaleidoscope
+		<span>Applies a kaleidoscope effect to an image</span></a></li>
+	<li id="t_kaleidoscopic"><a href="../kaleidoscopic/index.php.html">kaleidoscopic
+		<span>Applies a kaleidoscope effect to an image</span></a></li>
+	<li id="t_kapurthresh"><a href="../kapurthresh/index.php.html">kapurthresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		Kapur's entropy technique</span></a></li>
+	<li id="t_kmeans"><a href="../kmeans/index.php.html">kmeans
+		<span>Applies k-means color reduction to an image</span></a></li>
+	<li id="t_kmeansthresh"><a href="../kmeansthresh/index.php.html">kmeansthresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		the k-means technique</span></a></li>
+	<li id="t_kneemap"><a href="../kneemap/index.php.html">kneemap
+		<span>Creates a symmetric soft knee-shaped curved mapping look up table 
+		and applies it to an image</span></a></li>
+	<li id="t_kuwahara"><a href="../kuwahara/index.php.html">kuwahara
+		<span>Applies a Kuwahara type edge preserving noise reduction filter 
+		to an image</span></a></li>
+	<li id="t_laplacian"><a href="../laplacian/index.php.html">laplacian
+		<span>Applies a laplacian filter to an image</span></a></li>
+<!-- 
+	<li id="t_lenswarp"><a href="http://www.fmwconcepts.com/imagemagick/lenswarp/index.php">lenswarp
+		<span>simulates the effect of looking at a picture through a curved lens 
+		sitting with one flat side against the picture</span></a></li>
+ -->
+	<li id="t_levelcolors"><a href="../levelcolors/index.php.html">levelcolors
+		<span>Applies a color level transformation to an image 
+		channel-by-channel</span></a></li>
+	<li id="t_levelcolors"><a href="../levels/index.php.html">levels
+		<span>Applies a Photoshop-like levels operation on an image</span></a></li>
+	<li id="t_levelcolors"><a href="../lichtenstein/index.php.html">lichtenstein
+		<span>Applies a Roy Lichtenstein newspaper cartoon effect to an image</span></a></li>
+	<li id="t_limitedtrim"><a href="../limitedtrim/index.php.html">limitedtrim
+		<span>Trims an image on all sides by a maximum amount specified by the user</span></a></li>
+	<li id="t_localthresh"><a href="../localthresh/index.php.html">localthresh
+		<span>Automatically thresholds an image to binary (b/w) format using a moving 
+		window adaptive thresholding approach</span></a></li>
+	<li id="t_locatecolors"><a href="../locatecolors/index.php.html">locatecolors
+		<span>Modifies an image showing only those pixels which are within the specified 
+		color range</span></a></li>
+	<li id="t_lucisarteffect"><a href="../lucisarteffect/index.php.html">lucisarteffect
+		<span>Applies a LucisArt-like effect to an image</span></a></li>
+	<li id="t_lupe"><a href="../lupe/index.php.html">lupe
+		<span>Applies a magnifying glass effect in a local area of 
+		an image</span></a></li>
+	<li id="t_magicwand"><a href="../magicwand/index.php.html">magicwand
+		<span>Isolates a contiguous region of an image based upon a color 
+		determined from a user specified image coordinate</span></a></li>
+	<li id="t_mandala"><a href="../mandala/index.php.html">mandala
+		<span>Creates a Mandala type image from simple graphic figures</span></a></li>
+	<li id="t_mandalascope"><a href="../mandalascope/index.php.html">mandalascope
+		<span>Converts an image into a mandala-like kaleidoscope image</span></a></li>
+	<li id="t_mandelbrot"><a href="../mandelbrot/index.php.html">mandelbrot
+		<span>Creates a mandelbrot set fractal image</span></a></li>
+	<li id="t_mapcolors"><a href="../mapcolors/index.php.html">mapcolors
+		<span>Maps or translates one set of colors in an image to another 
+		set of colors</span></a></li>
+	<li id="t_matchimage"><a href="../matchimage/index.php.html">matchimage
+		<span>Matches the brightness and contrast of one image to another image</span></a></li>
+	<li id="t_maxima"><a href="../maxima/index.php.html">maxima
+		<span>Locate one or more local maxima in a grayscale image</span></a></li>
+	<li id="t_maxrgb"><a href="../maxrgb/index.php.html">maxrgb
+		<span>Converts an RGB image to keep only the channel with the maximum 
+		value at each pixel</span></a></li>
+	<li id="t_median"><a href="../median/index.php.html">median
+		<span>Computes the median value of an image</span></a></li>
+	<li id="t_melt"><a href="../melt/index.php.html">melt
+		<span>Creates a melting-like blur effect in an image</span></a></li>
+	<li id="t_meshwarp"><a href="../meshwarp/index.php.html">meshwarp
+		<span>Warps an image according to a user supplied triangular mesh</span></a></li>
+	<li id="t_mesmerize"><a href="../mesmerize/index.php.html">mesmerize
+		<span>Creates a mesmerizing animation from an image</span></a></li>
+	<li id="t_midgradient"><a href="../midgradient/index.php.html">midgradient
+		<span>Creates a two-color gradient with adjustable mid-color location</span></a></li>
+	<li id="t_midtonebalance"><a href="../midtonebalance/index.php.html">midtonebalance
+		<span>Color balances an image in the midtones in a manner similar to Photoshop</span></a></li>
+	<li id="t_mirrorize"><a href="../mirrorize/index.php.html">mirrorize
+		<span>Creates a mirror effect in an image</span></a></li>
+	<li id="t_mode"><a href="../mode/index.php.html">mode
+		<span>Computes the mode value of an image.</span></a></li>
+	<li id="t_modulatecolor1"><a href="../modulatecolor1/index.php.html">modulatecolor1
+		<span>Changes brightness, saturation and/or hue for any primary or secondary 
+		color in an image.</span></a></li>
+	<li id="t_modulatecolor2"><a href="../modulatecolor2/index.php.html">modulatecolor2
+		<span>Changes brightness, saturation and/or hue for any primary or secondary 
+		color in an image.</span></a></li>
+	<li id="t_moments"><a href="../moments/index.php.html">moments
+		<span>Computes shift, scale and rotation invariant image moments as well as 
+		elliptical shape descriptors</span></a></li>
+	<li id="t_morphology"><a href="../morphology/index.php.html">morphology
+		<span>Performs binary or grayscale morphologic operations on an image, including 
+		dilate, erode, open and close</span></a></li>
+	<li id="t_mosaictiles"><a href="../mosaictiles/index.php.html">mosaictiles
+		<span>Applies a mosaic tiles effect to image</span></a></li>
+	<li id="t_mottle"><a href="../mottle/index.php.html">mottle
+		<span>Applies various mottle effects to an image</span></a></li>
+	<li id="t_multicrop"><a href="../multicrop/index.php.html">multicrop
+		<span>Crops and unrotates multiple images from a scanned image</span></a></li>
+	<li id="t_multicrop2"><a href="../multicrop2/index.php.html">multicrop2
+		<span>Crops and unrotates multiple images from a scanned image</span></a></li>
+	<li id="t_multigradient"><a href="../multigradient/index.php.html">multigradient
+		<span>Creates either a linear or radial gradient image with two or more 
+		color stops</span></a></li>
+	<li id="t_nearestcolor"><a href="../nearestcolor/index.php.html">nearestcolor
+		<span>Finds the nearest color value in an image to a reference color</span></a></li>
+	<li id="t_neg2pos"><a href="../neg2pos/index.php.html">neg2pos
+		<span>Converts from a (scanned film) negative image to a positive image</span></a></li>
+	<li id="t_negative2positive"><a href="../negative2positive/index.php.html">negative2positive
+		<span>Converts from a (scanned film) negative image to a positive image</span></a></li>
+	<li id="t_nightvision"><a href="../nightvision/index.php.html">nightvision
+		<span>Simulates a picture as viewed through night vision goggles</span></a></li>
+	<li id="t_noisecleaner"><a href="../noisecleaner/index.php.html">noisecleaner
+		<span>Iteratively cleans noise from an image</span></a></li>
+	<li id="t_normcrosscorr"><a href="../normcrosscorr/index.php.html">normcrosscorr
+		<span>Computes the normalized cross correlation surface to find where a small image 
+		best matches within a larger image</span></a></li>
+	<li id="t_notch"><a href="../notch/index.php.html">notch
+		<span>Creates and applies a notch filter to an image in the frequency domain 
+		to remove dither patterns and other regular noise patterns</span></a></li>
+	<li id="t_omnistretch"><a href="../omnistretch/index.php.html">omnistretch
+		<span>Enhances the dynamic range of brightness values and optionally saturation 
+		values in an image</span></a></li>
+	<li id="t_ortoneffect"><a href="../ortoneffect/index.php.html">ortoneffect
+		<span>Applies an Orton effect to an image</span></a></li>
+	<li id="t_otsuthresh"><a href="../otsuthresh/index.php.html">otsuthresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		Otsu's between class variance technique</span></a></li>
+	<li id="t_outfit"><a href="../outfit/index.php.html">outfit
+		<span>Transforms a pattern image to place it over an image of some piece 
+		of clothing or outfit</span></a></li>
+	<li id="t_outfitwarper"><a href="../outfitwarper/index.php.html">outfitwarper
+		<span>Transforms a pattern image to place it over an image of some piece 
+		of clothing or outfit using a lighting file, a displacement map a mask and  
+		arguments provided by the script outfit</span></a></li>
+	<li id="t_overlapcrop"><a href="../overlapcrop/index.php.html">overlapcrop
+		<span>Creates a sequence of cropped subsections permitting optional overlap 
+		of the subsections</span></a></li>
+	<li id="t_pagecurl"><a href="../pagecurl/index.php.html">pagecurl
+		<span>Applies a pagecurl effect to the lower right corner of an image</span></a></li>
+	<li id="t_pagepeel"><a href="../pagepeel/index.php.html">pagepeel
+		<span>Applies a pagepeel effect to the lower right corner of an image</span></a></li>
+	<li id="t_painteffect"><a href="../painteffect/index.php.html">painteffect
+		<span>Applies a paint type effect to an image</span></a></li>
+	<li id="t_pano2fisheye"><a href="../pano2fisheye/index.php.html">pano2fisheye
+		<span>Transforms a spherical panorama to a fisheye view</span></a></li>
+	<li id="t_pano2rect"><a href="../pano2rect/index.php.html">pano2rect
+		<span>Applies vertical perspective correction to an angular 
+		panoramic image</span></a></li>
+	<li id="t_peelingpaint"><a href="../peelingpaint/index.php.html">peelingpaint
+		<span>Applies a peeling paint effect to an image</span></a></li>
+	<li id="t_perforations"><a href="../perforations/index.php.html">perforations
+		<span>Applies film-like perforations to two opposite edges of an image</span></a></li>
+	<li id="t_perlin"><a href="../perlin/index.php.html">perlin
+		<span>Creates an image composed of Perlin type noise</span></a></li>
+	<li id="t_phasecorr"><a href="../phasecorr/index.php.html">phasecorr
+		<span>Computes the phase correlation surface to find where a small image best 
+		matches within a larger image</span></a></li>
+	<li id="t_phashcompare"><a href="../phashcompare/index.php.html">phashcompare
+		<span>Compares two 168 digit phash strings to compute a phash metric</span></a></li>
+	<li id="t_phashconvert"><a href="../phashconvert/index.php.html">phashconvert
+		<span>Converts the 42 phash float values for an image to a string of 
+		168 digits</span></a></li>
+	<li id="t_phashes"><a href="../phashes/index.php.html">phashes
+		<span>Computes and stores one or more perceptual hashes for all 
+		provided images</span></a></li>
+	<li id="t_picframe"><a href="../picframe/index.php.html">picframe
+		<span>Adds a picture frame around an image</span></a></li>
+	<li id="t_picturefold"><a href="../picturefold/index.php.html">picturefold
+		<span>Applies a map-like folded appearance to an image</span></a></li>
+	<li id="t_pinbarrel"><a href="../pinbarrel/index.php.html">pinbarrel
+		<span>Applies or corrects pincushion and/or barrel lens distortion to an image</span></a></li>
+	<li id="t_pip"><a href="../pip/index.php.html">pip
+		<span>Creates a picture-in-picture effect</span></a></li>
+	<li id="t_pixelize"><a href="../pixelize/index.php.html">pixelize
+		<span>Creates a pixelized or blocky effect in an image</span></a></li>
+	<li id="t_plm"><a href="../plm/index.php.html">plm
+		<span>Generates a piece-wise linear mapping grayscale 
+		look up table and applies it to an image</span></a></li>
+	<li id="t_plmlut"><a href="../plmlut/index.php.html">plmlut
+		<span>Generates a piece-wise linear mapping grayscale 
+		look up table</span></a></li>
+	<li id="t_plot"><a href="../plot/index.php.html">plot
+		<span>Generates a profile of an image row or column or 
+		an image histogram.</span></a></li>
+	<li id="t_plot3D"><a href="../plot3D/index.php.html">plot3D
+		<span>Generates a 3D plot of a single channel or grayscale image</span></a></li>
+	<li id="t_polar"><a href="../polar/index.php.html">polar
+		<span>Applies either a rectangular (cartesian) to polar transformation or 
+		a polar to rectangular (cartesian) transformation on an image</span></a></li>
+	<li id="t_polarblur"><a href="../polarblur/index.php.html">polarblur
+		<span>Applies a polar blur to an image</span></a></li>
+	<li id="t_polyring"><a href="../polyring/index.php.html">polyring
+		<span>Creates a polygon ring image from one or more images</span></a></li>
+	<li id="t_popart"><a href="../popart/index.php.html">popart
+		<span>Creates a pop art style image</span></a></li>
+	<li id="t_postagestamp"><a href="../postagestamp/index.php.html">postagestamp
+		<span>Applies a perforated postage stamp like border around an image</span></a></li>
+	<li id="t_posteredges"><a href="../posteredges/index.php.html">posteredges
+		<span>Applies posterized edges to an image</span></a></li>
+	<li id="t_profile"><a href="../profile/index.php.html">profile
+		<span>Generates a profile of an image row or column</span></a></li>
+	<li id="t_pseudocolor"><a href="../pseudocolor/index.php.html">pseudocolor
+		<span>Generates a pseudocolored image or pseudocolored animation from grayscale 
+		image using a rainbow colored transformation</span></a></li>
+	<li id="t_ptilethresh"><a href="../ptilethresh/index.php.html">ptilethresh
+		<span>Automatically thresholds an image to binary (b/w) format at a specified 
+		percentile on the cumulative histogram</span></a></li>
+	<li id="t_puzzle"><a href="../puzzle/index.php.html">puzzle
+		<span>Applies a puzzle like effect to an image</span></a></li>
+	<li id="t_radialgradient"><a href="../radialgradient/index.php.html">radialgradient
+		<span>Creates a radial gradient image</span></a></li>
+	<li id="t_radialgrid"><a href="../radialgrid/index.php.html">radialgrid
+		<span>Superimposes circular grid lines on an image</span></a></li>
+	<li id="t_randomblob"><a href="../randomblob/index.php.html">randomblob
+		<span>Creates an image composed of a moderate sized black random blob shape 
+		on a white background</span></a></li>
+	<li id="t_randomclipart"><a href="../randomclipart/index.php.html">randomclipart
+		<span>Randomly distributes clip art over the image</span></a></li>
+	<li id="t_rangethresh"><a href="../rangethresh/index.php.html">rangethresh
+		<span>Converts an image to binary using range values for each channel of the input</span></a></li>
+	<li id="t_recursion"><a href="../recursion/index.php.html">recursion
+		<span>Creates a recursive affine composite effect in an image</span></a></li>
+	<li id="t_redeye"><a href="../redeye/index.php.html">redeye
+		<span>Removes redeye from an image</span></a></li>
+	<li id="t_redist"><a href="../redist/index.php.html">redist
+		<span>Modifies an image so that its (grayscale) histogram has a 
+		either Gaussian, distribution or a Uniform Distribution</span></a></li>
+	<li id="t_reflect"><a href="../reflect/index.php.html">reflect
+		<span>Splits an image, reflects each side and appends them to form horizontally 
+		symmetric images</span></a></li>
+	<li id="t_remap"><a href="../remap/index.php.html">remap
+		<span>Remaps the colors in an image using a 3D color distance metric 
+		relative to a color table map image</span></a></li>
+	<li id="t_removecolorcast"><a href="../removecolorcast/index.php.html">removecolorcast
+		<span>Removes a color cast from an image</span></a></li>
+	<li id="t_replacecolor"><a href="../replacecolor/index.php.html">replacecolor
+		<span>Changes one color to another color in an image</span></a></li>
+	<li id="t_retinex"><a href="../retinex/index.php.html">retinex
+		<span>Enhances detail and color in an image using the multiscale 
+		retinex algorithm</span></a></li>
+	<li id="t_rgbdots"><a href="../rgbdots/index.php.html">rgbdots
+		<span>Transforms an image into dots in primary and secondary colors</span></a></li>
+	<li id="t_ripples"><a href="../ripples/index.php.html">ripples
+		<span>Applies various circular ripple effects to an image</span></a></li>
+	<li id="t_rmsecorr"><a href="../rmsecorr/index.php.html">rmsecorr
+		<span>Computes the root mean squared correlation surface to find where a small image 
+		best matches within a larger image</span></a></li>
+	<li id="t_rotate3D"><a href="../rotate3D/index.php.html">rotate3D
+		<span>Applies a perspective distortion to an image by providing three 
+		rotation angles and an optional perspective exaggeration</span></a></li>
+	<li id="t_sahoothresh"><a href="../sahoothresh/index.php.html">sahoothresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		Sahoo's entropy technique</span></a></li>
+	<li id="t_saturation"><a href="../saturation/index.php.html">saturation
+		<span>Changes the color saturation in an image</span></a></li>
+	<li id="t_scalescroll"><a href="../scalescroll/index.php.html">scalescroll
+		<span>Creates a scaled scrolling animation</span></a></li>
+	<li id="t_scatter"><a href="../scatter/index.php.html">scatter
+		<span>Generates a channel-by-channel scatter diagram between two images</span></a></li>
+	<li id="t_scatterchannels"><a href="../scatterchannels/index.php.html">scatterchannels
+		<span>Generates a scatter diagram between channels of an image</span></a></li>
+	<li id="t_screeneffects"><a href="../screeneffects/index.php.html">screeneffects
+		<span>Applies screen-like effects to an image</span></a></li>
+	<li id="t_scriptbatch"><a href="../scriptbatch/index.php.html">scriptbatch
+		<span>Runs another script over a folder of images</span></a></li>
+	<li id="t_separate"><a href="../separate/index.php.html">separate
+		<span>Identifies each separate white shape in a binary image</span></a></li>
+	<li id="t_shadowhighlight"><a href="../shadowhighlight/index.php.html">shadowhighlight
+		<span>Adjusts the tone in shadow and highlight areas of an image</span></a></li>
+	<li id="t_shadows"><a href="../shadows/index.php.html">shadows
+		<span>Applies drop shadows to an image that has an alpha channel</span></a></li>
+	<li id="t_shapecluster"><a href="../shapecluster/index.php.html">shapecluster
+		<span>Creates a division of the image into 5 separated rectangular regions</span></a></li>
+	<li id="t_shapecompare"><a href="../shapecompare/index.php.html">shapecompare
+		<span>Compares two images' shapes using metrics computed from Hu image moments</span></a></li>
+	<li id="t_shapemorph"><a href="../shapemorph/index.php.html">shapemorph
+		<span>Create a shape morphing animation sequence between two images</span></a></li>
+	<li id="t_shapemorph2"><a href="../shapemorph2/index.php.html">shapemorph2
+		<span>Create a shape morphing animation sequence between two images</span></a></li>
+	<li id="t_sharp"><a href="../sharp/index.php.html">sharp
+		<span>Adaptively sharpens an image or extract edges</span></a></li>
+	<li id="t_sharpedge"><a href="../sharpedge/index.php.html">sharpedge
+		<span>Adaptively sharpens (or blurs) an image near edges</span></a></li>
+	<li id="t_shimmer"><a href="../shimmer/index.php.html">shimmer
+		<span>Creates a reflected heat shimmering effect animation</span></a></li>
+	<li id="t_shuffle"><a href="../shuffle/index.php.html">shuffle
+		<span>Randomly shuffles positions of square sized tiles in an image</span></a></li>
+	<li id="t_sigmoidal"><a href="../sigmoidal/index.php.html">sigmoidal
+		<span>Applies a sigmoidal brightness and/or contrast adjustment to an image</span></a></li>
+	<li id="t_similar"><a href="../similar/index.php.html">similar
+		<span>Computes the normalized cross correlation similarity metric between 
+		two equal dimensioned images</span></a></li>
+	<li id="t_sinescrollimage"><a href="../sinescrollimage/index.php.html">sinescrollimage
+		<span>Creates a sinusoidal curved scrolling image banner animation</span></a></li>
+	<li id="t_sinescrolltext"><a href="../sinescrolltext/index.php.html">sinescrolltext
+		<span>Creates a sinusoidal curved scrolling text banner animation</span></a></li>
+	<li id="t_sketch"><a href="../sketch/index.php.html">sketch
+		<span>Applies a sketch effect to an image</span></a></li>
+	<li id="t_sketcher"><a href="../sketcher/index.php.html">sketcher
+		<span>Applies a sketch effect to an image</span></a></li>
+	<li id="t_sketchetch"><a href="../sketchetch/index.php.html">sketchetch
+		<span>Creates an etch-like sketch from an image</span></a></li>
+	<li id="t_sketching"><a href="../sketching/index.php.html">sketching
+		<span>Applies a sketch effect to an image</span></a></li>
+	<li id="t_skew"><a href="../skew/index.php.html">skew
+		<span>Applies a skew distortion to an image</span></a></li>
+	<li id="t_slantedlight"><a href="../slantedlight/index.php.html">slantedlight
+		<span>Applies slanted lighting to an image</span></a></li>
+	<li id="t_slice"><a href="../slice/index.php.html">slice
+		<span>Thresholds an image (inclusively) between a range of graylevels 
+		and optionally colorizes inside and/or outside the threshold range</span></a></li>
+	<li id="t_smartcrop"><a href="../smartcrop/index.php.html">smartcrop
+		<span>Automatically crops an image to a given size around the hightest 
+		detail region</span></a></li>
+	<li id="t_smarttrim"><a href="../smarttrim/index.php.html">smarttrim
+		<span>Automatically trims an image around the region of highest detail 
+		in the image</span></a></li>
+	<li id="t_softfocus"><a href="../softfocus/index.php.html">softfocus
+		<span>Applies a softfocus effect to an image</span></a></li>
+	<li id="t_softlight"><a href="../softlight/index.php.html">softlight
+		<span>Applies soft light to an image</span></a></li>
+	<li id="t_space"><a href="../space/index.php.html">space
+		<span>Applies a spatially adaptive contrast (and brightness) enhancement 
+		filter to an image</span></a></li>
+	<li id="t_space2"><a href="../space2/index.php.html">space2
+		<span>Applies a spatially adaptive contrast (and brightness) enhancement 
+		filter to an image</span></a></li>
+	<li id="t_spectrum"><a href="../spectrum/index.php.html">spectrum
+		<span>Computes the spectrum image from the magnitude of the Fourier Transform 
+		of an image.</span></a></li>
+	<li id="t_spectrumhist"><a href="../spectrumhist/index.php.html">spectrumhist
+		<span>Creates either a color spectrum or histogram of the colors in an image.</span></a></li>
+	<li id="t_sphere"><a href="../sphere/index.php.html">sphere
+		<span>Creates a colored sphere with a combination of diffuse and specular illumination</span></a></li>
+	<li id="t_sphericalpano2cube"><a href="../sphericalpano2cube/index.php.html">sphericalpano2cube
+		<span>Transforms a spherical panorama into a cubical representation</span></a></li>
+	<li id="t_sphericalpano2rect"><a href="../sphericalpano2rect/index.php.html">sphericalpano2rect
+		<span>Generate a perspective (rectilinear) image from a region of a 
+		spherical panorama image</span></a></li>
+	<li id="t_spherize"><a href="../spherize/index.php.html">spherize
+		<span>Warps an image onto a (hemi-)sphere</span></a></li>
+	<li id="t_splice"><a href="../splice/index.php.html">splice
+		<span>Applies a jagged cut and splice effect to an image</span></a></li>
+	<li id="t_spline"><a href="../spline/index.php.html">spline
+		<span>Draws a spline curve on an image based upon supplied points</span></a></li>
+	<li id="t_splitcrop"><a href="../splitcrop/index.php.html">splitcrop
+		<span>Crops an image into two or four sections according to the given 
+		x,y coordinates</span></a></li>
+	<li id="t_splitimage"><a href="../splitimage/index.php.html">splitimage
+		<span>Generates a side-by-side append of two partial images with an option to 
+		animate the amount of each image used in the append</span></a></li>
+	<li id="t_splittone1"><a href="../splittone1/index.php.html">splittone1
+		<span>Applies a color splittone effect to an image</span></a></li>
+	<li id="t_splittone2"><a href="../splittone2/index.php.html">splittone2
+		<span>Applies a color splittone effect to an image</span></a></li>
+	<li id="t_splittone3"><a href="../splittone3/index.php.html">splittone3
+		<span>Applies a color splittone effect to an image</span></a></li>
+	<li id="t_spots"><a href="../spots/index.php.html">spots
+		<span>Converts the image into a series or uniform-colored spots</span></a></li>
+	<li id="t_squareup"><a href="../squareup/index.php.html">squareup
+		<span>Resizes an image and squares it up either by padding or 
+		cropping</span></a></li>
+	<li id="t_ssim"><a href="../ssim/index.php.html">ssim
+		<span>Computes the structural similarity metric between two equal 
+		sized images.</span></a></li>
+	<li id="t_starburst"><a href="../stainedglass/index.php.html">stainedglass
+		<span>Applies a stained glass cell effect to an image</span></a></li>
+	<li id="t_starburst"><a href="../starburst/index.php.html">starburst
+		<span>Applies a starburst pattern to an image</span></a></li>
+	<li id="t_statsfilt"><a href="../statsfilt/index.php.html">statsfilt
+		<span>Computes various localized (neighborhood) statistical 
+		filters on an image</span></a></li>
+	<li id="t_statsfilt"><a href="../stdimage/index.php.html">stdimage
+		<span>Computes a pixel-by-pixel standard deviation or variance image from 
+		multiple input images</span></a></li>
+	<li id="t_stretch"><a href="../stretch/index.php.html">stretch
+		<span>Modifies an image to automatically stretch the dynamic range between 
+		full black and white</span></a></li>
+	<li id="t_striations"><a href="../striations/index.php.html">striations
+		<span>Applies radial or circular striations to image</span></a></li>
+	<li id="t_stutter"><a href="../stutter/index.php.html">stutter
+		<span>Creates a 'stuttered' offset-like effect in an image</span></a></li>
+	<li id="t_surroundblur"><a href="../surroundblur/index.php.html">surroundblur
+		<span>Creates a blurred background region around the input image</span></a></li>
+	<li id="t_textcleaner"><a href="../textcleaner/index.php.html">textcleaner
+		<span>Processes a scanned document of text to clean the text background</span></a></li>
+	<li id="t_textdeskew"><a href="../textdeskew/index.php.html">textdeskew
+		<span>Unrotates (deskews) an image containing text</span></a></li>
+	<li id="t_textdistort"><a href="../textdistort/index.php.html">textdistort
+		<span>Distorts repeated text to warp it to the shape of the image content</span></a></li>
+	<li id="t_texteffect"><a href="../texteffect/index.php.html">texteffect
+		<span>Convert text to an image after applying various effects, styling 
+		and color</span></a></li>
+	<li id="t_texteffect2"><a href="../texteffect2/index.php.html">texteffect2
+		<span>Converts large size text to an image with color, effects 
+		and styling</span></a></li>
+	<li id="t_textetch"><a href="../textetch/index.php.html">textetch
+		<span>Adds text to an image to simulate etching on glass</span></a></li>
+	<li id="t_texturize"><a href="../texturize/index.php.html">texturize
+		<span>Creates a texture pattern and optionally applies it to the 
+		background of an input image</span></a></li>
+	<li id="t_thermography"><a href="../thermography/index.php.html">thermography
+		<span>Simulates a picture taken with a thermal imaging camera</span></a></li>
+	<li id="t_thresholds"><a href="../thresholds/index.php.html">thresholds
+		<span>Applies one or two thresholds to an image</span></a></li>
+	<li id="t_tileimage"><a href="../tileimage/index.php.html">tileimage
+		<span>Tiles an image to a given size with various tile arrangements</span></a></li>
+	<li id="t_tiler"><a href="../tiler/index.php.html">tiler
+		<span>Converts an image into a tilable texture</span></a></li>
+	<li id="t_tiltshift"><a href="../tiltshift/index.php.html">tiltshift
+		<span>Applies a tiltshift effect to an image</span></a></li>
+	<li id="t_tintilize"><a href="../tintilize/index.php.html">tintilize
+		<span>Applies a color tint to the mid-range of a grayscale image</span></a></li>
+	<li id="t_tinyplanet"><a href="../tinyplanet/index.php.html">tinyplanet
+		<span>Transforms a spherical panorama to a linear fisheye view</span></a></li>
+	<li id="t_tonemap1"><a href="../tonemap1/index.php.html">tonemap1
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			non-linear log or gamma function</span></a></li>
+	<li id="t_tonemap2"><a href="../tonemap2/index.php.html">tonemap2
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			non-linear log or gamma function plus another extra processing 
+			function</span></a></li>
+	<li id="t_tonemap3"><a href="../tonemap3/index.php.html">tonemap3
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			non-linear log or gamma function plus another extra processing 
+			function</span></a></li>
+	<li id="t_tonemap4"><a href="../tonemap4/index.php.html">tonemap4
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			dual gamma function plus an extra processing function</span></a></li>
+	<li id="t_toon"><a href="../toon/index.php.html">toon
+		<span>Applies a cartoon effect to an image</span></a></li>
+	<li id="t_toonify"><a href="../toonify/index.php.html">toonify
+		<span>Applies a cartoon effect to an image</span></a></li>
+	<li id="t_toonizarro"><a href="../toonizarro/index.php.html">toonizarro
+		<span>Applies a Superman Bizarro-like cartoon effect to an image</span></a></li>
+	<li id="t_toycamera"><a href="../toycamera/index.php.html">toycamera
+		<span>Simulates pictures taken by lomographic or holga type toy cameras</span></a></li>
+	<li id="t_transfercolor"><a href="../transfercolor/index.php.html">transfercolor
+		<span>Transfers the coloring from one image to another image</span></a></li>
+	<li id="t_transitions"><a href="../transitions/index.php.html">transitions
+		<span>Applies an animated transition between two images</span></a></li>
+	<li id="t_trianglethresh"><a href="../trianglethresh/index.php.html">trianglethresh
+		<span>Automatically thresholds an image to binary (b/w) format using the 
+		triangle technique</span></a></li>
+	<li id="t_tricolorize"><a href="../tricolorize/index.php.html">tricolorize
+		<span>Smoothly colorizes a grayscale image with either one, two or three 
+		different colors</span></a></li>
+	<li id="t_trim2detail"><a href="../trim2detail/index.php.html">trim2detail
+		<span>Trims an image to the bounding rectangle about the image's 
+		main content</span></a></li>
+	<li id="t_trim2rect"><a href="../trim2rect/index.php.html">trim2rect
+		<span>Automatically trims the sides of an image until no outer row or column 
+		contains the background color</span></a></li>
+	<li id="t_trimcorners"><a href="../trimcorners/index.php.html">trimcorners
+		<span>Automatically crops the image to removed rounded corners</span></a></li>
+	<li id="t_trimmer"><a href="../trimmer/index.php.html">trimmer
+		<span>Trims the background from any number of specified sides of 
+		an image</span></a></li>
+	<li id="t_tshirt"><a href="../tshirt/index.php.html">tshirt
+		<span>Transforms an image to place it in a region of a tshirt image.</span></a></li>
+	<li id="t_tshirtwarp"><a href="../tshirtwarp/index.php.html">tshirtwarp
+		<span>Transforms an image to place it in a region of a tshirt image using a lighting file, 
+		a displacement map and arguments provided by the script tshirt</span></a></li>
+	<li id="t_tshirtwarper"><a href="../tshirtwarper/index.php.html">tshirtwarper
+		<span>Transforms an image to place it in a region of a tshirt image using a lighting file, 
+		a displacement map and arguments provided by the script tshirt</span></a></li>
+	<li id="t_tunnelize"><a href="../tunnelize/index.php.html">tunnelize
+		<span>Creates a tunnel-like effect on an image</span></a></li>
+	<li id="t_turbulence"><a href="../turbulence/index.php.html">turbulence
+		<span>Applies a turbulence-like warping of the image</span></a></li>
+	<li id="t_turn"><a href="../turn/index.php.html">turn
+		<span>Simultaneously rotates and crops an image to eliminate 
+		any background</span></a></li>
+	<li id="t_typewriter"><a href="../typewriter/index.php.html">typewriter
+		<span>Creates a typewriter style scrolling text animation</span></a></li>
+	<li id="t_unrotate"><a href="../unperspective/index.php.html">unperspective
+		<span>Automatically removes pespective distortion from an image</span></a></li>
+	<li id="t_unrotate"><a href="../unrotate/index.php.html">unrotate
+		<span>Automatically unrotates a rotated image and trims the surrounding 
+		border</span></a></li>
+	<li id="t_unrotate2"><a href="../unrotate2/index.php.html">unrotate2
+		<span>Automatically unrotates a rotated image and trims the surrounding 
+		border</span></a></li>
+	<li id="t_uwcorrect"><a href="../uwcorrect/index.php.html">uwcorrect
+		<span>Corrects the color balance for red light attenuation in pictures taken 
+		underwater</span></a></li>
+	<li id="t_variableblur"><a href="../variableblur/index.php.html">variableblur
+		<span>Applies a variable blur to an image based upon a mask image</span></a></li>
+	<li id="t_vibrance"><a href="../vibrance/index.php.html">vibrance
+		<span>Applies a non-linear change to the saturation of an image</span></a></li>
+	<li id="t_vibrance2"><a href="../vibrance2/index.php.html">vibrance2
+		<span>Applies a non-linear change to the chroma channel of an image</span></a></li>
+	<li id="t_vibrance3"><a href="../vibrance3/index.php.html">vibrance3
+		<span>Applies a non-linear change to the chroma channel of an image</span></a></li>
+	<li id="t_videoglitch"><a href="../videoglitch/index.php.html">videoglitch
+		<span>Applies a video glitch effect to an image</span></a></li>
+	<li id="t_vignette"><a href="../vignette/index.php.html">vignette
+		<span>Applies a vignette effect to a picture</span></a></li>
+	<li id="t_vignette2"><a href="../vignette2/index.php.html">vignette2
+		<span>Applies a vignette effect to a picture</span></a></li>
+	<li id="t_vignette3"><a href="../vignette3/index.php.html">vignette3
+		<span>Applies a vignette effect to a picture</span></a></li>
+	<li id="t_vintage1"><a href="../vintage1/index.php.html">vintage1
+		<span>Applies a classic blue-green vintage effect to an image</span></a></li>
+	<li id="t_vintage2"><a href="../vintage2/index.php.html">vintage2
+		<span>Applies a colorful vintage effect to an image</span></a></li>
+	<li id="t_vintage3"><a href="../vintage3/index.php.html">vintage3
+		<span>Applies an old, heritage style vintage effect to an image</span></a></li>
+	<li id="t_warholeffect"><a href="../warholeffect/index.php.html">warholeffect
+		<span>Creates an Andy Warhol style colorization image</span></a></li>
+	<li id="t_watercolor"><a href="../watercolor/index.php.html">watercolor
+		<span>Applies a watercolor effect to an image</span></a></li>
+	<li id="t_whitebalance"><a href="../wavemap/index.php.html">wavemap
+		<span>Transforms the graylevels in each RGB channel according to a 
+		sinusoidal wave function</span></a></li>
+	<li id="t_whitebalance"><a href="../whitebalance/index.php.html">whitebalance
+		<span>Transform an image's overall color balance according to a desired change in a 
+		specified white point color</span></a></li>
+	<li id="t_whitebalancing"><a href="../whitebalancing/index.php.html">whitebalancing
+		<span>Applies white balancing to an image according to a gray world method
+		 in LAB colorspace</span></a></li>
+	<li id="t_whiteboard"><a href="../whiteboard/index.php.html">whiteboard
+		<span>Processes a picture of a whiteboard to clean up the background and correct 
+		the perspective</span></a></li>
+	<li id="t_wiggle"><a href="../wiggle/index.php.html">wiggle
+		<span>Creates a sinusoidal wiggling animation</span></a></li>
+	<li id="t_woodbrand"><a href="../woodbrand/index.php.html">woodbrand
+		<span>Creates a branded effect in a wood grain image using a binary image 
+		as the brand</span></a></li>
+	<li id="t_woodcut"><a href="../woodcut/index.php.html">woodcut
+		<span>Applies a woodcut effect to an image</span></a></li>
+	<li id="t_woodgrain"><a href="../woodgrain/index.php.html">woodgrain
+		<span>Simulates a woodgrain texture</span></a></li>
+	<li id="t_xpand"><a href="../xpand/index.php.html">xpand
+		<span>Applies a non-uniform outward stretch of the image in 
+		one direction</span></a></li>
+	<li id="t_xposure"><a href="../xposure/index.php.html">xposure
+		<span>Changes the exposure level of an image by 
+		photographic stops</span></a></li>
+	<li id="t_xtract"><a href="../xtract/index.php.html">xtract
+		<span>Uses Hough lines to extract and rectify a quadrilateral area 
+		from an image</span></a></li>
+	<li id="t_zerocrossing"><a href="../zerocrossing/index.php.html">zerocrossing
+		<span>Applies a zero crossing edge detector to an image</span></a></li>
+	<li id="t_zoomblur"><a href="../zoomblur/index.php.html">zoomblur
+		<span>Applies a radial or zoom blur to an image</span></a></li>
+	<li id="t_zoomrotatetext"><a href="../zoomrotatetext/index.php.html">zoomrotatetext
+		<span>Creates a zoomed rotating text animation</span></a></li>
+</ul>
+
+<table border="0" cellspacing="0" cellpadding="5" align="center" width="90%">
+	<tr>
+		<td align="left" valign="middle">
+			<ul>
+				<b>Licensing:</b>
+				<p align="left">Copyright &copy; Fred Weinhaus</p>
+				<p align="left">My scripts are available <u>free of charge for non-commercial (non-profit) use, ONLY.</u></p>
+				<p align="left"><b>For use of my scripts in commercial (for-profit) environments or non-free applications, please contact me 
+					(Fred Weinhaus) for licensing arrangements. My email address is fmw at alink dot net.</b></p>
+				<p align="left">If you: 1) redistribute, 2) incorporate any of these scripts into other free 
+					applications or 3) reprogram them in another scripting language, then 
+					<u>you must contact me for permission</u>, especially if the result 
+					might be used in a commercial or for-profit environment.</p>
+				<p align="left">Usage, whether stated or not in the script, is restricted to the above licensing arrangements. 
+					It is also subject, in a subordinate manner, to the ImageMagick license, which can be found at:
+					<a href="http://www.imagemagick.org/script/license.php" target="_blank">
+					http://www.imagemagick.org/script/license.php</a></p>
+				<p align="left" class="red">Please read the <u>Pointers For Use</u> on my home page to properly install and customize my scripts.</u></p>
+				
+			</ul>
+		</td>
+	</tr>
+</table>
+
+<h2 align="center">
+FILMGRAIN
+</h2>
+
+<br />
+
+<table border="0" cellspacing="0" cellpadding="5" align="center" width="70%">
+	<tr>
+		<td align="left" valign="middle" class="larger">
+		<p align="left">
+		Applies film grain noise to an image.
+		</td>
+	</tr>
+</table>
+
+<p align="center"><a href="../downloadcounter.php%3Fscriptname=filmgrain&amp;dirname=filmgrain" >Download Script</a></p>
+
+<p align="center" class="smaller red">
+last modified: December 15, 2018</p>
+
+<br />
+<br />
+
+<table border="0" cellspacing="0" cellpadding="5" align="center" width="90%">
+	<tr>
+		<td align="center" valign="middle" class="fixedwidth">
+		<p align="left">
+		USAGE: filmgrain [-n noise] [-a amount1] [-A amount2] [-d density1]<br /> 
+		[-D density2] [-s seed1] [-S seed2] [-c compose1] [-C compose2] <br />
+		[-b blur] [-m monotone] infile outfile<br />
+		<br />
+		USAGE: filmgrain [-h or -help]
+		</p>
+
+		<p align="left">
+		-n ... noise ...... type of noise; any valid IM noise, except random; <br />
+		................... default=gaussian<br />
+		-a ... amount1 .... amount of the first layer of noise; integer&gt;=0; <br />
+		................... default=100<br />
+		-A ... amount2 .... amount of the second layer of noise; integer&gt;=0; <br />
+		................... default=50<br />
+		-d ... density1 ... density of the first layer of noise; 0&lt;=integer&lt;=100 <br />
+		................... default=100<br />
+		-D ... density2 ... density of the second layer of noise; 0&lt;=integer&lt;=100 <br />
+		................... default=100<br />
+		-s ... seed1 ...... seed value for the first layer of noise; integer&gt;=0;<br /> 
+		................... default=100<br />
+		-S ... seed2 ...... seed value for the second layer of noise; integer&gt;=0; <br />
+		................... default=200<br />
+		-c ... compose1 ... compose method for the first layer of noise; choices are:<br />
+		................... overlay, softlight, hardlight, linearlight, vividlight; <br />
+		................... default=overlay<br />
+		-C ... compose2 ... compose method for the second layer of noise; choices are:<br />
+		................... overlay, softlight, hardlight, linearlight, vividlight; <br />
+		................... default=overlay<br />
+		-b ... blur ....... blur amount to soften noise; float&gt;=0; default=0.5<br />
+		-m ... monotone ... use monotone (grayscale) noise rather than color noise;<br />
+		................... choices are yes or no.
+		</p>
+
+		<p align="left">
+		PURPOSE: To apply film grain noise to an image.
+		</p>
+
+		<p align="left">
+		DESCRIPTION: FILMGRAIN applies film grain noise to an image. One or two 
+		layers of noise may be applied. The amount and density of each layer of 
+		noise may be controlled separately as well as the compose methods.
+		</p>
+
+		<p align="left">
+		ARGUMENTS: 
+		</p>
+
+		<p align="left">
+		-n noise ... NOISE is the type of noise; any valid IM noise, except random 
+		is allowed. The default=gaussian. Most of the noise types look rather 
+		similar on first glance with the appropriate amounts. Isolated noise can be 
+		simulated by reducing the density on the other noise types. Actual film grain 
+		is closestly approximated by the gaussian noise.
+		</p>
+
+		<p align="left">
+		-a amount1 ... AMOUNT1 is the amount of the first layer of noise. Value are
+		integers&gt;=0. The default=100.
+		</p>
+
+		<p align="left">
+		-A amount2 ... AMOUNT2 is the amount of the second layer of noise. Value are
+		integers&gt;=0. The default=50.
+		</p>
+
+		<p align="left">
+		-d density1 ... DENSITY1 is the density (spacing) of the first layer of 
+		noise. Values are 0&lt;=integers&lt;=100. The default=100.
+		</p>
+
+		<p align="left">
+		-D densityD ... DENSITY2 is the density (spacing) of the second layer of 
+		noise. Values are 0&lt;=integers&lt;=100. The default=100.
+		</p>
+
+		<p align="left">
+		-s seed1 ... SEED1 is the seed value for the first layer of noise. Values are 
+		integers&gt;=0. The default=100.
+		</p>
+
+		<p align="left">
+		-S seed2 ... SEED2 is the seed value for the second layer of noise. Values are 
+		integers&gt;=0. The default=200.
+		</p>
+
+		<p align="left">
+		-c compose1 ... COMPOSE1 is the compose method for the first layer of noise. 
+		Choices are: overlay, softlight, hardlight, linearlight and vividlight. 
+		The default=overlay.
+		</p>
+
+		<p align="left">
+		-C compose2 ... COMPOSE2 is the compose method for the second layer of noise. 
+		Choices are: overlay, softlight, hardlight, linearlight and vividlight. 
+		The default=overlay.
+		</p>
+
+		<p align="left">
+		-b blur ... BLUR amount to soften noise. Values are floats&gt;=0. The 
+		default=0.5.
+		</p>
+
+		<p align="left">
+		-m monotone ... MONOTONE indicates to use monotone (grayscale) noise rather 
+		than color noise. Choices are: yes or no.
+		</p>
+
+		<p align="left">
+		REFERENCES:<br />
+		<a href="http://en.wikipedia.org/wiki/Image_noise#Film_grain" 
+			target="_blank">http://en.wikipedia.org/wiki/Image_noise#Film_grain</a><br />
+		<a href="http://www.ephotozine.com/article/photoshop-tutorial--add-film-grain-to-images-13443" 
+			target="_blank">http://www.ephotozine.com/article/photoshop-tutorial--add-film-grain-to-images-13443</a><br />
+		<a href="http://www.photoshopessentials.com/photo-effects/film-grain/" 
+			target="_blank">http://www.photoshopessentials.com/photo-effects/film-grain/</a><br />
+		<a href="http://photoshoptutorials.ws/photoshop-tutorials/photo-effects/natural-film-grain/?singlepage=1" 
+			target="_blank">http://photoshoptutorials.ws/photoshop-tutorials/photo-effects/natural-film-grain/?singlepage=1</a><br />
+		<a href="http://www.digiretus.com/tippek/cikkiro.php?SORSZAM=79" 
+			target="_blank">http://www.digiretus.com/tippek/cikkiro.php?SORSZAM=79</a><br />
+		</p>
+
+		<p align="left">
+		CAVEAT: No guarantee that this script will work on all platforms, 
+		nor that trapping of inconsistent parameters is complete and 
+		foolproof. Use At Your Own Risk. 
+		</p>
+
+		</td>
+	</tr>
+</table>
+
+<br />
+
+<h3 align="center">EXAMPLES</h3>
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Example 1 - Default
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Original<br />
+		(<a href="http://upload.wikimedia.org/wikipedia/commons/d/d0/Barns_grand_tetons.jpg" 
+			target="_blank">image</a>)
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(default)<br />
+		-a 100 -A 50 -d 100 -D 100
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A50_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Example 2 - Variation In Second Layer Noise Amount
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Original
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<img src="images/barn.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 100 -A 0
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 100 -A 100
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A100_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Example 3 - Variation In First Layer Density
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Original
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<img src="images/barn.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 100 -A 0 -d 100
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 100 -A 0 -d 70
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d70_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 200 -A 0 -d 100
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 200 -A 0 -d 30
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a200_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a200_A0_d30_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Example 4 - Variation In First Layer Compose Method
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Original
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<img src="images/barn.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(softer noise)<br />
+		-a 100 -A 0 -c softlight
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(normal noise)<br />
+		-a 100 -A 0 -d overlay
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d100_D100_s100_S200_softlight_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(brighter noise)<br />
+		-a 100 -A 0 -c vividlight
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(darker noise)<br />
+		-a 100 -A 0 -c hardlight
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d100_D100_s100_S200_vividlight_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d100_D100_s100_S200_hardlight_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(brighter and darker noise)<br />
+		-a 100 -A 0 -c linearlight
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		&nbsp;
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A0_d100_D100_s100_S200_linearlight_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		&nbsp;
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Example 5 - Variation In First Layer Noise Type
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Original
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<img src="images/barn.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 50 -A 0 -n impulse
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 125 -A 0 -n gaussian
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_impulse_a50_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a125_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 200 -A 0 -n laplacian
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 75 -A 0 -n multiplicative
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_laplacian_a200_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_multiplicative_a75_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 100 -A 0 -n poisson
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		-a 2000 -A 0 -n uniform
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_poisson_a400_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_uniform_a2000_A0_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Example 6 - Grayscale vs Color Noise
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<p align="center">
+		Original
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=2>
+		<img src="images/barn.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(grayscale)<br />
+		-a 100 -A 50 -d 100 -D 100 -m yes
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		Arguments:<br />
+		(color)<br />
+		-a 100 -A 50 -d 100 -D 100 -m no
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A50_d100_D100_s100_S200_overlay_overlay_b0p5_yes.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/barn_filmgrain_gaussian_a100_A50_d100_D100_s100_S200_overlay_overlay_b0p5_no.jpg" width="400" height="299" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle" colspan=3>
+		<p align="center">
+		What the script does is as follows:
+		</p>
+		<p align="left">
+		<ul>
+			<li>Create a 50% gray image the same size as the input image</li>
+			<li>Apply the desired amount of (gaussian) noise</li>
+			<li>Extract one channel as grayscale</li>
+			<li>Reduce the density of the noise if desired</li>
+			<li>Blur a slight amount to soften the noise</li>
+			<li>Composite the noise image with the input image</li>
+			<li>Repeat with a new noise image for the second layer of noise</li>
+		</ul>
+		</p>
+		<p align="center">		
+		This is equivalent to the following IM commands
+		</p>
+		<p align="left">
+		<ul>
+			<li>convert -quiet -regard-warnings "$infile" +repage  "$dir/tmpI.mpc"</li>
+			<li>amt1=`convert xc: -format "%[fx:$amount1/100]" info:`</li>
+			<li>amt2=`convert xc: -format "%[fx:$amount2/100]" info:`</li>
+			<li>convert $dir/tmpI.mpc -fill "gray(50%)" -colorize 100% $dir/tmpG.mpc</li>
+			<li>fuzzval1=`convert xc: -format "%[fx:(100-$density1)/2]" info:`</li>
+			<li>densityproc1="-fuzz $fuzzval1% -fill gray(50%) -opaque gray(50%)"</li>
+			<li>fuzzval2=`convert xc: -format "%[fx:(100-$density2)/2]" info:`</li>
+			<li>densityproc2="-fuzz $fuzzval2% -fill gray(50%) -opaque gray(50%)"</li>
+			<li>if [ "$monotone" = "yes" ]; then<br />
+				monoproc="-set colorspace RGB -channel G -separate +channel"<br />
+			else<br />
+				monoproc=""<br />
+			fi</li>
+			<li>convert $dir/tmpI.mpc \<br />
+				\( $dir/tmpG.mpc -attenuate $amt1 -seed $seed1 +noise $noise $monoproc $densityproc1 -blur 0x$blur \) \<br />
+				-compose $compose1 -composite \<br />
+				\( $dir/tmpG.mpc -attenuate $amt2 -seed $seed2 +noise $noise $monoproc $densityproc2 -blur 0x$blur \) \<br />
+				-compose $compose2 -composite $outfile</li>
+		</ul>
+		</p>
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+
+</body>
+</html>

@@ -1,0 +1,2011 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>Fred's ImageMagick Scripts: OMNISTRETCH</title>
+<meta name="author" content="Fred Weinhaus">
+<meta name="description" content="Fred's ImageMagick Scripts - omnistretch - enhances the dynamic range of brightness values and optionally saturation values in an image">
+<meta name="keywords" content="ImageMagick, scripts, image processing, omnistretch, histogram stretch, brightness, contrast, saturation">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body marginwidth=0 marginheight=0 id="omnistretch">
+
+<div class="blue">
+<br />
+<h2 align="center" class="white"><img src="../images/im_logo_small_sharp.gif" border=2 width="120" height="90" hspace="20" vspace="0" border="0" align="absmiddle" class="red">Fred's ImageMagick Scripts</h2>
+<br />
+<br />
+</div>
+
+<ul id="nav">
+	<li id="t_homepage"><a href="../index.php.html">Home Page</a></li>
+	<li id="t_2colorthresh"><a href="../2colorthresh/index.php.html">2colorthresh
+		<span>Automatically thresholds an image to binary (b/w) format using
+		an adaptive spatial subdivision color reduction technique</span></a></li>
+	<li id="t_3Dbox"><a href="../3Dbox/index.php.html">3Dbox
+		<span>Generates a perspective view of a 3D box at any orientation with 
+		pictures pasted on each of its sides</span></a></li>
+	<li id="t_3Dcover"><a href="../3Dcover/index.php.html">3Dcover
+		<span>Wraps an image around the front and left or right side of box viewed 
+		in rotated perspective</span></a></li>
+	<li id="t_3Dreflection"><a href="../3Dreflection/index.php.html">3Dreflection
+		<span>Adds a fading reflection below an image and views it in perspective</span></a></li>
+	<li id="t_3Drotate"><a href="../3Drotate/index.php.html">3Drotate
+		<span>Applies a perspective distortion to an image by providing three 
+		rotation angles, zoom, offsets, background color, perspective exaggeration 
+		and auto zoom/centering</span></a></li>
+	<li id="t_3Dtext"><a href="../3Dtext/index.php.html">3Dtext
+		<span>Converts text into an image with a 3D extrusion effect</span></a></li>
+	<li id="t_accentedges"><a href="../accentedges/index.php.html">accentedges
+		<span>Applies accented edges to an image</span></a></li>
+	<li id="t_adaptivegamma"><a href="../adaptivegamma/index.php.html">adaptivegamma
+		<span>Enhances the contrast/brightness in an image using a locally adaptive gamma method</span></a></li>
+	<li id="t_adaptivegamma2"><a href="../adaptivegamma2/index.php.html">adaptivegamma2
+		<span>Enhances the contrast/brightness in an image using an adaptive gamma method</span></a></li>
+	<li id="t_anglegradient"><a href="../anglegradient/index.php.html">anglegradient
+		<span>Creates a gradient effect at a specific orientation angle</span></a></li>
+	<li id="t_aspect"><a href="../aspect/index.php.html">aspect
+		<span>Resizes an image to a specific size allowing either cropping or 
+		padding to deal with the aspect ratio change</span></a></li>
+	<li id="t_aspectcrop"><a href="../aspectcrop/index.php.html">aspectcrop
+		<span>Crops an image to a specified aspect ratio</span></a></li>
+	<li id="t_aspectpad"><a href="../aspectpad/index.php.html">aspectpad
+		<span>Pads an image with a color to a specified aspect ratio 
+		and orientation</span></a></li>
+	<li id="t_autocaption"><a href="../autocaption/index.php.html">autocaption
+		<span>Places text automatically in a specified square size region that has 
+		the least color variation</span></a></li>
+	<li id="t_autocolor"><a href="../autocolor/index.php.html">autocolor
+		<span>Automatically color balances an image</span></a></li>
+	<li id="t_autogamma"><a href="../autogamma/index.php.html">autogamma
+		<span>Modifies an image to automatically apply a gamma correction</span></a></li>
+	<li id="t_autolevel"><a href="../autolabel/index.php.html">autolabel
+		<span>Places text automatically in a specified size region that best matches a 
+		reference color</span></a></li>
+	<li id="t_autolevel"><a href="../autolevel/index.php.html">autolevel
+		<span>Modifies an image to automatically stretch the dynamic range between 
+		full black and white and automatically apply a gamma correction</span></a></li>
+	<li id="t_autotone"><a href="../autotone/index.php.html">autotone
+		<span>Automatically tone balances an image</span></a></li>
+	<li id="t_autotone2"><a href="../autotone2/index.php.html">autotone2
+		<span>Automatically tone balances an image</span></a></li>
+	<li id="t_autotrim"><a href="../autotrim/index.php.html">autotrim
+		<span>Automatically trims the background border around a normally oriented or 
+		rotated image</span></a></li>
+	<li id="t_autowhite"><a href="../autowhite/index.php.html">autowhite
+		<span>Automatically adjusts the white balance of an image</span></a></li>
+	<li id="t_balance"><a href="../balance/index.php.html">balance
+		<span>Transforms the image to enhance the shadows, midtones and highlight 
+		regions of the image</span></a></li>
+	<li id="t_bcimage"><a href="../bcimage/index.php.html">bcimage
+		<span>Changes the brightness, contrast and/or saturation of 
+		an image</span></a></li>
+	<li id="t_bcmatch"><a href="../bcmatch/index.php.html">bcmatch
+		<span>Modifies one image to try to match its brightness, contrast 
+		and optionally saturation to that of another image</span></a></li>
+	<li id="t_bevel"><a href="../bevel/index.php.html">bevel
+		<span>Applies an inner bevel or outer bevel or emboss effect 
+		to an image</span></a></li>
+	<li id="t_bevelborder"><a href="../bevelborder/index.php.html">bevelborder
+		<span>Applies a bevel effect to border of an image</span></a></li>
+	<li id="t_bilinearwarp"><a href="../bilinearwarp/index.php.html">bilinearwarp
+		<span>bilinearwarp --- Generates a proper four-point bilinear warp of the 
+		input image</span></a></li>
+	<li id="t_binomial"><a href="../binomial/index.php.html">binomial
+		<span>Generates high pass or low pass filtered images based upon convolution 
+		kernels whose weights are derived from the binomial coefficients</span></a></li>
+	<li id="t_binomialedge"><a href="../binomialedge/index.php.html">binomialedge
+		<span>Sharpens (or blurs) an image near edges using a Binomial 
+		shaped filter.</span></a></li>
+	<li id="t_bokeh"><a href="../bokeh/index.php.html">bokeh
+		<span>Applies a bokeh blurring effect to an image.</span></a></li>
+	<li id="t_bordereffects"><a href="../bordereffects/index.php.html">bordereffects
+		<span>Creates various dispersion-like effects in the border of 
+		an image</span></a></li>
+	<li id="t_bordergrid"><a href="../bordergrid/index.php.html">bordergrid
+		<span>Creates various grid effects in the border of an image</span></a></li>
+	<li id="t_bubblewarp"><a href="../bubblewarp/index.php.html">bubblewarp
+		<span>Applies or reverses a warp of an image onto a bubble</span></a></li>
+	<li id="t_bump"><a href="../bump/index.php.html">bump
+		<span>Applies a hemispherical-like bump distortion to 
+		an image</span></a></li>
+	<li id="t_bumptext"><a href="../bumptext/index.php.html">bumptext
+		<span>Applies a raised text effect onto an image.</span></a></li>
+	<li id="t_camerablur"><a href="../camerablur/index.php.html">camerablur
+		<span>Blurs an image in the frequency domain using an ideal blurring filter for 
+		either motion blur or lens defocus</span></a></li>
+	<li id="t_cameradeblur"><a href="../cameradeblur/index.php.html">cameradeblur
+		<span>Deblurs an image in the frequency domain using an ideal deblurring filter 
+		for either motion blur or lens defocus</span></a></li>
+	<li id="t_captcha"><a href="../captcha/index.php.html">captcha
+		<span>Creates a six-alphanumeric-character image for use as a challenge 
+		response test</span></a></li>
+	<li id="t_cartoon"><a href="../cartoon/index.php.html">cartoon
+		<span>Creates a cartoon-like appearance to an image</span></a></li>
+	<li id="t_centertrim"><a href="../centertrim/index.php.html">centertrim
+		<span>Trims an image so as to preserve the image center</span></a></li>
+	<li id="t_cepstrum"><a href="../cepstrum/index.php.html">cepstrum
+		<span>Creates the cepstrum to depict the type, amount and orientation 
+		of camera type blurring in an image</span></a></li>
+	<li id="t_chrome"><a href="../chrome/index.php.html">chrome
+		<span>Applies a chrome effect to a binary image</span></a></li>
+	<li id="t_clip"><a href="../clip/index.php.html">clip
+		<span>Stretches the channels of an image to full black and white 
+		according to a clip amount on each end of the histogram</span></a></li>
+	<li id="t_collage"><a href="../collage/index.php.html">collage
+		<span>Creates a multi-variant collage of the input image</a></li>
+	<li id="t_color2alpha"><a href="../color2alpha/index.php.html">color2alpha
+		<span>Creates a ramped alpha channel from the input image according to the specified color.</span></a></li>
+	<li id="t_color2gray"><a href="../color2gray/index.php.html">color2gray
+		<span>Mixes the color channels from an image into a single grayscale image 
+		using a weighted combination</span></a></li>
+	<li id="t_coloration"><a href="../coloration/index.php.html">coloration
+		<span>Mixes the color channels from an image into a grayscale image 
+		and then tints it</span></a></li>
+	<li id="t_colorbalance"><a href="../colorbalance/index.php.html">colorbalance
+		<span>Manually color balances an image</span></a></li>
+	<li id="t_colorbalance2"><a href="../colorbalance2/index.php.html">colorbalance2
+		<span>Manually color balances an image</span></a></li>
+	<li id="t_colorboost"><a href="../colorboost/index.php.html">colorboost
+		<span>Enhances the color in an under saturated image</span></a></li>
+	<li id="t_colorcells"><a href="../colorcells/index.php.html">colorcells
+		<span>Randomly modifies the color of rectangular cells of an image</span></a></li>
+	<li id="t_colorconverter"><a href="../colorconverter/index.php.html">colorconverter
+		<span>To convert any valid ImageMagick color specification to the other 
+		ImageMagick color representations</span></a></li>
+	<li id="t_colorcoords"><a href="../colorcoords/index.php.html">colorcoords
+		<span>Locates in the image the first location and/or last location for the closest 
+		pixel within the fuzz value to the color specified</span></a></li>
+	<li id="t_colorfilter"><a href="../colorfilter/index.php.html">colorfilter
+		<span>Applies a photographic color filter to an image</span></a></li>
+	<li id="t_colorfulness"><a href="../colorfulness/index.php.html">colorfulness
+		<span>Computes a metric that represents the colorfulness of an image</span></a></li>
+	<li id="t_colorglow"><a href="../colorglow/index.php.html">colorglow
+		<span>Applies a color glow effect to an image</span></a></li>
+	<li id="t_colorspectrum"><a href="../colorspectrum/index.php.html">colorspectrum
+		<span>Generates a spectrum-like image from the colors in an image</span></a></li>
+	<li id="t_colortemp"><a href="../colortemp/index.php.html">colortemp
+		<span>Transforms an image's overall color balance according to a desired color 
+		temperature change</span></a></li>
+	<li id="t_colortoning"><a href="../colortoning/index.php.html">colortoning
+		<span>Color tones an image in highlights and/or shadows and/or overall</span></a></li>
+	<li id="t_cone"><a href="../cone/index.php.html">cone
+		<span>Draws a cone-shaped object on an image</span></a></li>
+	<li id="t_conformal"><a href="../conformal/index.php.html">conformal
+		<span>Applies a conformal mapping to an image</span></a></li>
+	<li id="t_contour"><a href="../contour/index.php.html">contour
+		<span>Applies a contour outline to the image content</span></a></li>
+	<li id="t_corners"><a href="../corners/index.php.html">corners
+		<span>Detects corner structures in an image</span></a></li>
+	<li id="t_cosinebell"><a href="../cosinebell/index.php.html">cosinebell
+		<span>Creates a cosine-bell-shaped tapered alpha channel in an image and optionally 
+		blends the image into a background image.</span></a></li>
+	<li id="t_crosshatch"><a href="../crosshatch/index.php.html">crosshatch
+		<span>Applies a crosshatch effect to an image</span></a></li>
+	<li id="t_crossprocess"><a href="../crossprocess/index.php.html">crossprocess
+		<span>Applies a color crossprocessing effect to an image</span></a></li>
+	<li id="t_crystallize"><a href="../crystallize/index.php.html">crystallize
+		<span>Creates random crystal-like regions in an image</span></a></li>
+	<li id="t_cube2sphericalpano"><a href="../cube2sphericalpano/index.php.html">cube2sphericalpano
+		<span>Transforms 6 cube face images into a spherical panorama image</span></a></li>
+	<li id="t_cumhist"><a href="../cumhist/index.php.html">cumhist
+		<span>Creates the combined grayscale cumulative histogram of 
+		one or more images</span></a></li>
+	<li id="t_curves"><a href="../curves/index.php.html">curves
+		<span>Generate a smoothly interpolated, curved mapping look up table from a 
+		set of break points and applies it to an image</span></a></li>
+	<li id="t_cylinderize"><a href="../cylinderize/index.php.html">cylinderize
+		<span>Applies a cylinder distortion to an image so that the image is wrapped 
+		about the cylinder</span></a></li>
+	<li id="t_cylinderwarp"><a href="../cylinderwarp/index.php.html">cylinderwarp
+		<span>Applies a cylinder distortion to an image using a displacement map and 
+		arguments provided by the script cylinderize</span></a></li>
+	<li id="t_davehilleffect"><a href="../davehilleffect/index.php.html">davehilleffect
+		<span>Applies a DaveHill-like effect to an image</span></a></li>
+	<li id="t_defisheye"><a href="../defisheye/index.php.html">defisheye
+		<span>Corrects for fisheye distortion in an image</span></a></li>
+	<li id="t_denoise"><a href="../denoise/index.php.html">denoise
+		<span>Reduces the noise in an image</span></a></li>
+	<li id="t_derivative"><a href="../derivative/index.php.html">derivative
+		<span>Applies a first directional derivative filter to an image</span></a></li>
+	<li id="t_diagcollage"><a href="../diagcollage/index.php.html">diagcollage
+		<span>Collages three images in a diagonal orientation</span></a></li>
+	<li id="t_dice"><a href="../dice/index.php.html">dice
+		<span>Randomly rotates each successive square-sized patch 
+		in the image</span></a></li>
+	<li id="t_disperse"><a href="../disperse/index.php.html">disperse
+		<span>Applies a dispersion effect to an image</span></a></li>
+	<li id="t_dog"><a href="../dog/index.php.html">dog
+		<span>Create an edge extracted image using the difference of 
+		two Gaussian blurs</span></a></li>
+	<li id="t_dominantcolor"><a href="../dominantcolor/index.php.html">dominantcolor
+		<span>Finds the dominant color in an image</span></a></li>
+	<li id="t_dotproductcorr"><a href="../dotproductcorr/index.php.html">dotproductcorr
+		<span>Computes the dot product correlation surface to find where a small image best matches 
+		within a larger image</span></a></li>
+	<li id="t_downsize"><a href="../downsize/index.php.html">downsize
+		<span>Downsizes (reduces) an image to a specified file size</span></a></li>
+	<li id="t_draganeffect"><a href="../draganeffect/index.php.html">draganeffect
+		<span>Applies a Dragan-like effect to an image to enhance wrinkles 
+		creating a 'gritty' effect</span></a></li>
+	<li id="t_dualtonemap"><a href="../dualtonemap/index.php.html">dualtonemap
+		<span>Enhances the shadows and/or highlight regions in an image</span></a></li>
+	<li id="t_duotonemap"><a href="../duotonemap/index.php.html">duotonemap
+		<span>Enhances the shadows and/or highlight regions in an image</span></a></li>
+	<li id="t_edgefx"><a href="../edgefx/index.php.html">edgefx
+		<span>Extracts the edges in an image and optionally composes them 
+		with the image to create interesting effects</span></a></li>
+	<li id="t_edges"><a href="../edges/index.php.html">edges
+		<span>Applies edge extraction to image</span></a></li>
+	<li id="t_emboss"><a href="../emboss/index.php.html">emboss
+		<span>Applies an emboss effect to an image</span></a></li>
+	<li id="t_embroidery"><a href="../embroidery/index.php.html">embroidery
+		<span>Applies an embroidery effect to each color in an image</span></a></li>
+	<li id="t_endpoints"><a href="../endpoints/index.php.html">endpoints
+		<span>Applies a Photoshop-like curves operation on an image that only adjusts 
+		the linear endpoints</span></a></li>
+	<li id="t_enhancelab"><a href="../enhancelab/index.php.html">enhancelab
+		<span>Applies brightness/contrast/colorization enhancement on an image via 
+		LAB colorspace</span></a></li>
+	<li id="t_enrich"><a href="../enrich/index.php.html">enrich
+		<span>Enhances an image by high pass filtering and composition</span></a></li>
+	<li id="t_entropy"><a href="../entropy/index.php.html">entropy
+		<span>Computes the normalized entropy of an image channel-by-channel</span></a></li>
+	<li id="t_exposure"><a href="../exposure/index.php.html">exposure
+		<span>Changes the exposure level of an image</span></a></li>
+	<li id="t_feather"><a href="../feather/index.php.html">feather
+		<span>Feathers (smoothes) the white-to-black transition in a 
+		binary mask image</span></a></li>
+	<li id="t_fftconvol"><a href="../fftconvol/index.php.html">fftconvol
+		<span>Performs convolution on an image in the frequency domain</span></a></li>
+	<li id="t_fftdeconvol"><a href="../fftdeconvol/index.php.html">fftdeconvol
+		<span>Performs deconvolution on an image in the frequency domain</span></a></li>
+	<li id="t_fftfilter"><a href="../fftfilter/index.php.html">fftfilter
+		<span>Performs filtering on an image in the frequency domain</span></a></li>
+	<li id="t_filmgrain"><a href="../filmgrain/index.php.html">filmgrain
+		<span>Applies film grain noise to an image</span></a></li>
+	<li id="t_fisheye"><a href="../fisheye/index.php.html">fisheye
+		<span>Applies a fisheye distortion to an image</span></a></li>
+	<li id="t_fisheye2pano"><a href="../fisheye2pano/index.php.html">fisheye2pano
+		<span>Generates a strip panoramic image from a linear type fisheye image 
+		with optional vertical perspective correction</span></a></li>
+	<li id="t_fisheye2rect"><a href="../fisheye2rect/index.php.html">fisheye2rect
+		<span>Generates a perspective (rectilinear) image from a region of a vertically 
+		viewed fisheye image</span></a></li>
+	<li id="t_flicker"><a href="../flicker/index.php.html">flicker
+		<span>Displays and optionally save an animation of the input images</span></a></li>
+	<li id="t_flickerchannel"><a href="../flickerchannel/index.php.html">flickerchannel
+		<span>Displays and optionally save an animation of the channels in 
+		an image</span></a></li>
+	<li id="t_frosted"><a href="../frosted/index.php.html">frosted
+		<span>Applies a frosted glass effect to an image</span></a></li>
+	<li id="t_furrowed"><a href="../furrowed/index.php.html">furrowed
+		<span>Applies a furrowed-looking effect to an image to enhance wrinkles 
+		creating a "gritty" look</span></a></li>
+	<li id="t_fuzzythresh"><a href="../fuzzythresh/index.php.html">fuzzythresh
+		<span>Automatically thresholds an image to binary (b/w) format using the 
+		fuzzy c-means technique</span></a></li>
+	<li id="t_fxtransitions"><a href="../fxtransitions/index.php.html">fxtransitions
+		<span>Creates an animated transition between two images using a special 
+		effect distortion</span></a></li>
+	<li id="t_gaussian"><a href="../gaussian/index.php.html">gaussian
+		<span>Generates high pass or low pass filtered images based upon a Gaussian 
+		shaped convolution</span></a></li>
+	<li id="t_gaussianedge"><a href="../gaussianedge/index.php.html">gaussianedge
+		<span>Sharpens (or blurs) an image near edges using a Gaussian 
+		shaped filter.</span></a></li>
+	<li id="t_glasseffects"><a href="../glasseffects/index.php.html">glasseffects
+		<span>Modifies an image so that it appears to be viewed through 
+		textured and/or tiled glass</span></a></li>
+	<li id="t_glow"><a href="../glow/index.php.html">glow
+		<span>Creates a glowing effect in an image</span></a></li>
+	<li id="t_gradient"><a href="../gradient/index.php.html">gradient
+		<span>Applies a gradient filter to an image.</span></a></li>
+	<li id="t_graytoning"><a href="../graytoning/index.php.html">graytoning
+		<span>Mixes color channels from an image into a grayscale image and 
+		optionally tints it.</span></a></li>
+	<li id="t_greenscreen"><a href="../greenscreen/index.php.html">greenscreen
+		<span>Removes background green color in a green screen image.</span></a></li>
+	<li id="t_grid"><a href="../grid/index.php.html">grid
+		<span>Superimposes a set of horizontal and/or vertical grid lines 
+		on an image</span></a></li>
+	<li id="t_halo"><a href="../halo/index.php.html">halo
+		<span>Applies a circular halo to an image</span></a></li>
+	<li id="t_hamming"><a href="../hamming/index.php.html">hamming
+		<span>Computes the percent hamming distance between two binary string 
+		perceptual hashes</span></a></li>
+	<li id="t_hexagons"><a href="../hexagons/index.php.html">hexagons
+		<span>Creates a hexagonal grid of the randomly rotated input image</span></a></li>
+	<li id="t_histcompare"><a href="../histcompare/index.php.html">histcompare
+		<span>Computes one of several metrics characterizing the difference between 
+		the histograms of two images</span></a></li>
+	<li id="t_histmatch"><a href="../histmatch/index.php.html">histmatch
+		<span>Modifies one image to try to match its histogram and 
+		optionally saturation to that of another image</span></a></li>
+	<li id="t_histog"><a href="../histog/index.php.html">histog
+		<span>Generates an output image which is composed of the histograms
+		from each channel of the input image</span></a></li>
+	<li id="t_houghlines"><a href="../houghlines/index.php.html">houghlines
+		<span>Uses the Hough Transform technique to compute and display straight lines 
+		from a binary edge image</span></a></li>
+	<li id="t_huemap"><a href="../huemap/index.php.html">huemap
+		<span>Transforms the hues in an image from one range to another</span></a></li>
+	<li id="t_imageborder"><a href="../imageborder/index.php.html">imageborder
+		<span>Appends an image border by extending the outer regions of 
+		the image</span></a></li>
+	<li id="t_innercrop"><a href="../innercrop/index.php.html">innercrop
+		<span>Crops an image to a rectangle that will just trim any 
+		irregularly shaped outer boundary color</span></a></li>
+	<li id="t_interleave"><a href="../interleave/index.php.html">interleave
+		<span>Interleaves the channels of a single image or each image of a set of 
+		multiple images</span></a></li>
+	<li id="t_interweave"><a href="../interweave/index.php.html">interweave
+		<span>Interleaves two images together in swaths</span></a></li>
+	<li id="t_isodatathresh"><a href="../isodatathresh/index.php.html">isodatathresh
+		<span>Automatically thresholds an image to binary (b/w) format using the 
+		isodata technique</span></a></li>
+	<li id="t_isolatecolor"><a href="../isolatecolor/index.php.html">isolatecolor
+		<span>Isolates a particular color in an image</span></a></li>
+	<li id="t_isonoise"><a href="../isonoise/index.php.html">isonoise
+		<span>Reduces isolated noise in an image</span></a></li>
+	<li id="t_juliaset"><a href="../juliaset/index.php.html">juliaset
+		<span>Creates a julia set fractal image</span></a></li>
+	<li id="t_kaleidoscope"><a href="../kaleidoscope/index.php.html">kaleidoscope
+		<span>Applies a kaleidoscope effect to an image</span></a></li>
+	<li id="t_kaleidoscopic"><a href="../kaleidoscopic/index.php.html">kaleidoscopic
+		<span>Applies a kaleidoscope effect to an image</span></a></li>
+	<li id="t_kapurthresh"><a href="../kapurthresh/index.php.html">kapurthresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		Kapur's entropy technique</span></a></li>
+	<li id="t_kmeans"><a href="../kmeans/index.php.html">kmeans
+		<span>Applies k-means color reduction to an image</span></a></li>
+	<li id="t_kmeansthresh"><a href="../kmeansthresh/index.php.html">kmeansthresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		the k-means technique</span></a></li>
+	<li id="t_kneemap"><a href="../kneemap/index.php.html">kneemap
+		<span>Creates a symmetric soft knee-shaped curved mapping look up table 
+		and applies it to an image</span></a></li>
+	<li id="t_kuwahara"><a href="../kuwahara/index.php.html">kuwahara
+		<span>Applies a Kuwahara type edge preserving noise reduction filter 
+		to an image</span></a></li>
+	<li id="t_laplacian"><a href="../laplacian/index.php.html">laplacian
+		<span>Applies a laplacian filter to an image</span></a></li>
+<!-- 
+	<li id="t_lenswarp"><a href="http://www.fmwconcepts.com/imagemagick/lenswarp/index.php">lenswarp
+		<span>simulates the effect of looking at a picture through a curved lens 
+		sitting with one flat side against the picture</span></a></li>
+ -->
+	<li id="t_levelcolors"><a href="../levelcolors/index.php.html">levelcolors
+		<span>Applies a color level transformation to an image 
+		channel-by-channel</span></a></li>
+	<li id="t_levelcolors"><a href="../levels/index.php.html">levels
+		<span>Applies a Photoshop-like levels operation on an image</span></a></li>
+	<li id="t_levelcolors"><a href="../lichtenstein/index.php.html">lichtenstein
+		<span>Applies a Roy Lichtenstein newspaper cartoon effect to an image</span></a></li>
+	<li id="t_limitedtrim"><a href="../limitedtrim/index.php.html">limitedtrim
+		<span>Trims an image on all sides by a maximum amount specified by the user</span></a></li>
+	<li id="t_localthresh"><a href="../localthresh/index.php.html">localthresh
+		<span>Automatically thresholds an image to binary (b/w) format using a moving 
+		window adaptive thresholding approach</span></a></li>
+	<li id="t_locatecolors"><a href="../locatecolors/index.php.html">locatecolors
+		<span>Modifies an image showing only those pixels which are within the specified 
+		color range</span></a></li>
+	<li id="t_lucisarteffect"><a href="../lucisarteffect/index.php.html">lucisarteffect
+		<span>Applies a LucisArt-like effect to an image</span></a></li>
+	<li id="t_lupe"><a href="../lupe/index.php.html">lupe
+		<span>Applies a magnifying glass effect in a local area of 
+		an image</span></a></li>
+	<li id="t_magicwand"><a href="../magicwand/index.php.html">magicwand
+		<span>Isolates a contiguous region of an image based upon a color 
+		determined from a user specified image coordinate</span></a></li>
+	<li id="t_mandala"><a href="../mandala/index.php.html">mandala
+		<span>Creates a Mandala type image from simple graphic figures</span></a></li>
+	<li id="t_mandalascope"><a href="../mandalascope/index.php.html">mandalascope
+		<span>Converts an image into a mandala-like kaleidoscope image</span></a></li>
+	<li id="t_mandelbrot"><a href="../mandelbrot/index.php.html">mandelbrot
+		<span>Creates a mandelbrot set fractal image</span></a></li>
+	<li id="t_mapcolors"><a href="../mapcolors/index.php.html">mapcolors
+		<span>Maps or translates one set of colors in an image to another 
+		set of colors</span></a></li>
+	<li id="t_matchimage"><a href="../matchimage/index.php.html">matchimage
+		<span>Matches the brightness and contrast of one image to another image</span></a></li>
+	<li id="t_maxima"><a href="../maxima/index.php.html">maxima
+		<span>Locate one or more local maxima in a grayscale image</span></a></li>
+	<li id="t_maxrgb"><a href="../maxrgb/index.php.html">maxrgb
+		<span>Converts an RGB image to keep only the channel with the maximum 
+		value at each pixel</span></a></li>
+	<li id="t_median"><a href="../median/index.php.html">median
+		<span>Computes the median value of an image</span></a></li>
+	<li id="t_melt"><a href="../melt/index.php.html">melt
+		<span>Creates a melting-like blur effect in an image</span></a></li>
+	<li id="t_meshwarp"><a href="../meshwarp/index.php.html">meshwarp
+		<span>Warps an image according to a user supplied triangular mesh</span></a></li>
+	<li id="t_mesmerize"><a href="../mesmerize/index.php.html">mesmerize
+		<span>Creates a mesmerizing animation from an image</span></a></li>
+	<li id="t_midgradient"><a href="../midgradient/index.php.html">midgradient
+		<span>Creates a two-color gradient with adjustable mid-color location</span></a></li>
+	<li id="t_midtonebalance"><a href="../midtonebalance/index.php.html">midtonebalance
+		<span>Color balances an image in the midtones in a manner similar to Photoshop</span></a></li>
+	<li id="t_mirrorize"><a href="../mirrorize/index.php.html">mirrorize
+		<span>Creates a mirror effect in an image</span></a></li>
+	<li id="t_mode"><a href="../mode/index.php.html">mode
+		<span>Computes the mode value of an image.</span></a></li>
+	<li id="t_modulatecolor1"><a href="../modulatecolor1/index.php.html">modulatecolor1
+		<span>Changes brightness, saturation and/or hue for any primary or secondary 
+		color in an image.</span></a></li>
+	<li id="t_modulatecolor2"><a href="../modulatecolor2/index.php.html">modulatecolor2
+		<span>Changes brightness, saturation and/or hue for any primary or secondary 
+		color in an image.</span></a></li>
+	<li id="t_moments"><a href="../moments/index.php.html">moments
+		<span>Computes shift, scale and rotation invariant image moments as well as 
+		elliptical shape descriptors</span></a></li>
+	<li id="t_morphology"><a href="../morphology/index.php.html">morphology
+		<span>Performs binary or grayscale morphologic operations on an image, including 
+		dilate, erode, open and close</span></a></li>
+	<li id="t_mosaictiles"><a href="../mosaictiles/index.php.html">mosaictiles
+		<span>Applies a mosaic tiles effect to image</span></a></li>
+	<li id="t_mottle"><a href="../mottle/index.php.html">mottle
+		<span>Applies various mottle effects to an image</span></a></li>
+	<li id="t_multicrop"><a href="../multicrop/index.php.html">multicrop
+		<span>Crops and unrotates multiple images from a scanned image</span></a></li>
+	<li id="t_multicrop2"><a href="../multicrop2/index.php.html">multicrop2
+		<span>Crops and unrotates multiple images from a scanned image</span></a></li>
+	<li id="t_multigradient"><a href="../multigradient/index.php.html">multigradient
+		<span>Creates either a linear or radial gradient image with two or more 
+		color stops</span></a></li>
+	<li id="t_nearestcolor"><a href="../nearestcolor/index.php.html">nearestcolor
+		<span>Finds the nearest color value in an image to a reference color</span></a></li>
+	<li id="t_neg2pos"><a href="../neg2pos/index.php.html">neg2pos
+		<span>Converts from a (scanned film) negative image to a positive image</span></a></li>
+	<li id="t_negative2positive"><a href="../negative2positive/index.php.html">negative2positive
+		<span>Converts from a (scanned film) negative image to a positive image</span></a></li>
+	<li id="t_nightvision"><a href="../nightvision/index.php.html">nightvision
+		<span>Simulates a picture as viewed through night vision goggles</span></a></li>
+	<li id="t_noisecleaner"><a href="../noisecleaner/index.php.html">noisecleaner
+		<span>Iteratively cleans noise from an image</span></a></li>
+	<li id="t_normcrosscorr"><a href="../normcrosscorr/index.php.html">normcrosscorr
+		<span>Computes the normalized cross correlation surface to find where a small image 
+		best matches within a larger image</span></a></li>
+	<li id="t_notch"><a href="../notch/index.php.html">notch
+		<span>Creates and applies a notch filter to an image in the frequency domain 
+		to remove dither patterns and other regular noise patterns</span></a></li>
+	<li id="t_omnistretch"><a href="index.php.html">omnistretch
+		<span>Enhances the dynamic range of brightness values and optionally saturation 
+		values in an image</span></a></li>
+	<li id="t_ortoneffect"><a href="../ortoneffect/index.php.html">ortoneffect
+		<span>Applies an Orton effect to an image</span></a></li>
+	<li id="t_otsuthresh"><a href="../otsuthresh/index.php.html">otsuthresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		Otsu's between class variance technique</span></a></li>
+	<li id="t_outfit"><a href="../outfit/index.php.html">outfit
+		<span>Transforms a pattern image to place it over an image of some piece 
+		of clothing or outfit</span></a></li>
+	<li id="t_outfitwarper"><a href="../outfitwarper/index.php.html">outfitwarper
+		<span>Transforms a pattern image to place it over an image of some piece 
+		of clothing or outfit using a lighting file, a displacement map a mask and  
+		arguments provided by the script outfit</span></a></li>
+	<li id="t_overlapcrop"><a href="../overlapcrop/index.php.html">overlapcrop
+		<span>Creates a sequence of cropped subsections permitting optional overlap 
+		of the subsections</span></a></li>
+	<li id="t_pagecurl"><a href="../pagecurl/index.php.html">pagecurl
+		<span>Applies a pagecurl effect to the lower right corner of an image</span></a></li>
+	<li id="t_pagepeel"><a href="../pagepeel/index.php.html">pagepeel
+		<span>Applies a pagepeel effect to the lower right corner of an image</span></a></li>
+	<li id="t_painteffect"><a href="../painteffect/index.php.html">painteffect
+		<span>Applies a paint type effect to an image</span></a></li>
+	<li id="t_pano2fisheye"><a href="../pano2fisheye/index.php.html">pano2fisheye
+		<span>Transforms a spherical panorama to a fisheye view</span></a></li>
+	<li id="t_pano2rect"><a href="../pano2rect/index.php.html">pano2rect
+		<span>Applies vertical perspective correction to an angular 
+		panoramic image</span></a></li>
+	<li id="t_peelingpaint"><a href="../peelingpaint/index.php.html">peelingpaint
+		<span>Applies a peeling paint effect to an image</span></a></li>
+	<li id="t_perforations"><a href="../perforations/index.php.html">perforations
+		<span>Applies film-like perforations to two opposite edges of an image</span></a></li>
+	<li id="t_perlin"><a href="../perlin/index.php.html">perlin
+		<span>Creates an image composed of Perlin type noise</span></a></li>
+	<li id="t_phasecorr"><a href="../phasecorr/index.php.html">phasecorr
+		<span>Computes the phase correlation surface to find where a small image best 
+		matches within a larger image</span></a></li>
+	<li id="t_phashcompare"><a href="../phashcompare/index.php.html">phashcompare
+		<span>Compares two 168 digit phash strings to compute a phash metric</span></a></li>
+	<li id="t_phashconvert"><a href="../phashconvert/index.php.html">phashconvert
+		<span>Converts the 42 phash float values for an image to a string of 
+		168 digits</span></a></li>
+	<li id="t_phashes"><a href="../phashes/index.php.html">phashes
+		<span>Computes and stores one or more perceptual hashes for all 
+		provided images</span></a></li>
+	<li id="t_picframe"><a href="../picframe/index.php.html">picframe
+		<span>Adds a picture frame around an image</span></a></li>
+	<li id="t_picturefold"><a href="../picturefold/index.php.html">picturefold
+		<span>Applies a map-like folded appearance to an image</span></a></li>
+	<li id="t_pinbarrel"><a href="../pinbarrel/index.php.html">pinbarrel
+		<span>Applies or corrects pincushion and/or barrel lens distortion to an image</span></a></li>
+	<li id="t_pip"><a href="../pip/index.php.html">pip
+		<span>Creates a picture-in-picture effect</span></a></li>
+	<li id="t_pixelize"><a href="../pixelize/index.php.html">pixelize
+		<span>Creates a pixelized or blocky effect in an image</span></a></li>
+	<li id="t_plm"><a href="../plm/index.php.html">plm
+		<span>Generates a piece-wise linear mapping grayscale 
+		look up table and applies it to an image</span></a></li>
+	<li id="t_plmlut"><a href="../plmlut/index.php.html">plmlut
+		<span>Generates a piece-wise linear mapping grayscale 
+		look up table</span></a></li>
+	<li id="t_plot"><a href="../plot/index.php.html">plot
+		<span>Generates a profile of an image row or column or 
+		an image histogram.</span></a></li>
+	<li id="t_plot3D"><a href="../plot3D/index.php.html">plot3D
+		<span>Generates a 3D plot of a single channel or grayscale image</span></a></li>
+	<li id="t_polar"><a href="../polar/index.php.html">polar
+		<span>Applies either a rectangular (cartesian) to polar transformation or 
+		a polar to rectangular (cartesian) transformation on an image</span></a></li>
+	<li id="t_polarblur"><a href="../polarblur/index.php.html">polarblur
+		<span>Applies a polar blur to an image</span></a></li>
+	<li id="t_polyring"><a href="../polyring/index.php.html">polyring
+		<span>Creates a polygon ring image from one or more images</span></a></li>
+	<li id="t_popart"><a href="../popart/index.php.html">popart
+		<span>Creates a pop art style image</span></a></li>
+	<li id="t_postagestamp"><a href="../postagestamp/index.php.html">postagestamp
+		<span>Applies a perforated postage stamp like border around an image</span></a></li>
+	<li id="t_posteredges"><a href="../posteredges/index.php.html">posteredges
+		<span>Applies posterized edges to an image</span></a></li>
+	<li id="t_profile"><a href="../profile/index.php.html">profile
+		<span>Generates a profile of an image row or column</span></a></li>
+	<li id="t_pseudocolor"><a href="../pseudocolor/index.php.html">pseudocolor
+		<span>Generates a pseudocolored image or pseudocolored animation from grayscale 
+		image using a rainbow colored transformation</span></a></li>
+	<li id="t_ptilethresh"><a href="../ptilethresh/index.php.html">ptilethresh
+		<span>Automatically thresholds an image to binary (b/w) format at a specified 
+		percentile on the cumulative histogram</span></a></li>
+	<li id="t_puzzle"><a href="../puzzle/index.php.html">puzzle
+		<span>Applies a puzzle like effect to an image</span></a></li>
+	<li id="t_radialgradient"><a href="../radialgradient/index.php.html">radialgradient
+		<span>Creates a radial gradient image</span></a></li>
+	<li id="t_radialgrid"><a href="../radialgrid/index.php.html">radialgrid
+		<span>Superimposes circular grid lines on an image</span></a></li>
+	<li id="t_randomblob"><a href="../randomblob/index.php.html">randomblob
+		<span>Creates an image composed of a moderate sized black random blob shape 
+		on a white background</span></a></li>
+	<li id="t_randomclipart"><a href="../randomclipart/index.php.html">randomclipart
+		<span>Randomly distributes clip art over the image</span></a></li>
+	<li id="t_rangethresh"><a href="../rangethresh/index.php.html">rangethresh
+		<span>Converts an image to binary using range values for each channel of the input</span></a></li>
+	<li id="t_recursion"><a href="../recursion/index.php.html">recursion
+		<span>Creates a recursive affine composite effect in an image</span></a></li>
+	<li id="t_redeye"><a href="../redeye/index.php.html">redeye
+		<span>Removes redeye from an image</span></a></li>
+	<li id="t_redist"><a href="../redist/index.php.html">redist
+		<span>Modifies an image so that its (grayscale) histogram has a 
+		either Gaussian, distribution or a Uniform Distribution</span></a></li>
+	<li id="t_reflect"><a href="../reflect/index.php.html">reflect
+		<span>Splits an image, reflects each side and appends them to form horizontally 
+		symmetric images</span></a></li>
+	<li id="t_remap"><a href="../remap/index.php.html">remap
+		<span>Remaps the colors in an image using a 3D color distance metric 
+		relative to a color table map image</span></a></li>
+	<li id="t_removecolorcast"><a href="../removecolorcast/index.php.html">removecolorcast
+		<span>Removes a color cast from an image</span></a></li>
+	<li id="t_replacecolor"><a href="../replacecolor/index.php.html">replacecolor
+		<span>Changes one color to another color in an image</span></a></li>
+	<li id="t_retinex"><a href="../retinex/index.php.html">retinex
+		<span>Enhances detail and color in an image using the multiscale 
+		retinex algorithm</span></a></li>
+	<li id="t_rgbdots"><a href="../rgbdots/index.php.html">rgbdots
+		<span>Transforms an image into dots in primary and secondary colors</span></a></li>
+	<li id="t_ripples"><a href="../ripples/index.php.html">ripples
+		<span>Applies various circular ripple effects to an image</span></a></li>
+	<li id="t_rmsecorr"><a href="../rmsecorr/index.php.html">rmsecorr
+		<span>Computes the root mean squared correlation surface to find where a small image 
+		best matches within a larger image</span></a></li>
+	<li id="t_rotate3D"><a href="../rotate3D/index.php.html">rotate3D
+		<span>Applies a perspective distortion to an image by providing three 
+		rotation angles and an optional perspective exaggeration</span></a></li>
+	<li id="t_sahoothresh"><a href="../sahoothresh/index.php.html">sahoothresh
+		<span>Automatically thresholds an image to binary (b/w) format using 
+		Sahoo's entropy technique</span></a></li>
+	<li id="t_saturation"><a href="../saturation/index.php.html">saturation
+		<span>Changes the color saturation in an image</span></a></li>
+	<li id="t_scalescroll"><a href="../scalescroll/index.php.html">scalescroll
+		<span>Creates a scaled scrolling animation</span></a></li>
+	<li id="t_scatter"><a href="../scatter/index.php.html">scatter
+		<span>Generates a channel-by-channel scatter diagram between two images</span></a></li>
+	<li id="t_scatterchannels"><a href="../scatterchannels/index.php.html">scatterchannels
+		<span>Generates a scatter diagram between channels of an image</span></a></li>
+	<li id="t_screeneffects"><a href="../screeneffects/index.php.html">screeneffects
+		<span>Applies screen-like effects to an image</span></a></li>
+	<li id="t_scriptbatch"><a href="../scriptbatch/index.php.html">scriptbatch
+		<span>Runs another script over a folder of images</span></a></li>
+	<li id="t_separate"><a href="../separate/index.php.html">separate
+		<span>Identifies each separate white shape in a binary image</span></a></li>
+	<li id="t_shadowhighlight"><a href="../shadowhighlight/index.php.html">shadowhighlight
+		<span>Adjusts the tone in shadow and highlight areas of an image</span></a></li>
+	<li id="t_shadows"><a href="../shadows/index.php.html">shadows
+		<span>Applies drop shadows to an image that has an alpha channel</span></a></li>
+	<li id="t_shapecluster"><a href="../shapecluster/index.php.html">shapecluster
+		<span>Creates a division of the image into 5 separated rectangular regions</span></a></li>
+	<li id="t_shapecompare"><a href="../shapecompare/index.php.html">shapecompare
+		<span>Compares two images' shapes using metrics computed from Hu image moments</span></a></li>
+	<li id="t_shapemorph"><a href="../shapemorph/index.php.html">shapemorph
+		<span>Create a shape morphing animation sequence between two images</span></a></li>
+	<li id="t_shapemorph2"><a href="../shapemorph2/index.php.html">shapemorph2
+		<span>Create a shape morphing animation sequence between two images</span></a></li>
+	<li id="t_sharp"><a href="../sharp/index.php.html">sharp
+		<span>Adaptively sharpens an image or extract edges</span></a></li>
+	<li id="t_sharpedge"><a href="../sharpedge/index.php.html">sharpedge
+		<span>Adaptively sharpens (or blurs) an image near edges</span></a></li>
+	<li id="t_shimmer"><a href="../shimmer/index.php.html">shimmer
+		<span>Creates a reflected heat shimmering effect animation</span></a></li>
+	<li id="t_shuffle"><a href="../shuffle/index.php.html">shuffle
+		<span>Randomly shuffles positions of square sized tiles in an image</span></a></li>
+	<li id="t_sigmoidal"><a href="../sigmoidal/index.php.html">sigmoidal
+		<span>Applies a sigmoidal brightness and/or contrast adjustment to an image</span></a></li>
+	<li id="t_similar"><a href="../similar/index.php.html">similar
+		<span>Computes the normalized cross correlation similarity metric between 
+		two equal dimensioned images</span></a></li>
+	<li id="t_sinescrollimage"><a href="../sinescrollimage/index.php.html">sinescrollimage
+		<span>Creates a sinusoidal curved scrolling image banner animation</span></a></li>
+	<li id="t_sinescrolltext"><a href="../sinescrolltext/index.php.html">sinescrolltext
+		<span>Creates a sinusoidal curved scrolling text banner animation</span></a></li>
+	<li id="t_sketch"><a href="../sketch/index.php.html">sketch
+		<span>Applies a sketch effect to an image</span></a></li>
+	<li id="t_sketcher"><a href="../sketcher/index.php.html">sketcher
+		<span>Applies a sketch effect to an image</span></a></li>
+	<li id="t_sketchetch"><a href="../sketchetch/index.php.html">sketchetch
+		<span>Creates an etch-like sketch from an image</span></a></li>
+	<li id="t_sketching"><a href="../sketching/index.php.html">sketching
+		<span>Applies a sketch effect to an image</span></a></li>
+	<li id="t_skew"><a href="../skew/index.php.html">skew
+		<span>Applies a skew distortion to an image</span></a></li>
+	<li id="t_slantedlight"><a href="../slantedlight/index.php.html">slantedlight
+		<span>Applies slanted lighting to an image</span></a></li>
+	<li id="t_slice"><a href="../slice/index.php.html">slice
+		<span>Thresholds an image (inclusively) between a range of graylevels 
+		and optionally colorizes inside and/or outside the threshold range</span></a></li>
+	<li id="t_smartcrop"><a href="../smartcrop/index.php.html">smartcrop
+		<span>Automatically crops an image to a given size around the hightest 
+		detail region</span></a></li>
+	<li id="t_smarttrim"><a href="../smarttrim/index.php.html">smarttrim
+		<span>Automatically trims an image around the region of highest detail 
+		in the image</span></a></li>
+	<li id="t_softfocus"><a href="../softfocus/index.php.html">softfocus
+		<span>Applies a softfocus effect to an image</span></a></li>
+	<li id="t_softlight"><a href="../softlight/index.php.html">softlight
+		<span>Applies soft light to an image</span></a></li>
+	<li id="t_space"><a href="../space/index.php.html">space
+		<span>Applies a spatially adaptive contrast (and brightness) enhancement 
+		filter to an image</span></a></li>
+	<li id="t_space2"><a href="../space2/index.php.html">space2
+		<span>Applies a spatially adaptive contrast (and brightness) enhancement 
+		filter to an image</span></a></li>
+	<li id="t_spectrum"><a href="../spectrum/index.php.html">spectrum
+		<span>Computes the spectrum image from the magnitude of the Fourier Transform 
+		of an image.</span></a></li>
+	<li id="t_spectrumhist"><a href="../spectrumhist/index.php.html">spectrumhist
+		<span>Creates either a color spectrum or histogram of the colors in an image.</span></a></li>
+	<li id="t_sphere"><a href="../sphere/index.php.html">sphere
+		<span>Creates a colored sphere with a combination of diffuse and specular illumination</span></a></li>
+	<li id="t_sphericalpano2cube"><a href="../sphericalpano2cube/index.php.html">sphericalpano2cube
+		<span>Transforms a spherical panorama into a cubical representation</span></a></li>
+	<li id="t_sphericalpano2rect"><a href="../sphericalpano2rect/index.php.html">sphericalpano2rect
+		<span>Generate a perspective (rectilinear) image from a region of a 
+		spherical panorama image</span></a></li>
+	<li id="t_spherize"><a href="../spherize/index.php.html">spherize
+		<span>Warps an image onto a (hemi-)sphere</span></a></li>
+	<li id="t_splice"><a href="../splice/index.php.html">splice
+		<span>Applies a jagged cut and splice effect to an image</span></a></li>
+	<li id="t_spline"><a href="../spline/index.php.html">spline
+		<span>Draws a spline curve on an image based upon supplied points</span></a></li>
+	<li id="t_splitcrop"><a href="../splitcrop/index.php.html">splitcrop
+		<span>Crops an image into two or four sections according to the given 
+		x,y coordinates</span></a></li>
+	<li id="t_splitimage"><a href="../splitimage/index.php.html">splitimage
+		<span>Generates a side-by-side append of two partial images with an option to 
+		animate the amount of each image used in the append</span></a></li>
+	<li id="t_splittone1"><a href="../splittone1/index.php.html">splittone1
+		<span>Applies a color splittone effect to an image</span></a></li>
+	<li id="t_splittone2"><a href="../splittone2/index.php.html">splittone2
+		<span>Applies a color splittone effect to an image</span></a></li>
+	<li id="t_splittone3"><a href="../splittone3/index.php.html">splittone3
+		<span>Applies a color splittone effect to an image</span></a></li>
+	<li id="t_spots"><a href="../spots/index.php.html">spots
+		<span>Converts the image into a series or uniform-colored spots</span></a></li>
+	<li id="t_squareup"><a href="../squareup/index.php.html">squareup
+		<span>Resizes an image and squares it up either by padding or 
+		cropping</span></a></li>
+	<li id="t_ssim"><a href="../ssim/index.php.html">ssim
+		<span>Computes the structural similarity metric between two equal 
+		sized images.</span></a></li>
+	<li id="t_starburst"><a href="../stainedglass/index.php.html">stainedglass
+		<span>Applies a stained glass cell effect to an image</span></a></li>
+	<li id="t_starburst"><a href="../starburst/index.php.html">starburst
+		<span>Applies a starburst pattern to an image</span></a></li>
+	<li id="t_statsfilt"><a href="../statsfilt/index.php.html">statsfilt
+		<span>Computes various localized (neighborhood) statistical 
+		filters on an image</span></a></li>
+	<li id="t_statsfilt"><a href="../stdimage/index.php.html">stdimage
+		<span>Computes a pixel-by-pixel standard deviation or variance image from 
+		multiple input images</span></a></li>
+	<li id="t_stretch"><a href="../stretch/index.php.html">stretch
+		<span>Modifies an image to automatically stretch the dynamic range between 
+		full black and white</span></a></li>
+	<li id="t_striations"><a href="../striations/index.php.html">striations
+		<span>Applies radial or circular striations to image</span></a></li>
+	<li id="t_stutter"><a href="../stutter/index.php.html">stutter
+		<span>Creates a 'stuttered' offset-like effect in an image</span></a></li>
+	<li id="t_surroundblur"><a href="../surroundblur/index.php.html">surroundblur
+		<span>Creates a blurred background region around the input image</span></a></li>
+	<li id="t_textcleaner"><a href="../textcleaner/index.php.html">textcleaner
+		<span>Processes a scanned document of text to clean the text background</span></a></li>
+	<li id="t_textdeskew"><a href="../textdeskew/index.php.html">textdeskew
+		<span>Unrotates (deskews) an image containing text</span></a></li>
+	<li id="t_textdistort"><a href="../textdistort/index.php.html">textdistort
+		<span>Distorts repeated text to warp it to the shape of the image content</span></a></li>
+	<li id="t_texteffect"><a href="../texteffect/index.php.html">texteffect
+		<span>Convert text to an image after applying various effects, styling 
+		and color</span></a></li>
+	<li id="t_texteffect2"><a href="../texteffect2/index.php.html">texteffect2
+		<span>Converts large size text to an image with color, effects 
+		and styling</span></a></li>
+	<li id="t_textetch"><a href="../textetch/index.php.html">textetch
+		<span>Adds text to an image to simulate etching on glass</span></a></li>
+	<li id="t_texturize"><a href="../texturize/index.php.html">texturize
+		<span>Creates a texture pattern and optionally applies it to the 
+		background of an input image</span></a></li>
+	<li id="t_thermography"><a href="../thermography/index.php.html">thermography
+		<span>Simulates a picture taken with a thermal imaging camera</span></a></li>
+	<li id="t_thresholds"><a href="../thresholds/index.php.html">thresholds
+		<span>Applies one or two thresholds to an image</span></a></li>
+	<li id="t_tileimage"><a href="../tileimage/index.php.html">tileimage
+		<span>Tiles an image to a given size with various tile arrangements</span></a></li>
+	<li id="t_tiler"><a href="../tiler/index.php.html">tiler
+		<span>Converts an image into a tilable texture</span></a></li>
+	<li id="t_tiltshift"><a href="../tiltshift/index.php.html">tiltshift
+		<span>Applies a tiltshift effect to an image</span></a></li>
+	<li id="t_tintilize"><a href="../tintilize/index.php.html">tintilize
+		<span>Applies a color tint to the mid-range of a grayscale image</span></a></li>
+	<li id="t_tinyplanet"><a href="../tinyplanet/index.php.html">tinyplanet
+		<span>Transforms a spherical panorama to a linear fisheye view</span></a></li>
+	<li id="t_tonemap1"><a href="../tonemap1/index.php.html">tonemap1
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			non-linear log or gamma function</span></a></li>
+	<li id="t_tonemap2"><a href="../tonemap2/index.php.html">tonemap2
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			non-linear log or gamma function plus another extra processing 
+			function</span></a></li>
+	<li id="t_tonemap3"><a href="../tonemap3/index.php.html">tonemap3
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			non-linear log or gamma function plus another extra processing 
+			function</span></a></li>
+	<li id="t_tonemap4"><a href="../tonemap4/index.php.html">tonemap4
+		<span>Enhances the shadows and/or highlight regions in an image using a 
+			dual gamma function plus an extra processing function</span></a></li>
+	<li id="t_toon"><a href="../toon/index.php.html">toon
+		<span>Applies a cartoon effect to an image</span></a></li>
+	<li id="t_toonify"><a href="../toonify/index.php.html">toonify
+		<span>Applies a cartoon effect to an image</span></a></li>
+	<li id="t_toonizarro"><a href="../toonizarro/index.php.html">toonizarro
+		<span>Applies a Superman Bizarro-like cartoon effect to an image</span></a></li>
+	<li id="t_toycamera"><a href="../toycamera/index.php.html">toycamera
+		<span>Simulates pictures taken by lomographic or holga type toy cameras</span></a></li>
+	<li id="t_transfercolor"><a href="../transfercolor/index.php.html">transfercolor
+		<span>Transfers the coloring from one image to another image</span></a></li>
+	<li id="t_transitions"><a href="../transitions/index.php.html">transitions
+		<span>Applies an animated transition between two images</span></a></li>
+	<li id="t_trianglethresh"><a href="../trianglethresh/index.php.html">trianglethresh
+		<span>Automatically thresholds an image to binary (b/w) format using the 
+		triangle technique</span></a></li>
+	<li id="t_tricolorize"><a href="../tricolorize/index.php.html">tricolorize
+		<span>Smoothly colorizes a grayscale image with either one, two or three 
+		different colors</span></a></li>
+	<li id="t_trim2detail"><a href="../trim2detail/index.php.html">trim2detail
+		<span>Trims an image to the bounding rectangle about the image's 
+		main content</span></a></li>
+	<li id="t_trim2rect"><a href="../trim2rect/index.php.html">trim2rect
+		<span>Automatically trims the sides of an image until no outer row or column 
+		contains the background color</span></a></li>
+	<li id="t_trimcorners"><a href="../trimcorners/index.php.html">trimcorners
+		<span>Automatically crops the image to removed rounded corners</span></a></li>
+	<li id="t_trimmer"><a href="../trimmer/index.php.html">trimmer
+		<span>Trims the background from any number of specified sides of 
+		an image</span></a></li>
+	<li id="t_tshirt"><a href="../tshirt/index.php.html">tshirt
+		<span>Transforms an image to place it in a region of a tshirt image.</span></a></li>
+	<li id="t_tshirtwarp"><a href="../tshirtwarp/index.php.html">tshirtwarp
+		<span>Transforms an image to place it in a region of a tshirt image using a lighting file, 
+		a displacement map and arguments provided by the script tshirt</span></a></li>
+	<li id="t_tshirtwarper"><a href="../tshirtwarper/index.php.html">tshirtwarper
+		<span>Transforms an image to place it in a region of a tshirt image using a lighting file, 
+		a displacement map and arguments provided by the script tshirt</span></a></li>
+	<li id="t_tunnelize"><a href="../tunnelize/index.php.html">tunnelize
+		<span>Creates a tunnel-like effect on an image</span></a></li>
+	<li id="t_turbulence"><a href="../turbulence/index.php.html">turbulence
+		<span>Applies a turbulence-like warping of the image</span></a></li>
+	<li id="t_turn"><a href="../turn/index.php.html">turn
+		<span>Simultaneously rotates and crops an image to eliminate 
+		any background</span></a></li>
+	<li id="t_typewriter"><a href="../typewriter/index.php.html">typewriter
+		<span>Creates a typewriter style scrolling text animation</span></a></li>
+	<li id="t_unrotate"><a href="../unperspective/index.php.html">unperspective
+		<span>Automatically removes pespective distortion from an image</span></a></li>
+	<li id="t_unrotate"><a href="../unrotate/index.php.html">unrotate
+		<span>Automatically unrotates a rotated image and trims the surrounding 
+		border</span></a></li>
+	<li id="t_unrotate2"><a href="../unrotate2/index.php.html">unrotate2
+		<span>Automatically unrotates a rotated image and trims the surrounding 
+		border</span></a></li>
+	<li id="t_uwcorrect"><a href="../uwcorrect/index.php.html">uwcorrect
+		<span>Corrects the color balance for red light attenuation in pictures taken 
+		underwater</span></a></li>
+	<li id="t_variableblur"><a href="../variableblur/index.php.html">variableblur
+		<span>Applies a variable blur to an image based upon a mask image</span></a></li>
+	<li id="t_vibrance"><a href="../vibrance/index.php.html">vibrance
+		<span>Applies a non-linear change to the saturation of an image</span></a></li>
+	<li id="t_vibrance2"><a href="../vibrance2/index.php.html">vibrance2
+		<span>Applies a non-linear change to the chroma channel of an image</span></a></li>
+	<li id="t_vibrance3"><a href="../vibrance3/index.php.html">vibrance3
+		<span>Applies a non-linear change to the chroma channel of an image</span></a></li>
+	<li id="t_videoglitch"><a href="../videoglitch/index.php.html">videoglitch
+		<span>Applies a video glitch effect to an image</span></a></li>
+	<li id="t_vignette"><a href="../vignette/index.php.html">vignette
+		<span>Applies a vignette effect to a picture</span></a></li>
+	<li id="t_vignette2"><a href="../vignette2/index.php.html">vignette2
+		<span>Applies a vignette effect to a picture</span></a></li>
+	<li id="t_vignette3"><a href="../vignette3/index.php.html">vignette3
+		<span>Applies a vignette effect to a picture</span></a></li>
+	<li id="t_vintage1"><a href="../vintage1/index.php.html">vintage1
+		<span>Applies a classic blue-green vintage effect to an image</span></a></li>
+	<li id="t_vintage2"><a href="../vintage2/index.php.html">vintage2
+		<span>Applies a colorful vintage effect to an image</span></a></li>
+	<li id="t_vintage3"><a href="../vintage3/index.php.html">vintage3
+		<span>Applies an old, heritage style vintage effect to an image</span></a></li>
+	<li id="t_warholeffect"><a href="../warholeffect/index.php.html">warholeffect
+		<span>Creates an Andy Warhol style colorization image</span></a></li>
+	<li id="t_watercolor"><a href="../watercolor/index.php.html">watercolor
+		<span>Applies a watercolor effect to an image</span></a></li>
+	<li id="t_whitebalance"><a href="../wavemap/index.php.html">wavemap
+		<span>Transforms the graylevels in each RGB channel according to a 
+		sinusoidal wave function</span></a></li>
+	<li id="t_whitebalance"><a href="../whitebalance/index.php.html">whitebalance
+		<span>Transform an image's overall color balance according to a desired change in a 
+		specified white point color</span></a></li>
+	<li id="t_whitebalancing"><a href="../whitebalancing/index.php.html">whitebalancing
+		<span>Applies white balancing to an image according to a gray world method
+		 in LAB colorspace</span></a></li>
+	<li id="t_whiteboard"><a href="../whiteboard/index.php.html">whiteboard
+		<span>Processes a picture of a whiteboard to clean up the background and correct 
+		the perspective</span></a></li>
+	<li id="t_wiggle"><a href="../wiggle/index.php.html">wiggle
+		<span>Creates a sinusoidal wiggling animation</span></a></li>
+	<li id="t_woodbrand"><a href="../woodbrand/index.php.html">woodbrand
+		<span>Creates a branded effect in a wood grain image using a binary image 
+		as the brand</span></a></li>
+	<li id="t_woodcut"><a href="../woodcut/index.php.html">woodcut
+		<span>Applies a woodcut effect to an image</span></a></li>
+	<li id="t_woodgrain"><a href="../woodgrain/index.php.html">woodgrain
+		<span>Simulates a woodgrain texture</span></a></li>
+	<li id="t_xpand"><a href="../xpand/index.php.html">xpand
+		<span>Applies a non-uniform outward stretch of the image in 
+		one direction</span></a></li>
+	<li id="t_xposure"><a href="../xposure/index.php.html">xposure
+		<span>Changes the exposure level of an image by 
+		photographic stops</span></a></li>
+	<li id="t_xtract"><a href="../xtract/index.php.html">xtract
+		<span>Uses Hough lines to extract and rectify a quadrilateral area 
+		from an image</span></a></li>
+	<li id="t_zerocrossing"><a href="../zerocrossing/index.php.html">zerocrossing
+		<span>Applies a zero crossing edge detector to an image</span></a></li>
+	<li id="t_zoomblur"><a href="../zoomblur/index.php.html">zoomblur
+		<span>Applies a radial or zoom blur to an image</span></a></li>
+	<li id="t_zoomrotatetext"><a href="../zoomrotatetext/index.php.html">zoomrotatetext
+		<span>Creates a zoomed rotating text animation</span></a></li>
+</ul>
+
+<table border="0" cellspacing="0" cellpadding="5" align="center" width="90%">
+	<tr>
+		<td align="left" valign="middle">
+			<ul>
+				<b>Licensing:</b>
+				<p align="left">Copyright &copy; Fred Weinhaus</p>
+				<p align="left">My scripts are available <u>free of charge for non-commercial (non-profit) use, ONLY.</u></p>
+				<p align="left"><b>For use of my scripts in commercial (for-profit) environments or non-free applications, please contact me 
+					(Fred Weinhaus) for licensing arrangements. My email address is fmw at alink dot net.</b></p>
+				<p align="left">If you: 1) redistribute, 2) incorporate any of these scripts into other free 
+					applications or 3) reprogram them in another scripting language, then 
+					<u>you must contact me for permission</u>, especially if the result 
+					might be used in a commercial or for-profit environment.</p>
+				<p align="left">Usage, whether stated or not in the script, is restricted to the above licensing arrangements. 
+					It is also subject, in a subordinate manner, to the ImageMagick license, which can be found at:
+					<a href="http://www.imagemagick.org/script/license.php" target="_blank">
+					http://www.imagemagick.org/script/license.php</a></p>
+				<p align="left" class="red">Please read the <u>Pointers For Use</u> on my home page to properly install and customize my scripts.</u></p>
+				
+			</ul>
+		</td>
+	</tr>
+</table>
+
+<h2 align="center">
+OMNISTRETCH
+</h2>
+
+<br />
+
+<table border="0" cellspacing="0" cellpadding="5" align="center" width="70%">
+	<tr>
+		<td align="left" valign="middle" class="larger">
+		<p align="left">
+		Enhances the dynamic range of brightness values and 
+		optionally saturation values in an image
+		</td>
+	</tr>
+</table>
+
+<p align="center"><a href="../downloadcounter.php%3Fscriptname=omnistretch&amp;dirname=omnistretch" >Download Script</a></p>
+
+<p align="center" class="smaller red">
+last modified: December 15, 2018</p>
+
+<br />
+<br />
+
+<table border="0" cellspacing="0" cellpadding="5" align="center" width="90%">
+	<tr>
+		<td align="center" valign="middle" class="fixedwidth">
+		<p align="left">USAGE: omnistretch [option1] [option2] [option3] [option4] infile outfile</p>
+
+		<p align="left">
+		Option1 (choice of one only):<br />
+		  -h or -help ................ get help<br />
+		  -st ........................ get image statistics; requires input_file<br />
+  		  -m or -model ............... processing (color) model (HSL, HSB, RGB);<br />
+  		  ............................ requires infile and outfile; default HSL if none specified
+		</p>
+
+		<p align="left">
+		Option2 (choice of one only):<br />
+  		  -b ... low,[high[,gamma]] .. process w/ brightness 0-100 for low,high; gamma 0-10<br />
+		  -c ... low,[high[,gamma]] .. process w/ histogram counts >=0 for low,high; gamma 0-10<br />
+		  -pc .. low,[high[,gamma]] .. process w/ % of max histogram counts 0-100 for low,high; gamma 0-10<br />
+		  -cc .. low,[high[,gamma]] .. process w/ cumulative histogram counts >=0 for low,high; gamma 0-10<br />
+		  -cd .. low,[high[,gamma]] .. process w/ cumulative histogram count differences >=0 for low,high; gamma 0-10<br />
+		  -ab .. gamma_method ........ auto process w/ default brightness values of min,max,gamma<br />
+		  -ac .. gamma_method ........ auto process w/ default histogram counts of 30,30,gamma<br />
+		  -apc . gamma_method ........ auto process w/ default % of max histogram counts of 10,10,gamma<br />
+		  -acc . gamma_method ........ auto process w/ default % cumulative histogram counts of .6,.6,gamma<br />
+		  -acd . gamma_method ........ auto process w/ default % cumulative histogram count differences of .06,.06,gamma
+		</p>
+
+		<p align="left">
+		Option2:<br />
+		  -s ... sgamma .............. process w/ saturation; sgamma 0-10
+		</p>
+
+		<p align="left">
+		Option3:<br />
+		 -g ......................... display graph of intensity mapping function,<br />
+		  ............................ but must be used in conjunction with option 1 or 2,<br />
+		  ............................ but not -h or -help or -st
+		</p>
+
+
+		<p align="left">
+		PURPOSE: To enhance the dynamic range of brightness values and 
+		optionally saturation values in an image. 
+		</p>
+
+
+		<p align="left">
+		DESCRIPTION: OMNISTRETCH is designed to enhance the dynamic 
+		range of brightness values and optionally saturation values 
+		in an image. It has various means of linearly doing this as 
+		described below. If a gamma value is also supplied, then a 
+		non-linear change is affected on top of the linear change. 
+		It works by computing a grayscale histogram, which is then 
+		used to compute a low and high value to map to black and 
+		white, respectively in the image as a whole or on either the 
+		Lightness or Brightness channels, depending upon which 
+		colorspace model is selected. The script uses the IM -level 
+		function to do the processing. If a saturation change is 
+		desired, then the IM -gamma function will be applied to 
+		the saturation channel. No saturation processing is allowed 
+		if the image is grayscale. The graph is normally just 
+		viewed, but a default parameter in the program can be set to 
+		allow it to be saved as outfilename_graph.gif. To end the 
+		script, close/quit the graph image. 
+		</p>
+
+		<p align="left">
+		Argument: ........ displays help information. 
+		</p>
+
+		<p align="left">
+		Argument: -h ..... displays help information. 
+		</p>
+
+		<p align="left">
+		Argument: -g ..... displays graph of intensity mapping function. 
+		</p>
+
+		<p align="left">
+		Argument: -st .... displays image statistics, including:  
+		minimum, maximum, mean, standard deviation and histogram 
+		in a range of brightness values scaled to 0-100. An 
+		input_file is required with no output_file specified. 
+		</p>
+
+		<p align="left">
+		Argument: -m  ---  defines the processing color model to use for the 
+		processing of a color image. If HSL or HSB are specified, then the 
+		the image is first transformed into that color space and the 
+		corresponding channels are separated. Either the L or B channels 
+		will then be used to compute a histogram, which is then used 
+		to determine the low and high values to map to black and white, 
+		within that channel. The channels are then put back together and 
+		output in RGB format. If RGB is selected, the image is first 
+		converted to RGB format and used to generate a grayscale image. 
+		The grayscale image is then used to compute a histogram. The 
+		histogram is then used to determine the low and high values which 
+		are then stretched in the RGB image to black and white, respectively. 
+		The default for a color image is HSL. If a grayscale image is the 
+		input file, then the processing color model is ignored. Note that 
+		results for HSB tend to be undersaturated and for RGB tend to be 
+		oversaturated.
+		</p>
+		
+		<p align="left">
+		Argument: -b ..... defines the method using brightness values 
+		for low and high in the range of 0-100 to be linearly stretch 
+		to full black (0) and full white (100). If high is not provided, 
+		high=100-low. A value of 0,[100,[1]] leaves the image unchanged. 
+		Optionally, a gamma value may be included in the range 
+		of 0 upward; but, nominally 0-10, where 1 is no change, 
+		<1 is less contrast and >1 is more contrast. Gamma is a 
+		non-linear adjustment. 
+		</p>
+		
+		<p align="left">
+		Argument: -c ..... defines the method using histogram counts 
+		for low and high. The method finds the first occurrences of 
+		the specified count (or higher) from each end of the histogram 
+		to locate the corresponding low and high brightness values to 
+		linearly stretch to full black (0) and full white (100). If only 
+		one count is specified, it will be used for both low and high. 
+		A value of 0,[0,[1]] leaves the image unchanged. Optionally, a 
+		gamma value may be included in the range of >=0; but, nominally 
+		0-10, where 1 (default) is no change, <1 is less contrast and >1 
+		is more contrast. Gamma is a non-linear adjustment. 
+		</p>
+		
+		<p align="left">
+		Argument: -pc .... defines the method using percent of maximum 
+		histogram counts for low and high. The method finds the first 
+		occurrences of the specified percent of maximum histogram count 
+		(or higher) from each end of the histogram to locate the 
+		corresponding low and high brightness values to linearly stretch 
+		to full black (0) and full white (100). If only one count is 
+		specified, it will be used for both low and high. Counts for low 
+		and high are expressed as percent of the maximum count in the 
+		histogram, but the % symbol is not specified. A value of 
+		0,[0,[1]] leaves the image unchanged. Optionally, a gamma value 
+		may be included in the range of >=0; but, nominally 0-10, where 
+		1 (default) is no change, <1 is less contrast and >1 is more 
+		contrast. Gamma is a non-linear adjustment. 
+		</p>
+		
+		<p align="left">
+		Argument: -cc .... defines the method using cumulative histogram 
+		counts in percent of total count for low and high. The method 
+		finds the first occurrences of the specified cumulative count 
+		(or higher) from each end of the histogram to locate the 
+		corresponding low and high brightness values to linearly stretch 
+		to full black (0) and full white (100). If only one cumulative 
+		count is specified, it will be used for both low and high. 
+		A value of 0,[0,[1]] indicates no change in the image. Cumulative 
+		counts for low and high are expressed as percent of total pixels 
+		in the image, but the % symbol is not specified. Optionally, 
+		a gamma value may be included in the range of >=0; but, 
+		nominally 0-10, where 1 (default) is no change, <1 is less 
+		saturation and >1 is more saturation. Gamma is a non-linear 
+		adjustment. 
+		</p>
+		
+		<p align="left">
+		Argument: -cd .... defines the method using cumulative percent 
+		histogram count differences between successive histogram values 
+		equal to or exceeding low and high. The method finds the first 
+		occurrences of the specified cumulative count differences 
+		(or higher) from each end of the histogram to locate the 
+		corresponding low and high brightness values to linearly stretch 
+		to full black (0) and full white (100). If only one cumulative 
+		count difference is specified, it will be used for both low and high. 
+		A value of 0,[0,[1]] indicates no change in the image. Cumulative 
+		count differences for low and high are expressed as percent of total 
+		pixels in the image, but the % symbol is not specified. This method 
+		is basically looking for where the slope of the histogram, starting 
+		from each end, increases above a threshold given by low and high. 
+		Optionally, a gamma value may be included in the range of >=0; but, 
+		nominally 0-10, where 1 (default) is no change, <1 is less 
+		saturation and >1 is more saturation. Gamma is a non-linear 
+		adjustment. 
+		</p>
+		
+		<p align="left">
+		Argument: -ab .... automatic version of -b using the image's 
+		actual minimum and maximum values for low and high. gamma_method=1 
+		sets gamma=1. gamma_method=2 determines gamma from the computed low 
+		and high. gamma_method=3 determines gamma from the image's standard 
+		deviation. 
+		</p>
+		
+		<p align="left">
+		Argument: -ac .... automatic version of -c using low and high 
+		counts of 30. gamma_method=1 sets gamma=1. gamma_method=2 determines 
+		gamma from computed low and high. gamma_method=3 determines gamma from 
+		the image's standard deviation. 
+		</p>
+		
+		<p align="left">
+		Argument: -apc ... automatic version of -pc using low and high 
+		percent of maximum counts of 10. gamma_method=1 sets gamma=1. 
+		gamma_method=2 determines gamma from computed low and high. 
+		gamma_method=3 determines gamma from the image's standard deviation. 
+		</p>
+		
+		<p align="left">
+		Argument: -acc ... automatic version of -cc using low and high 
+		cumulative counts of 0.6. gamma_method=1 sets gamma=1. gamma_method=2 
+		determines gamma from computed low and high. gamma_method=3 determines 
+		gamma from the image's standard deviation 
+		</p>
+		
+		<p align="left">
+		Argument: -acd ... automatic version of -cd using low and high 
+		cumulative count differences of 0.06. gamma_method=1 sets gamma=1. 
+		gamma_method=2 determines gamma from computed low and high. 
+		gamma_method=3 determines gamma from the image's standard deviation 
+		</p>
+		
+		<p align="left">
+		OBSERVATION: All these algorithms tend to work better on image's which 
+		have long, low histogram tails or do not span the full range of 0-100. 
+		Typically, this means low contrast images. 
+		</p>
+		
+		<p align="left">
+		REMARK: Feel free to change the default values below for the 
+		automatic methods: -ac, -apc and -acc, if you find that those 
+		values work better for your class of imagery. Also the methods for 
+		automatically determining gamma are not well tested. Method 2 is 
+		limited to histograms for which low > 0 and/or high < 100. 
+		Method 3 seems to work for both low and high contrast images.
+		</p>
+		
+		<p align="left">
+		CAVEAT: No guarantee that this script will work on all platforms, 
+		nor that trapping of inconsistent parameters is complete and 
+		foolproof. Use At Your Own Risk. 
+		</p>
+		</td>
+	</tr>
+</table>
+
+<br />
+
+<h3 align="center">EXAMPLES</h3>
+
+<br />
+
+<p align="center"><u>Autolevels</u></p>
+
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">
+		Original Image
+		</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		artificially brightened and contrast lowered<br />
+		convert lena.jpg -fx ".724u+.310" lenap.jpg
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lena.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+ 
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=3>
+		<p align="center">
+		histogram min and max graylevels are automatically stretched to <br />
+		0 and 100 (0 and 255)
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=3>
+		<p align="center">
+		Histogram Grayscale Value Mapped To Black = 50.5 (128 in range 0 - 255)<br />
+		Histogram Grayscale Value Mapped To White = 100.0 (255 in range 0 - 255)<br />
+		Break Points = 0,0 50.5,0 100.0,100.0 100.0,100.0
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -ab 1 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -ab 1 -s 1.5</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab1.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab1_s1p5.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab1_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">
+		same but with saturation  <br />
+		increased by 50%; <br />
+		graph will be the same and <br />
+		does not show such changes
+		</p>
+		</td>
+	</tr>
+</table>
+
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle" colspan=3>
+		<p align="center">
+		The example above on the right does the following:
+		</p>
+		<p align="left">
+		<ul>
+			<li>Separates the RGB image into HSB channels.</li>
+			<li>Applies the linear stretch to the Brightness channel from graylevel 50.5 to black and 100 to white</li>
+			<li>Applies a gamma of 1.5 to the Saturation channel.</li>
+			<li>Merges the Hue, Saturation and Brightness channels back together as an RGB image.</li>
+		</ul>
+		</p>
+		<p align="center">		
+		This is equivalent to the following IM commands:<br />
+		</p>
+		<p align="left">
+		<ul>
+			<li>convert lenap.jpg -colorspace HSB -channel R -separate tmp0.jpg</li>
+			<li>convert lenap.jpg -colorspace HSB -channel G -separate tmp1.jpg</li>
+			<li>convert lenap.jpg -colorspace HSB -channel B -separate tmp2.jpg</li>
+			<li>convert tmp2.jpg -level 50.5%,100.0%,1 tmp2p.jpg</li>
+			<li>convert tmp1.jpg -gamma 1.5 tmp1p.jpg</li>
+			<li>convert tmp0.jpg -colorspace HSB tmp0.jpg -compose CopyRed -composite \ <br />
+			tmp1p.jpg -compose CopyGreen -composite tmp2p.jpg -compose CopyBlue -composite \ <br />
+			-colorspace RGB lenap-hsbmethod-ab1_s1p5.jpg</li>
+		</ul>
+		</p>
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Autolevels: -ab and Processing Model: HSL<br />
+		first occurrence of graylevel from either end corresponding to <br />
+		cumulative histogram count=0.6% are automatically stretched to <br />
+		0 and 100 (0 and 255)
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Histogram Grayscale Value Mapped To Black = 41.7 (106 in range 0 - 255) <br />
+		Histogram Grayscale Value Mapped To White = 96.2 (245 in range 0 - 255) <br />
+		Break Points = 0,0 41.7,0 96.2,100.0 100.0,100.0
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">source image</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSL -ab 1 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSL -ab 2 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSL -ab 3 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">original image</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-ab1.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-ab2.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-ab3.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lena.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-ab1_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-ab2_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-ab3_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Autolevels: -ab and Processing Model: HSB<br />
+		first occurrence of graylevel from either end corresponding to <br />
+		cumulative histogram count=0.6% are automatically stretched to <br />
+		0 and 100 (0 and 255)
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Histogram Grayscale Value Mapped To Black = 50.5 (128 in range 0 - 255) <br />
+		Histogram Grayscale Value Mapped To White = 100.0 (255 in range 0 - 255) <br />
+		Break Points = 0,0 50.5,0 100.0,100.0 100.0,100.0
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">source image</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -ab 1 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -ab 2 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -ab 3 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">original image</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab1.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab2.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab3.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lena.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab1_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab2_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-ab3_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Autolevels: -ab and Processing Model: RGB<br />
+		first occurrence of graylevel from either end corresponding to <br />
+		cumulative histogram count=0.6% are automatically stretched to <br />
+		0 and 100 (0 and 255)
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Histogram Grayscale Value Mapped To Black = 37.2 (94 in range 0 - 255) <br />
+		Histogram Grayscale Value Mapped To White = 92.5 (235 in range 0 - 255) <br />
+		Break Points = 0,0 37.2,0 92.5,100.0 100.0,100.0
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">source image</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m RGB -ab 1 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m RGB -ab 2 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m RGB -ab 3 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">original image</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-ab1.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-ab2.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-ab3.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lena.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-ab1_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-ab2_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-ab3_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Autolevels: -acc and Processing Model: HSL<br />
+		first occurrence of graylevel from either end corresponding to <br />
+		cumulative histogram count=0.6% are automatically stretched to <br />
+		0 and 100 (0 and 255)
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Histogram Grayscale Value Mapped To Black = 44.7 (113 in range 0 - 255) <br />
+		Histogram Grayscale Value Mapped To White = 92.5 (235 in range 0 - 255) <br />
+		Break Points = 0,0 44.7,0 92.5,100.0 100.0,100.0
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">source image</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSL -acc 1 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSL -acc 2 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSL -acc 3 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">original image</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-acc1.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-acc2.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-acc3.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lena.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-acc1_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-acc2_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hslmethod-acc3_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Autolevels: -acc and Processing Model: HSB<br />
+		first occurrence of graylevel from either end corresponding to <br />
+		cumulative histogram count=0.6% are automatically stretched to <br />
+		0 and 100 (0 and 255)
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Histogram Grayscale Value Mapped To Black = 53.7 (136 in range 0 - 255)<br />
+		Histogram Grayscale Value Mapped To White = 100.0 (255 in range 0 - 255)<br />
+		Break Points = 0,0 53.7,0 100.0,100.0 100.0,100.0
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">source image</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -acc 1 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -acc 2 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m HSB -acc 3 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">original image</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-acc1.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-acc2.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-acc3.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lena.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-acc1_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-acc2_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-hsbmethod-acc3_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Autolevels: -acc and Processing Model: RGB<br />
+		first occurrence of graylevel from either end corresponding to <br />
+		cumulative histogram count=0.6% are automatically stretched to <br />
+		0 and 100 (0 and 255)
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" colspan=5>
+		<p align="center">
+		Histogram Grayscale Value Mapped To Black = 43.9 (111 in range 0 - 255) <br />
+		Histogram Grayscale Value Mapped To White = 86.2 (219 in range 0 - 255) <br />
+		Break Points = 0,0 43.9,0 86.2,100.0 100.0,100.0
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">source image</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m RGB -acc 1 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m RGB -acc 2 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">arguments:<br /> -m RGB -acc 3 -g</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">original image</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-acc1.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-acc2.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-acc3.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lena.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-acc1_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-acc2_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap-rgbmethod-acc3_graph.gif" width="150" height="150" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle" width="150">
+		&nbsp;
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle" colspan=3>
+		<p align="center">
+		The example above for arguments:<br /> -m HSB -acc 3 does the following:
+		</p>
+		<p align="left">
+		<ul>
+			<li>Separates the RGB image into HSB channels.</li>
+			<li>Applies the linear stretch to the Brightness channel from graylevel 53.7 to black and 100 to white.</li>
+			<li>and also applies a gamma of 1.52 to the Brightness channel.
+			<li>Merges the Hue, Saturation and Brightness channels back together as an RGB image.</li>
+		</ul>
+		</p>
+		<p align="center">		
+		This is equivalent to the following IM commands:<br />
+		</p>
+		<p align="left">
+		<ul>
+			<li>convert lenap.jpg -colorspace HSB -channel R -separate tmp0.jpg</li>
+			<li>convert lenap.jpg -colorspace HSB -channel G -separate tmp1.jpg</li>
+			<li>convert lenap.jpg -colorspace HSB -channel B -separate tmp2.jpg</li>
+			<li>convert tmp2.jpg -level 53.7%,100.0%,1.52 tmp2p.jpg</li>
+			<li>convert tmp0.jpg -colorspace HSB tmp0.jpg -compose CopyRed -composite \ <br />
+			tmp1.jpg -compose CopyGreen -composite tmp2p.jpg -compose CopyBlue -composite \ <br />
+			-colorspace RGB lenap-hsbmethod-acc3.jpg</li>
+		</ul>
+		</p>
+		</td>
+	</tr>
+</table>
+
+
+<p align="center"><u>Autolevels From Other Imaging Tools</u></p>
+
+<br />
+
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="center" valign="middle">
+		<p align="center">Photoshop</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">GraphicConverter</p>
+		</td>
+		<td align="center" valign="middle">
+		<p align="center">GIMP</p>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" valign="middle">
+		<img src="images/lenap_psal.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap_gcal.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+		<td align="center" valign="middle">
+		<img src="images/lenap_gpal.jpg" width="128" height="128" hspace="0" vspace="0" border="0">
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+
+<p align="center">
+<u>Option -st: Image Statistics (for artificially modified image and processing model HSB)</u>
+<br /><br />
+These are provided to assist in the manual selection of low and high values 
+to map to black and white, respectively.
+</p>
+
+<br />
+
+<table border="0" cellspacing="0" cellpadding="10" align="center">
+	<tr>
+		<td align="center" valign="middle" class="fixedwidth">
+		<p align="center">
+		Image Statistics:
+		<br /><br />
+		Colorspace = RGB
+		<br /><br />
+		Width = 128<br />
+		Height = 128<br />
+		Total Pixels = 16384
+		<br /><br />
+		Min (0-100) = 50.5<br />
+		Max (0-100) = 100.0<br />
+		Mean (0-100) = 82.2<br />
+		Std (0-...) = 13.5<br />
+		<br /><br />
+		Histogram:
+		<br /><br />
+		Total Values=127<br />
+		Mid Point=63<br />
+		Max Count = 511<br />
+		Tot Count = 16384<br />
+		<br /><br />
+		B=brightness 0-100(0-255)<br />
+		C=count<br />
+		PC=percent of maximum count<br />
+		CC=cumulative count percent<br />
+		CD=cumulative count percent difference
+		<br /><br />
+		<table border="0" cellspacing="0" cellpadding="5" align="center">
+		</td><td>1</td><td>B=50.5(128)</td><td>C=3</td><td>PC=.5</td><td>CC=.01</td><td>CD=.01</td></tr>
+		</td><td>2</td><td>B=50.9(129)</td><td>C=1</td><td>PC=.1</td><td>CC=.02</td><td>CD=0</td></tr>
+		</td><td>3</td><td>B=51.3(130)</td><td>C=7</td><td>PC=1.3</td><td>CC=.06</td><td>CD=.04</td></tr>
+		</td><td>4</td><td>B=51.7(131)</td><td>C=10</td><td>PC=1.9</td><td>CC=.12</td><td>CD=.06</td></tr>
+		</td><td>5</td><td>B=52.1(132)</td><td>C=12</td><td>PC=2.3</td><td>CC=.20</td><td>CD=.07</td></tr>
+		</td><td>6</td><td>B=52.5(133)</td><td>C=17</td><td>PC=3.3</td><td>CC=.30</td><td>CD=.10</td></tr>
+		</td><td>7</td><td>B=52.9(134)</td><td>C=15</td><td>PC=2.9</td><td>CC=.39</td><td>CD=.09</td></tr>
+		</td><td>8</td><td>B=53.3(135)</td><td>C=17</td><td>PC=3.3</td><td>CC=.50</td><td>CD=.10</td></tr>
+		</td><td>9</td><td>B=53.7(136)</td><td>C=27</td><td>PC=5.2</td><td>CC=.66</td><td>CD=.16</td></tr>
+		</td><td>10</td><td>B=54.1(137)</td><td>C=35</td><td>PC=6.8</td><td>CC=.87</td><td>CD=.21</td></tr>
+		</td><td>11</td><td>B=54.5(138)</td><td>C=42</td><td>PC=8.2</td><td>CC=1.13</td><td>CD=.25</td></tr>
+		</td><td>12</td><td>B=54.9(139)</td><td>C=63</td><td>PC=12.3</td><td>CC=1.51</td><td>CD=.38</td></tr>
+		</td><td>13</td><td>B=55.2(140)</td><td>C=67</td><td>PC=13.1</td><td>CC=1.92</td><td>CD=.40</td></tr>
+		</td><td>14</td><td>B=55.6(141)</td><td>C=87</td><td>PC=17.0</td><td>CC=2.45</td><td>CD=.53</td></tr>
+		</td><td>15</td><td>B=56.0(142)</td><td>C=108</td><td>PC=21.1</td><td>CC=3.11</td><td>CD=.65</td></tr>
+		</td><td>16</td><td>B=56.4(143)</td><td>C=115</td><td>PC=22.5</td><td>CC=3.82</td><td>CD=.70</td></tr>
+		</td><td>17</td><td>B=56.8(144)</td><td>C=132</td><td>PC=25.8</td><td>CC=4.62</td><td>CD=.80</td></tr>
+		</td><td>18</td><td>B=57.2(145)</td><td>C=148</td><td>PC=28.9</td><td>CC=5.52</td><td>CD=.90</td></tr>
+		</td><td>19</td><td>B=57.6(146)</td><td>C=138</td><td>PC=27.0</td><td>CC=6.37</td><td>CD=.84</td></tr>
+		</td><td>20</td><td>B=58.0(147)</td><td>C=168</td><td>PC=32.8</td><td>CC=7.39</td><td>CD=1.02</td></tr>
+		</td><td>21</td><td>B=58.4(148)</td><td>C=168</td><td>PC=32.8</td><td>CC=8.42</td><td>CD=1.02</td></tr>
+		</td><td>22</td><td>B=58.8(149)</td><td>C=169</td><td>PC=33.0</td><td>CC=9.45</td><td>CD=1.03</td></tr>
+		</td><td>23</td><td>B=59.2(150)</td><td>C=132</td><td>PC=25.8</td><td>CC=10.26</td><td>CD=.80</td></tr>
+		</td><td>24</td><td>B=59.6(151)</td><td>C=150</td><td>PC=29.3</td><td>CC=11.17</td><td>CD=.91</td></tr>
+		</td><td>25</td><td>B=60.0(153)</td><td>C=115</td><td>PC=22.5</td><td>CC=11.87</td><td>CD=.70</td></tr>
+		</td><td>26</td><td>B=60.3(153)</td><td>C=117</td><td>PC=22.8</td><td>CC=12.59</td><td>CD=.71</td></tr>
+		</td><td>27</td><td>B=60.7(154)</td><td>C=107</td><td>PC=20.9</td><td>CC=13.24</td><td>CD=.65</td></tr>
+		</td><td>28</td><td>B=61.1(155)</td><td>C=98</td><td>PC=19.1</td><td>CC=13.84</td><td>CD=.59</td></tr>
+		</td><td>29</td><td>B=61.5(156)</td><td>C=86</td><td>PC=16.8</td><td>CC=14.36</td><td>CD=.52</td></tr>
+		</td><td>30</td><td>B=61.9(157)</td><td>C=85</td><td>PC=16.6</td><td>CC=14.88</td><td>CD=.51</td></tr>
+		</td><td>31</td><td>B=62.3(158)</td><td>C=98</td><td>PC=19.1</td><td>CC=15.48</td><td>CD=.59</td></tr>
+		</td><td>32</td><td>B=62.7(159)</td><td>C=69</td><td>PC=13.5</td><td>CC=15.90</td><td>CD=.42</td></tr>
+		</td><td>33</td><td>B=63.1(160)</td><td>C=90</td><td>PC=17.6</td><td>CC=16.45</td><td>CD=.54</td></tr>
+		</td><td>34</td><td>B=63.5(161)</td><td>C=65</td><td>PC=12.7</td><td>CC=16.85</td><td>CD=.39</td></tr>
+		</td><td>35</td><td>B=63.9(162)</td><td>C=64</td><td>PC=12.5</td><td>CC=17.24</td><td>CD=.39</td></tr>
+		</td><td>36</td><td>B=64.3(163)</td><td>C=61</td><td>PC=11.9</td><td>CC=17.61</td><td>CD=.37</td></tr>
+		</td><td>37</td><td>B=64.7(164)</td><td>C=57</td><td>PC=11.1</td><td>CC=17.96</td><td>CD=.34</td></tr>
+		</td><td>38</td><td>B=65.0(165)</td><td>C=58</td><td>PC=11.3</td><td>CC=18.31</td><td>CD=.35</td></tr>
+		</td><td>39</td><td>B=65.4(166)</td><td>C=63</td><td>PC=12.3</td><td>CC=18.70</td><td>CD=.38</td></tr>
+		</td><td>40</td><td>B=65.8(167)</td><td>C=58</td><td>PC=11.3</td><td>CC=19.05</td><td>CD=.35</td></tr>
+		</td><td>41</td><td>B=66.2(168)</td><td>C=58</td><td>PC=11.3</td><td>CC=19.40</td><td>CD=.35</td></tr>
+		</td><td>42</td><td>B=66.6(169)</td><td>C=44</td><td>PC=8.6</td><td>CC=19.67</td><td>CD=.26</td></tr>
+		</td><td>43</td><td>B=67.0(170)</td><td>C=57</td><td>PC=11.1</td><td>CC=20.02</td><td>CD=.34</td></tr>
+		</td><td>44</td><td>B=67.4(171)</td><td>C=72</td><td>PC=14.0</td><td>CC=20.46</td><td>CD=.43</td></tr>
+		</td><td>45</td><td>B=67.8(172)</td><td>C=53</td><td>PC=10.3</td><td>CC=20.78</td><td>CD=.32</td></tr>
+		</td><td>46</td><td>B=68.2(173)</td><td>C=67</td><td>PC=13.1</td><td>CC=21.19</td><td>CD=.40</td></tr>
+		</td><td>47</td><td>B=68.6(174)</td><td>C=71</td><td>PC=13.8</td><td>CC=21.63</td><td>CD=.43</td></tr>
+		</td><td>48</td><td>B=69.0(175)</td><td>C=64</td><td>PC=12.5</td><td>CC=22.02</td><td>CD=.39</td></tr>
+		</td><td>49</td><td>B=69.4(176)</td><td>C=58</td><td>PC=11.3</td><td>CC=22.37</td><td>CD=.35</td></tr>
+		</td><td>50</td><td>B=69.8(177)</td><td>C=62</td><td>PC=12.1</td><td>CC=22.75</td><td>CD=.37</td></tr>
+		</td><td>51</td><td>B=70.1(178)</td><td>C=47</td><td>PC=9.1</td><td>CC=23.04</td><td>CD=.28</td></tr>
+		</td><td>52</td><td>B=70.5(179)</td><td>C=52</td><td>PC=10.1</td><td>CC=23.35</td><td>CD=.31</td></tr>
+		</td><td>53</td><td>B=70.9(180)</td><td>C=58</td><td>PC=11.3</td><td>CC=23.71</td><td>CD=.35</td></tr>
+		</td><td>54</td><td>B=71.3(181)</td><td>C=67</td><td>PC=13.1</td><td>CC=24.12</td><td>CD=.40</td></tr>
+		</td><td>55</td><td>B=71.7(182)</td><td>C=59</td><td>PC=11.5</td><td>CC=24.48</td><td>CD=.36</td></tr>
+		</td><td>56</td><td>B=72.1(183)</td><td>C=69</td><td>PC=13.5</td><td>CC=24.90</td><td>CD=.42</td></tr>
+		</td><td>57</td><td>B=72.5(184)</td><td>C=74</td><td>PC=14.4</td><td>CC=25.35</td><td>CD=.45</td></tr>
+		</td><td>58</td><td>B=72.9(185)</td><td>C=81</td><td>PC=15.8</td><td>CC=25.84</td><td>CD=.49</td></tr>
+		</td><td>59</td><td>B=73.3(186)</td><td>C=50</td><td>PC=9.7</td><td>CC=26.15</td><td>CD=.30</td></tr>
+		</td><td>60</td><td>B=73.7(187)</td><td>C=63</td><td>PC=12.3</td><td>CC=26.53</td><td>CD=.38</td></tr>
+		</td><td>61</td><td>B=74.1(188)</td><td>C=53</td><td>PC=10.3</td><td>CC=26.86</td><td>CD=.32</td></tr>
+		</td><td>62</td><td>B=74.5(189)</td><td>C=65</td><td>PC=12.7</td><td>CC=27.25</td><td>CD=.39</td></tr>
+		</td><td>63</td><td>B=74.9(190)</td><td>C=69</td><td>PC=13.5</td><td>CC=27.67</td><td>CD=.42</td></tr>
+		</td><td>64</td><td>B=75.2(191)</td><td>C=83</td><td>PC=16.2</td><td>CC=72.32</td><td>CD=.50</td></tr>
+		</td><td>65</td><td>B=75.6(192)</td><td>C=108</td><td>PC=21.1</td><td>CC=71.81</td><td>CD=.65</td></tr>
+		</td><td>66</td><td>B=76.0(193)</td><td>C=82</td><td>PC=16.0</td><td>CC=71.15</td><td>CD=.50</td></tr>
+		</td><td>67</td><td>B=76.4(194)</td><td>C=82</td><td>PC=16.0</td><td>CC=70.65</td><td>CD=.50</td></tr>
+		</td><td>68</td><td>B=76.8(195)</td><td>C=88</td><td>PC=17.2</td><td>CC=70.15</td><td>CD=.53</td></tr>
+		</td><td>69</td><td>B=77.2(196)</td><td>C=81</td><td>PC=15.8</td><td>CC=69.61</td><td>CD=.49</td></tr>
+		</td><td>70</td><td>B=77.6(197)</td><td>C=82</td><td>PC=16.0</td><td>CC=69.12</td><td>CD=.50</td></tr>
+		</td><td>71</td><td>B=78.0(198)</td><td>C=90</td><td>PC=17.6</td><td>CC=68.62</td><td>CD=.54</td></tr>
+		</td><td>72</td><td>B=78.4(199)</td><td>C=90</td><td>PC=17.6</td><td>CC=68.07</td><td>CD=.54</td></tr>
+		</td><td>73</td><td>B=78.8(200)</td><td>C=100</td><td>PC=19.5</td><td>CC=67.52</td><td>CD=.61</td></tr>
+		</td><td>74</td><td>B=79.2(201)</td><td>C=103</td><td>PC=20.1</td><td>CC=66.91</td><td>CD=.62</td></tr>
+		</td><td>75</td><td>B=79.6(202)</td><td>C=125</td><td>PC=24.4</td><td>CC=66.28</td><td>CD=.76</td></tr>
+		</td><td>76</td><td>B=80.0(204)</td><td>C=125</td><td>PC=24.4</td><td>CC=65.52</td><td>CD=.76</td></tr>
+		</td><td>77</td><td>B=80.3(204)</td><td>C=154</td><td>PC=30.1</td><td>CC=64.75</td><td>CD=.93</td></tr>
+		</td><td>78</td><td>B=80.7(205)</td><td>C=166</td><td>PC=32.4</td><td>CC=63.81</td><td>CD=1.01</td></tr>
+		</td><td>79</td><td>B=81.1(206)</td><td>C=187</td><td>PC=36.5</td><td>CC=62.80</td><td>CD=1.14</td></tr>
+		</td><td>80</td><td>B=81.5(207)</td><td>C=155</td><td>PC=30.3</td><td>CC=61.66</td><td>CD=.94</td></tr>
+		</td><td>81</td><td>B=81.9(208)</td><td>C=152</td><td>PC=29.7</td><td>CC=60.71</td><td>CD=.92</td></tr>
+		</td><td>82</td><td>B=82.3(209)</td><td>C=133</td><td>PC=26.0</td><td>CC=59.79</td><td>CD=.81</td></tr>
+		</td><td>83</td><td>B=82.7(210)</td><td>C=114</td><td>PC=22.3</td><td>CC=58.97</td><td>CD=.69</td></tr>
+		</td><td>84</td><td>B=83.1(211)</td><td>C=112</td><td>PC=21.9</td><td>CC=58.28</td><td>CD=.68</td></tr>
+		</td><td>85</td><td>B=83.5(212)</td><td>C=125</td><td>PC=24.4</td><td>CC=57.59</td><td>CD=.76</td></tr>
+		</td><td>86</td><td>B=83.9(213)</td><td>C=124</td><td>PC=24.2</td><td>CC=56.83</td><td>CD=.75</td></tr>
+		</td><td>87</td><td>B=84.3(214)</td><td>C=157</td><td>PC=30.7</td><td>CC=56.07</td><td>CD=.95</td></tr>
+		</td><td>88</td><td>B=84.7(215)</td><td>C=169</td><td>PC=33.0</td><td>CC=55.12</td><td>CD=1.03</td></tr>
+		</td><td>89</td><td>B=85.0(216)</td><td>C=164</td><td>PC=32.0</td><td>CC=54.08</td><td>CD=1.00</td></tr>
+		</td><td>90</td><td>B=85.4(217)</td><td>C=163</td><td>PC=31.8</td><td>CC=53.08</td><td>CD=.99</td></tr>
+		</td><td>91</td><td>B=85.8(218)</td><td>C=180</td><td>PC=35.2</td><td>CC=52.09</td><td>CD=1.09</td></tr>
+		</td><td>92</td><td>B=86.2(219)</td><td>C=187</td><td>PC=36.5</td><td>CC=50.99</td><td>CD=1.14</td></tr>
+		</td><td>93</td><td>B=86.6(220)</td><td>C=203</td><td>PC=39.7</td><td>CC=49.85</td><td>CD=1.23</td></tr>
+		</td><td>94</td><td>B=87.0(221)</td><td>C=172</td><td>PC=33.6</td><td>CC=48.61</td><td>CD=1.04</td></tr>
+		</td><td>95</td><td>B=87.4(222)</td><td>C=177</td><td>PC=34.6</td><td>CC=47.56</td><td>CD=1.08</td></tr>
+		</td><td>96</td><td>B=87.8(223)</td><td>C=192</td><td>PC=37.5</td><td>CC=46.48</td><td>CD=1.17</td></tr>
+		</td><td>97</td><td>B=88.2(224)</td><td>C=221</td><td>PC=43.2</td><td>CC=45.31</td><td>CD=1.34</td></tr>
+		</td><td>98</td><td>B=88.6(225)</td><td>C=252</td><td>PC=49.3</td><td>CC=43.96</td><td>CD=1.53</td></tr>
+		</td><td>99</td><td>B=89.0(226)</td><td>C=271</td><td>PC=53.0</td><td>CC=42.42</td><td>CD=1.65</td></tr>
+		</td><td>100</td><td>B=89.4(227)</td><td>C=285</td><td>PC=55.7</td><td>CC=40.77</td><td>CD=1.73</td></tr>
+		</td><td>101</td><td>B=89.8(228)</td><td>C=285</td><td>PC=55.7</td><td>CC=39.03</td><td>CD=1.73</td></tr>
+		</td><td>102</td><td>B=90.1(229)</td><td>C=276</td><td>PC=54.0</td><td>CC=37.29</td><td>CD=1.68</td></tr>
+		</td><td>103</td><td>B=90.5(230)</td><td>C=240</td><td>PC=46.9</td><td>CC=35.60</td><td>CD=1.46</td></tr>
+		</td><td>104</td><td>B=90.9(231)</td><td>C=239</td><td>PC=46.7</td><td>CC=34.14</td><td>CD=1.45</td></tr>
+		</td><td>105</td><td>B=91.3(232)</td><td>C=266</td><td>PC=52.0</td><td>CC=32.68</td><td>CD=1.62</td></tr>
+		</td><td>106</td><td>B=91.7(233)</td><td>C=227</td><td>PC=44.4</td><td>CC=31.06</td><td>CD=1.38</td></tr>
+		</td><td>107</td><td>B=92.1(234)</td><td>C=197</td><td>PC=38.5</td><td>CC=29.67</td><td>CD=1.20</td></tr>
+		</td><td>108</td><td>B=92.5(235)</td><td>C=196</td><td>PC=38.3</td><td>CC=28.47</td><td>CD=1.19</td></tr>
+		</td><td>109</td><td>B=92.9(236)</td><td>C=237</td><td>PC=46.3</td><td>CC=27.27</td><td>CD=1.44</td></tr>
+		</td><td>110</td><td>B=93.3(237)</td><td>C=254</td><td>PC=49.7</td><td>CC=25.83</td><td>CD=1.55</td></tr>
+		</td><td>111</td><td>B=93.7(238)</td><td>C=313</td><td>PC=61.2</td><td>CC=24.27</td><td>CD=1.91</td></tr>
+		</td><td>112</td><td>B=94.1(239)</td><td>C=336</td><td>PC=65.7</td><td>CC=22.36</td><td>CD=2.05</td></tr>
+		</td><td>113</td><td>B=94.5(240)</td><td>C=317</td><td>PC=62.0</td><td>CC=20.31</td><td>CD=1.93</td></tr>
+		</td><td>114</td><td>B=94.9(241)</td><td>C=306</td><td>PC=59.8</td><td>CC=18.38</td><td>CD=1.86</td></tr>
+		</td><td>115</td><td>B=95.2(242)</td><td>C=260</td><td>PC=50.8</td><td>CC=16.51</td><td>CD=1.58</td></tr>
+		</td><td>116</td><td>B=95.6(243)</td><td>C=230</td><td>PC=45.0</td><td>CC=14.92</td><td>CD=1.40</td></tr>
+		</td><td>117</td><td>B=96.0(244)</td><td>C=173</td><td>PC=33.8</td><td>CC=13.52</td><td>CD=1.05</td></tr>
+		</td><td>118</td><td>B=96.4(245)</td><td>C=164</td><td>PC=32.0</td><td>CC=12.46</td><td>CD=1.00</td></tr>
+		</td><td>119</td><td>B=96.8(246)</td><td>C=146</td><td>PC=28.5</td><td>CC=11.46</td><td>CD=.89</td></tr>
+		</td><td>120</td><td>B=97.2(247)</td><td>C=170</td><td>PC=33.2</td><td>CC=10.57</td><td>CD=1.03</td></tr>
+		</td><td>121</td><td>B=97.6(248)</td><td>C=181</td><td>PC=35.4</td><td>CC=9.53</td><td>CD=1.10</td></tr>
+		</td><td>122</td><td>B=98.0(249)</td><td>C=194</td><td>PC=37.9</td><td>CC=8.43</td><td>CD=1.18</td></tr>
+		</td><td>123</td><td>B=98.4(250)</td><td>C=186</td><td>PC=36.3</td><td>CC=7.25</td><td>CD=1.13</td></tr>
+		</td><td>124</td><td>B=98.8(251)</td><td>C=189</td><td>PC=36.9</td><td>CC=6.11</td><td>CD=1.15</td></tr>
+		</td><td>125</td><td>B=99.2(252)</td><td>C=168</td><td>PC=32.8</td><td>CC=4.96</td><td>CD=1.02</td></tr>
+		</td><td>126</td><td>B=99.6(253)</td><td>C=134</td><td>PC=26.2</td><td>CC=3.93</td><td>CD=.81</td></tr>
+		</td><td>127</td><td>B=100.0(255)</td><td>C=511</td><td>PC=100.0</td><td>CC=3.11</td><td>CD=3.11</td></tr>
+		</table>
+		</p>
+		</td>
+	</tr>
+</table>
+
+
+</body>
+</html>

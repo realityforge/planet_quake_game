@@ -1,0 +1,3582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fred's ImageMagick Tidbits</title>
+<meta name="author" content="Fred Weinhaus">
+<meta name="description" content="Fred's ImageMagick Tidbits">
+<meta name="keywords" content="ImageMagick, tidbits, image processing">
+<link rel="stylesheet" href="style.css">
+</head>
+<body marginwidth=0 marginheight=0 id="image">
+
+<div class="backblue">
+<br />
+<h2 align="center" class="white"><img src="../images/im_logo_small_sharp.gif" border=2 width="120" height="90" hspace="20" vspace="0" border="0" align="absmiddle" class="red">Fred's ImageMagick Tidbits</h2>
+<br />
+</div>
+
+<ul id="nav">
+	<li id="t_homepage"><a href="index.php.html">Home Page
+		<span>Tidbits Home Page</span></a></li></a></li>
+	<li id="t_im_info"><a href="im_info.php.html">ImageMagick Information
+		<span>ImageMagick configuration and parameters</span></a></li>
+	<li id="t_image_info"><a href="image_info.php.html">Image Information
+		<span>Image specific information</span></a></li></a></li>
+	<li id="t_graphics"><a href="graphics.php.html">Graphics Processing
+		<span>Color information and creating specific color images</span></a></li></a></li>
+	<li id="t_image"><a href="image.php.html">Image Processing
+		<span>Miscellaneous image processing techniques</span></a></li></a></li>
+</ul>
+<p>&nbsp;</p>
+
+<br /><br />
+
+<a name="top"></a>
+<h2 align="center">Image Processing</h2>
+
+<table border="0" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td align="left" valign="middle">
+		<ul id="menu_list">
+			<li><a href="image.php.html#alpha">Enabling The Alpha Channel</a></li>
+			<br />
+			<li><a href="image.php.html#color2transparent">Converting All Pixels Of A Given Color To Transparent</a></li>
+			<br />
+			<li><a href="image.php.html#transparent2color">Re-coloring Transparency</a></li>
+			<br />
+			<li><a href="image.php.html#color2colorlocation">Re-coloring All Pixels With Same Color As At Some Location</a></li>
+			<br />
+			<li><a href="image.php.html#color2colorblock">Re-coloring All Pixels Within Some Block</a></li>
+			<br />
+			<li><a href="image.php.html#insert_hole">Inserting A Tranparent Hole</a></li>
+			<br />
+			<li><a href="image.php.html#preserve2colors">Preserve Multiple Colors And Change The Rest</a></li>
+			<br />
+			<li><a href="image.php.html#gradient_transparency">Gradient Transparency</a></li>
+			<br />
+			<li><a href="image.php.html#grayscale">Converting Color Images To Grayscale</a></li>
+			<br />
+			<li><a href="image.php.html#stretch">Stretch Colors To Full Range Of Values</a></li>
+			<br />
+			<li><a href="image.php.html#pad_crop_square">Pad Or Crop To Square Dimensions</a></li>
+			<br />
+			<li><a href="image.php.html#resize_square">Resizing An Image To Square Shape</a></li>
+			<br />
+			<li><a href="image.php.html#resize">Resize One Image To Size Of Another Image</a></li>
+			<br />
+			<li><a href="image.php.html#crop1">Crop Image Into 2 Non-Overlapping Equal Sized Parts</a></li>
+			<br />
+			<li><a href="image.php.html#crop2">Crop Image Into 4 Non-Overlapping Quandrants</a></li>
+			<br />
+			<li><a href="image.php.html#append">Horizontally Appending Images: Top Aligned, Bottom Aligned And Center Aligned</a></li>
+			<br />
+			<li><a href="image.php.html#trim_2sides">Trimming Background Color On Two Sides Only</a></li>
+			<br />
+			<li><a href="image.php.html#skew">Skewing (Shearing) An Image</a></li>
+			<br />
+			<li><a href="image.php.html#fuzzythresh">Fuzzy Color Thresholding</a></li>
+			<br />
+			<li><a href="image.php.html#color_slice">Color Range Slicing</a></li>
+			<br />
+			<li><a href="image.php.html#grayscale_slice">Grayscale Range Slicing And Thresholding</a></li>
+			<br />
+			<li><a href="image.php.html#lr_composite">Lower Right Offset Composite</a></li>
+			<br />
+			<li><a href="image.php.html#power2_pad">Padding An Image To A Power Of 2 Size</a></li>
+			<br />
+			<li><a href="image.php.html#unfold">Mirror Framing Of An Image (Unfolding Border Region)</a></li>
+			<br />
+			<li><a href="image.php.html#mirror">Mirror Tiling</a></li>
+			<br />
+			<li><a href="image.php.html#ave">Weighted Average Of Multiple Images</a></li>
+			<br />
+			<li><a href="image.php.html#maxmin">Max Or Min Composite Of Two Images</a></li>
+			<br />
+			<li><a href="image.php.html#graph2image">Graph To 1D (LUT) Image: Image Intensity Transformation</a></li>
+			<br />
+			<li><a href="image.php.html#image2graph">1D (Row) Image To Graph: Row Profile</a></li>
+			<br />
+			<li><a href="image.php.html#convolution">1D And 2D Equal Weight (Averaging) Convolutions</a></li>
+			<br />
+			<li><a href="image.php.html#filter">Mean And Standard Deviation Filtering</a></li>
+			<br />
+			<li><a href="image.php.html#composite1">Antialiased Image Composite Along Image Boundary</a></li>
+			<br />
+			<li><a href="image.php.html#composite2">Antialiased Image Composite Along Arbitrary Boundary</a></li>
+			<br />
+			<li><a href="image.php.html#shape_mean">Mean Of A Region In An Image</a></li>
+			<br />
+			<li><a href="image.php.html#montage_cols">Montage By Columns</a></li>
+			<br />
+			<li><a href="image.php.html#part_overlap_blend">Partially Overlapping Blend</a></li>
+			<br />
+			<li><a href="image.php.html#round_shadow">Rounded Corners With Shadow</a></li>
+			<br />
+			<li><a href="image.php.html#hole_fill">Filling Holes</a></li>
+			<br />
+			<li><a href="image.php.html#grid_lines">Adding Grid Lines</a></li>
+			<br />
+			<li><a href="image.php.html#image2overlay">Converting An Image To An Overlay</a></li>
+			<br />
+			<li><a href="image.php.html#labeled_animation">Creating A Labeled Animation</a></li>
+			<br />
+			<li><a href="image.php.html#fast_gblur">Fast Gaussian Blur</a></li>
+			<br />
+			<li><a href="image.php.html#color_blur">Color Blurring</a></li>
+			<br />
+			<li><a href="image.php.html#histogram_ticks">Histogram With Grid And Tick Marks</a></li>
+			<br />
+		</ul>
+		</td>
+	</tr>
+</table>
+
+<br /><br />
+
+<a name="alpha"></a>
+<p class="title">	
+Enabling The Alpha Channel
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Default Enable Full Transparency (Zero Opacity)
+			</p>
+			<p align="left">
+			<ul>
+				<li>Requires a format for the output that supports transparency</li>
+				<li>PNG will support alpha varying continuously from fully opaque to fullytransparent</li>
+				<li>GIF will support, in general, only binary alpha, namely part fully opaque and part fully transparent</li>
+				<li>JPG does not support transparency</li>
+			</ul>
+			<p class="blue">
+			NOTE: Both -channel a and -channel o actually set transparency in later IM releases. <br />
+			However, in early releases both -channel a and -channel o actually set opacity.
+			</p>
+			</p>
+			<p class="red">	
+			convert logo.jpg -channel rgba -alpha set logo.png
+			</p>
+			<p align="center">	
+			<img src="image/logo.png" width="128" height="128" />
+			</p>
+			<p class="header">	
+			Specify 40% Transparency (60% Opacity)
+			</p>
+			<p>
+			<ul>
+				<li>Specify transparency amount</li>
+				<li>Specify image</li>
+				<li>clone, threshold to solid white, change white to graylevel at transparency level</li>
+				<li>then merge second image as alpha channel</li>
+			</ul>
+			<p class="red">	
+			transparency=40<br />
+			convert logo.jpg \<br />
+				<span class="indent">\( +clone -threshold -1 -fill gray$transparency -opaque white \) \</span><br />
+				<span class="indent">-alpha off -compose copy_opacity -composite logo_transparency40.png</span>
+			</p>
+			<p>
+			or
+			</p>
+			<p class="red">	
+			transparency=40<br />
+			convert logo.jpg -alpha set -channel a -evaluate set $transparency% logo_transparency40.png
+			</p>
+			<p>
+			or
+			</p>
+			<p class="red">	
+			opacity=60<br />
+			transparency=`convert xc: -format "%[fx:100-opacity]" info:`<br />
+			convert logo.jpg -alpha set -channel a -evaluate set $transparency% logo_opacity60.png
+			</p>
+			<p align="center">	
+			<img src="image/logo_opacity60.png" width="128" height="128" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="color2transparent"></a>
+<p class="title">	
+Converting All Pixels Of A Given Color To Transparent
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Opaque Image
+			</p>
+			<p align="center">
+			<img src="image/logo.jpg" width="128" height="128" />
+			</p>
+			<p class="header">	
+			Method 1:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert logo.jpg -transparent white logo_transparent1.gif
+				</p>
+				<p align="center">	
+				<img src="image/logo_transparent1.gif" width="128" height="128" />
+				</p>
+			</div>
+			<p class="header">	
+			Method 2:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert logo.jpg -fuzz 5% -transparent white logo_transparent2.gif
+				</p>
+				<p align="center">	
+				<img src="image/logo_transparent2.gif" width="128" height="128" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="transparent2color"></a>
+<p class="title">	
+Re-coloring Transparency
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Transparent Image
+			</p>
+			<p align="center">
+			<img src="image/logo_transparent2.gif" width="128" height="128" />
+			</p>
+			<p class="header">	
+			Convert Transparent To Color (Wheat)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert logo_transparent2.gif -channel rgba -fill wheat -opaque none logo_transparent_wheat.gif
+				</p>
+				<p>
+				or
+				</p>
+				<p class="red">	
+				convert logo_transparent2.gif -background wheat -flatten logo_transparent_wheat.gif
+				</p>
+				<p align="center">	
+				<img src="image/logo_transparent_wheat.gif" width="128" height="128" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="color2colorlocation"></a>
+<p class="title">	
+Re-coloring All Pixels With Same Color As At Some Location
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Opaque Image
+			</p>
+			<p align="center">
+			<img src="image/cyclops.gif" width="100" height="100" />
+			</p>
+			<p class="header">	
+			Change All Pixels With Color At Location 10,10 To Red
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert cyclops.gif -channel rgba -alpha set -fill red -draw 'color 10,10 replace' cyclops_red.gif
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_red.gif" width="100" height="100" />
+				</p>
+			</div>
+			<p class="header">	
+			Change All Pixels With Color At Location 10,10 To Transparent
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert cyclops.gif -channel rgba -alpha set -fill none -draw 'color 10,10 replace' cyclops_transparent.gif
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_transparent.gif" width="100" height="100" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="color2colorblock"></a>
+<p class="title">	
+Re-coloring All Pixels Within Some Block
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Opaque Image
+			</p>
+			<p align="center">
+			<img src="image/cyclops.gif" width="100" height="100" />
+			</p>
+			<p class="header">	
+			Change Color Of All Pixels Within Block 5,5 to 25,15 To Red
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert cyclops.gif -fx "i>=5&&i<=25&&j>=5&&j<=15?red:u" cyclops_block_red.gif
+				</p>
+				<p>
+				or
+				</p>
+				<p class="red">	
+				convert cyclops.gif -draw "fill red rectangle 5,5 25,15" cyclops_block_red.gif
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_block_red.gif" width="100" height="100" />
+				</p>
+			</div>
+			<p class="header">	
+			Change All Pixels With Color At Location 5,5 to 25,15 To Transparent
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert cyclops.gif -alpha set -channel RGBA -fx "i>=5&&i<=25&&j>=5&&j<=15?none:u" cyclops_block_transparent.gif
+				</p>
+				<p>
+				or (recolor area red, then floodfill to transparent)
+				</p>
+				<p class="red">	
+				convert cyclops.gif -draw "fill red rectangle 5,5 25,15 fill none matte 10,10 floodfill" cyclops_block_transparent.gif
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_block_transparent.gif" width="100" height="100" />
+				</p>
+			</div>
+			<p>	
+			<ul>
+				<li>Note: method can be used to change selected pixels, also</li>
+			</ul>
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="insert_hole"></a>
+<p class="title">	
+Inserting A Transparent Hole
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Opaque Image
+			</p>
+			<p align="center">
+			<img src="image/logo.jpg" width="128" height="128" />
+			</p>
+			<p class="header">	
+			Method 1:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert logo.jpg -size 25x25 xc:none -alpha set \<br />
+					<span class="indent">-geometry +25+75 -compose copy -composite logo_hole1.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/logo_hole1.gif" width="128" height="128" />
+				</p>
+			</div>
+			<p class="header">	
+			Method 2:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert logo.jpg -size 25x25 xc:white -alpha set \<br />
+					<span class="indent">-geometry +25+75 -compose dst_out -composite logo_hole2.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/logo_hole2.gif" width="128" height="128" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="preserve2colors"></a>
+<p class="title">	
+Preserve Multiple Colors And Change The Rest
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Original Image
+			</p>
+			<div class="indent">
+				<p class="blue">	
+				convert -size 50x50 xc:red xc:magenta xc:green1 xc:cyan xc:blue +append rmgcb.png
+				</p>
+			</div>
+			<p align="center">
+			<img src="image/rmgcb.png" width="250" height="50" />
+			</p>
+			<p class="header">	
+			Preserve Red And Blue And Change The Rest To Yellow
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rmgcb.png -alpha off \( -clone 0 -transparent red -transparent blue -alpha extract -fill yellow -opaque white -transparent black \) \<br />
+					<span class="indent">-compose over -composite rmgcb_red_yellow_blue.png</span>
+				</p>
+				<p align="center">	
+				<img src="image/rmgcb_red_yellow_blue.png" width="250" height="50" />
+				</p>
+			</div>
+			<p class="header">	
+			Preserve Red And Blue And Change The Rest To Transparent
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert rmgcb.png -alpha off \( -clone 0 -transparent red -transparent blue -alpha extract -negate \) \<br />
+					<span class="indent">-compose copy_opacity -composite rmgcb_red_none_blue.png</span>
+				</p>
+				<p>
+				or (Improved By Anthony Thyssen)
+				</p>
+				<p class="red">	
+				convert rmgcb.png -alpha off -channel A -transparent red -transparent blue -negate +channel rmgcb_red_none_blue.png
+				</p>
+				<p align="center">	
+				<img src="image/rmgcb_red_none_blue.png" width="250" height="50" />
+				</p>
+			</div>
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="gradient_transparency"></a>
+<p class="title">	
+Gradient Transparency
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Opaque Image
+			</p>
+			<p align="center">
+			<img src="image/rainbow_square.jpg" width="128" height="128" />
+			</p>
+			<p class="header">	
+			Add Gradient Transparency
+			</p>
+			<div class="indent">
+				<p class="red">	
+				ww=`convert rainbow_square.jpg -format %w info:`<br />
+				hh=`convert rainbow_square.jpg -format %h info:`<br />
+				convert rainbow_square.jpg \( -size ${ww}x${hh} gradient: \) \<br />
+					<span class="indent">-alpha off -compose copy_opacity -composite rainbow_square_grad_trans.png</span>
+				</p>
+			</div>
+			<p align="center">	
+			<img src="image/rainbow_square_grad_trans.png" width="128" height="128" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="grayscale"></a>
+<p class="title">	
+Converting Color Images To Grayscale
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1: Gray, Grayscale, Rec601Luma or Intensity (all the same)
+			</p>
+			<div class="indent">
+				<p>	
+				gray = 0.299*red+0.587*green+0.114*blue
+				</p>
+				<p class="red">	
+				convert gradient.gif -colorspace gray gradient_gray.gif
+				</p>
+				<p>	
+				or
+				</p>
+				<p class="red">	
+				convert gradient.gif -type grayscale gradient_grayscale.gif
+				</p>
+				<p>	
+				or
+				</p>
+				<p class="red">	
+				convert gradient.gif -colorspace rec601luma gradient_rec601luma.gif
+				</p>
+				<p>	
+				or
+				</p>
+				<p class="red">	
+				convert gradient.gif -fx "intensity" gradient_intensity.gif
+				</p>
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_gray.gif" width="100" height="100" align="middle" />
+				&nbsp;&nbsp; <img src="image/gradient_gray_histogram.gif" width="100" height="100" align="middle" hspace="10" /> Histogram
+				</p>
+				<p class="red">	
+				compare -metric rmse gradient_gray.gif gradient_grayscale.gif null:
+				</p>
+				<p>	
+				0 (0)
+				</p>
+				<p class="red">	
+				compare -metric rmse gradient_gray.gif gradient_rec601luma.gif null:
+				</p>
+				<p>	
+				0 (0)
+				</p>
+				<p class="red">	
+				compare -metric rmse gradient_gray.gif gradient_intensity.gif null:
+				</p>
+				<p>	
+				0 (0)
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2: Rec709Luma and Luminance (both the same)
+			</p>
+			<div class="indent">
+				<p>	
+				gray: 0.2126*red + 0.7152*green + 0.0722*blue
+				</p>
+				<p class="red">	
+				convert gradient.gif -colorspace rec709luma gradient_rec709luma.gif
+				</p>
+				<p>	
+				or
+				</p>
+				<p class="red">	
+				convert gradient.gif -fx "luminance" gradient_luminance.gif
+				</p>
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_luminance.gif" width="100" height="100" align="middle" />
+				&nbsp;&nbsp; <img src="image/gradient_luminance_histogram.gif" width="100" height="100" align="middle" hspace="10" /> Histogram
+				</p>
+				<p class="red">	
+				compare -metric rmse gradient_rec709luma.gif gradient_luminance.gif null:
+				</p>
+				<p>	
+				0 (0)
+				</p>
+			</div>
+		</td>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 3: OHTA
+			</p>
+			<div class="indent">
+				<p>	
+				gray: 0.33333*red + 0.33334*green + 0.33333*blue
+				</p>
+				<p class="red">	
+				convert gradient.gif -colorspace ohta -channel red -separate gradient_ohta.gif
+				</p>
+				<p>	
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_ohta.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 4: Ligntness
+			</p>
+			<div class="indent">
+				<p>	
+				gray: (max(red,green,blue) + min(red,green,blue))/2
+				</p>
+				<p class="red">	
+				convert gradient.gif -colorspace hsl -channel blue -separate gradient_lightness.gif
+				</p>
+				<p>	
+				or
+				</p>
+				<p class="red">	
+				convert gradient.gif -fx "lightness" gradient_fx_lightness.gif
+				</p>
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_lightness.gif" width="100" height="100" align="middle" />
+				</p>
+				<p class="red">	
+				compare -metric rmse gradient_lightness.gif gradient_fx_lightness.gif null:
+				</p>
+				<p>	
+				0 (0)
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 5: Brightness
+			</p>
+			<div class="indent">
+				<p>	
+				gray: max(red,green,blue)
+				</p>
+				<p class="red">	
+				convert gradient.gif -colorspace hsb -channel blue -separate gradient_brightness.gif
+				</p>
+				<p>	
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_brightness.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="stretch"></a>
+<p class="title">	
+Stretch Colors To Full Range Of Values
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Original Image
+				</p>
+				<p align="center">	
+				<img src="image/image26s.jpg" width="180" height="118" />
+				</p>
+				<p class="header">	
+				Get min and max stats for each channel
+				</p>
+				<p class="indent">	
+				<ul>
+					<li>method requires IM 6.4.0-11 or higher due to use of fx escape image.minima and image.maxima</li>
+					<li>as of IM 6.4.2-6 image.minima and image.maxima may be shortened to just minima and maxima</li>
+					<li>alternate is to use <a href="image_info.php.html#gray_stats" target="_blank">grayscale methods</a> on each channel</li>
+				</ul>
+				</p>
+				<p class="blue">	
+				convert image26s.jpg -separate -format "%[fx:quantumrange*image.minima]" info:
+				</p>
+				<p>	
+				17219<br />
+				19275<br />
+				18247
+				</p>
+				<p class="blue">	
+				convert image26s.jpg -separate -format "%[fx:quantumrange*image.maxima]" info:
+				</p>
+				<p>	
+				53456<br />
+				52428<br />
+				49858
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Method 1: -contrast-stretch: Histogram Stretch All Channels In Concert
+				</p>
+				<p class="indent">
+				<ul>
+					<li>limitation: groups data in bins</li>
+					<li>limitation: stretches based upon intensity of all channels mixed together</li>
+					<li>result: some data may be clipped in each channel even for channels that are stretched to black or white</li>
+					<li>as of IM 6.4.2-6 image.minima and image.maxima may be shortened to just minima and maxima</li>
+				</ul>
+				</p>
+				<p class="red">	
+				convert image26s.jpg -contrast-stretch 0 image26s_stretch1.png
+				</p>
+				<p align="center">	
+				<img src="image/image26s_stretch1.png" width="180" height="118" />
+				</p>
+				<p class="header">	
+				Get min and max stats for each channel
+				</p>
+				<p class="red">	
+				convert image26s_stretch1.png -separate -format "%[fx:quantumrange*image.minima]" info:
+				</p>
+				<p>	
+				0<br />
+				1028<br />
+				0
+				</p>
+				<p class="red">	
+				convert image26s_stretch1.png -separate -format "%[fx:quantumrange*image.maxima]" info:
+				</p>
+				<p>	
+				65535<br />
+				65535<br />
+				60652
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Method 2: -contrast-stretch: Histogram Stretch Each Channel Separately
+				</p>
+				<p class="indent">
+				<ul>
+					<li>limitation: groups data in bins</li>
+					<li>limitation: stretches each channel separately so color shift is possible</li>
+					<li>result: some data may be clipped in each channel due to use of histogram bins</li>
+					<li>as of IM 6.4.2-6 image.minima and image.maxima may be shortened to just minima and maxima</li>
+				</ul>
+				</p>
+				<p class="red">	
+				convert image26s.jpg -separate -contrast-stretch 0 -combine image26s_stretch2.png
+				</p>
+				<p align="center">	
+				<img src="image/image26s_stretch2.png" width="180" height="118" />
+				</p>
+				<p class="header">	
+				Get min and max stats for each channel
+				</p>
+				<p class="red">	
+				convert image26s_stretch2.png -separate -format "%[fx:quantumrange*image.minima]" info:
+				</p>
+				<p>	
+				0<br />
+				0<br />
+				0
+				</p>
+				<p class="red">	
+				convert image26s_stretch2.png -separate -format "%[fx:quantumrange*image.maxima]" info:
+				</p>
+				<p>	
+				65535<br />
+				65535<br />
+				65535
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Method 3: -level: Stretch All Channels In Concert Based Upon Largest Of Min Channel Values and Smallest Of Max Channel Values
+				</p>
+				<p class="indent">
+				<ul>
+					<li>result: some data may be clipped in any channel whose min is not the largest min and whose max is not the smallest max</li>
+					<li>as of IM 6.4.2-6 image.minima and image.maxima may be shortened to just minima and maxima</li>
+				</ul>
+				</p>
+				<p class="red">	
+				minr=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.minima]" info:) | cut -d\  -f1`<br />
+				ming=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.minima]" info:) | cut -d\  -f2`<br />
+				minb=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.minima]" info:) | cut -d\  -f3`<br />
+				max_of_mins=`convert xc: -format "%[fx:max($minr,max($ming,$minb))]" info:`<br />
+				maxr=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.maxima]" info:) | cut -d\  -f1`<br />
+				maxg=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.maxima]" info:) | cut -d\  -f2`<br />
+				maxb=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.maxima]" info:) | cut -d\  -f3`<br />
+				min_of_maxs=`convert xc: -format "%[fx:min($maxr,min($maxg,$maxb))]" info:`<br />
+				convert image26s.jpg -level ${max_of_mins},${min_of_maxs} image26s_stretch3.png<br />
+				</p>
+				<p align="center">	
+				<img src="image/image26s_stretch2.png" width="180" height="118" />
+				</p>
+				<p class="header">	
+				Get min and max stats for each channel
+				</p>
+				<p class="red">	
+				convert image26s_stretch3.png -separate -format "%[fx:quantumrange*image.minima]" info:
+				</p>
+				<p>	
+				0<br />
+				0<br />
+				0
+				</p>
+				<p class="red">	
+				convert image26s_stretch3.png -separate -format "%[fx:quantumrange*image.maxima]" info:
+				</p>
+				<p>	
+				65535<br />
+				65535<br />
+				65535
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Method 4: -level: Stretch All Channels In Concert Based Upon Smallest Of Min Channel Values and Largest Of Max Channel Values
+				</p>
+				<p class="indent">
+				<ul>
+					<li>result: some channels may not stretch to black and white, but no data will be clipped</li>
+					<li>as of IM 6.4.2-6 image.minima and image.maxima may be shortened to just minima and maxima</li>
+				</ul>
+				</p>
+				<p class="red">	
+				minr=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.minima]" info:) | cut -d\  -f1`<br />
+				ming=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.minima]" info:) | cut -d\  -f2`<br />
+				minb=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.minima]" info:) | cut -d\  -f3`<br />
+				min_of_mins=`convert xc: -format "%[fx:min($minr,min($ming,$minb))]" info:`<br />
+				maxr=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.maxima]" info:) | cut -d\  -f1`<br />
+				maxg=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.maxima]" info:) | cut -d\  -f2`<br />
+				maxb=`echo $(convert image26s.jpg -separate -format "%[fx:quantumrange*image.maxima]" info:) | cut -d\  -f3`<br />
+				max_of_maxs=`convert xc: -format "%[fx:max($maxr,max($maxg,$maxb))]" info:`<br />
+				convert image26s.jpg -level ${min_of_mins},${max_of_maxs} image26s_stretch4.png<br />
+				convert image26s_stretch4.png -separate -format "%[fx:quantumrange*image.minima]" info:<br />
+				</p>
+				<p align="center">	
+				<img src="image/image26s_stretch2.png" width="180" height="118" />
+				</p>
+				<p class="header">	
+				Get min and max stats for each channel
+				</p>
+				<p class="red">	
+				convert image26s_stretch4.png -separate -format "%[fx:quantumrange*image.minima]" info:
+				</p>
+				<p>	
+				0<br />
+				3598<br />
+				1799
+				</p>
+				<p class="red">	
+				convert image26s_stretch4.png -separate -format "%[fx:quantumrange*image.maxima]" info:
+				</p>
+				<p>	
+				65535<br />
+				63736<br />
+				59110
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Method 5: -level: Stretch All Channels Separately Based Upon Each Min And Max Channel Values
+				</p>
+				<p class="indent">
+				<ul>
+					<li>result: some color shift may occur, but no data will be clipped</li>
+					<li>requires IM 6.4.2.1 or higher due to use of -level-colors
+					<li>as of IM 6.4.2-6 image.minima and image.maxima may be shortened to just minima and maxima</li>
+				</ul>
+				</p>
+				<p class="red">	
+				minr=`echo $(convert image26s.jpg -separate -format "%[fx:100*image.minima]%%" info:) | cut -d\  -f1`<br />
+				ming=`echo $(convert image26s.jpg -separate -format "%[fx:100*image.minima]%%" info:) | cut -d\  -f2`<br />
+				minb=`echo $(convert image26s.jpg -separate -format "%[fx:100*image.minima]%%" info:) | cut -d\  -f3`<br />
+				maxr=`echo $(convert image26s.jpg -separate -format "%[fx:100*image.maxima]%%" info:) | cut -d\  -f1`<br />
+				maxg=`echo $(convert image26s.jpg -separate -format "%[fx:100*image.maxima]%%" info:) | cut -d\  -f2`<br />
+				maxb=`echo $(convert image26s.jpg -separate -format "%[fx:100*image.maxima]%%" info:) | cut -d\  -f3`<br />
+				min="rgb($minr,$ming,$minb)"<br />
+				max="rgb($maxr,$maxg,$maxb)"<br />
+				convert image26s.jpg -level-colors ${min}-${max} image26s_stretch5.png
+				</p>
+				<p align="center">	
+				<img src="image/image26s_stretch2.png" width="180" height="118" />
+				</p>
+				<p class="header">	
+				Get min and max stats for each channel
+				</p>
+				<p class="red">	
+				convert image26s_stretch5.png -separate -format "%[fx:quantumrange*image.minima]" info:
+				</p>
+				<p>	
+				0<br />
+				0<br />
+				0
+				</p>
+				<p class="red">	
+				convert image26s_stretch5.png -separate -format "%[fx:quantumrange*image.maxima]" info:
+				</p>
+				<p>	
+				65535<br />
+				65535<br />
+				65535
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="pad_crop_square"></a>
+<p class="title">	
+Pad Or Crop To Square Dimensions
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Image
+			</p>
+			<p align="center">
+			<img src="image/monet3.jpg" width="128" height="161" />
+			</p>
+			<p class="header">	
+			Pad:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet3.jpg -virtual-pixel background -background white -set option:distort:viewport \<br />
+					<span class="indent">"%[fx:max(w,h)]x%[fx:max(w,h)]-%[fx:max((h-w)/2,0)]-%[fx:max((w-h)/2,0)]" \</span><br />
+					<span class="indent">-filter point -distort SRT 0 +repage monet3_pad.jpg</span>
+
+				</p>
+				<p align="center">	
+			<img src="image/monet3_pad.jpg" width="161" height="161" />
+				</p>
+			</div>
+			<p class="header">	
+			Crop:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet3.jpg -virtual-pixel edge -set option:distort:viewport \<br />
+					<span class="indent">"%[fx:min(w,h)]x%[fx:min(w,h)]+%[fx:max((w-h)/2,0)]+%[fx:max((h-w)/2,0)]" \</span><br />
+					<span class="indent">-filter point -distort SRT 0 +repage monet3_crop.jpg</span>
+
+				</p>
+				<p align="center">	
+			<img src="image/monet3_crop.jpg" width="128" height="128" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="resize_square"></a>
+<p class="title">	
+Resizing An Image To Square Shape
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Pad To Square The Size Of The Larger Dimension
+				</p>
+				<p class="red">	
+				max=`convert $infile -format "%[fx:max(w,h)]" info:`<br />
+				convert monet.jpg -background white -gravity center -extent ${max}x${max} monet_padout_max.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="121" height="161" align="middle" />
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/monet_padout_max.jpg" width="161" height="161" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Crop To Square The Size Of The Smaller Dimension
+				</p>
+				<p class="red">	
+				min=`convert $infile -format "%[fx:min(w,h)]" info:`<br />
+				convert monet.jpg -background white -gravity center -extent ${min}x${min} monet_cropout_min.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="121" height="161" align="middle" />
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/monet_cropout_min.jpg" width="121" height="121" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Resize Larger Dimension And Pad Smaller Dimension To 200x200 Square
+				</p>
+				<p class="red">	
+				convert monet.jpg -resize 200x200 -background white -gravity center -extent 200x200 monet_padout_200.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="121" height="161" align="middle" />
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/monet_padout_200.jpg" width="200" height="200" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Resize Smaller Dimension And Crop Larger Dimension To 200x200 Square
+				</p>
+				<p class="red">	
+				convert monet.jpg -resize '200x200^' -background white -gravity center -extent 200x200 monet_cropout_200.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="121" height="161" align="middle" />
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/monet_cropout_200.jpg" width="200" height="200" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Resize Larger Dimension And Pad Smaller Dimension To 200x200 Square Only If Image Larger Than 200x200
+				</p>
+				<p class="red">	
+				convert monet.jpg -resize '200x200>' -background white -gravity center -extent 200x200 monet_padout2_200.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="121" height="161" align="middle" />
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/monet_padout2_200.jpg" width="200" height="200" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Resize Smaller Dimension And Crop Larger Dimension To 200x200 Square Only If Image Larger Than 200x200
+				</p>
+				<p class="red">	
+				convert monet.jpg -resize '200x200>^' -background white -gravity center -extent 200x200 monet_cropout2_200.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="121" height="161" align="middle" />
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/monet_cropout2_200.jpg" width="200" height="200" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="resize"></a>
+<p class="title">	
+Resize One Image To Match The Size Of Another Image
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				Resize logo image to match size of cyclops image
+				</p>
+				<p class="red">	
+				convert logo.jpg -resize `identify -ping -format "%wx%h\!" cyclops.jpg` logo_resize_cyclops.jpg
+				</p>
+				<p>	
+				or
+				</p>
+				<p class="red">	
+				convert cyclops.jpg logo.jpg -fx "v.p{i*(v.w/u.w),j*(v.h/u.h)}" logo_resize_cyclops.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/logo.jpg" width="128" height="128" align="middle" />
+						<td><img src="image/cyclops.jpg" width="100" height="100" align="middle" /></td>
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/logo_resize_cyclops.jpg" width="100" height="100" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="crop1"></a>
+<p class="title">	
+Crop Image Into 2 Non-Overlapping Equal Sized Parts
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Crop Vertically
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg -crop 100%x50% +repage monet_vertical_%d.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="128" height="161" align="middle" /></td>
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/monet_vertical_0.jpg" width="128" height="81" align="middle" />
+							<br /><br />
+							<img src="image/monet_vertical_1.jpg" width="128" height="81" align="middle" />
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Crop Horizontally
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg -crop 50%x100% +repage monet_horizontal_%d.jpg
+				</p>
+				<p align="center">	
+				<img src="image/monet.jpg" width="128" height="161" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/monet_horizontal_0.jpg" width="64" height="161" align="middle" />
+				<img src="image/monet_horizontal_1.jpg" width="64" height="161" align="middle" hspace="10" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="crop2"></a>
+<p class="title">	
+Crop Image Into 4 Non-Overlapping Quadrants
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Quadrant Crop
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert mandril_256x256.jpg -crop 128x128 +repage mandril_128x128_%d.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/mandril_256x256.jpg" width="256" height="256" align="middle" /></td>
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/mandril_128x128_0.jpg" width="128" height="128" align="middle" />
+							<br /><br />
+							<img src="image/mandril_128x128_2.jpg" width="128" height="128" align="middle" />
+						</td>
+						<td><img src="image/mandril_128x128_1.jpg" width="128" height="128" align="middle" />
+							<br /><br />
+							<img src="image/mandril_128x128_3.jpg" width="128" height="128" align="middle" />
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="append"></a>
+<p class="title">	
+Horizontally Appending Images: Top Aligned, Bottom Aligned And Center Aligned
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Top Aligned
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg cyclops.jpg -background none +append append_top.png
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="128" height="161" align="middle" /></td>
+						<td><img src="image/cyclops.jpg" width="100" height="100" align="middle" /></td>
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/append_top.png" width="228" height="161" align="middle" />
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+			<p class="header">	
+			As Of IM 6.4.7-1, Append Is Gravity Sensitive. Thus The Following Is Equivalent To The Above
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg cyclops.jpg -background none -gravity north +append append_top.png
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Bottom Aligned
+			</p>
+			<p class="header">	
+			<ul>
+				<li>Flip both images</li>
+				<li>Append horizontally</li>
+				<li>Flip result</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg cyclops.jpg -flip -background none +append -flip append_bottom.jpg
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="128" height="161" align="middle" /></td>
+						<td><img src="image/cyclops.jpg" width="100" height="100" align="middle" /></td>
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/append_bottom.png" width="228" height="161" align="middle" />
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+			<p class="header">	
+			As Of IM 6.4.7-1, Append Is Gravity Sensitive. Thus The Following Is Equivalent To The Above
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg cyclops.jpg -background none -gravity south +append append_top.png
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Center Aligned<br />
+			(but can also do top or bottom aligned)<br />
+			May Be Limited To IM 6.4.6-6 Or Higher Due To -Extent Bug
+			</p>
+			<p class="header">	
+			<ul>
+				<li>Find Height Of Tallest Image</li>
+				<li>Use -extent In Vertical Direction To Fill Out Height Of Images </li>
+				<li>Append Images</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="blue">
+				convert monet.jpg cyclops.jpg -format "%h" info:<br />
+				161<br />
+				100
+				</p>
+			</div>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg cyclops.jpg -gravity center -background none -extent x161 +append append_center.png
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/monet.jpg" width="128" height="161" align="middle" /></td>
+						<td><img src="image/cyclops.jpg" width="100" height="100" align="middle" /></td>
+						<td><img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" /></td>
+						<td><img src="image/append_center.png" width="228" height="161" align="middle" />
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+			<p class="header">	
+			As Of IM 6.4.7-1, Append Is Gravity Sensitive. Thus The Following Is Equivalent To The Above
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert monet.jpg cyclops.jpg -background none -gravity center +append append_top.png
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="trim_2sides"></a>
+<p class="title">	
+Trimming Background Color On Two Sides Only
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Original Image
+			</p>
+			<div class="indent">
+				<p class="blue">	
+				convert rose: -bordercolor white -border 20 rose_white20.jpg
+				</p>
+			</div>
+			<p align="center">
+			<img src="image/rose_white20.jpg" width="110" height="86" />
+			</p>
+			<p class="header">	
+			Trim Only On The Top And Bottom
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert \( rose_white20.jpg -bordercolor white -border 1x0 \) \<br />
+					<span class="indent">-size 1x1 xc:black -gravity west -composite \</span><br />
+					<span class="indent">-size 1x1 xc:black -gravity east -composite \</span><br />
+					<span class="indent">-fuzz 10% -trim +repage -bordercolor white -shave 1x0 \</span><br />
+					<span class="indent">rose_white20_trim_vertical.jpg</span>
+				</p>
+				<p align="center">	
+				<img src="image/rose_white20_trim_vertical.jpg" width="110" height="46" />
+				</p>
+			</div>
+			<p class="header">	
+			Trim Only On The Left And Right
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert \( rose_white20.png -bordercolor white -border 0x1 \) \<br />
+					<span class="indent">-size 1x1 xc:black -gravity north -composite \</span><br />
+					<span class="indent">-size 1x1 xc:black -gravity south -composite \</span><br />
+					<span class="indent">-fuzz 10% -trim +repage -bordercolor white -shave 0x1 \</span><br />
+					<span class="indent">rose_white20_trim_horizontal.jpg</span>
+				</p>
+				<p align="center">	
+				<img src="image/rose_white20_trim_horizontal.jpg" width="70" height="86" />
+				</p>
+			</div>
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="skew"></a>
+<p class="title">	
+Skewing (Shearing) An Image
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Image
+			</p>
+			<p align="center">
+			<img src="image/cyclops.jpg" width="100" height="100" />
+			</p>
+			<p>
+			Prior to IM 6.4.2-7, -affine -transform did not respect the virtual-pixel setting. <br />
+			Thus, if the output image format supported an alpha channel, then the background <br />
+			pad due to the skew would be transparent, irrespective of the background color; <br />
+			otherwise it would be background color. As of IM 6.4.2-7, this has been fixed <br />
+			along with an artifact that could show when skewing the bottom to the left, <br />
+			expecially when the background was transparent.
+			</p>
+			<p class="header">	
+			Skew Bottom Edge To Right (SkewX=20 deg)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				ang=20<br />
+				sinang=`convert xc: -format "%[fx:sin($ang*pi/180)]" info:`<br />
+				convert cyclops.png -affine 1,0,$sinang,1,0,0 -channel rgba -alpha set \<br />
+					<span class="indent">-virtual-pixel transparent -background white -transform \</span><br />
+					<span class="indent">cyclops_20_degrees_b2r.gif</span>
+				<br /><br />
+				convert cyclops.png -affine 1,0,$sinang,1,0,0 \<br />
+					<span class="indent">-virtual-pixel white -background white \</span><br />
+					<span class="indent">-transform cyclops_20_degrees_b2r_white.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_20_degrees_b2r.gif" width="134" height="100" />
+				<br /><br />
+				<img src="image/cyclops_20_degrees_b2r_white.gif" width="134" height="100" />
+				</p>
+			</div>
+			<p class="header">	
+			Skew Bottom Edge To Left (SkewX=-20 deg)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				ang=-20<br />
+				sinang=`convert xc: -format "%[fx:sin($ang*pi/180)]" info:`<br />
+				convert cyclops.png -affine 1,0,$sinang,1,0,0  -channel rgba -alpha set \<br />
+					<span class="indent">-virtual-pixel transparent -background white \</span><br />
+					<span class="indent">-transform cyclops_20_degrees_b2l.gif</span>
+				<br /><br />
+				convert cyclops.png -affine 1,0,$sinang,1,0,0 \<br />
+					<span class="indent">-virtual-pixel white -background white -transform \</span><br />
+					<span class="indent">cyclops_20_degrees_b2l_white.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_20_degrees_b2l.gif" width="134" height="100" />
+				<br /><br />
+				<img src="image/cyclops_20_degrees_b2l_white.gif" width="134" height="100" />
+				</p>
+			</div>
+			<p class="header">	
+			Skew Right Edge To Bottom (SkewY=20 deg)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				ang=20<br />
+				sinang=`convert xc: -format "%[fx:sin($ang*pi/180)]" info:`<br />
+				convert cyclops.png -affine 1,$sinang,0,1,0,0 -channel rgba -alpha set \<br />
+					<span class="indent">-virtual-pixel transparent -background white -transform \</span><br />
+					<span class="indent">cyclops_20_degrees_r2b.gif</span>
+				<br /><br />
+				convert cyclops.png -affine 1,$sinang,0,1,0,0 \<br />
+					<span class="indent">-virtual-pixel white -background white -transform \</span><br />
+					<span class="indent">cyclops_20_degrees_r2b_white.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_20_degrees_r2b.gif" width="100" height="134" />
+				<br /><br />
+				<img src="image/cyclops_20_degrees_r2b_white.gif" width="100" height="134" />
+				</p>
+			</div>
+			<p class="header">	
+			Skew Right Edge To Top (SkewY=20 deg)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				ang=-20<br />
+				sinang=`convert xc: -format "%[fx:sin($ang*pi/180)]" info:`<br />
+				convert cyclops.png -affine 1,$sinang,0,1,0,0 -channel rgba -alpha set \<br />
+					<span class="indent">-virtual-pixel transparent -background white -transform \</span><br />
+					<span class="indent">cyclops_20_degrees_r2t.gif
+				<br /><br />
+				convert cyclops.png -affine 1,$sinang,0,1,0,0 \<br />
+					<span class="indent">-virtual-pixel white -background white -transform \</span><br />
+					<span class="indent">cyclops_20_degrees_r2t_white.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/cyclops_20_degrees_r2t.gif" width="100" height="134" />
+				<br /><br />
+				<img src="image/cyclops_20_degrees_r2t_white.gif" width="100" height="134" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="fuzzythresh"></a>
+<p class="title">	
+Fuzzy Color Thresholding
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>	
+			<ul>
+				<li>define color (blue)</li>
+				<li>define fuzz amount</li>
+				<li>replace all colors not within fuzz range with black</li>
+				<li>replace all colors within fuzz range with white</li>
+			</ul>
+			<p class="red">	
+			color="rgb(2,90,164)"<br />
+			fuzz=5<br />
+			convert logo.gif -fuzz $fuzz% \<br />
+				<span class="indent">-fill black +opaque "$color" \</span><br />
+				<span class="indent">-fill white -opaque "$color" \</span><br />
+				<span class="indent">-colorspace gray logo_fuzzy_thresh.gif</span>
+			</p>
+			<p align="center">	
+			<img src="image/logo.gif" width="128" height="128" align="middle" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/logo_fuzzy_thresh.gif" width="128" height="128" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="color_slice"></a>
+<p class="title">	
+Color Range Slicing
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Slice Mid 50% Of Each Channel
+			</p>
+			<div class="indent">
+				<p>	
+				By Minimum And Maximum Graylevel Percent
+				</p>
+				<p class="red">	
+				min="25"<br />
+				max="75"<br />
+				convert gradient.gif -separate \<br />
+					<span class="indent">-black-threshold $min% \</span><br />
+					<span class="indent">-white-threshold $max% \</span><br />
+					<span class="indent">-fill black -opaque white \</span><br />
+					<span class="indent">-combine \</span><br />
+					<span class="indent">gradient_slice1.gif</span>
+				</p>
+				<p>	
+				Or By Mid Graylevel And Range Percent
+				</p>
+				<p class="red">	
+				mid="50"<br />
+				range="25"<br />
+				convert grad_wedge.gif -separate \<br />
+					<span class="indent">-fuzz $range% \</span><br />
+					<span class="indent">-fill black +opaque "gray($mid%)" \</span><br />
+					<span class="indent">-combine \</span><br />
+					<span class="indent">gradient_slice1.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_slice1.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Slice Mid 50% Of Each Channel And Intensify
+			</p>
+			<div class="indent">
+				<p>	
+				By Minimum And Maximum Graylevel Percent
+				</p>
+				<p class="red">	
+				min="25"<br />
+				max="75"<br />
+				convert gradient.gif -separate \<br />
+					<span class="indent">-black-threshold $min% \</span><br />
+					<span class="indent">-white-threshold $max% \</span><br />
+					<span class="indent">-fill black -opaque white \</span><br />
+					<span class="indent">-fill white +opaque black \</span><br />
+					<span class="indent">-combine \</span><br />
+					<span class="indent">gradient_slice2.gif</span>
+				</p>
+				<p>	
+				Or By Mid Graylevel And Range Percent
+				</p>
+				<p class="red">	
+				mid="50"<br />
+				range="25"<br />
+				convert grad_wedge.gif -separate \<br />
+					<span class="indent">-fuzz $range% \</span><br />
+					<span class="indent">-fill black +opaque "gray($mid%)" \</span><br />
+					<span class="indent">-fill white +opaque black \</span><br />
+					<span class="indent">-combine \</span><br />
+					<span class="indent">gradient_slice2.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_slice2.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Slice Mid 50% Of Each Channel, Intensify And Convert To Grayscale
+			</p>
+			<div class="indent">
+				<p>	
+				By Minimum And Maximum Graylevel Percent
+				</p>
+				<p class="red">	
+				min="25"<br />
+				max="75"<br />
+				convert gradient.gif -separate \<br />
+					<span class="indent">-black-threshold $min% \</span><br />
+					<span class="indent">-white-threshold $max% \</span><br />
+					<span class="indent">-fill black -opaque white \</span><br />
+					<span class="indent">-fill white +opaque black \</span><br />
+					<span class="indent">-combine -colorspace gray \</span><br />
+					<span class="indent">gradient_slice3.gif</span>
+				</p>
+				<p>	
+				Or By Mid Graylevel And Range Percent
+				</p>
+				<p class="red">	
+				mid="50"<br />
+				range="25"<br />
+				convert grad_wedge.gif -separate \<br />
+					<span class="indent">-fuzz $range% \</span><br />
+					<span class="indent">-fill black +opaque "gray($mid%)" \</span><br />
+					<span class="indent">-fill white +opaque black \</span><br />
+					<span class="indent">-combine -colorspace gray \</span><br />
+					<span class="indent">gradient_slice3.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/gradient_slice3.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="grayscale_slice"></a>
+<p class="title">	
+Grayscale Range Slicing And Thresholding
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Slice Mid 50%
+			</p>
+			<div class="indent">
+				<p>	
+				By Minimum And Maximum Graylevel Percent
+				</p>
+				<p class="red">	
+				min="25"<br />
+				max="75"<br />
+				convert grad.gif \<br />
+					<span class="indent">-black-threshold $min% \</span><br />
+					<span class="indent">-white-threshold $max% \</span><br />
+					<span class="indent">-fill black -opaque white \</span><br />
+					<span class="indent">grad_slice1.gif</span>
+				</p>
+				<p>	
+				Or By Mid Graylevel And Range Percent
+				</p>
+				<p class="red">	
+				mid="50"<br />
+				range="25"<br />
+				convert grad.gif \<br />
+					<span class="indent">-fuzz $range% \</span><br />
+					<span class="indent">-fill black +opaque "gray($mid%)" \</span><br />
+					<span class="indent">grad_slice1.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/grad.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/grad_slice1.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Threshold Mid 50%
+			</p>
+			<div class="indent">
+				<p>	
+				By Minimum And Maximum Graylevel Percent
+				</p>
+				<p class="red">	
+				min="25"<br />
+				max="75"<br />
+				convert grad.gif \<br />
+					<span class="indent">-black-threshold $min% \</span><br />
+					<span class="indent">-white-threshold $max% \</span><br />
+					<span class="indent">-fill black -opaque white \</span><br />
+					<span class="indent">-fill white +opaque black \</span><br />
+					<span class="indent">grad_slice2.gif</span>
+				</p>
+				<p>	
+				Or By Mid Graylevel And Range Percent
+				</p>
+				<p class="red">	
+				mid="50"<br />
+				range="25"<br />
+				convert grad.gif \<br />
+					<span class="indent">-fuzz $range% \</span><br />
+					<span class="indent">-fill black +opaque "gray($mid%)" \</span><br />
+					<span class="indent">-fill white +opaque black \</span><br />
+					<span class="indent">grad_slice2.gif</span>
+				</p>
+				<p align="center">	
+				<img src="image/grad.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/grad_slice2.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="lr_composite"></a>
+<p class="title">	
+Lower Right Offset Composite
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert \( -size 100x100 xc:white \) rose: -gravity southeast -geometry +10+10 rose_white.jpg
+			</p>
+			<p>
+			(note: +10+10 NOT -10-10)
+			</p>
+			<p align="center">	
+			<img src="image/rose_white.jpg" width="100" height="100" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="power2_pad"></a>
+<p class="title">	
+Padding An Image To A Power Of 2 Size
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="blue">	
+			convert rose: -format "%w x %h" info:<br />
+			70 x 46<br />
+			</p>
+			<p class="header">	
+			Rectangular
+			</p>
+			<p class="red">	
+			p2w=`convert rose: -format "%[fx:2^(ceil(log(w)/log(2)))]" info:`<br />
+			p2h=`convert rose: -format "%[fx:2^(ceil(log(h)/log(2)))]" info:`<br />
+			</p>
+			<p class="blue">	
+			echo "$p2w x $p2h"<br />
+			128 x 64<br />
+			</p>
+			<p class="red">	
+			convert rose: -background white -gravity center -extent ${p2w}x${p2h} rose_padded.jpg
+			</p>
+			<p align="center">	
+			<img src="image/rose_padded.jpg" width="128" height="64" align="middle" />
+			</p>
+			<p class="header">	
+			Square
+			</p>
+			<p class="red">	
+			p2=`convert rose: -format "%[fx:2^(ceil(log(max(w,h))/log(2)))]" info:`<br />
+			</p>
+			<p class="blue">	
+			echo "$p"<br />
+			128<br />
+			</p>
+			<p class="red">	
+			convert rose: -background white -gravity center -extent ${p2}x${p2} rose_padded_sq.jpg
+			</p>
+			<p align="center">	
+			<img src="image/rose_padded_sq.jpg" width="128" height="128" align="middle" />
+			</p>
+			<p>	
+			<br />
+			Note: logtwo(x)=log<sub>2</sub>(x)=log(x)/log(2) added to -fx in IM 6.4.2-2
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="unfold"></a>
+<p class="title">	
+Mirror Framing Of An Image (Unfolding Border Region)
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert cyclops.jpg \( +clone -border 25x25 \) +swap -virtual-pixel mirror -fx "v.p{i-25,j-25}" cyclops_unfold.jpg
+			</p>
+			<p>	
+			or
+			</p>
+			<p class="red">	
+			convert cyclops.jpg -virtual-pixel mirror -set option:distort:viewport 150x150-25-25 -distort SRT 0 +repage cyclops_unfold.jpg
+			</p>
+			<p align="center">	
+			<img src="image/cyclops.jpg" width="100" height="100" align="middle" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/cyclops_unfold.jpg" width="150" height="150" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="mirror"></a>
+<p class="title">	
+Mirror Tiling
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert question.gif \( +clone -flop \) +append \( +clone -flip \) -append -write mpr:tile +delete \<br />
+				<span class="indent">-size 100x100 tile:mpr:tile question_mirror.gif</span>
+			</p>
+			<p>	
+			or
+			</p>
+			<p class="red">	
+			convert question.gif \( +clone -extent 100x100 \) +swap -virtual-pixel mirror -fx "v" question_mirror.gif
+			</p>
+			<p>	
+			or
+			</p>
+			<p class="red">	
+			convert question.gif -virtual-pixel mirror -set option:distort:viewport 100x100 -distort SRT 0 question_mirror.gif
+			</p>
+			<p align="center">	
+			<img src="image/question.gif" width="20" height="20" align="middle" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/question_mirror.gif" width="100" height="100" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="ave"></a>
+<p class="title">	
+Weighted Average Of Multiple Images
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Examples Use The Same Image To Verify That They Reproduce The Original
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Unequal Weight Of Two Images
+				</p>
+				<p class="red">	
+				composite 33%x67% gradient.gif gradient.gif 
+				</p>
+				<p align="center">	
+				33% <img src="image/gradient.gif" width="100" height="100" align="middle" />&nbsp;
+				<b>+</b> 67% <img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				100% <img src="image/gradient_33x67_ave.gif" width="100" height="100" align="middle" />
+				</p>
+				<p>&nbsp;</p>
+				<p class="header">	
+				Equal Weighting Of More Than Two Images
+				</p>
+				<p class="red">	
+				convert gradient.gif gradient.gif gradient.gif -average gradient_equal_ave.gif
+				</p>
+				<p align="center">	
+				1/3 <img src="image/gradient.gif" width="100" height="100" align="middle" /> 
+				<b>+</b> 1/3 <img src="image/gradient.gif" width="100" height="100" align="middle" /> 
+				<b>+</b> 1/3 <img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				100% <img src="image/gradient_equal_ave.gif" width="100" height="100" align="middle" />
+				</p>
+				<p>&nbsp;</p>
+				<p class="header">	
+				Unequal Weighting Of More Than Two Images
+				</p>
+				<p class="red">	
+				convert \<br />
+					<span class="indent">\( gradient.gif -evaluate multiply .2 \) \<br /></span>
+					<span class="indent">\( gradient.gif -evaluate multiply .5 \) \<br /></span>
+					<span class="indent">\( gradient.gif -evaluate multiply .3 \) \<br /></span>
+					<span class="indent">-background black -compose plus -flatten gradient_unequal_ave.gif</span>
+				</p>
+				<p align="center">	
+				20% <img src="image/gradient.gif" width="100" height="100" align="middle" /> 
+				<b>+</b> 50% <img src="image/gradient.gif" width="100" height="100" align="middle" /> 
+				<b>+</b> 30% <img src="image/gradient.gif" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				100% <img src="image/gradient_equal_ave.gif" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="maxmin"></a>
+<p class="title">	
+Max Or Min Composite Of Two Images
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Create Horizontal Mirror Of Gradient
+			</p>
+			<p class="blue">	
+			convert gradient.gif -flop gradient_flop.gif 
+			</p>
+			<p align="center">	
+			<img src="image/gradient_flop.gif" width="100" height="100" align="middle" />
+			</p>
+			<p class="header">	
+			Max Of Gradient And Its Mirror Image
+			</p>
+			<p class="red">	
+			convert gradient.gif gradient_flop.gif -compose lighten -composite gradient_max.gif 
+			</p>
+			<p align="center">
+			max of 
+			<img src="image/gradient.gif" width="100" height="100" align="middle" hspace="5" />
+			with &nbsp;
+			<img src="image/gradient_flop.gif" width="100" height="100" align="middle" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/gradient_max.gif" width="100" height="100" align="middle" />
+			</p>
+			<p>&nbsp;</p>
+			<p class="header">	
+			Min Of Gradient And Its Mirror Image
+			</p>
+			<p class="red">	
+			convert gradient.gif gradient_flop.gif -compose darken -composite gradient_min.gif 
+			</p>
+			<p align="center">
+			min of 
+			<img src="image/gradient.gif" width="100" height="100" align="middle" hspace="5" />
+			with &nbsp;
+			<img src="image/gradient_flop.gif" width="100" height="100" align="middle" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/gradient_min.gif" width="100" height="100" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="graph2image"></a>
+<p class="title">	
+Graph To 1D (LUT) Image: Image Intensity Transformation
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			<ul>
+				<li>Create transformation as break point pairs in range 0-100 (percent)
+					where x is the input value and y is the output value. <br />
+					Here we use "0,20 100,80" which will lower the contrast by 20%. 
+					But any number of break points can be supplied</li>
+				<li>Augment the point pairs with 0,0 at start and 100,0 at end so that 
+					we can form a complete filled polygon</li>
+				<li>Use gradient.gif image as image to be transformed by 1D Look Up Table
+					image that will be created</li>
+				<li>Optionally draw polyline in red to show user supplied two-point 
+					linear transformation and write out a flipped image for display</li>
+				<li>Optionally draw polyline in red to show augmented break point   
+					polyline and write out a flipped image for display</li>
+				<li>Draw white filled polygon on black background, crop out the first  
+					which represents values at zero so they do not contribute <br />
+					(and optionally write out flipped image for display)</li>
+				<li>Do a column average to one row for use as the LUT using -scale (and optionally  
+					write it out for display)</li>
+				<li>Apply the LUT to the gradient.gif image using -clut</li>
+				<li>(Note: -clut requires IM 6.3.5.7 or higher; the alternate is to use 
+					-fx 'v.p{u*v.w,0}')</li>
+			</ul>
+			</p>
+			<p class="red">	
+			plist_user="0,20 100,80"<br />
+			plist_augmented="0,0 $plist_user 100,0"<br />
+			convert gradient.gif \<br />
+				<span class="indent blue">\( -size 101x101 xc:white -fill white -draw "stroke red polyline $plist_user" -flip -write gradient_graph1.gif \) +delete \<br /></span>
+				<span class="indent blue">\( -size 101x101 xc:white -fill white -draw "stroke red polyline $plist_augmented" -flip -write gradient_graph2.gif \) +delete \<br /></span>
+				<span class="indent">\( -size 101x101 xc:black -fill white -draw "polygon $plist_augmented" \<br /></span>
+				<span class="indent">-crop 101x100+0+1 +repage <span class="blue">-flip -write gradient_graph3.gif</span> \<br /></span>
+				<span class="indent">-scale 101x1! <span class="blue">-write gradient_lut.png</span> \) \<br /></span>
+				<span class="indent">-clut gradient_low_contrast.gif</span>
+			</p>
+			<table cellspacing="0" cellpadding="5" align="center">
+				<tr>
+					<td align="center" valign="middle">LUT Creation:</td>
+					<td>
+					<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">(</span> <img src="image/gradient_graph1.gif" width="101" height="101" align="middle" />
+					</td>
+					<td>
+					<img src="image/gradient_graph2.gif" width="101" height="101" align="middle" /> <span class="blue"> <span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">)</span>
+					</td>
+					<td>
+					<img src="image/gradient_graph3.gif" width="101" height="100" align="middle" />
+					</td>
+					<td>
+					<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+					<img src="image/gradient_lut.png" width="101" height="20" align="middle" />
+					</td>
+				</tr>
+				<tr>
+					<td align="center" valign="middle">&nbsp;</td>
+					<td align="center" valign="middle">linear<br />transform<br />&nbsp;</td>
+					<td align="center" valign="middle">augmented<br />polyline<br />&nbsp;</td>
+					<td align="center" valign="middle">filled<br />polygon<br />&nbsp;</td>
+					<td align="center" valign="middle">LUT<br />(expanded<br />to 20 rows)</td>
+				</tr>
+			</table>
+			<br /><br />
+			<p align="center">
+			Apply LUT To Image: &nbsp;  
+			<img src="image/gradient.gif" width="100" height="100" align="middle" /> 
+			<b>&nbsp;+&nbsp;</b> <img src="image/gradient_lut.png" width="101" height="20" align="middle" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/gradient_lowcontrast.gif" width="100" height="100" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="image2graph"></a>
+<p class="title">	
+1D (Row) Image To Graph: Row Profile
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			<ul>
+				<li>Create 100x1 grayscale gradient and apply -gamma 2 transformation to it 
+					to create the single row image. <br />
+					(note: any row of an image can be used)</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="blue">	
+				convert -size 1x101 gradient: -rotate 90 -gamma 2 gradient_gamma2.gif
+				</p>
+			</div>
+			<p>
+			<ul>
+				<li>Define a scaling fraction to convert 8-bit data to range 0 to 100
+				<li>Convert the row of pixels into list of text values using NetPBM PGM 
+					ASCII image format, setting 8-bit depth, <br />
+					scaling the data to the range 0 to 100 and removing the first 3 header 
+					lines of the pgm data</li>
+				<li>Define empty point-pair list</li>
+				<li>Initialize point-pair x values to 0</li>
+				<li>Use "for loop" to create list of x,y point-pairs, one for each pixel in the 101x1 row image</li>
+				<li>Draw graph using list of point-pairs</li>
+				<li>(note: for floating point accuracy, remove -evaluate multipy $frac and insert <br />
+					y=`echo "scale=1; "100*$y/255" | bc` into the beginning of the "for loop")</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="red">	
+				frac=`convert xc: -format "%[fx:100/255]" info:`<br />
+				pixvals=`convert gradient_gamma2.gif -depth 8 -evaluate multiply $frac -compress none  pgm:- | sed '1,3d'`<br />
+				plist=""<br />
+				x=0<br />
+				for y in $pixvals; do<br />
+				<span class="indent">plist="$plist $x,$y"<br /></span>
+				<span class="indent">x=`expr $x + 1`<br /></span>
+				done<br />
+				convert -size 101x101 xc:white -fill white -draw "stroke red polyline $plist" -flip gradient_gamma2_graph.gif
+				</p>
+			</div>
+			<p align="center">
+			Note: LUT expanded to 20 rows for display
+			</p>
+			<p align="center">
+			<img src="image/gradient_gamma2.gif" width="101" height="20" align="middle" /> 
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/gradient_gamma2_graph.gif" width="101" height="101" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="convolution"></a>
+<p class="title">	
+1D And 2D Equal Weight (Averaging) Convolutions
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Create Test Image
+			</p>
+			<div class="indent">
+				<p class="blue">	
+				convert -size 100x100 xc:white -bordercolor black -border 28 white_in_black.jpg
+				</p>
+				<p align="center">
+				<img src="image/white_in_black.jpg" width="156" height="156" hspace="5"/>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			2D Uniform Weight 11x11 Convolution Using -convolve:
+			</p>
+			<p>
+			<ul>
+				<li>uniform weight convolution produces linear ramp centered on edge of white area
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="red">	
+				ave11="<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1,<br />
+				1,1,1,1,1,1,1,1,1,1,1<br />
+				"<br />
+				ave11=`echo $ave11 | sed -n 's/ //'pg`		<span class="blue">#removes spaces introduced by new lines</span><br />
+				convert white_in_black.jpg -convolve $ave11 white_in_black_ave11.jpg
+				</p>
+				<p align="center">
+				<img src="image/white_in_black_ave11.jpg" width="156" height="156" vspace="5" />
+				<br />
+				<img src="image/white_in_black_ave11_profile.gif" width="176" height="110" vspace="5" />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			2D Gaussian Weight 11x11 Convolution Using -blur radius,sigma:
+			</p>
+			<p>
+			<ul>
+				<li>-blur radius,sigma -- produces gaussian weight filter and gaussian curved ramped sides</li>
+				<li>if radius set to 0, then radius will be set approximately to 3xsigma</li>
+				<li>thus use radius=0 and sigma=11/3=3.7</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert white_in_black.jpg -blur 0,3.7 white_in_black_blur0x3p7.jpg
+				</p>
+				<p align="center">
+				<img src="image/white_in_black_blur0x3p7.jpg" width="156" height="156" vspace="5" />
+				<br />
+				<img src="image/white_in_black_blur0x3p7_profile.gif" width="176" height="110" vspace="5" />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			2D Equal Weight 11x11 Convolution Using -blur radius,sigma:
+			</p>
+			<p>
+			<ul>
+				<li>-blur radius,sigma -- produces gaussian weight filter</li>
+				<li>if sigma>>radius, then the filter will be uniform weight and sides of result linearly ramped</li>
+				<li>thus use radius=(floor(11/2))=5 and sigma=65535 to achieve 11x11 equal weight filter</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert white_in_black.jpg -blur 5,65535 white_in_black_blur5x65535.jpg
+				</p>
+				<p align="center">
+				<img src="http://www.fmwconcepts.com/imagemagick/tidbits/image/white_in_black_blur5x65535" width="156" height="156" vspace="5" />
+				<br />
+				<img src="image/white_in_black_blur5x65535_profile.gif" width="176" height="110" vspace="5" />
+				</p>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			1D (Horizontal Only) Equal Weight 11x1 Convolution Using -motion-blur radius,sigma:
+			</p>
+			<p>
+			<ul>
+				<li>-blur radius,sigma -- produces gaussian weight filter</li>
+				<li>if sigma>>radius, then the filter will be uniform weight and sides of result linearly ramped</li>
+				<li>but motion-blur is asymmetric -- thus it is not centered</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert white_in_black.jpg -motion-blur 5,65535 white_in_black_motion_blur_5x65535.jpg
+				</p>
+				<p align="center">
+				<img src="image/white_in_black_motion_blur_5x65535.jpg" width="156" height="156" vspace="5" />
+				<br />
+				<img src="image/white_in_black_motion_blur_5x65535_profile.gif" width="176" height="110" vspace="5" />
+				</p>
+			</div>
+			<p>
+			<ul>
+				<li>repeat but shift back so properly centered using -roll</li>
+			</ul>
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert white_in_black.jpg -motion-blur 5,65535 -roll +5+0 white_in_black_motion_blur_5x65535_roll5.jpg
+				</p>
+				<p align="center">
+				<img src="image/white_in_black_motion_blur_5x65535_roll5.jpg" width="156" height="156" vspace="5" />
+				<br />
+				<img src="image/white_in_black_motion_blur_5x65535_roll5_profile.gif" width="176" height="110" vspace="5" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="filter"></a>
+<p class="title">	
+Mean And Standard Deviation Filtering
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1: Use -convolve For 3x3 Equal Weight Average As Mean
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Mean (Average): Blurs
+				</p>
+				<p class="red">	
+				convert cyclops.png -convolve "1,1,1,1,1,1,1,1,1" cyclops_mean1.png 
+				</p>
+				<p align="center">
+				<img src="image/cyclops.png" width="100" height="100" align="middle" hspace="5" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/cyclops_mean1.png" width="100" height="100" align="middle" />
+				</p>
+				<p>&nbsp;</p>
+				<p class="header">	
+				Standard Deviation = sqrt( average of squared image - square of averaged image ): Extracts Edges
+				<ul>
+					<li>multiply mean by itself</li>
+					<li>multiply image by itself then take mean</li>
+					<li>subtract and take square root, then stretch to full range of values</li>
+					<li>note: -evaluate pow is only available since IM 6.4.1.9; alternate is -gamma 2</li>
+				</p>
+				<p class="red">	
+				convert \<br />
+					<span class="indent">\( cyclops_mean1.png cyclops_mean1.png -compose multiply -composite \) \<br /></span>
+					<span class="indent">\( cyclops.png cyclops.png -compose multiply -composite -convolve "1,1,1,1,1,1,1,1,1" \) \<br /></span>
+					<span class="indent">-compose minus -composite -evaluate pow 0.5 -contrast-stretch 0 cyclops_std1.png</span>
+				</p>
+				<p align="center">
+				<img src="image/cyclops.png" width="100" height="100" align="middle" hspace="5" /> 
+				with &nbsp; <img src="image/cyclops_mean1.png" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/cyclops_std1.png" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2: Use -blur 0xsigma (sigma=1) For Approximately The Same But Weighted Average For Mean
+			</p>
+			<p>	
+			(note: sigma can be increased/decreased to make more/less blurring and broader/narrower edges)
+			</p>
+			<div class="indent">
+				<p class="header">	
+				Mean (Average): Blurs
+				</p>
+				<p class="red">	
+				convert cyclops.png -blur 0x1 cyclops_mean2.png 
+				</p>
+				<p align="center">
+				<img src="image/cyclops.png" width="100" height="100" align="middle" hspace="5" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/cyclops_mean2.png" width="100" height="100" align="middle" />
+				</p>
+				<p>&nbsp;</p>
+				<p class="header">	
+				Standard Deviation = sqrt( average of squared image - square of averaged image ): Extracts Edges
+				<ul>
+					<li>multiply mean by itself</li>
+					<li>multiply image by itself then take mean</li>
+					<li>subtract and take square root, then stretch to full range of values</li>
+					<li>note: -evaluate pow is only available since IM 6.4.1.9; alternate is -gamma 2</li>
+				</p>
+				<p class="red">	
+				convert \<br />
+					<span class="indent">\( cyclops_mean2.png cyclops_mean2.png -compose multiply -composite \) \<br /></span>
+					<span class="indent">\( cyclops.png cyclops.png -compose multiply -composite -blur 0x1 \) \<br /></span>
+					<span class="indent">-compose minus -composite -evaluate pow 0.5 -contrast-stretch 0 cyclops_std2.png</span>
+				</p>
+				<p align="center">
+				<img src="image/cyclops.png" width="100" height="100" align="middle" hspace="5" /> 
+				with &nbsp; <img src="image/cyclops_mean2.png" width="100" height="100" align="middle" />
+				<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+				<img src="image/cyclops_std1.png" width="100" height="100" align="middle" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="composite1"></a>
+<p class="title">	
+Antialiased Image Composite Along Image Boundary
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 1: Linear Ramp Blending
+			</p>
+			<div class="indent">
+				<p class="header">	
+				<ul>
+					<li>Define fraction of image to ramp inward from each edge of the image</li>
+					<li>Specify overlay image</li>
+					<li>Create a grayscale mask ramped from black at the left edge to white at the given fraction inward and save in memory</li>
+					<li>Horizontally mirror the left edge mask to make the right edge mask and save in memory</li>
+					<li>Create a grayscale mask ramped from black at the top edge to white at the given fraction inward and save in memory</li>
+					<li>Horizontally mirror the left edge mask to make the right edge mask and save in memory</li>
+					<li>Composite the first and second ramped (in memory) masks</li>
+					<li>Composite the previous result with the third ramped mask</li>
+					<li>Composite the previous result with the fourth ramped mask to make the final ramped mask image \<br />
+						(and optionally save for display and generating a profile)</li>
+					<li>Add the mask as an alpha channel to the overlay image</li>
+					<li>Specify the background image and composite with the modified overlay image</li>
+				</ul>
+				</p>
+				<p class="red">	
+				ff=.3<br />
+				convert flower_yellow.jpg \<br />
+					<span class="indent">\( -clone 0 -monitor -fx "min(1,(i/($ff*(w-1))))" -write mpr:tmp0 +delete \) \<br /></span>
+					<span class="indent">\( mpr:tmp0 -flop -write mpr:tmp1 \) \<br /></span>
+					<span class="indent">\( -clone 0 -monitor -fx "min(1,(j/($ff*(h-1))))" -write mpr:tmp2 +delete \) \<br /></span>
+					<span class="indent">\( mpr:tmp2 -flip -write mpr:tmp3 \) \<br /></span>
+					<span class="indent">\( mpr:tmp0 mpr:tmp1 -compose multiply -composite \<br /></span>
+					<span class="indent">mpr:tmp2 -compose multiply -composite \<br /></span>
+					<span class="indent">mpr:tmp3 -compose multiply -composite <span class="blue">-write flower_linear_mask.jpg</span> \) \<br /></span>
+					<span class="indent">-compose copy_opacity -composite \<br /></span>
+					<span class="indent">flower_pink.jpg +swap -gravity center -composite flowers_linear.jpg</span>
+				</p>
+				<table border="0" cellspacing="0" cellpadding="0" align="center">
+					<tr>
+						<td align="center" valign="top">
+						<img src="image/flower_pink.jpg" width="240" height="160" align="middle" hspace="0" />
+						<p>
+						background image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_yellow.jpg" width="76" height="69" align="middle" hspace="10" />
+						<p>
+						overlay<br />image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_linear_mask.jpg" width="76" height="69" align="middle" hspace="0" />
+						<p>
+						mask image
+						</p>
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">(</span>
+						<img src="image/flower_linear_mask_profile.gif" width="100" height="100" align="middle" hspace="0" />
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">)</span>
+						<p>
+						profile of center<br />row of mask
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<br />
+						<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="top" />
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flowers_linear.jpg" width="240" height="160" align="middle" hspace="5" />
+						<p>
+						composited image
+						</p>
+						</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 2: Partial Cosine Ramp Blending
+			</p>
+			<div class="indent">
+				<p class="header">	
+				<ul>
+					<li>Define fraction of image to ramp inward from each edge of the image</li>
+					<li>Specify overlay image</li>
+					<li>Create a grayscale mask ramped from black at the left edge to white at the given fraction inward and save in memory</li>
+					<li>Horizontally mirror the left edge mask to make the right edge mask and save in memory</li>
+					<li>Create a grayscale mask ramped from black at the top edge to white at the given fraction inward and save in memory</li>
+					<li>Horizontally mirror the left edge mask to make the right edge mask and save in memory</li>
+					<li>Composite the first and second ramped (in memory) masks</li>
+					<li>Composite the previous result with the third ramped mask</li>
+					<li>Composite the previous result with the fourth ramped mask to make the final ramped mask image \<br />
+						(and optionally save for display and generating a profile)</li>
+					<li>Add the mask as an alpha channel to the overlay image</li>
+					<li>Specify the background image and composite with the modified overlay image</li>
+				</ul>
+				</p>
+				<p class="red">	
+				ff=.3<br />
+				convert flower_yellow.jpg \<br />
+					<span class="indent">\( -clone 0 -monitor -fx "cos((pi/2)*max(0,(1-i/($ff*(w-1)))))" -write mpr:tmp0 +delete \) \<br /></span>
+					<span class="indent">\( mpr:tmp0 -flop -write mpr:tmp1 \) \<br /></span>
+					<span class="indent">\( -clone 0 -monitor -fx "cos((pi/2)*max(0,(1-j/($ff*(h-1)))))" -write mpr:tmp2 +delete \) \<br /></span>
+					<span class="indent">\( mpr:tmp2 -flip -write mpr:tmp3 \) \<br /></span>
+					<span class="indent">\( mpr:tmp0 mpr:tmp1 -compose multiply -composite \<br /></span>
+					<span class="indent">mpr:tmp2 -compose multiply -composite \<br /></span>
+					<span class="indent">mpr:tmp3 -compose multiply -composite <span class="blue">-write flower_cosine1_mask.jpg</span> \) \<br /></span>
+					<span class="indent">-compose copy_opacity -composite \<br /></span>
+					<span class="indent">flower_pink.jpg +swap -gravity center -composite flowers_cosine1.jpg
+				</p>
+				<table border="0" cellspacing="0" cellpadding="0" align="center">
+					<tr>
+						<td align="center" valign="top">
+						<img src="image/flower_pink.jpg" width="240" height="160" align="middle" hspace="0" />
+						<p>
+						background image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_yellow.jpg" width="76" height="69" align="middle" hspace="10" />
+						<p>
+						overlay<br />image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_cosine1_mask.jpg" width="76" height="69" align="middle" hspace="0" />
+						<p>
+						mask image
+						</p>
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">(</span>
+						<img src="image/flower_cosine1_mask_profile.gif" width="100" height="100" align="middle" hspace="0" />
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">)</span>
+						<p>
+						profile of center<br />row of mask
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<br />
+						<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flowers_cosine1.jpg" width="240" height="160" align="middle" hspace="5" />
+						<p>
+						composited image
+						</p>
+						</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 3: Full Cosine Ramp Blending
+			</p>
+			<div class="indent">
+				<p class="header">	
+				<ul>
+					<li>Define fraction of image to ramp inward from each edge of the image</li>
+					<li>Specify overlay image</li>
+					<li>Create a grayscale mask ramped from black at the left edge to white at the given fraction inward and save in memory</li>
+					<li>Horizontally mirror the left edge mask to make the right edge mask and save in memory</li>
+					<li>Create a grayscale mask ramped from black at the top edge to white at the given fraction inward and save in memory</li>
+					<li>Horizontally mirror the left edge mask to make the right edge mask and save in memory</li>
+					<li>Composite the first and second ramped (in memory) masks</li>
+					<li>Composite the previous result with the third ramped mask</li>
+					<li>Composite the previous result with the fourth ramped mask to make the final ramped mask image \<br />
+						(and optionally save for display and generating a profile)</li>
+					<li>Add the mask as an alpha channel to the overlay image</li>
+					<li>Specify the background image and composite with the modified overlay image</li>
+				</ul>
+				</p>
+				<p class="red">	
+				ff=.3<br />
+				convert flower_yellow.jpg \<br />
+					<span class="indent">\( -clone 0 -monitor -fx "0.5*cos(pi*max(0,(1-i/($ff*(w-1)))))+0.5" -write mpr:tmp0 +delete \) \<br /></span>
+					<span class="indent">\( mpr:tmp0 -flop -write mpr:tmp1 \) \<br /></span>
+					<span class="indent">\( -clone 0 -monitor -fx "0.5*cos(pi*max(0,(1-j/($ff*(h-1)))))+0.5" -write mpr:tmp2 +delete \) \<br /></span>
+					<span class="indent">\( mpr:tmp2 -flip -write mpr:tmp3 \) \<br /></span>
+					<span class="indent">\( mpr:tmp0 mpr:tmp1 -compose multiply -composite \<br /></span>
+					<span class="indent">mpr:tmp2 -compose multiply -composite \<br /></span>
+					<span class="indent">mpr:tmp3 -compose multiply -composite <span class="blue">-write flower_cosine1_mask.jpg</span> \) \<br /></span>
+					<span class="indent">-compose copy_opacity -composite \<br /></span>
+					<span class="indent">flower_pink.jpg +swap -gravity center -composite flowers_cosine1.jpg</span>
+				</p>
+				<table border="0" cellspacing="0" cellpadding="0" align="center">
+					<tr>
+						<td align="center" valign="top">
+						<img src="image/flower_pink.jpg" width="240" height="160" align="middle" hspace="0" />
+						<p>
+						background image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_yellow.jpg" width="76" height="69" align="middle" hspace="10" />
+						<p>
+						overlay<br />image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_cosine2_mask.jpg" width="76" height="69" align="middle" hspace="0" />
+						<p>
+						mask image
+						</p>
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">(</span>
+						<img src="image/flower_cosine2_mask_profile.gif" width="100" height="100" align="middle" hspace="0" />
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">)</span>
+						<p>
+						profile of center<br />row of mask
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<br />
+						<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flowers_cosine2.jpg" width="240" height="160" align="middle" hspace="5" />
+						<p>
+						composited image
+						</p>
+						</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Method 4: Linear Radial Ramp Blending
+			</p>
+			<div class="indent">
+				<p class="header">	
+				<ul>
+					<li>Define fraction of image to ramp inward from each edge of the image</li>
+					<li>Specify overlay image</li>
+					<li>Create a grayscale mask radial ramped from black at the radius, min(w/2,h/2), to white at the given fraction inward</li>
+					<li>Optionally save the mask for display and generating a profile</li>
+					<li>Add the mask as an alpha channel to the overlay image</li>
+					<li>Specify the background image and composite with the modified overlay image</li>
+				</ul>
+				</p>
+				<p class="red">	
+				ff=.3<br />
+				convert flower_yellow.jpg \<br />
+					<span class="indent">\( +clone -monitor -fx "rm=min(w/2,h/2); rr=hypot(i-w/2,j-h/2); min(1,max(0,(rm-rr))/($ff*rm))" \<br /></span>
+					<span class="indent">-write flower_radial_linear_mask.jpg \) \<br /></span>
+					<span class="indent">-compose copy_opacity -composite \<br /></span>
+					<span class="indent">flower_pink.jpg +swap -gravity center -composite flowers_radial_linear.jpg</span>
+				</p>
+				<table border="0" cellspacing="0" cellpadding="0" align="center">
+					<tr>
+						<td align="center" valign="top">
+						<img src="image/flower_pink.jpg" width="240" height="160" align="middle" hspace="0" />
+						<p>
+						background image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_yellow.jpg" width="76" height="69" align="middle" hspace="10" />
+						<p>
+						overlay<br />image
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flower_radial_linear_mask.jpg" width="76" height="69" align="middle" hspace="0" />
+						<p>
+						mask image
+						</p>
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">(</span>
+						<img src="image/flower_radial_linear_mask_profile.gif" width="100" height="100" align="middle" hspace="0" />
+						<span style="font:24pt Arial, Helvetica, sans-serif; color: blue;">)</span>
+						<p>
+						profile of center<br />row of mask
+						</p>
+						</td>
+						<td align="center" valign="top">
+						<br />
+						<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+						</td>
+						<td align="center" valign="top">
+						<img src="image/flowers_radial_linear.jpg" width="240" height="160" align="middle" hspace="5" />
+						<p>
+						composited image
+						</p>
+						</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="composite2"></a>
+<p class="title">	
+Antialiased Image Composite Along Arbitrary Boundary
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="header">	
+			Composite Background, Overlay And Binary Mask
+			</p>
+			<p class="indent">
+			<ul>
+				<li>provide background and overlay images</li>
+				<li>provide mask</li>
+				<li>composite</li>
+				<li>(note jaggies around border of cyclops)</li>
+			</ul>
+			</p>
+			<p class="red">	
+			convert cyclops_backgray.jpg cyclops.jpg \<br />
+				<span class="indent">cyclops_mask.png \</span><br />
+				<span class="indent">-composite cyclops_composite1.jpg</span><br />			
+			</p>
+			<p align="center">	
+			<img src="image/cyclops_backgray.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/cyclops.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/cyclops_mask.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/cyclops_composite1.jpg" width="100" height="100" align="middle" hspace="5" />
+			</p>
+			<br /><br />
+			<p class="header">	
+			Composite Background, Overlay And Linearly Ramped Blurred Binary Mask
+			</p>
+			<p class="indent">
+			<ul>
+				<li>provide background and overlay images</li>
+				<li>provide mask and blur it -- note blurring will be centered along cyclops boundary, <br />
+					so that it will extend outward as well as inward.<br />
+					(optionally save blurred mask for display)</li>
+				<li>composite</li>
+				<li>(note blurring causes halo effect)</li>
+			</ul>
+			</p>
+			<p class="red">	
+			convert cyclops_backgray.jpg cyclops.jpg \<br />
+				<span class="indent">\( cyclops_mask.jpg -blur 1x65535 <span class="blue">-write cyclops_mask_blur.jpg</span> \) \</span><br />
+				<span class="indent">-composite cyclops_composite2.jpg</span>
+			</p>
+			<p align="center">	
+			<img src="image/cyclops_backgray.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/cyclops.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/cyclops_mask_blur.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/cyclops_composite2.jpg" width="100" height="100" align="middle" hspace="5" />
+			</p>
+			<br /><br />
+			<p class="header">	
+			Composite Background, Overlay And Linearly Ramped Blurred Binary Mask Limited To Inside Cyclops Boundary 
+			</p>
+			<p class="indent">
+			<ul>
+				<li>provide background and overlay images</li>
+				<li>provide mask and blur it, then apply -level to make linear ramp only inside boundary <br />
+					(optionally save blurred mask for display)</li>
+				<li>composite</li>
+				<li>(note jaggies are removed and no halo, but some thinning of narrow features occurs)</li>
+			</ul>
+			</p>
+			<p class="red">	
+			convert cyclops_backgray.jpg cyclops.jpg \<br />
+				<span class="indent">\( cyclops_mask.jpg -blur 1x65535 -level 50%,100% <span class="blue">-write cyclops_mask_blur_level.jpg</span> \) \</span><br />
+				<span class="indent">-composite cyclops_composite2.jpg</span>
+			</p>
+			<p align="center">	
+			<img src="image/cyclops_backgray.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/cyclops.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/cyclops_mask_blur_level.jpg" width="100" height="100" align="middle" hspace="5" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/cyclops_composite3.jpg" width="100" height="100" align="middle" hspace="5" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="shape_mean"></a>
+<p class="title">	
+Mean Of A Region In An Image
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Original Image
+			</p>
+			<p align="center">
+			<img src="image/shape_ellipse.gif" width="100" height="100" />
+			</p>
+			<p class="header">	
+			Extract Mask Of Shape
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert shape_ellipse.gif -threshold 0 shape_ellipse_mask.gif
+				</p>
+			</div>
+			<p align="center">	
+			<img src="image/shape_ellipse_mask.gif" width="100" height="100" />
+			</p>
+			<p class="header">	
+			Compute Mean As quantumrange*(mean of image)/(mean of mask)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				mean_image=`convert shape_ellipse.gif -format "%[mean]" info:`<br />
+				</p><p>
+				echo "mean_image = $mean_image"<br />
+				mean_image = 8537.95<br />
+				</p><p class="red">	
+				mean_mask=`convert shape_ellipse_mask.gif -format "%[mean]" info:`<br />
+				</p><p>
+				echo "mean_mask = $mean_mask"<br />
+				mean_mask = 17517.5<br />
+				</p><p class="red">	
+				mean_shape=`convert xc: -format "%[fx:quantumrange*$mean_image/$mean_mask]" info:`<br />
+				</p><p>
+				echo "mean_shape = $mean_shape"<br />
+				mean_shape = 31941.5<br />
+				</p><p class="red">	
+				# convert to 8-bit mean if desired<br />
+				mean_shape8=`convert xc: -format "%[fx:255*$mean_shape/quantumrange]" info:`<br />
+				</p><p>
+				echo "mean_shape8 = $mean_shape8"<br />
+				mean_shape8 = 124.286<br />
+				</p>
+			</div>
+			</p>
+			<p class="header">	
+			Better Method Suggested By Anthony Thyssen:<br />
+			Scaling to 1 pixel will ignore any transparent values <br />
+			and give the equivalent of averaging the non-transparent pixels.
+			</p>
+			<div class="indent">
+				<p class="red">	
+				mean=`convert shape_ellipse.gif \( -clone 0 -threshold 0 \) \<br />
+				-alpha off -compose copy_opacity -composite \<br />
+				-scale 1x1! -format "%[fx:u*quantumrange]" info:`<br />				
+				</p><p>
+				echo "mean = $mean"<br />
+				mean = 31941<br />
+				</p><p class="red">	
+				# convert to 8-bit mean if desired<br />
+				mean8=`convert shape_ellipse.gif \( -clone 0 -threshold 0 \) \<br />
+				-alpha off -compose copy_opacity -composite \<br />
+				-scale 1x1! -format "%[fx:u*255]" info:`<br />
+				</p><p>
+				echo "mean8 = $mean8"<br />
+				mean8 = 124.284<br />
+				</p>
+			</div>
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="montage_cols"></a>
+<p class="title">	
+Montage By Columns
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="red">	
+				convert logo3.jpg lena2.jpg hatching.jpg zelda3.jpg -transpose miff:- |\<br />
+					<span class="indent">montage - -geometry +2+2 -tile 2x2 miff:- |\</span><br />
+					<span class="indent">convert - -transpose montage_columns.jpg</span>
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/montage_columns.jpg" width="264" height="264" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="part_overlap_blend"></a>
+<p class="title">	
+Partially Overlapping Blend
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<div class="indent">
+				<p class="header">	
+				White Background
+				</p>
+				<p class="red">	
+				convert -background "rgba(255,255,255,0)" \<br />
+					<span class="indent">-page -64-64 zelda3.png -page +0+0 lena2.png \</span><br />
+					<span class="indent">-compose blend -define compose:args=50,50 \</span><br />
+					<span class="indent">-layers merge -alpha off zelda_lena_blend50.jpg</span>
+				</p>
+				<p align="center">	
+				<table cellspacing="0" cellpadding="5" align="center">
+					<tr>
+						<td><img src="image/zelda_lena_blend50.jpg" width="192" height="192" align="middle" /></td>
+						</td>
+					</tr>
+				</table>
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+
+<a name="round_shadow"></a>
+<p class="title">	
+Rounded Corners With Shadow
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Original Image
+			</p>
+			<p align="center">
+			<img src="image/thumbnail.gif" width="120" height="90" />
+			</p>
+			<p class="header">	
+			Prior To IM 6.4.3-7
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert thumbnail.gif \( +clone -channel a -separate +channel -negate \<br />
+					<span class="indent">\( -size 15x15 xc:black -draw 'fill white circle 15,15 15,0' -write mpr:arc +delete \) \</span><br />
+					<span class="indent">\( mpr:arc \) -gravity northwest -composite \</span><br />
+					<span class="indent">\( mpr:arc -flip \) -gravity southwest -composite  \</span><br />
+					<span class="indent">\( mpr:arc -flop \) -gravity northeast -composite  \</span><br />
+					<span class="indent">\( mpr:arc -rotate 180 \) -gravity southeast -composite  \) \</span><br />
+					<span class="indent">-alpha off -compose CopyOpacity -composite -compose over \</span><br />
+					<span class="indent">\( +clone -background black -shadow 80x3+5+5 \) \</span><br />
+					<span class="indent">+swap -background none -mosaic thumbnail_rounded_shade1.png </span>
+				</p>
+				<p align="center">	
+				<img src="image/thumbnail_rounded_shade1.png" width="131" height="101" />
+				</p>
+			</div>
+			<p class="header">	
+			As Of IM 6.4.3-7
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert thumbnail.gif \( +clone -alpha extract \<br />
+					<span class="indent">\( -size 15x15 xc:black -draw 'fill white circle 15,15 15,0' -write mpr:arc +delete \) \</span><br />
+					<span class="indent">\( mpr:arc \) -gravity northwest -composite \</span><br />
+					<span class="indent">\( mpr:arc -flip \) -gravity southwest -composite \</span><br />
+					<span class="indent">\( mpr:arc -flop \) -gravity northeast -composite \</span><br />
+					<span class="indent">\( mpr:arc -rotate 180 \) -gravity southeast -composite \) \</span><br />
+					<span class="indent">-alpha off -compose CopyOpacity -composite -compose over \</span><br />
+					<span class="indent">\( +clone -background black -shadow 80x3+5+5 \) \</span><br />
+					<span class="indent">+swap -background none -layers merge thumbnail_rounded_shade2.png </span>
+				</p>
+				<p align="center">	
+				<img src="image/thumbnail_rounded_shade2.png" width="132" height="102" />
+				</p>
+			</div>
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="hole_fill"></a>
+<p class="title">	
+Filling Holes
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Binary Image
+			</p>
+			<p align="center">
+			<img src="image/1thres_15_small.png" width="192" height="298" />
+			</p>
+			<p class="header">	
+			Method 1:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert 1thres_15_small.png -bordercolor white -border 1 \<br />
+					<span class="indent">-fuzz 10% -fill red -floodfill +0+0 white  \</span><br />
+					<span class="indent">-fill black +opaque red \</span><br />
+					<span class="indent">-fill white -opaque red \</span><br />
+					<span class="indent">-shave 1x1 1thres_15_small_filled.png</span>
+				</p>
+			</div>
+			<p class="header">	
+			Method 2:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert 1thres_15_small.png -bordercolor white -border 1 \<br />
+					<span class="indent">-fill red -draw "color 0,0 floodfill" \</span><br />
+					<span class="indent">-fill black +opaque red \</span><br />
+					<span class="indent">-fill white -opaque red \</span><br />
+					<span class="indent">-shave 1x1 1thres_15_small_filled.png</span>
+				</p>
+			</div>
+			<p class="header">	
+			Method 3:
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert 1thres_15_small.png \<br />
+					<span class="indent">\( +clone -bordercolor white -border 1 \</span><br />
+					<span class="indent">-fill black -draw "color 0,0 floodfill" \</span><br />
+					<span class="indent">-negate -shave 1x1 -transparent white \) \</span><br />
+					<span class="indent">-compose over -composite \</span><br />
+					<span class="indent">1thres_15_small_filled.png</span>
+				</p>
+			</div>
+			<p class="header">	
+			Result:
+			</p>
+			<p align="center">
+			<img src="image/1thres_15_small_filled.png" width="192" height="298" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="grid_lines"></a>
+<p class="title">	
+Adding Grid Lines
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Image
+			</p>
+			<p align="center">
+			<img src="image/lena.jpg" width="256" height="256" />
+			</p>
+			<p class="header">	
+			Method 1: Overlaying Grid Lines -- Images Stays Same Size
+			</p>
+			<div class="indent">
+				<p class="red">	
+				infile="lena.jpg"<br />
+				hcolor="white"<br />
+				vcolor="black"<br />
+				thickness=3<br />
+				xspace=24<br />
+				yspace=24<br />
+				ww=`convert $infile -format "%w" info:`<br />
+				hh=`convert $infile -format "%h" info:`<br />
+				inname=`convert $infile -format "%t" info:`<br />
+				convert $infile \<br />
+					<span class="indent">\( -size ${xspace}x${yspace} xc:none -background none -fill none -strokewidth $thickness \</span><br />
+					<span class="indent">-draw "stroke $vcolor line 0,0 0,$((yspace-1)) stroke $hcolor line 0,0 $((xspace-1)),0" -write mpr:grid +delete \</span><br />
+					<span class="indent">-size $((ww))x$((hh)) tile:mpr:grid \) -compose over -composite ${inname}_grid.jpg</span>
+				</p>
+				<p align="center">	
+				<img src="image/lena_grid.jpg" width="256" height="256" />
+				</p>
+			</div>
+			<p class="header">	
+			Method 2: Inserting Grid Lines -- Image Is Enlarged
+			</p>
+			<div class="indent">
+				<p class="red">	
+				infile="lena.jpg"<br />
+				hcolor="white"<br />
+				vcolor="black"<br />
+				thickness=3<br />
+				xspace=24<br />
+				yspace=24<br />
+				ww=`convert $infile -format "%w" info:`<br />
+				hh=`convert $infile -format "%h" info:`<br />
+				nx=`convert xc: -format "%[fx:round($ww/$xspace)]" info:`<br />
+				ny=`convert xc: -format "%[fx:round($hh/$yspace)]" info:`<br />
+				inname=`convert $infile -format "%t" info:`<br />
+				convert $infile -crop ${xspace}x${yspace} \<br />
+					<span class="indent">-background $vcolor -gravity west -splice ${thickness}x0 \</span><br />
+					<span class="indent">-background $hcolor -gravity north -splice 0x${thickness} \</span><br />
+					<span class="indent">miff:- | montage - -geometry +0+0 -tile ${nx}x${ny} ${inname}_grid_expand.jpg</span>
+				</p>
+				<p align="center">	
+				<img src="image/lena_grid_expand.jpg" width="256" height="256" />
+				</p>
+			</div>
+			<p class="header">	
+			Method 2: Inserting Grid Lines -- Image Is Enlarged <br />
+			(Method Provided By Anthony Thyssen)
+			</p>
+			<div class="indent">
+				<p class="red">	
+				infile="lena.jpg"<br />
+				hcolor="white"<br />
+				vcolor="black"<br />
+				thickness=3<br />
+				xspace=24<br />
+				yspace=24<br />
+				convert $infile \<br />
+					<span class="indent">-crop ${xspace}x0 +repage -background $vcolor -splice ${thickness}x0 +append \</span><br />
+					<span class="indent">-crop 0x${yspace} +repage -background $hcolor -splice 0x${thickness} -append \</span><br />
+					<span class="indent">${inname}_grid_expand.jpg</span>
+				</p>
+				<p align="center">	
+				<img src="image/lena_grid_expand.jpg" width="256" height="256" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="image2overlay"></a>
+<p class="title">	
+Converting An Image To An Overlay
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Opaque Color Or Grayscale Image
+			</p>
+			<p align="center">
+			<img src="image/sample_gray.jpg" width="420" height="74" />
+			</p>
+			<p class="header">	
+			Convert Image To 8-bit Transparent Overlay
+			</p>
+			<div class="center">
+				<p class="red">	
+				convert sample-gray.jpeg -set colorspace gray -negate \</span><br />
+					<span class="indent">-background black -alpha shape -background black -alpha background \</span><br />
+					<span class="indent">PNG32:sample_gray_correct2.png</span>
+				</p>
+				<p align="center">	
+					<img src="image/sample_gray_overlay.png" width="420" height="74" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="labeled_animation"></a>
+<p class="title">	
+Creating A Labeled Animation
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Images
+			</p>
+			<p align="center">
+			<img src="image/zelda3.jpg" width="128" height="128" />
+			<img src="image/lena2.jpg" width="128" height="128" />
+			<img src="image/checks.jpg" width="128" height="128" />
+			</p>
+			<p class="header">	
+			Create Labeled Animation
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert -label "%f" \<br />
+				zelda3.jpg lena2.jpg checks.jpg miff:- |\<br />
+				montage - -background skyblue -geometry +0+0 -tile 1x1 miff:- |\<br />
+				convert -dispose background -delay 150 - -loop 0 animation_labeled.gif
+
+				</p>
+				<p>
+				<p align="center">	
+				<img src="image/animation_labeled.gif" width="128" height="128" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="fast_gblur"></a>
+<p class="title">	
+Fast Gaussian Blur
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Input Image
+			</p>
+			<p align="center">
+			<img src="image/logo2.png" width="320" height="240" />
+			</p>
+			<p>	
+			Fast Gaussian Blur <br /><br />
+			For blur sigmas greater than or equal to 20, resize by 1/8, <br />
+			apply gaussian blur, then resize back to original size. For <br />
+			smaller blur sigmas, resize in proportion to the sigma value.
+			</p>
+			<div class="indent">
+				<p class="red">	
+				<span class="indent">infile="logo2.png"</span><br />
+				<span class="indent">ww=`convert $infile -format "%[fx:w]" info:`</span><br />
+				<span class="indent">hh=`convert $infile -format "%[fx:h]" info:`</span><br />
+				<span class="indent">for ((sigma=50; sigma>0; sigma=sigma-10)); do</span><br />
+				<span class="indent">factor=`convert xc: -format "%[fx: max(min($sigma/2.5,8),1)]" info:`</span><br />
+				<span class="indent">sigma2=`convert xc: -format "%[fx:$sigma/$factor]" info:`</span><br />
+				<span class="indent">pct=`convert xc: -format "%[fx:100/$factor]" info:`</span><br />
+				<span class="indent">echo "sigma=$sigma; factor=$factor; sigma2=$sigma2; pct=$pct;"</span>
+				</p>
+				<p class="blue">	
+				<span class="indent">time convert $infile -virtual-pixel edge -resize ${pct}x${pct}% -gaussian-blur 0x$sigma2 \</span><br />
+				<span class="indent">-resize ${ww}x${hh}! logo_resize_gaussblur_${sigma}_${factor}.jpg</span>
+				</p>
+				<p class="red">				
+				<span class="indent">time convert $infile -monitor -gaussian-blur 0x$sigma +monitor logo_gaussblur_$sigma.jpg</span><br /><br />
+				<span class="indent">done</span>
+				</p>
+			</div>
+			<table border="1" cellspacing="0" cellpadding="5" align="center">
+				<tr>
+					<th>Gaussian Blur</th>
+					<th>Fast Gaussian Blur</th>	
+				</tr>
+				<tr>
+					<td align="center">Sigma=50; Time=32.3 s</td>
+					<td align="center">Sigma=50; Time=0.07 s; Resize=1/8 (12.5%)</td>	
+				</tr>
+				<tr>
+					<td><p align="center">	
+					<img src="image/logo_gaussblur_50.jpg" width="320" height="240" />
+					</p></td>
+					<td><p align="center">	
+					<img src="image/logo_fast_gaussblur_50_8.jpg" width="320" height="240" />
+					</p></td>
+				</tr>
+				</tr>
+				<tr>
+					<td align="center">Sigma=40; Time=26.1 s</td>
+					<td align="center">Sigma=40; Time=0.06 s; Resize=1/8 (12.5%)</td>	
+				</tr>
+				<tr>
+					<td><p align="center">	
+					<img src="image/logo_gaussblur_40.jpg" width="320" height="240" />
+					</p></td>
+					<td><p align="center">	
+					<img src="image/logo_fast_gaussblur_40_8.jpg" width="320" height="240" />
+					</p></td>
+				</tr>
+				<tr>
+					<td align="center">Sigma=30; Time=18.8 s</td>
+					<td align="center">Sigma=30; Time=0.05 s; Resize=1/8 (12.5%)</td>	
+				</tr>
+				<tr>
+					<td><p align="center">	
+					<img src="image/logo_gaussblur_30.jpg" width="320" height="240" />
+					</p></td>
+					<td><p align="center">	
+					<img src="image/logo_fast_gaussblur_30_8.jpg" width="320" height="240" />
+					</p></td>
+				</tr>
+				<tr>
+					<td align="center">Sigma=20; Time=11.0 s</td>
+					<td align="center">Sigma=20; Time=0.05 s; Resize=1/8 (12.5%)</td>	
+				</tr>
+				<tr>
+					<td><p align="center">	
+					<img src="image/logo_gaussblur_20.jpg" width="320" height="240" />
+					</p></td>
+					<td><p align="center">	
+					<img src="image/logo_fast_gaussblur_20_8.jpg" width="320" height="240" />
+					</p></td>
+				</tr>
+				<tr>
+					<td align="center">Sigma=10; Time=3.9 s</td>
+					<td align="center">Sigma=10; Time=0.07 s; Resize=1/4 (25%)</td>	
+				</tr>
+				<tr>
+					<td><p align="center">	
+					<img src="image/logo_gaussblur_10.jpg" width="320" height="240" />
+					</p></td>
+					<td><p align="center">	
+					<img src="image/logo_fast_gaussblur_10_4.jpg" width="320" height="240" />
+					</p></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="color_blur"></a>
+<p class="title">	
+Color Blurring
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p>
+			Two-Color Image
+			</p>
+			<p align="center">
+			<img src="image/redgreen.png" width="400" height="200" />
+			</p>
+			<p class="header">	
+			Poor Way (Simple Blur):
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert redgreen.png -blur 0x10 redgreen_blur_bad.png
+				</p>
+				<p align="center">	
+				<img src="image/redgreen_blur_bad.png" width="400" height="200" />
+				</p>
+			</div>
+			<p class="header">	
+			Better Way (Blur In Linear Colorspace):
+			</p>
+			<div class="indent">
+				<p class="red">	
+				convert redgreen.png -colorspace RGB -blur 0x10 -colorspace sRGB redgreen_blur_good.png
+				</p>
+				<p align="center">	
+				<img src="image/redgreen_blur_good.png" width="400" height="200" />
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+<a name="histogram_ticks"></a>
+<p class="title">	
+Histogram With Grid And Tick Marks
+</p>
+<table border="1" cellspacing="0" cellpadding="5" align="center">
+	<tr>
+		<td bgcolor="#def">
+			<p class="red">	
+			convert rose.jpg histogram:miff:- |\<br />
+			convert - -fill white -draw \<br />
+			"line 63,0 63,199 line 128,0 128,199 line 193,0 193,199 <br />
+			line 0,49 255,49 line 0,99 255,99 line 0,149 255,149" \<br />
+			-alpha off +write mpr:hist +delete \<br />
+			\<br />
+			\( -size 1x10 xc:white -size 12x10 xc:black +append -write mpr:tile +delete \<br />
+			-size 260x10 tile:mpr:tile -gravity west -chop 1x0 -background black -splice 1x0 \<br />
+			-roll -1+0 -shave 1x0 -bordercolor white -border 1x0 -resize 256x10! +write mpr:hticks +delete \) \<br />
+			\<br />
+			\( -size 1x10 xc:white -size 9x10 xc:black +append -write mpr:tile +delete \<br />
+			-size 260x10 tile:mpr:tile -gravity west -chop 1x0 -background black -splice 1x0 \<br />
+			-roll -1+0 -shave 1x0 -bordercolor white -border 1x0 -resize 256x10! -rotate 90 +write mpr:vticks +delete \) \<br />
+			\<br />
+			mpr:hist -bordercolor black -border 10 \<br />
+			-gravity north mpr:hticks -composite \<br />
+			-gravity south mpr:hticks -composite \<br />
+			-gravity west mpr:vticks -composite \<br />
+			-gravity east mpr:vticks -composite \<br />
+			rose_hist_ticks.gif
+			</p>
+			<p align="center">	
+			<img src="image/rose.jpg" width="70" height="46" align="middle" />
+			<img src="image/rightarrow.gif" width="20" height="20" hspace="10" align="middle" />
+			<img src="image/rose_hist_ticks.gif" width="276" height="220" align="middle" />
+			</p>
+		</td>
+	</tr>
+</table>
+<p class="text blue">	
+<a href="image.php.html#top">top</a>
+</p>
+
+<br /><br />
+
+</body>
+</html>
