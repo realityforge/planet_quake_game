@@ -1,0 +1,32 @@
+Info about Hunt Mod
+
+- hordes of monsters 
+- heavy fire power 
+- all classic game types, plus two co-op modes 
+- amazing special effects 
+- realtime map generator 
+- enhanced bot AI 
+- Optional map for Hunt's gametype "Escape from Hell" 	
+- Optional music package
+- Optional skin pack by Daniel "Fusion" Schneider
+
+
+Description 
+
+Hunt introduces two new game types: "Save the Universe" (STU), and "Escape from Hell" (EFH). Both are single player / co-operative multiplayer missions against monsters.
+
+STU is played on standard Q3A maps. An artefact is spawned at a random place on the map. Your task is to find and collect it. When you manage to do this, a new artefact spawns. This repeats until the artefact limit is reached. When all artefacts have been collected, you win. This would be easy if there wouldn't be those monsters randomly spawning all around the map...
+
+EFH is played on specially designed maps. Your task simply is to move from a starting place to the goal without getting killed by the monsters. This gets more interesting by the fact that EFH maps merely consist of building blocks, put together by a realtime map generator.
+
+Hunt also supports all the original Q3A game types. You can have monsters even with these game types, but you have to create them yourself with the monster launcher. This is a new weapon, and monsters created this way only attack your opponents. It's surprising how many tactical variants the monster launcher adds to a CTF match, for example.
+
+The monsters generally outnumber the human players, so it's clear you need more fire power than in vanilla Q3. For example, you no longer need to collect weapons. Instead, you already have them as soon as you spawn. Also, ammunition automatically recharges, and it's even possible to enable unlimited ammunition. The weapons are balanced, so players are usually motivated to make use of the complete arsenal, instead of just sticking to the BFG.
+
+
+Comments & Reviews 
+"Absofragginglutely excellent mod! I love it! (...) Work for Id, please..." - Colin Hopkins 
+"Hunt (...) is amazing." - Lee'Mon in an interview at HomeLAN Fed <http://www.homelanfed.com/index.php?id=5902> 
+PlanetQuake's "Mod of the Week" Review <http://www.planetquake.com/quake3/features/motw/hunt.shtml> by Abomonog 
+PlanetQuake's Big Fuzzy Focus <http://www.planetquake.com/features/articles/focus_hunt_a.shtml> by Pappy-R 
+Review at fpsmods.com <http://www.fpsmods.com/review.php?id=26&action=review> by Y2 
