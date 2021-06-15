@@ -1,0 +1,9 @@
+/src/.vs/*
+/src/Debug/*
+/src/Release/*
+/src/x64/*
+/src/libjpeg/Debug/*
+/src/libjpeg/x64/*
+src/libjpeg/Release/*
+*.filters
+*.user
