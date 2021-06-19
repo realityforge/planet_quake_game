@@ -1,0 +1,4 @@
+void CheckQPong(void)
+{
+	return;
+}

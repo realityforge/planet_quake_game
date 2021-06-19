@@ -1,0 +1,417 @@
+# Microsoft Developer Studio Generated Dependency File, included by ui.mak
+
+..\game\bg_misc.c : \
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	
+
+..\game\q_math.c : \
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	
+
+..\game\q_shared.c : \
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	
+
+.\ui_addbots.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_arcade.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_atoms.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_cdkey.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_cinematics.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_confirm.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_connect.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_controls2.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_credits.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_demo2.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_display.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_gameinfo.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_ingame.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_loadconfig.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_main.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_menu.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_mfield.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_mods.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_network.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_playermodel.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_players.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_playersettings.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_preferences.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_qmenu.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_removebots.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_saveconfig.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_serverinfo.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_servers2.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_setup.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_sound.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_sparena.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_specifyserver.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_splevel.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_sppostgame.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_spskill.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_startserver.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_syscalls.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_team.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_teamorders.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	
+
+.\ui_video.c : \
+	"..\cgame\tr_types.h"\
+	"..\game\bg_public.h"\
+	"..\game\q_shared.h"\
+	"..\game\surfaceflags.h"\
+	".\keycodes.h"\
+	".\ui_local.h"\
+	".\ui_public.h"\
+	

@@ -1,0 +1,101 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: cgame - Win32 QVM--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSP20D1.BAT" with contents
+[
+@echo off
+cd .\vm
+C:\Quake3\bin_nt\lcc -DQ3_VM -S -Wf-target=bytecode -Wf-g -I..\\..\\cgame -I..\\..\\game -I..\\..\\q3_ui ..\cg_q3pong.c
+C:\Quake3\bin_nt\addtofile ..\cgame.q3asm cg_q3pong
+]
+Creating command line "C:\WINDOWS\TEMP\RSP20D1.BAT"
+<h3>Output Window</h3>
+Compiling .\cg_q3pong.c...
+Creating temporary file "C:\WINDOWS\TEMP\RSP20E1.BAT" with contents
+[
+@echo off
+cd vm
+C:\Quake3\bin_nt\q3asm -o "\quake3\q3pong_beta\vm\cgame.qvm" -f ..\cgame
+]
+Creating command line "C:\WINDOWS\TEMP\RSP20E1.BAT"
+Generating cgame.qvm
+outputFilename: \quake3\q3pong_beta\vm\cgame.qvm
+pass 0: cg_main
+pass 0: ..\cg_syscalls
+pass 0: cg_consolecmds
+pass 0: cg_draw
+pass 0: cg_drawtools
+pass 0: cg_effects
+pass 0: cg_ents
+pass 0: cg_event
+pass 0: cg_info
+pass 0: cg_localents
+pass 0: cg_marks
+pass 0: cg_players
+pass 0: cg_playerstate
+pass 0: cg_predict
+pass 0: cg_scoreboard
+pass 0: cg_servercmds
+pass 0: cg_snapshot
+pass 0: cg_view
+pass 0: cg_weapons
+pass 0: cg_q3pong
+pass 0: bg_slidemove
+pass 0: bg_pmove
+pass 0: bg_lib
+pass 0: bg_misc
+pass 0: q_math
+pass 0: q_shared
+pass 1: cg_main
+pass 1: ..\cg_syscalls
+pass 1: cg_consolecmds
+pass 1: cg_draw
+pass 1: cg_drawtools
+pass 1: cg_effects
+pass 1: cg_ents
+pass 1: cg_event
+pass 1: cg_info
+pass 1: cg_localents
+pass 1: cg_marks
+pass 1: cg_players
+pass 1: cg_playerstate
+pass 1: cg_predict
+pass 1: cg_scoreboard
+pass 1: cg_servercmds
+pass 1: cg_snapshot
+pass 1: cg_view
+pass 1: cg_weapons
+pass 1: cg_q3pong
+pass 1: bg_slidemove
+pass 1: bg_pmove
+pass 1: bg_lib
+pass 1: bg_misc
+pass 1: q_math
+pass 1: q_shared
+0 total errors
+code segment:  253316
+data segment:    9712
+lit  segment:   19564
+bss  segment: 3713388
+instruction count: 85704
+Writing to \quake3\q3pong_beta\vm\cgame.qvm
+Writing \quake3\q3pong_beta\vm\cgame.map...
+5515 symbols defined
+Stats for hashtable 01770480, 2048 buckets, 5515 nodes
+ Longest chain: 12, empty chains: 367, mean non-empty: 3.280785
+Stats for hashtable 01770470, 100 buckets, 95 nodes
+ Longest chain: 3, empty chains: 36, mean non-empty: 1.484375
+    1 seconds elapsed
+
+
+
+<h3>Results</h3>
+cgame.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
